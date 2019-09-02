@@ -1,0 +1,43 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='position'>
+	  <van-icon name="location-o" class='position-icon' />
+	  {{position.address}}
+		<van-icon name="arrow" class='position-icon' />
+	</view>
+	<view class='search-area'>
+	  <text class='arrive-time'>49分钟送达</text>
+		<view class='search' >
+		  <van-search placeholder="请输入商品名称" class='' readonly bindtap='go' id='/pages/search/index'/>
+		</view>
+		<view class='qr'>
+		  <van-icon name="qr" size='46rpx'/>
+			<text class='qr-text'>会员码</text>
+		</view>
+	</view>
+	<view class='good-area'>
+	  <view class='good-cate'>
+		  <view class='good-cate-list'>
+		    <view wx:for='{{cates}}' wx:key='index' wx:if='{{item.onShow == true}}' bindtap='cateChange' id='{{item.id}}' class="good-cate-item {{active == item.id ? 'active' : ''}}">
+				  <text class='seg' hidden='{{active != item.id}}'>|</text>
+				  {{item.name}}
+				</view>
+			</view>
+		</view>
+		<scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper'>
+		  <swiper autoplay="true" interval="3000" duration="500" class='w-100' style='display: block'>
+				<block wx:for="{{imgUrls}}" wx:key='index'>
+					<swiper-item class='swiper-item'>
+						<image src="{{item}}" class="slide-image w-100" mode="widthFix"/>
+					</swiper-item>
+				</block>
+			</swiper>
+			<van-card wx:for='{{goods}}' wx:key='index' price="{{item.sellingPrice}}" origin-price='{{item.originalPrice}}' desc="{{item.specification}}" title="{{item.name}}" thumb="{{item.image ? item.image : 'https://img.yzcdn.cn/vant/t-thirt.jpg'}}" thumb-class='thumb' desc-class='good-desc' title-class='good-name' price-class='good-price' custom-class='good-item' centered='false'>
+				<image src='../../static/image/shopcar.png' slot='bottom' class='shopcar-icon' mode='widthFix' bindtap='addShopcar' data-good='{{item}}' wx:if='{{item.count == 0}}' />
+				<van-stepper slot='bottom' value="{{item.count}}" bind:change="onCartChange" class='shopcar' custom-class='step' input-class='good-input' minus-class='minus' plus-class='plus' min='0' wx:if='{{item.count != 0}}' data-good='{{item}}'/>
+			</van-card>
+			<text wx:if='{{isLoadAll}}' class='more-text w-100'>没有更多商品了</text>
+		</scroll-view>
+	</view>
+	<shopcar goods='{{shopcarGoods}}' totalPrice='{{totalPrice}}' wx:if='{{shopcarGoods.length > 0}}' bind:onCartChange='onCartChange' bind:onClear='onCartClear'></shopcar>
+</view>

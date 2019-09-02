@@ -1,0 +1,27 @@
+<view class='h-100'>
+  <van-search placeholder="请输入商品名称" use-action-slot class='w-100' value='{{search.value}}' bind:focus='onFocus' bind:change='onChange' bind:search='onSearch'>
+	  <view slot="action" bindtap='onSearch'>搜索</view>
+	</van-search>	
+	<van-cell-group wx:if='{{isSearch}}'>
+		<van-cell title="历史搜索" class='w-100' use-label-slot wx:if='{{cuser && histories.length > 0}}' >
+			<van-icon name="delete" size='40rpx' bind:click='clearHistory'/>
+			<view slot='label'>
+				<van-tag round color='#eee' text-color='#333' class='history' wx:for='{{histories}}' wx:key='index' bindtap='handleTagClick' data-search='{{item}}'>{{item.name}}</van-tag>
+			</view>
+		</van-cell>
+		<van-cell title="热门搜索" class='w-100' use-label-slot>
+			<view slot='label'>
+				<van-tag round color='#eee' text-color='#333' class='history' wx:for='{{hots}}' wx:key='index' bindtap='handleTagClick' data-search='{{item}}'>{{item.name}}</van-tag>
+			</view>
+		</van-cell>
+	</van-cell-group>
+	<scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper' wx:else>
+		<van-card wx:for='{{goods}}' wx:key='index' price="{{item.sellingPrice}}" origin-price='{{item.originalPrice}}' desc="{{item.specification}}" title="{{item.name}}" thumb="{{item.image ? item.image : 'https://img.yzcdn.cn/vant/t-thirt.jpg'}}" thumb-class='thumb' desc-class='good-desc' title-class='good-name' price-class='good-price' custom-class='good-item' centered='false'>
+			<image src='../../static/image/shopcar.png' slot='bottom' class='shopcar-icon' mode='widthFix' bindtap='addShopcar' data-good='{{item}}' wx:if='{{item.count == 0}}' />
+			<van-stepper slot='bottom' value="{{item.count}}" bind:change="onCartChange" class='shopcar' custom-class='step' input-class='good-input' minus-class='minus' plus-class='plus' min='0' wx:if='{{item.count != 0}}' data-good='{{item}}'/>
+		</van-card>
+		<text wx:if='{{isLoadAll}}' class='more-text w-100'>没有更多商品了</text>
+	</scroll-view>
+	<van-dialog id="van-dialog" />
+	<shopcar goods='{{shopcarGoods}}' totalPrice='{{totalPrice}}' wx:if='{{shopcarGoods.length > 0}}' bind:onCartChange='onCartChange' bind:onClear='onCartClear'></shopcar>
+</view>

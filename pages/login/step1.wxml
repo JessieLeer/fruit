@@ -1,0 +1,9 @@
+<view>
+  <van-cell-group>
+    <van-field value="{{ phone.value }}" label="手机号" placeholder="请输入手机号"
+    error-message="{{phone.message}}" border="{{ false }}" bind:change='phoneChange' required/>
+		<van-field value="{{ sms }}" center clearable label="短信验证码" placeholder="请输入短信验证码" border="{{ false }}" required use-button-slot>
+    <van-button slot="button" size="small" type="primary" disabled='{{phone.verify && countdown == 0 ? false : true}}'>发送验证码</van-button>
+  </van-field>
+  </van-cell-group>
+</view>

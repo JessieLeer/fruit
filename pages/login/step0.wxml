@@ -1,0 +1,5 @@
+<view>
+  <van-button type="primary" size='small' data-url='/pages/login/step1'  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" >微信登录</van-button>
+  <van-button type="info" size='small' data-url='/pages/login/step1' bindtap='go'>手机号登录</van-button>
+	<van-toast id="van-toast" />
+</view>

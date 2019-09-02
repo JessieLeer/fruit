@@ -1,0 +1,77 @@
+.w-100{
+  width: 100%;
+}
+
+.h-100{
+  height: 100%;
+}
+
+.history{
+  margin-right: 10rpx;
+}
+
+.good-wrapper{
+	height: 100%;
+	overflow: auto;
+}
+
+.good-item{
+  position: relative;
+}
+
+.thumb{
+  max-width: 200rpx;
+}
+
+.good-name{
+  font-size: 28rpx;
+}
+
+.good-price{
+  color: #F6931F;
+}
+
+.shopcar,.shopcar-icon{
+  position: absolute;
+	right: 0;
+}
+
+.shopcar{
+  right: -20rpx;
+  bottom: -10rpx;
+}
+
+.shopcar-icon{
+  width: 40rpx;
+}
+
+.step .minus,.step .plus{
+  width: 40rpx;
+	height: 40rpx;
+}
+
+.step .minus{
+  background:rgba(255,255,255,1);
+  border:1px solid rgba(175,175,175,1);
+  border-radius:50%;
+}
+
+.step .plus{
+  background:rgba(0,131,123,1);
+  border-radius:50%;
+	color: white;
+}
+
+.step .good-input{
+  background-color: white;
+	width: 40rpx;
+}
+
+.more-text{
+  text-align: center;
+	color: #AFAFAF;
+	font-size: 24rpx;
+	display: block;
+	padding-top: 20rpx;
+	padding-bottom: 20rpx;
+}

@@ -1,0 +1,23 @@
+<van-submit-bar button-text="去结算" bind:submit="onSubmit" button-class='submit' bar-class='submit-bar'>
+  <view slot='' class='submit-shopcar' bindtap='toggleGood'>
+	  <van-icon name="shopping-cart" info='{{goods.length}}' size='40rpx' color='black'/>
+		<view class='shopcar-price'>
+		  <text class='price'>¥{{totalPrice}}</text>
+			<text class='tip'>不含运费</text>
+		</view>
+	</view>
+	<view slot='top' hidden='{{goodHidden}}'>
+	  <view class='shopcar-header f-cb'>
+		  <text class='selected f-fl'>已选商品</text>
+			<text class='clear f-fr' bindtap='onClear'>清空</text>
+		</view>
+		<view wx:for='{{goods}}' wx:key='index' class='good'>
+		  <view class='good-info'>
+		    <text class='good-name'>{{item.name}}</text>
+			  <text class='good-price'>¥{{item.sellingPrice}}</text>
+			</view>
+			<van-stepper value="{{item.count}}" bind:change="onChange" class='good-count' input-class='good-input' custom-class='step' minus-class='minus' plus-class='plus' data-good='{{item}}' min='0'/>
+		</view>
+	</view>
+</van-submit-bar>
+<van-popup show="{{!goodHidden}}" z-index='1' bind:close="onClose" position='bottom'></van-popup>
