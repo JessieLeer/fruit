@@ -3,7 +3,8 @@
     "pages/home/index/index",
 		"pages/home/search/index",
 		"pages/user/login/step0",
-		"pages/user/login/step1"
+		"pages/user/login/step1",
+		"pages/user/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -49,7 +50,7 @@
         "text": "订单"
 			},
 			{
-				"pagePath": "pages/user/index/index",
+				"pagePath": "pages/home/index/index",
         "text": "会员中心"
 			}
 		]

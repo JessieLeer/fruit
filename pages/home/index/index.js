@@ -216,7 +216,7 @@ Page({
 			this.handleShopcar()
 		}else{
 			wx.navigateTo({
-				url: '/pages/login/step0'
+				url: '/pages/user/login/step0'
 			})
 		}
 	},

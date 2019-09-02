@@ -1,4 +1,4 @@
-import Toast from "../../miniprogram_npm/vant-weapp/toast/toast"
+import Toast from "../../../miniprogram_npm/vant-weapp/toast/toast"
 
 //获取应用实例
 const app = getApp()
