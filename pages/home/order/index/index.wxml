@@ -12,11 +12,11 @@
 					</view>
 				</view>
 				<view slot="footer" wx:if='{{item.status == "待支付"}}'>
-					<van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}'>取消订单</van-button>
+					<van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='0'>取消订单</van-button>
 					<van-button type="warning" custom-class='pay'>去支付</van-button>
 				</view>
 				<view slot='footer' wx:if='{{item.status == "待配送"}}'>
-				  <van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}'>取消订单</van-button>
+				  <van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='0'>取消订单</van-button>
 				</view>
 				<view slot='footer' wx:if='{{item.status == "待自提"}}'>
 				  <van-button custom-class='cancel'>退款</van-button>
@@ -27,10 +27,10 @@
 					<van-button type="warning" custom-class='pay'>确认收货</van-button>
 				</view>
 				<view slot='footer' wx:if='{{item.status == "已取消"}}'>
-				  <van-button type="warning" custom-class='pay'>再来一单</van-button>
+				  <van-button type="warning" custom-class='pay' data-id='{{item.id}}' bind:click='again'>再来一单</van-button>
 				</view>
 				<view slot='footer' wx:if='{{item.status == "已完成"}}'>
-				  <van-button type="warning" custom-class='pay'>再来一单</van-button>
+				  <van-button type="warning" custom-class='pay' data-id='{{item.id}}' bind:click='again'>再来一单</van-button>
 				</view>
 				<view slot='footer' wx:if='{{item.status == "退款中"}}'>
 				  <van-button type="default" custom-class='cancel'>退款情况</van-button>
@@ -45,3 +45,6 @@
   <van-tab title="拼团">拼团</van-tab>
   <van-tab title="到店订单">到店订单</van-tab>
 </van-tabs>
+
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

@@ -1,3 +1,6 @@
+import Dialog from "../../../miniprogram_npm/vant-weapp/dialog/dialog"
+import Toast from '../../../miniprogram_npm/vant-weapp/toast/toast'
+
 Page({
 	data: {
 		active: 0,
@@ -22,6 +25,17 @@ Page({
 	onLoad(option) {
 		this.initSystem()
 		this.initCuser()
+	},
+	onShow() {
+		this.refreshOrder()
+	},
+	/*-- 刷新订单数据 --*/
+	refreshOrder(e) {
+		this.setData({
+			'order0.data': this.data.order0.data,
+			'order1.data': this.data.order1.data,
+			'order2.data': this.data.order2.data,
+		})
 	},
 	/*-- 获取设备信息（屏幕高度等） --*/
 	initSystem(e) {
@@ -154,5 +168,37 @@ Page({
 		this.setData({
 			active: e.detail.index
 		})
-  }
+  },
+	/*-- 取消订单 --*/
+	cancel(e) {
+		Dialog.confirm({
+			message: '确认取消该订单吗？'
+		}).then(() => {
+			let [
+				id,
+				type,
+				_this
+			] = [
+				e.currentTarget.dataset.id,
+				e.currentTarget.dataset.type,
+				this
+			]
+			wx.request({
+				url: 'http://192.168.1.103:8080/api/order/cancel',
+				data: {
+					orderId: id
+				},
+				success(res) {
+					if(res.data.code == 200) {
+						Toast('操作成功')
+						_this.data[`order${type}`].data.filter((item) => {
+							return item.id == id
+						})[0].status = '已取消'
+						_this.onShow()
+					}
+				}
+			})
+		}).catch(() => {
+		})
+	}
 })
