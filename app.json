@@ -1,6 +1,22 @@
 {
   "pages": [
     "pages/home/index/index",
+    "pages/user/index/index",
+    "pages/user/charge/index/index",
+    "pages/user/charge/chargedetail/index",
+    "pages/user/scorecard/scoredetail/index",
+    "pages/user/scorecard/index/index",
+    "pages/user/coupon/index/index",
+    "pages/user/coupon/history/index",
+    "pages/user/shopcard/index/index",
+    "pages/user/shopcard/history/index",
+    "pages/user/seccard/index/index",
+    "pages/user/seccard/history/index",
+    "pages/user/mydetail/index/index",
+    "pages/user/addressManage/addressManage",
+    "pages/user/customerService/customerService",
+    "pages/user/payCode/payCode",
+    "pages/user/setting/setting",
     "pages/home/search/index",
     "pages/home/address/index",
     "pages/home/good/index",
@@ -9,7 +25,8 @@
 		"pages/home/order/success/index",
     "pages/user/login/step0",
     "pages/user/login/step1",
-    "pages/user/index/index"
+    "pages/bindVIP/index"
+
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -41,6 +58,7 @@
 		"van-radio": "/miniprogram_npm/vant-weapp/radio/index",
     "van-radio-group": "/miniprogram_npm/vant-weapp/radio-group/index",
 		"van-panel": "/miniprogram_npm/vant-weapp/panel/index"
+
   },
   "tabBar": {
     "color": "#d5d5d5",
@@ -61,10 +79,16 @@
         "text": "订单"
       },
       {
-        "pagePath": "pages/home/index/index",
+        "pagePath": "pages/user/index/index",
+
         "text": "会员中心"
       }
     ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   },
   "sitemapLocation": "sitemap.json"
 }

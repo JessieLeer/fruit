@@ -1,0 +1,16 @@
+<!--page/user/customerService/customerService.wxml-->
+ <view class='box'>
+      <block wx:for="{{content}}" wx:key="item">
+        <view class='text-item'>
+          <view class='text-name' bindtap="showHide" data-changeid="{{item.id}}">{{item.title}}<view class="{{item.shows?'toUp':'toLeft'}}"></view></view>
+          <view wx:if="{{item.shows}}" class="content">{{item.contents}}</view>
+        </view>
+      </block>
+    </view>
+
+    <view class="customerTime">
+  （客服服务时间：9：00-23：00）
+</view>
+<view bindtap='tel' style="width:100%;height:132rpx;background:#fff;position:fixed;bottom:0;">
+  <view class="customerPhone">客服电话</view>
+</view>

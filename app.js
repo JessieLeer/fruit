@@ -8,15 +8,17 @@ let qqmapsdk = new QQMapWX({
 App({
 	globalData: {
 		// 用户的微信信息
-    userInfo: null,
+    	userInfo: null,
 		// 用户的地理位置信息
 		position: {},
 		// openid
 		openid: '',
 		// session_key
-		session_key: '',
+
 		shop: {},
-		orderGoods: []
+		orderGoods: [],
+		session_key: '' ,
+		url: 'http://119.3.50.232:8082'
   },
   onLaunch() {
     // 展示本地存储能力

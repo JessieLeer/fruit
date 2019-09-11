@@ -1,1 +1,5 @@
-{}
+{
+    "disableScroll": true,
+    "navigationBarTitleText": "会员中心",
+    "navigationBarTextStyle": "white"
+}

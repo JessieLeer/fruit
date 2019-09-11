@@ -1,0 +1,48 @@
+<view class="wrap">
+    <view class="relative">
+        <view class="top_zindex">
+            <image class="score_desc" src="../../../../static/image/score_desc.png" mode="widthFix"></image>
+            <view class="remain_info" bindtap="close">
+                <view class="info_flex">
+                    <view>
+                        可用积分
+                    </view>
+                    <view>
+                        <text class="icon_money">￥</text>
+                        <text class="money">{{number}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="date_area">
+                <view class="datepicker" bindtap="showSelect">
+                    <text>{{date}}</text>
+                    <image src="../../../../static/image/select.png" mode="widthFix" class="{{select?'img_animation' : ''}}"></image>
+                </view>
+                <view>
+                    <text decode="{{true}}">充值：￥{{income}}&emsp;</text>
+                    <text>支出：{{expenditure}}</text>
+                </view>
+        
+            </view>
+        </view>
+    </view>
+    <view class="content_detail" bindtap="close">
+        <view class="item_detail" wx:for="{{datalist}}" wx:key="{{index}}">
+            <view>
+                <view>
+                    <view>{{item.ireason}}</view>
+                    <!-- <view>订单编号：5610257893012356</view> -->
+                    <view>{{item.itime}}</view>
+                </view>  
+            </view>
+            <view>
+                <view class="info_charge {{item.itype == 1 ? 'minus' : ''}}">{{item.itype == 0 ? "+" : "-"}}￥{{item.inumber}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="popup" wx:if="{{select}}">
+        <view class="autoheight" bindtap="close"></view>
+        <van-datetime-picker class="fix" type="year-month" min-date="{{ minDate }}" max-date="{{ maxDate }}" item-height="54"
+            value="{{ maxDate }}" bind:confirm="confirm" bind:cancel="cancel" value="{{ valuecurrent }}"/>
+    </view>
+</view>

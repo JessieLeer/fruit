@@ -1,0 +1,62 @@
+<!--page/user/addressManage/editAddress/editAddress.wxml-->
+<view style="background:#fff;">
+  <view class="box">
+    <view class="titleName">收货人</view>
+    <view class="inputStyle">
+      <input style="height:110rpx;text-align:right;" placeholder="请输入收货人姓名"></input>
+    </view>
+  </view>
+  <view class="box">
+    <view class="woman">
+      <view style="font-size:32rpx;font-family:Source Han Sans CN;font-weight:400;color:#333;margin-left:15rpx;">女士</view>
+      <view class="{{isSel?'selSex':'sex'}}" bindtap="selSex"></view>
+    </view>
+    <view class="man">
+      <view class="{{isSel?'sex':'selSex'}}" bindtap="selSex"></view>
+      <view style="font-size:32rpx;font-family:Source Han Sans CN;font-weight:400;color:#333;margin-left:50rpx;">先生</view>
+    </view>
+  </view>
+  <view class="box">
+    <view class="titleName">手机号</view>
+    <view class="inputStyle">
+      <input style="height:110rpx;text-align:right;" placeholder="请输入收货人手机号"></input>
+    </view>
+  </view>
+  <view class="box">
+    <view class="titleName">地址</view>
+    <view class="inputStyle" style="position:relative">
+      <input style="width:420rpx;;height:110rpx;text-align:right;" disabled="true" placeholder="点击选择所在地区"></input>
+      <view class="toLeft"></view>
+    </view>
+  </view>
+  <view class="box">
+    <view class="titleName">门牌号</view>
+    <view class="inputStyle">
+      <input style="height:110rpx;text-align:right;" placeholder="详细地址，如：3号楼2单元105"></input>
+    </view>
+  </view>
+    <view class="box">
+    <view class="titleName" style="width:210rpx">标签</view>
+    <view class="selSign">
+      <view style="width:80rpx;"  class="{{icon==4?'sel':''}}"  bindtap="sel" data-text="公司">公司</view>
+      <view style="width:102rpx;"  class="{{icon==3?'sel':''}}"  bindtap="sel" data-text="父母家">父母家</view>
+      <view style="width:80rpx;"  class="{{icon==2?'sel':''}}"  bindtap="sel" data-text="学校">学校</view>
+      <view style="width:60rpx;"  class="{{icon==1?'sel':''}}" bindtap="sel" data-text="家">家</view>
+    </view>
+  </view>
+    <view class="box">
+    <view class="titleName">设置为默认地址</view>
+    <view class="inputStyle" style="text-align: right;padding-top: 25rpx;">
+      <view class="body-view">
+        <switch style="zoom:.8" checked bindchange="switch1Change"/>
+      </view>
+    </view>
+  </view>
+</view>
+<view style="font-size:26rpx;font-family:Source Han Sans CN;font-weight:400;color:#9F9F9F;margin-top:29rpx;margin-left:20rpx;">每次购物时会优先定位至改地址，方便您轻松购物</view>
+
+<view style="width:100%;height:132rpx;background:#fff;position:fixed;bottom:0;" bindtap="newAddress">
+  <view class="deleBtn" bindtap="popConfirm">删除</view>
+  <view class="keepBtn">保存</view>
+</view>
+
