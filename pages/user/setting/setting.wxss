@@ -1,0 +1,42 @@
+/* page/user/setting/setting.wxss */
+page{
+  background: #ebebeb;
+  font-weight: 400;
+  font-size: 32rpx;
+  font-family: SourceHanSansCN-Regular;
+  color:#333333;
+}
+
+.to-page{
+  position: relative;
+  background: #fff;
+  height: 120rpx;
+  line-height: 120rpx;
+  border-bottom: 1px solid #EBEBEB;
+  text-indent: 18rpx;
+}
+.to-page:nth-child(3){
+  border: none;
+}
+
+.right-sign {
+  position: absolute;
+  top:42rpx;
+  right:18rpx;
+  width:24rpx;
+  height: 24rpx;
+  border-top:1px solid #D3D3D3;
+  border-right:1px solid #D3D3D3;
+  transform:rotate(45deg);
+}
+
+.btn-quit{
+  margin-top: 20rpx;
+   width:750rpx;
+   height:120rpx;
+   font-size:32rpx;
+   color:#333;
+   text-align:center;
+   line-height:120rpx;
+   background-color:#fff;
+}

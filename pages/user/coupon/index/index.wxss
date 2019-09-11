@@ -1,0 +1,187 @@
+.input_wrap{
+    min-height:64.5px;
+    background:rgba(255,255,255,1);
+    padding : 24.5px 9.5px 16.5px 9.5px;
+    box-sizing : border-box;
+    display: flex;
+    border-bottom : 10px solid #F4F4F4;
+}
+.input_wrap>view:nth-child(2){
+    height:  32px;
+    line-height: 32px;
+    margin-left : 12px;
+    font-size:16px;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(51,51,51,1);
+}
+.for_code{
+    height:  32px;
+    width : 310px;
+    border-bottom : 1px solid rgba(244,244,244,1);
+}
+.content_coupon{
+    padding : 15px 10px; 
+}
+.cuopon_detail{
+    display: flex;
+    border : 1px solid rgba(221,221,221,1);
+}
+.cuopon_detail>view:nth-child(1){
+    width:99px;
+    height:101.5px;
+    background:rgba(246,147,31,1); 
+}
+.cuopon_detail>view:nth-child(2){
+    flex : 1;
+    height:101.5px;
+}
+.coupon_price{
+    font-size:30px;
+    font-family:Microsoft YaHei;
+    font-weight:bold;
+    color:rgba(255,255,255,1);
+    text-align : center;    
+}
+.coupon_info{
+    margin : 0 auto;
+    width:84px;
+    height:26px;
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:4px;
+    font-size:12px;
+    line-height : 26px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    text-align : center;
+    margin-top : 3.5px;
+}
+.flex{
+    padding-top: 14px;
+    box-sizing : border-box;
+}
+.coupon_text_area{
+    padding : 5px 8px;
+    box-sizing : border-box;
+}
+.top_text_area{
+    height:65.5px;
+    position: relative;
+    border:1px solid rgba(235,235,235,0.8);
+    border-radius:4px;
+    padding : 10px 11px;
+    box-sizing : border-box;
+}
+.top_text_area>view:nth-child(1){
+    font-size:14px;
+    font-family:Microsoft YaHei;
+    font-weight:bold;
+    color:rgba(51,51,51,1);
+}
+.top_text_area>view:nth-child(2){
+    font-size:12px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    color:rgba(109,109,109,1);
+    margin-top : 6px;
+}
+.btn_use{
+    position: absolute;
+    width:62px;
+    height:25px;
+    background:rgba(255,255,255,1);
+    border:1px solid rgba(246,147,31,1);
+    border-radius:12.5px;
+    font-size:9px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    line-height : 25px;
+    text-align : center;
+    color:rgba(247,163,74,1);
+    right : 5px;
+    top : 25px;
+}
+.more_detail{
+    font-size:12px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    color:rgba(51,51,51,1);
+    line-height:30px;
+    display: flex;
+}
+.more_detail_select{
+    font-size:12px;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(112,112,112,1);
+    line-height:19px;
+    padding : 12px 7.5px;
+    border : 1px solid rgba(221,221,221,1);
+    border-top : none;
+}
+.item_coupon{
+    margin-bottom : 14px;
+}
+.auto_height{
+    height : 67px;
+}
+.op_icon{
+    margin-top : 2px;
+    margin-left : auto;
+}
+.op_icon image{
+    width:13px;
+    
+}
+.rotateani{
+    transform-origin: 50% 50%;
+    animation: move 0.6s forwards 
+}
+@keyframes move{
+    0%{
+        transform: rotate(0) 
+    }
+    100%{
+        transform: rotate(-180deg) translateY(3px)
+    }
+}
+.history_fix{
+    height : 67px;
+    position: fixed;
+    width : 100%;
+    bottom : 0;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+}
+.history_fix view{
+    height : 18px;
+    box-sizing: border-box;
+    width : 100%;
+    text-align : center;
+    font-size:14px;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+}
+.history_fix view:nth-child(1){
+   border-right : 1px solid rgba(217,217,217,1);
+}
+.hasno_area{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height : 100vh;
+}
+.hasno_area image{
+    width : 314.5px;
+}
+.info{
+    text-align : center;
+    font-size:16px;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(158,158,158,1);
+}

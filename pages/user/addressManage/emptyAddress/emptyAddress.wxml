@@ -1,0 +1,10 @@
+<!--page/user/addressManage/emptyAddress/emptyAddress.wxml-->
+
+<view class="emptyAdd">
+  <view class="sign">暂无收货地址~~</view>
+</view>
+<view style="width:100%;height:132rpx;background:#fff;position:fixed;bottom:0;" bindtap="newAddress">
+   <view class="add-addressBtn">
+    新增收货地址
+  </view>
+</view>

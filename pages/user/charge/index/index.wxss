@@ -1,0 +1,125 @@
+page{
+    background: #F4F4F4;
+}
+.remain_info{
+    width : 100%;
+    background:rgba(255,255,255,1);
+    border-bottom : 10px solid #F4F4F4;
+    padding : 27px 10px 27px 10px;
+    box-sizing : border-box;
+    display: flex;
+}
+.remain_info view:nth-child(1){
+    font-size:16px;
+    font-family:Source Han Sans CN;
+    font-weight:200;
+    color:rgba(165,165,165,1);
+}
+.money{
+    font-size:38px;
+    font-family:Source Han Sans CN;
+    color:rgba(51,51,51,1);
+}
+.icon_money{
+    font-size:19.5px;
+    font-family:Source Han Sans CN;
+    color:rgba(51,51,51,1);
+}
+.remain_info>view:last-child{
+    margin-left : auto;
+    line-height : 75px;
+    font-size:16px;
+    font-family:Source Han Sans CN;
+    font-weight:200;
+    color:rgba(187,187,187,1);
+}
+.remain_info>view:last-child text:nth-child(1){
+    margin-right : 9px;
+}
+.charge_detail{
+    background:rgba(255,255,255,1);
+    padding : 17px 10px;
+    display: flex;
+    flex-wrap : wrap;
+    justify-content : space-between;
+    
+}
+.charge_detail>view{
+    margin-bottom : 5px;
+    width:32%;
+    height:80px;
+    background:rgba(255,255,255,1);
+    border:1px solid rgba(221,221,221,1);
+    border-radius:3px;
+    text-align : center; 
+    display : flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content: center;
+
+}
+.rmb{
+    font-size:21px;
+    font-family:Source Han Sans CN;
+    color:rgba(51,51,51,1);
+}
+.gift{
+    font-size:13px;
+    font-family:Source Han Sans CN;
+    font-weight:200;
+    color:rgba(150,150,150,1);
+}
+.cur{
+    border:1px solid  #F6931F!important;
+} 
+.cur text{
+    color : #F6931F!important;
+}
+.charge_info{
+    padding : 49px 10px;
+}
+.charge_info image{
+    width : 21.5px;
+}
+.title text{
+    font-size:16px;
+    font-family:Source Han Sans CN;
+    color:rgba(51,51,51,1);
+}
+.title{
+    margin-bottom : 15px;
+}
+.title image{
+    vertical-align:  -4px;
+    margin-right : 9px;
+}
+.content_info{
+    font-size:15px;
+    font-family:Source Han Sans CN;
+    font-weight:200;
+    color:rgba(130,130,130,1);
+}
+.btn_charge{
+    position: fixed;
+    bottom : 0;
+    width : 100%;
+    height:61px;
+    background:rgba(255,255,255,1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn_charge view{
+    width : 96%;
+    height : 45px;
+    border-radius:45px;
+    background : #F6931F;
+    text-align : center;
+    line-height : 45px;
+    font-size:18px;
+    font-family:Source Han Sans CN;
+    color:rgba(255,255,255,1);
+}
+.arrow{
+    width : 7px;
+}

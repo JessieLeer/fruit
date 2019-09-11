@@ -1,0 +1,48 @@
+<view class="outer_container">
+    <view>
+        <view class="item_input">
+            <view>手机号</view>
+            <view class="input"><input maxlength="11" type="number" placeholder="请输入手机号" placeholder-style='text-align:right' value="{{tel}}" bindinput="inputChange"/></view>
+        </view>
+        <view class="item_input" wx:if="{{showCodeItem}}">
+            <view>验证码</view>
+            <view class="input_code"><input maxlength="6" type="number" placeholder="验证码" placeholder-style='text-align:right' value="{{code}}" bindinput="changeHandlerCode"/></view>
+            <view class="code" bindtap="getCode">{{codetext}}{{num}}</view>
+        </view>
+        <view class="item_input">
+            <view>姓名</view>
+            <view class="input"><input placeholder="请输入姓名" placeholder-style='text-align:right' value="{{name}}" bindinput="inputChange" bindinput="changeHandlerName"/></view>
+        </view>
+        <view class="item_input" bindtap="chooseDate">
+            <view>生日</view>
+            <view class="input">{{current}}</view>
+            <view>
+                <image src="../../static/image/arrow.png" mode="widthFix" class="date_arrow"></image>
+            </view>
+        </view>
+        <view class="item_input" bindtap="showStore">
+            <view>所属门店</view>
+            <view class="input">{{currentadress}}</view>
+        </view>
+        <view class="bind_btn" bindtap="bindcard">绑定会员卡</view>
+        <view class="checkbox_area">
+            <checkbox></checkbox>
+            <text>
+                <text class="text_f">我已阅读并同意</text>
+                <text class="text_s">会员卡信息使用声明</text>
+            </text>
+        </view>
+    </view>
+    <view class="popup" wx:if="{{showDate}}">
+        <view class="autoheight" bindtap="close"></view>
+        <van-datetime-picker class="fix" type="date" min-date="{{ minDate }}" max-date="{{ maxDate }}"
+            item-height="54" value="{{ maxDate }}" bind:confirm="confirm" bind:cancel="cancel" formatter="{{ formatter }}" />
+    </view>
+    <view class="popup" wx:if="{{showStore}}">
+        <view class="autoheight" bindtap="close"></view>
+        <van-picker class="fix" show-toolbar="true" wx:if="{{showStore}}" columns="{{ columns }}" item-height="54"
+            bind:confirm="confirm_select" bind:cancel="cancel_selcect"></van-picker>
+    </view>
+   
+   
+</view>

@@ -1,0 +1,10 @@
+var substr = function (val) {
+  if (val == undefined) {
+    return false;
+  } else if (val.length > 15) {
+    return val.substring(0, 15) + "...";
+  } else {
+    return val;
+  }
+}
+module.exports.substr = substr;

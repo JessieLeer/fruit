@@ -1,0 +1,135 @@
+<view class="user_container">
+    <scroll-view scroll-y class="count_height">
+    <view class="use_info">
+        <view class="user_card">
+            <view class="detail_user" wx:if="{{true}}">
+                <view>
+                    <image class="avatar" src="../../../static/image/shopcar.png" mode='widthFix' bindtap="gotoMy"></image>
+                </view>
+                <view class="text_info">
+                    <view class="name_info">{{username}}的卡片</view>
+                    <view class="tel_num">{{mobile}}</view>
+                </view>
+                <view class="vip_card">
+                    <image src="../../../static/image/vip.png" mode="widthFix"></image>
+                </view>
+                <view class="code">
+                    <image src="../../../static/image/erweicode.png" bindtap="showCode"></image>
+                </view>
+            </view>
+            <view class="detail_user" wx:if="{{false}}">
+                <view>
+                    <image class="avatar" src="../../../static/image/user.png" mode='widthFix'></image>
+                </view>
+                <view class="register_info">
+                    登录/注册
+                </view>
+            </view>
+        </view>
+        <view class="num_detail_info">
+            <view>
+                <view class="num_common">
+                    <view class="num_common">{{balance}}</view>
+                    <view class="charge_btn" bindtap="onTap">充值</view>
+                </view>
+                <view class="desc_text">余额</view>
+            </view>
+            <view bindtap="gotoScorePage">
+                <view class="num_common">{{point}}</view>
+                <view class="desc_text">积分</view>
+            </view>
+            <view bindtap="gotoCoupon"> 
+                <view class="num_common">{{coupon}}</view>
+                <view class="desc_text">优惠券</view>
+            </view>
+        </view>
+    </view>
+        <view class="item_list" bindtap="gotoShopCard">
+            <view>
+                <image src="../../../static/image/shop.png" mode="widthFix"></image>
+            </view>
+            <view>
+                我的购物卡
+            </view>
+            <view>
+                <view>{{card}}张</view>
+                <view><image class="arrow" src="../../../static/image/arrow.png" mode="widthFix"></image></view>
+            </view>
+        </view>
+        <view class="item_list" bindtap="gotoSecCard">
+            <view>
+                <image src="../../../static/image/ucard.png" mode="widthFix"></image>
+            </view>
+            <view>
+                我的次卡
+            </view>
+            <view>
+                <view>2张</view>
+                <view><image class="arrow" src="../../../static/image/arrow.png" mode="widthFix"></image></view>
+            </view>
+        </view>
+        <view class="item_list" bindtap="gotoPayCode">
+            <view>
+                <image src="../../../static/image/paycode.png" mode="widthFix"></image>
+            </view>
+            <view>
+                我的付款码
+            </view>
+            <view>
+                <view><image class="arrow" src="../../../static/image/arrow.png" mode="widthFix"></image></view>
+            </view>
+        </view>
+        <view class="item_list" bindtap="gotoLocationMan">
+            <view>
+                <image src="../../../static/image/local.png" mode="widthFix"></image>
+            </view>
+            <view>
+                收货管理
+            </view>
+            <view>
+                <view><image class="arrow" src="../../../static/image/arrow.png" mode="widthFix"></image></view>
+            </view>
+        </view>
+        <view class="item_list" bindtap="gotoSetting">
+            <view>
+                <image src="../../../static/image/set.png" mode="widthFix"></image>
+            </view>
+            <view>
+                设置
+            </view>
+            <view>
+                <view><image class="arrow" src="../../../static/image/arrow.png" mode="widthFix"></image></view>
+            </view>
+        </view>
+        <view class="item_list" bindtap="gotoCus">
+            <view>
+                <image src="../../../static/image/ask.png" mode="widthFix"></image>
+            </view>
+            <view>
+                客服帮助
+            </view>
+            <view>
+                <view><image class="arrow" src="../../../static/image/arrow.png" mode="widthFix"></image></view>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="popup" wx:if="{{popupkey}}">
+        <view>
+            <view class="img_wrap">
+                <view class="logo_wrap">
+                    <image src="../../../static/image/logo.png" mode="widthFix"></image>
+                </view>
+                <view class="code_wrap">
+                    <image src="../../../static/image/tiaocode.png" mode="widthFix"></image>
+                </view>
+                <view class="text_area">
+                    到店结账时请向店员出示此会员卡
+                </view>
+            </view>
+            <view class="close_area">
+                <image src="../../../static/image/close.png" mode="widthFix" bindtap="showCode"></image>
+            </view>
+        </view>
+        
+    </view>
+</view> 

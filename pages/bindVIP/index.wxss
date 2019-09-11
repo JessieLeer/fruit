@@ -1,0 +1,123 @@
+.outer_container{
+    padding : 0 10px;
+}
+.item_input{
+    height : 54.5px;
+    line-height : 54.5px;
+    display: flex;
+    align-items: center;
+    font-size:16px;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(104,104,104,1);
+    border-bottom : 1px solid rgba(243,243,243,1);
+}
+.input{
+    margin-left : auto;
+    display: flex;
+    align-items: center;
+}
+.input input{
+    width: 106px;
+    text-align : right;
+}
+.input_code{
+    width: 68px;
+    margin-left : auto;
+    margin-right : 10px;
+}
+.code{
+    padding : 0 4px;
+    height: 30px;
+    width: 70px;
+    text-align : center;
+    font-size: 12px;
+    border : 1px solid #F6931F;
+    line-height: 30px;
+    color :  #F6931F;
+    border-radius : 15px;
+}
+.date_arrow{
+    width : 7px;
+    margin-left : 12.5px;
+}
+.fix{
+    position: absolute;
+    bottom : 0;
+    width  : 100%;
+    left : 0;
+}
+.van-picker__confirm{
+    color :#676767!important;
+}
+.van-picker__cancel{
+    color :#676767!important;
+}
+.bind_btn{
+    width:179.5px;
+    height:45px;
+    background:rgba(246,147,31,1);
+    border-radius:22.5px;
+    text-align : center;
+    line-height : 45px;
+    margin : 87px auto;
+    font-size:18px;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    margin-bottom : 26px;
+}
+.popup{
+    position: fixed;
+    width : 100vw;
+    height :100vh;
+    background : rgba(0,0,0,.2);
+    top : 0;
+    left : 0;
+}
+.autoheight{
+    position: absolute;
+    height : 100%;
+    width: 100%;
+}
+/*checkbox 选项框大小  */
+checkbox .wx-checkbox-input {
+    width: 17px;
+    height: 17px;
+    border-radius : 50%;
+    margin-right :  8px;
+}
+/*checkbox选中后样式  */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  background: #00837B;
+}
+/*checkbox选中后图标样式  */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 22rpx;
+  height: 22rpx;
+  line-height: 22rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+.checkbox_area {
+    text-align : center;
+    line-height : 17px;
+
+}
+.text_f{
+    font-size:13px;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(159,159,159,1);
+}
+.text_s{
+    font-size:13px;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:#00837B;
+    margin-left : 4px;
+}
