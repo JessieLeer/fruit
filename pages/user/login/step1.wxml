@@ -1,9 +1,13 @@
 <view>
+  <image src='/static/image/pro.png' mode='widthFix' class='pro'></image>
+	<view class='safe'>为了保障您的资金安全</view>
+	<text class='safe-grey'>请先验证您的手机号</text>
   <van-cell-group>
     <van-field value="{{ phone.value }}" label="手机号" placeholder="请输入手机号"
     error-message="{{phone.message}}" border="{{ false }}" bind:change='phoneChange' required/>
-		<van-field value="{{ sms }}" center clearable label="短信验证码" placeholder="请输入短信验证码" border="{{ false }}" required use-button-slot>
-    <van-button slot="button" size="small" type="primary" disabled='{{phone.verify && countdown == 0 ? false : true}}'>发送验证码</van-button>
-  </van-field>
+		<van-field value="{{ sms.value }}" center clearable label="短信验证码" placeholder="请输入短信验证码" border="{{ false }}" bind:change='smsChange' required use-button-slot>
+      <van-button slot="button" size="small" type="default" disabled='{{phone.verify && countdown == 0 ? false : true}}' bind:click='sendSms'>发送验证码</van-button>
+    </van-field>
   </van-cell-group>
+	<van-button type="default" custom-class='login-phone' disabled='{{phone.verify && sms.verify ? false : true}}'>下一步</van-button>
 </view>

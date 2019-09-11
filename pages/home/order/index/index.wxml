@@ -1,0 +1,47 @@
+<van-tabs active="{{ active }}" bind:change="onChange" color='#F6931F' tab-active-class='active' sticky='{{true}}' class='h-100'>
+  <van-tab title="及时达" >
+	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper' style='height: {{windowH}}px' data-id='0'>
+			<van-panel wx:for='{{order0.data}}' wx:key='index' title="{{item.createTime}}" status="{{item.status}}" use-footer-slot custom-class='good' header-class='good-header' footer-class='good-footer'>
+			  <view class='good-content'>
+					<scroll-view  scroll-x class='image-wrapper'>
+				    <image wx:for='{{item.headImages}}' wx:key='i' wx:for-item="image" src='{{image}}' class='good-image' mode='widthFix'/>
+					</scroll-view>
+					<view class='good-count'>
+					  <text class='good-count-count'>共{{item.headImages.length}}件</text>
+						<text>实付¥{{item.payMoney}}</text>
+					</view>
+				</view>
+				<view slot="footer" wx:if='{{item.status == "待支付"}}'>
+					<van-button custom-class='cancel'>取消订单</van-button>
+					<van-button type="warning" custom-class='pay'>去支付</van-button>
+				</view>
+				<view slot='footer' wx:if='{{item.status == "待配送"}}'>
+				  <van-button custom-class='cancel'>取消订单</van-button>
+				</view>
+				<view slot='footer' wx:if='{{item.status == "待自提"}}'>
+				  <van-button custom-class='cancel'>退款</van-button>
+					<van-button type="warning" custom-class='pay'>查看取货码</van-button>
+				</view>
+				<view slot='footer' wx:if='{{item.status == "配送中"}}'>
+				  <van-button custom-class='cancel'>查看物流</van-button>
+					<van-button type="warning" custom-class='pay'>确认收货</van-button>
+				</view>
+				<view slot='footer' wx:if='{{item.status == "已取消"}}'>
+				  <van-button type="warning" custom-class='pay'>再来一单</van-button>
+				</view>
+				<view slot='footer' wx:if='{{item.status == "已完成"}}'>
+				  <van-button type="warning" custom-class='pay'>再来一单</van-button>
+				</view>
+				<view slot='footer' wx:if='{{item.status == "退款中"}}'>
+				  <van-button type="default" custom-class='cancel'>退款情况</van-button>
+				</view>
+				<view slot='footer' wx:if='{{item.status == "已退款"}}'>
+				  <van-button type="default" custom-class='cancel'>退款情况</van-button>
+				</view>
+			</van-panel>
+			<text wx:if='{{order0.isLoadAll}}' class='more-text w-100'>没有更多了</text>
+		</scroll-view>
+	</van-tab>
+  <van-tab title="拼团">拼团</van-tab>
+  <van-tab title="到店订单">到店订单</van-tab>
+</van-tabs>

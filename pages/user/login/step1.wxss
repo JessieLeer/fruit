@@ -1,0 +1,35 @@
+.pro{
+  width: 140rpx;
+	display: block;
+	margin: 40rpx auto;
+}
+
+.safe{
+  font-weight:bold;
+  color:rgba(51,51,51,1);
+}
+
+.safe-grey{
+  font-weight:400;
+  color:rgba(129,128,128,1);
+	font-size: 28rpx;
+	margin-bottom: 40rpx;
+}
+
+.safe,.safe-grey{
+  font-family:Source Han Sans CN;
+  display: block;
+	text-align: center;
+}
+
+.login-phone.van-button--default{
+	background-color: #F6931F;
+	color: white;
+	display: block;
+	width: 50%;
+	margin: 80rpx auto 0rpx auto;
+	border: 1px solid #F6931F;
+	border-radius:45px;
+	height: 80rpx;
+	line-height: 80rpx;
+}

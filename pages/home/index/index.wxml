@@ -1,6 +1,5 @@
-<!--index.wxml-->
-<view class="container">
-  <view class='position'>
+<view class="container" wx:if='{{shop.id}}'>
+  <view class='position' bindtap='go' data-url='/pages/home/address/index'>
 	  <van-icon name="location-o" class='position-icon' />
 	  {{position.address}}
 		<van-icon name="arrow" class='position-icon' />
@@ -8,7 +7,7 @@
 	<view class='search-area'>
 	  <text class='arrive-time'>49分钟送达</text>
 		<view class='search' >
-		  <van-search placeholder="请输入商品名称" class='' readonly bindtap='go' id='/pages/home/search/index'/>
+		  <van-search placeholder="请输入商品名称" class='' readonly bindtap='go' data-url='/pages/home/search/index?id={{shop.id}}'/>
 		</view>
 		<view class='qr'>
 		  <van-icon name="qr" size='46rpx'/>
@@ -26,18 +25,30 @@
 		</view>
 		<scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper'>
 		  <swiper autoplay="true" interval="3000" duration="500" class='w-100' style='display: block'>
-				<block wx:for="{{imgUrls}}" wx:key='index'>
+				<block wx:for="{{banners}}" wx:key='index'>
 					<swiper-item class='swiper-item'>
-						<image src="{{item}}" class="slide-image w-100" mode="widthFix"/>
+						<image src="{{item.showImg}}" class="slide-image w-100" mode="widthFix" bindtap='bannerGo' data-banner='{{item}}'/>
 					</swiper-item>
 				</block>
 			</swiper>
-			<van-card wx:for='{{goods}}' wx:key='index' price="{{item.sellingPrice}}" origin-price='{{item.originalPrice}}' desc="{{item.specification}}" title="{{item.name}}" thumb="{{item.image ? item.image : 'https://img.yzcdn.cn/vant/t-thirt.jpg'}}" thumb-class='thumb' desc-class='good-desc' title-class='good-name' price-class='good-price' custom-class='good-item' centered='false'>
-				<image src='../../../static/image/shopcar.png' slot='bottom' class='shopcar-icon' mode='widthFix' bindtap='addShopcar' data-good='{{item}}' wx:if='{{item.count == 0}}' />
-				<van-stepper slot='bottom' value="{{item.count}}" bind:change="onCartChange" class='shopcar' custom-class='step' input-class='good-input' minus-class='minus' plus-class='plus' min='0' wx:if='{{item.count != 0}}' data-good='{{item}}'/>
+			<van-card wx:for='{{goods}}' wx:key='index' price="{{item.sellingPrice}}" origin-price='{{item.originalPrice}}' desc="{{item.specification}}" title="{{item.name}}" desc-class='good-desc' title-class='good-name' price-class='good-price' custom-class='good-item' centered='false'>
+			  <image slot='thumb' src="{{item.image ? item.image : 'https://img.yzcdn.cn/vant/t-thirt.jpg'}}" mode='widthFix' class='thumb' bindtap='go' data-url='/pages/home/good/index?shopId={{shop.id}}&id={{item.id}}'/>
+				<image src='../../../static/image/shopcar.png' slot='bottom' class='shopcar-icon' mode='widthFix' catchtap='addShopcar' data-good='{{item}}' wx:if='{{item.count == 0}}' />
+				<van-stepper slot='bottom' value="{{item.count}}" bind:change="onCartChange" class='shopcar' custom-class='step' input-class='good-input' minus-class='minus' plus-class='plus' min='0' max='{{item.inventory}}' wx:if='{{item.count != 0}}' data-good='{{item}}'/>
 			</van-card>
 			<text wx:if='{{isLoadAll}}' class='more-text w-100'>没有更多商品了</text>
 		</scroll-view>
 	</view>
-	<shopcar goods='{{shopcarGoods}}' totalPrice='{{totalPrice}}' wx:if='{{shopcarGoods.length > 0}}' bind:onCartChange='onCartChange' bind:onClear='onCartClear'></shopcar>
+	<shopcar goods='{{shopcarGoods}}' shopId='{{shop.id}}'  totalPrice='{{totalPrice}}' wx:if='{{shopcarGoods.length > 0}}' bind:onCartChange='onCartChange' bind:onClear='onCartClear'></shopcar>
 </view>
+
+<view wx:else class='f-tac'>
+  <image src='../../../static/image/noshop@2x.png' mode='widthFix' class='noshop'/>
+	<view class='caller'>已有<text class='caller-number'>{{caller}}人</text>召唤缘疆佳园在这里开店～</view>
+	<van-button type="default" custom-class='caller-me' bindtap='calling'>我也来召唤</van-button>
+	<van-button type="default" custom-class='caller-change' bindtap='go' data-url='/pages/home/address/index'>换个地址</van-button>
+</view>
+
+<van-toast id="van-toast" />
+
+

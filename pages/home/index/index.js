@@ -1,3 +1,5 @@
+import Toast from "../../../miniprogram_npm/vant-weapp/toast/toast"
+
 //index.js
 //获取应用实例
 const app = getApp()
@@ -12,29 +14,28 @@ Page({
 		shop: {},
 		cates: [],
 		active: 1,
-		imgUrls: [
-      'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
-      'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
-      'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
-    ],
-		goods: [
-			
-		],
+		banners: [],
+		goods: [],
 		page: 1,
 		isLoadAll: false,
 		shopcarGoods: [],
-		totalPrice: 0
+		localShopcarGoods: [],
+		totalPrice: 0,
+		caller: 0
 	},
 
-  onLoad() {
+  onLoad(option) {
+		this.bannerIndex()
 		wx.showLoading({
       title: '加载中',
     })
     setTimeout(() => {
       this.setData({
 			  position: app.globalData.position,
+				shop: app.globalData.shop,
+				cates: [],
+				goods: []
 		  })
-			this.shopShow()
 			this.initCuser()
       wx.hideLoading()
     }, 1000)
@@ -70,9 +71,35 @@ Page({
 		setTimeout(() => {
 			this.setData({
 				position: app.globalData.position,
+				shop: app.globalData.shop,
+				cates: [],
+				goods: []
 			})
+			this.shopShow()
 			this.initCuser()
 		},1000)
+	},
+	
+	/*-- 初始化购物车数据 --*/
+	initShopcar(e) {
+		let _this = this
+		wx.getStorage({
+			key: 'shopcar',
+			success(res) {
+				_this.setData({
+					localShopcarGoods: res.data,
+				})
+				_this.setShopcar()
+				_this.calTotal()
+			}
+		})
+	},
+	setShopcar(e) {
+		this.setData({
+			shopcarGoods: this.data.localShopcarGoods.filter((item) => {
+				return item.shopId == this.data.shop.id
+			})
+		})
 	},
 	
 	/*-- 初始化用户 --*/
@@ -88,29 +115,64 @@ Page({
 		})
 	},
 	
+	/*-- 获取banner轮播图 --*/
+	bannerIndex(e) {
+		let _this = this
+		wx.request({
+			url: 'http://192.168.1.103:8080/api/banner/list',
+			data: {},
+			success(res) {
+				_this.setData({
+					banners: res.data.data
+				})
+			}
+		})
+	},
+	bannerGo(e) {
+		let url
+		if(e.currentTarget.dataset.banner.type == '1') {
+			url = `/pages/home/good/index?shopId=${this.data.shop.id}&id=${e.currentTarget.dataset.banner.value}`
+		}
+		wx.navigateTo({
+			url: url
+		})
+	},
+	
 	/*-- 页面跳转 --*/
 	go(e) {
 		wx.navigateTo({
-			url: e.target.id
+			url: e.currentTarget.dataset.url
 		})
 	},
 	
 	/*-- 获取最近店铺 --*/
 	shopShow(e) {
-		let _this = this
-		wx.request({
-			url: 'http://192.168.1.103:8080/api/curr/store',
-			data: {
-				latitude: _this.data.position.location.lat,
-				longitude: _this.data.position.location.lng,
-			},
-			success(res) {
-				_this.setData({
-					shop: res.data.data
-				})
-				_this.cateIndex()
-			}
-		})
+		if(this.data.shop.id) {
+			this.cateIndex()
+			this.initShopcar()
+		}else{
+			let _this = this
+			wx.request({
+				url: 'http://192.168.1.103:8080/api/curr/store',
+				data: {
+					latitude: _this.data.position.location.lat,
+					longitude: _this.data.position.location.lng,
+				},
+				success(res) {
+					if(res.data.message == '附近没有门店'){
+						_this.setData({
+							caller: res.data.data
+						})
+					}else{
+						_this.setData({
+							shop: res.data.data
+						})
+						_this.cateIndex()
+						_this.initShopcar()
+					}
+				}
+			})
+		}
 	},
 	
 	/*--获取分类列表--*/
@@ -122,17 +184,19 @@ Page({
 				storeId: _this.data.shop.id
 			},
 			success (res) {
-				_this.setData({
-					cates: res.data.data.sort((a,b) => {
-						return a.rank - b.rank
+				if(res.data.data.length > 0) {
+					_this.setData({
+						cates: res.data.data.sort((a,b) => {
+							return a.rank - b.rank
+						})
 					})
-				})
-				_this.setData({
-					active: _this.data.cates.filter((item) => {
-						return item.onShow == true
-					})[0].id
-				})
-				_this.index()
+					_this.setData({
+						active: _this.data.cates.filter((item) => {
+							return item.onShow == true
+						})[0].id
+					})
+					_this.index()
+				}
 			}
 		})
 	},
@@ -152,6 +216,7 @@ Page({
 		wx.request({
 			url: 'http://192.168.1.103:8080/api/commodity/category',
 			data: {
+				storeId: this.data.shop.id,
 				categoryId: this.data.active,
 				pageNum: this.data.page,
 				pageSize: 10
@@ -171,6 +236,7 @@ Page({
 						}else{
 							item.count = 0
 						}
+						item.shopId = _this.data.shop.id
 					}
 					_this.setData({
 						goods: _this.data.goods.concat(res.data.data)
@@ -204,15 +270,14 @@ Page({
 	addShopcar(e) {
 		if(this.data.cuser.userId) {
 			let id = e.currentTarget.dataset['good'].id
-			this.data.goods.filter((item) => {
+			let good = this.data.goods.filter((item) => {
 				return item.id == id
-			})[0].count = 1
+			})[0]
+	    good.count = 1
 			this.setData({
 				goods: this.data.goods
 			})
-			this.data.shopcarGoods.push(this.data.goods.filter((item) => {
-				return item.id == id
-			})[0])
+			this.data.localShopcarGoods.push(good)
 			this.handleShopcar()
 		}else{
 			wx.navigateTo({
@@ -222,17 +287,14 @@ Page({
 	},
 	
 	handleShopcar(e) {
+		this.setData({
+			localShopcarGoods: this.data.localShopcarGoods
+		})
+		this.setShopcar()
 		wx.setStorage({
 			key: 'shopcar',
-			data: this.data.shopcarGoods
-		})
-		let _this = this
-		wx.getStorage({
-			key: 'shopcar',
+			data: this.data.localShopcarGoods,
 			success(res) {
-				_this.setData({
-					shopcarGoods: res.data
-				})
 			}
 		})
 		this.calTotal()
@@ -242,12 +304,12 @@ Page({
 		let count = e.detail.count == undefined ? e.detail : e.detail.count
 		let id = e.currentTarget.dataset['good'] ? e.currentTarget.dataset['good'].id : e.detail.id
 		if(count == 0) {
-			let i = this.data.shopcarGoods.indexOf(this.data.shopcarGoods.filter((item) => {
+			let i = this.data.localShopcarGoods.indexOf(this.data.shopcarGoods.filter((item) => {
 				return item.id == id
 			})[0])
-			this.data.shopcarGoods.splice(i,1)
+			this.data.localShopcarGoods.splice(i,1)
 		}else{
-			this.data.shopcarGoods.filter((item) => {
+			this.data.localShopcarGoods.filter((item) => {
 				return item.id == id
 			})[0].count = count
 		}
@@ -279,7 +341,25 @@ Page({
 		this.setData({
 			goods: this.data.goods
 		})
-	  this.data.shopcarGoods = []
+		this.data.localShopcarGoods = this.data.localShopcarGoods.filter((item) => {
+			return item.shopId != this.data.shop.id
+		})
 		this.handleShopcar()
+	},
+	
+	/*-- 召唤开店 --*/
+	calling(e) {
+		wx.request({
+			url: 'http://192.168.1.103:8080/api/call/store',
+			method: 'post',
+			data: {
+				latitude: this.data.position.location.lat,
+				longitude: this.data.position.location.lng,
+				userId: this.data.cuser.userId
+			},
+			success(res) {
+				Toast(res.data.message)
+			}
+		})
 	}
 })

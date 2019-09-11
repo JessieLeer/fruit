@@ -1,0 +1,23 @@
+.logo{
+  width: 400rpx;
+	margin: 0 auto;
+	display: block;
+}
+
+.login-wechat.van-button--primary{
+  background:rgba(246,147,31,1);
+}
+
+.login-phone.van-button--default{
+	color: #F6931F;
+}
+
+.login-wechat.van-button--primary,.login-phone.van-button--default{
+  display: block;
+	width: 90%;
+	margin: 0 auto 40rpx auto;
+	border: 1px solid #F6931F;
+	border-radius:45px;
+	height: 80rpx;
+	line-height: 80rpx;
+}

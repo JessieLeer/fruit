@@ -1,0 +1,32 @@
+.main{
+  text-align: center;
+	padding-top: 100rpx;
+}
+
+.success{
+  width: 200rpx;
+	margin-bottom: 30rpx;
+}
+
+.success-text{
+  display: block;
+	margin-bottom: 100rpx;
+}
+
+.shopping.van-button--default {
+  background: rgba(255,255,255,1);
+  border: 1px solid rgba(246,147,31,1);
+	color: #F6931F;
+}
+
+.view.van-button--warning{
+  background:rgba(246,147,31,1);
+	border: 1px solid #F6931F;
+	color: white;
+}
+
+.shopping.van-button--default,.view.van-button--warning{
+  border-radius:45px;
+	margin-left: 30rpx;
+	margin-right: 30rpx;
+}

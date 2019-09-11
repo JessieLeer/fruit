@@ -1,0 +1,23 @@
+<view class='search'>
+  <van-button type="default" size='small' custom-class='city'>{{position.address_component.city || position.city}}</van-button>
+  <van-search placeholder="请输入收货地址" class='search-input' bind:change='getsuggest' value='{{searchValue}}'/>
+</view>
+<van-cell title="{{position.title || position.address}}">
+	<van-button type="default" custom-class='positioning' size='small' slot='' icon='aim' bind:click='rePosition' data-url='/pages/home/index/index' >重新定位</van-button>
+</van-cell>
+<van-cell-group wx:if='{{suggestion.length > 0}}'>
+  <van-cell wx:for="{{suggestion}}" wx:key="index" title="{{item.title}}" label="{{item.address}}" border="{{ false }}" data-address='{{item}}' bind:click='handleAddress' />
+</van-cell-group>
+
+<van-cell-group title='附近门店' wx:else>
+  <van-cell wx:for='{{shops}}' title="{{item.name}}" wx:key='index' use-label-slot bind:click='handleShop' data-shop='{{item}}'>
+	  <view slot='label'>
+		  <text class='address'>{{item.address}}</text>
+			<text class='opentime'>营业时间：{{item.openTime}}</text>
+		</view>
+		<view slot="" class='distance'>
+		  <image src='/static/image/position.png' mode='widthFix' class='position'/>
+		  <view>{{item.distance}}米</view>
+		</view>
+  </van-cell>
+</van-cell-group>

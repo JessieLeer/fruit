@@ -1,0 +1,5 @@
+{
+	"usingComponents": {
+		"pay": "/components/pay/index"
+	}
+}

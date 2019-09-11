@@ -1,0 +1,8 @@
+<view class='main'>
+  <image src='/static/image/success.png' mode='widthFix' class='success' />
+	<text class='success-text'>支付成功</text>
+	<view class='opera'>
+	  <van-button type="default" custom-class='shopping'>继续购物</van-button>
+		<van-button type="warning" custom-class='view'>查看订单</van-button>
+	</view>
+</view>

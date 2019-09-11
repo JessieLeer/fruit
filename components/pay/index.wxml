@@ -1,0 +1,30 @@
+<van-popup show="{{ isShow }}" bind:close="onClose" position="bottom" custom-class='pay'>
+  <view class='pay-method f-tac'>选择支付方式</view>
+	<view class='pay-money f-tac'>¥<text class='amount'>{{cost}}</text></view>
+	<van-radio-group value="{{ type }}">
+		<van-cell-group>
+			<van-cell title="会员卡余额支付" value-class="value-class" clickable data-name="balance" bind:click="onClick" label='可用余额：¥{{balance}}' border='{{false}}'>
+			  <image src='/static/image/card.png' mode='widthFix' slot='icon' class='pay-icon pay-icon-balance'/>
+				<van-radio name="balance" checked-color='#F6931F' class='pay-radio pay-radio-balance' disabled='{{cost > balance ? true : false}}'/>
+			</van-cell>
+			<van-cell title="微信支付" value-class="value-class" clickable data-name="wechat" bind:click="onClick" border='{{false}}'>
+			  <image src='/static/image/wepay.png' mode='widthFix' slot='icon' class='pay-icon'/>
+				<van-radio name="wechat" checked-color='#F6931F' class='pay-radio'/>
+			</van-cell>
+		</van-cell-group>
+	</van-radio-group>
+	<van-button type="warning" custom-class='pay-button' disabled='{{type == "" ? true : false}}' bind:click='handlePass'>支付</van-button>
+</van-popup>
+
+<van-popup show="{{ paShow }}" bind:close="onPaclose" custom-class='pa-popup'>
+	<view class='pa-header'>
+	  <text>请输入支付密码</text>
+		<van-icon name="clear" custom-class='pa-close' size='50rpx' color='#c6c6c6' bind:click='onPassclose' />
+	</view>
+	<view class='pa-input-wrapper'>
+    <view class='pa-input' wx:for='{{6}}' wx:key='item' wx:for-index='i'>
+      <input type='password' value='{{password[i]}}' wx:if='{{password.length > i}}' class='pa-text'></input>
+    </view>
+  </view>
+	<van-field focus='{{passFocus}}' type='number' bindinput='onPassChange' maxlength='6' value='{{password}}'/>
+</van-popup>

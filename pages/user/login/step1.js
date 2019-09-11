@@ -6,7 +6,10 @@ Page({
 			verify: false
 		},
 		countdown: 0,
-		sms: '111111'
+		sms: {
+			value: '',
+			verify: false
+		},
 	},
 	
 	onLoad(option) {
@@ -25,8 +28,45 @@ Page({
 			verify = false
     }
     this.setData({
+			'phone.value': phone,
       'phone.message': message,
 			'phone.verify': verify
     })
+	},
+	
+	/*-- 发送手机验证码 --*/
+	sendSms(e) {
+		this.setData({
+			countdown: 60
+		})
+		wx.request({
+			url: '',
+			data: {
+				phone: this.data.phone.value
+			},
+			success(res) {
+				console.log(res)
+				if(res.data.retcode == '1'){
+					let count = setInterval(() => {
+						if(this.countdown > 0){
+							this.countdown--
+						}else{
+							clearInterval(count)
+						}
+					},1000)
+				}else{
+					this.setData({
+						countdown: 60
+					})
+				}
+			}
+		})
+	},
+	
+	/*-- 监听验证码改变 --*/
+	smsChange(e) {
+		this.setData({
+			'sms.verify': e.detail.length == 6
+		})
 	}
 })

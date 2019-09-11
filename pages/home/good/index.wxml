@@ -1,0 +1,56 @@
+<swiper autoplay="true" interval="3000" duration="500" class='w-100 f-db'>
+	<block wx:for="{{good.images}}" wx:key='index' wx:if='{{item.type == 1}}'>
+		<swiper-item class='swiper-item'>
+			<image src="{{item.imageUrl}}" class="slide-image w-100" mode="widthFix"/>
+		</swiper-item>
+	</block>
+</swiper>
+<van-icon name="share" class='share' size='40rpx' color='#F6931F' bindtap='showShare' />
+<view class='good-area'>
+	<view class='good-name'>
+		{{good.name}} {{good.flmc}} {{good.specification}}
+	</view>
+	<view class='good-intro'>{{good.intro}}</view>
+	<view class='good-spec'>
+		<text>1份/{{good.specification}}</text>
+		<text class='sold'>已售:{{good.salesVolume}}份</text>
+	</view>
+	<view class='price-area'>
+	  <view class='price'>
+		  <text class='price-now'>
+			  <text class='rmb'>¥</text>{{good.sellingPrice}}
+			</text>
+			<text class='price-old'>¥{{good.originalPrice}}</text>
+		</view>
+		<view class='addcar'>
+		  <image src='../../../static/image/shopcar.png' slot='bottom' class='shopcar-icon' mode='widthFix' catchtap='addShopcar' wx:if='{{good.count == 0}}' />
+		  <van-stepper slot='bottom' value="{{good.count}}" bind:change="onCartChange" class='shopcar' custom-class='step' input-class='good-input' minus-class='minus' plus-class='plus' min='0' max='{{good.inventory}}' wx:else data-good='{{good}}'/>
+		</view>
+	</view>
+</view>
+<view class='seg w-100'></view>
+<view class='good-detail'>
+  <view class='good-detail-header'>
+    <view class='line'></view>
+	  <text class='good-detail-text'>商品详情</text>
+	  <view class='line'></view>
+	</view>
+	<image wx:for='{{good.images}}' src="{{item.imageUrl}}" class="slide-image w-100" mode="widthFix" wx:if='{{item.type == 2}}' wx:key='index'/>
+</view>
+<shopcar goods='{{shopcarGoods}}' shopId='{{shopId}}' totalPrice='{{totalPrice}}' wx:if='{{shopcarGoods.length > 0}}' bind:onCartChange='onCartChange' bind:onClear='onCartClear'></shopcar>
+<!--<canvas canvas-id="myCanvas" style="width:600px;height:900px"></canvas>-->
+<van-popup show="{{ shareShow }}" position="bottom" bind:close="onClose" class='f-cb' custom-class='share-area'>
+  <view class='share-part'>
+    <van-button type="default" open-type='share' custom-class='share-button'>
+	    <image src='../../../static/image/wechat.png' mode='widthFix' class='share-image' />
+	  </van-button>
+		<view class='share-text'>分享给好友</view>
+	</view>
+	<view class='share-part'>
+    <van-button type="default" custom-class='share-button'>
+	    <image src='../../../static/image/picture.png' mode='widthFix' class='share-image' />
+	  </van-button>
+		<view class='share-text'>生成图片</view>
+	</view>
+	<van-button type="default" custom-class='share-close' bindtap='onClose'>取消</van-button>
+</van-popup>

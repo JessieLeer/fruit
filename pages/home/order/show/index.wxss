@@ -1,0 +1,103 @@
+page{
+  background-color: #f6f6f6;
+}
+
+.main{
+	padding-top: 30rpx;
+}
+
+.tab{
+  background-color: #f8ebc8;
+}
+.van-tabs__nav--card .tab.van-tab.van-tab--active{
+  color: #080808;
+	background-color: white;
+}
+.tabs .van-tabs__scroll--card{
+  border: none;
+}
+
+.van-tabs__nav--card .tab.van-tab {
+  border-right: none;
+	color: #080808;
+}
+
+.label{
+  color: #9E9E9E;
+}
+
+.head-image{
+  width: 100rpx;
+}
+
+.good-area{
+  display: flex;
+}
+
+.good-price{
+  width: 200rpx;
+	text-align: right;
+	padding-top: 26rpx;
+}
+
+.good-name{
+  flex: 1;
+	padding-left: 20rpx;
+}
+
+.good-name text{
+  display: block;
+}
+
+.good-count{
+  color: #666;
+}
+
+.oldprice{
+  color: #BCBCBC;
+	font-size: 24rpx;
+	text-decoration: line-through;
+}
+
+.newprice{
+  font-weight: bold;
+	margin-left: 10rpx;
+}
+
+.goods{
+  margin-top: 10rpx;
+	margin-bottom: 10rpx;
+	display: block;
+}
+
+.address-type{
+  margin-right: 10rpx;
+}
+
+.value.van-cell__value{
+  color: #333;
+}
+
+.submit-bar .van-submit-bar__bar{
+  padding-right: 30rpx;
+}
+
+.price{
+	flex: 1;
+	padding-left: 30rpx;
+}
+
+.price-price{
+  margin-left: 20rpx;
+	color: #F6931F;
+	font-weight: bold;
+	font-size: 32rpx;
+}
+
+.submit-button.van-button--danger{
+  background:rgba(246,147,31,1);
+  border-radius:45px;
+	border: none;
+	height: 80rpx;
+	line-height: 80rpx;
+}

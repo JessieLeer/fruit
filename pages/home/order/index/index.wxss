@@ -1,0 +1,79 @@
+page{
+  background-color: #f4f4f4;
+}
+
+.active.van-tab--active {
+  color: #F6931F;
+}
+
+.good-wrapper{
+	overflow: auto;
+}
+
+.good{
+  margin-top: 14rpx;
+}
+
+.good-header.van-cell:after{
+  border-bottom: none;
+}
+
+.good-header .van-cell__title{
+  color: #A5A5A5;
+}
+
+.good-header .van-cell__value{
+  color: #F6931F;
+}
+
+.good-content{
+  padding-left: 30rpx;
+	padding-right: 30rpx;
+	padding-top: 30rpx;
+	padding-bottom: 20rpx;
+}
+
+.image-wrapper{
+	width: 100%;
+	white-space: nowrap; 
+}
+
+.good-image{
+  width: 120rpx;
+	margin-right: 30rpx;
+	display: inline-block;
+}
+
+.good-count{
+  text-align: right;
+	padding-left: 30rpx;
+	padding-top: 20rpx;
+	font-size: 28rpx;
+	letter-spacing: 4rpx;
+}
+
+.good-count-count{
+  color: #A5A5A5;
+	margin-right: 10rpx;
+}
+
+.good-footer{
+  text-align: right;
+}
+
+.cancel.van-button--default {
+  background: rgba(255,255,255,1);
+  border: 1px solid #D7D7D7;
+	color: #6a6a6a;
+}
+
+.pay.van-button--warning{
+  background:rgba(246,147,31,1);
+	border: 1px solid #F6931F;
+	color: white;
+}
+
+.cancel.van-button--default,.pay.van-button--warning{
+  border-radius:45px;
+	margin-left: 30rpx;
+}

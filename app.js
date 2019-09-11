@@ -14,7 +14,9 @@ App({
 		// openid
 		openid: '',
 		// session_key
-		session_key: ''
+		session_key: '',
+		shop: {},
+		orderGoods: []
   },
   onLaunch() {
     // 展示本地存储能力

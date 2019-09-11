@@ -1,0 +1,58 @@
+<view class='main'>
+	<van-tabs type="card" tab-class='tab' custom-class='tabs' tab-active-class='tab-active' active='{{active}}' bind:change='tabChange'>
+		<van-tab title="门店自提">
+			<van-cell-group>
+				<van-field value="{{orderInfo.ztName}}" border="{{ false }}" readonly>
+				  <text slot='label' class='label'>提货门店</text>
+				</van-field>
+				<van-field value="{{orderInfo.ztAddress}}" border="{{ false }}" readonly>  
+				  <text slot='label' class='label'>提货地址</text> 
+				</van-field>
+				<van-field value="{{orderInfo.ztMobile}}" border="{{ false }}" readonly>
+				  <text slot='label' class='label'>门店电话</text> 
+				</van-field>
+				<van-field value="{{orderInfo.ztOpenTime}}" border="{{ false }}" readonly>
+				  <text slot='label' class='label'>营业时间</text> 
+				</van-field>
+				<van-field value="{{orderInfo.ztPickTime}}" border="{{ false }}" readonly>
+				  <text slot='label' class='label'>提货时间</text> 
+				</van-field>
+			</van-cell-group>
+		</van-tab>
+		<van-tab title="配送">
+		  <van-cell is-link title="{{orderInfo.fsAddress}}" link-type="navigateTo" url="/pages/dashboard/index" use-label-slot>
+			  <van-tag slot='icon' color='#e8fcfb' text-color='#00837B' custom-class='address-type'>{{orderInfo.addressType}}</van-tag>
+			  <view slot='label'>{{orderInfo.fsName}} {{orderInfo.fsMobile}}</view>
+			</van-cell>
+		</van-tab>
+	</van-tabs>
+	<van-cell-group class='goods'>
+	  <van-cell wx:for='{{goods}}' wx:key='index'>
+		  <view slot="title" class='good-area'>
+			  <image src='{{item.headImage}}' mode='widthFix' class='head-image' />
+				<view class='good-name'>
+				  <text>{{item.name}}</text>
+					<text class='good-count'>X{{item.count}}</text>
+				</view>
+				<view class='good-price'>
+				  <text class='oldprice'>¥{{item.originalPrice}}</text>
+					<text class='newprice'>¥{{item.sellingPrice}}</text>
+				</view>
+			</view>
+		</van-cell>
+	</van-cell-group>
+	<van-cell-group class='goods'>
+	  <van-cell title="优惠券" value="无可用" is-link/>
+		<van-cell title="商品合计" value="¥{{orderInfo.totalMoney}}" value-class='value'/>
+		<van-cell title="配送费" value="¥{{active == 0 ? 0 : orderInfo.deliveryMoney}}" value-class='value' />
+		<van-cell title="积分" value="{{orderInfo.integral}}" value-class='value'/>
+  </van-cell-group>
+	<van-submit-bar button-text="提交订单" bind:submit="onPayshow" custom-class='submit-bar' button-class='submit-button'>
+	  <view class='price'>
+		  <text class='price-text'>付款</text>
+		  <text class='price-price'>¥{{active == 0 ? orderInfo.totalMoney : orderInfo.totalMoney + orderInfo.deliveryMoney}}</text>
+		</view>
+	</van-submit-bar>
+	<pay isShow="{{pay.show}}" paShow='{{pay.paShow}}' password='{{pay.password}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{active == 0 ? orderInfo.totalMoney : orderInfo.totalMoney + orderInfo.deliveryMoney}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose'></pay>
+	<van-toast id="van-toast" />
+</view>

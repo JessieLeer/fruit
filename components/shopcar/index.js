@@ -1,3 +1,5 @@
+const app = getApp()
+
 Component({
   properties: {
     goods: {
@@ -5,6 +7,9 @@ Component({
     },
 		totalPrice: {
 			type: Number
+		},
+		shopId: {
+			type: String
 		}
   },
   data: {
@@ -26,13 +31,10 @@ Component({
 	pageLifetimes: {
     // 组件所在页面的生命周期函数
     show() {
-			console.log('show')
 		},
     hide() { 
-			console.log('hide')
 		},
     resize() { 
-			console.log('resize')
 		},
   },
   methods: {
@@ -60,6 +62,12 @@ Component({
   	},
 		onClear(e) {
 			this.triggerEvent('onClear', {})
+		},
+		onSubmit(e) {
+			app.globalData.orderGoods = this.properties.goods
+			wx.navigateTo({
+				url: `/pages/home/order/show/index?shopId=${this.properties.shopId}`
+			})
 		}
   }
 })

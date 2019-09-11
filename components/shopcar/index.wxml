@@ -1,4 +1,4 @@
-<van-submit-bar button-text="去结算" bind:submit="onSubmit" button-class='submit' bar-class='submit-bar'>
+<van-submit-bar button-text="提交订单" bind:submit="onSubmit" button-class='submit' bar-class='submit-bar'>
   <view slot='' class='submit-shopcar' bindtap='toggleGood'>
 	  <van-icon name="shopping-cart" info='{{goods.length}}' size='40rpx' color='black'/>
 		<view class='shopcar-price'>
