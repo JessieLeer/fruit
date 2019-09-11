@@ -12,11 +12,11 @@
 					</view>
 				</view>
 				<view slot="footer" wx:if='{{item.status == "待支付"}}'>
-					<van-button custom-class='cancel'>取消订单</van-button>
+					<van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}'>取消订单</van-button>
 					<van-button type="warning" custom-class='pay'>去支付</van-button>
 				</view>
 				<view slot='footer' wx:if='{{item.status == "待配送"}}'>
-				  <van-button custom-class='cancel'>取消订单</van-button>
+				  <van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}'>取消订单</van-button>
 				</view>
 				<view slot='footer' wx:if='{{item.status == "待自提"}}'>
 				  <van-button custom-class='cancel'>退款</van-button>

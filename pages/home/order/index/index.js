@@ -58,49 +58,71 @@ Page({
 				pageSize: 10
 			},
 			success(res) {
-				for(let item of res.data.data) {
-					switch(item.status) {
-						case '1':
-							item.status = '待支付'
-							break
-						case '2':
-							item.status = '待配送'
-							break
-						case '3':
-							item.status = '待自提'
-							break
-						case '4':
-							item.status = '配送中'
-							break
-						case '5':
-							item.status = '已取消'
-							break
-						case '6':
-							item.status = '已完成'
-							break
-						case '7':
-							item.status = '退款中'
-							break
-						case '8':
-							item.status = '已退款'
-							break
+				if(res.data.data.length == 0) {
+					_this.setData({
+						'order0.isLoadAll': true
+					})
+				}else{
+					for(let item of res.data.data) {
+						switch(item.status) {
+							case '1':
+								item.status = '待支付'
+								break
+							case '2':
+								item.status = '待配送'
+								break
+							case '3':
+								item.status = '待自提'
+								break
+							case '4':
+								item.status = '配送中'
+								break
+							case '5':
+								item.status = '已取消'
+								break
+							case '6':
+								item.status = '已完成'
+								break
+							case '7':
+								item.status = '退款中'
+								break
+							case '8':
+								item.status = '已退款'
+								break
+						}
 					}
+					_this.setData({
+						'order0.data': _this.data.order0.data.concat(res.data.data)
+					})
+					console.log(res.data.data)
 				}
-				_this.setData({
-					'order0.data': _this.data.order0.data.concat(res.data.data)
-				})
-				console.log(res.data.data)
 			}
 		})
 	},
 	/*-- 上拉刷新 --*/
 	refresh(e) {
-		console.log('上拉了')
-		/*this.setData({
-			goods: [],
-			page: 1
-		})
-		this.index()*/
+		let id = e.currentTarget.dataset.id
+		switch(id) {
+			case '0':
+				this.setData({
+					'order0.data': [],
+					'order0.page': 1
+				})
+				break
+			case '1':
+				this.setData({
+					'order1.data': [],
+					'order1.page': 1
+				})
+				break
+			case '2':
+				this.setData({
+					'order2.data': [],
+					'order2.page': 1
+				})
+				break
+		}				 
+		this[`index${id}`]()
 	},
 	
 	/*-- 下拉加载更多商品 --*/
