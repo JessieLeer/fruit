@@ -1,0 +1,72 @@
+.info{
+    text-align : center;
+    font-size:16px;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(158,158,158,1);
+}
+.shopcard_container{
+    padding : 15px 17.5px;
+}
+.card{
+    position: relative;
+    height:141px;
+    background:linear-gradient(149deg,rgba(247,247,247,1) 0%,rgba(214,214,214,1) 100%);
+    border-radius:7.5px;
+    padding : 24px 17.5px 0 17.5px;
+    box-sizing : border-box;
+}
+.title_card{
+    font-size:16px;
+    font-family:Microsoft YaHei;
+    font-weight:bold;
+    color:rgba(51,51,51,1);
+}
+.price_card{
+    margin-top : 8px;
+    font-size:14px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    color:rgba(120,120,120,1);
+}
+
+.wrap_info{
+    padding-bottom : 14px;
+    border-bottom : 1px solid rgba(255,255,255,.4);
+}
+.card_date{
+    height : 38px;
+    line-height : 38px;
+    font-size:14px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    color:#B9B9B9;
+}
+.store_name{
+    position: absolute;
+    min-width: 10px;
+    max-width: 200px;
+    height:30px;
+    border:1px solid #EBEBEC;
+    background:linear-gradient(149deg,rgba(247,247,247,1) 0%,rgba(214,214,214,1) 100%);
+    border-top-left-radius:15px;
+    border-bottom-left-radius:15px;
+    line-height : 30px;
+    font-size:14px;
+    font-family:Microsoft YaHei;
+    font-weight:bold;
+    color:rgba(140,140,140,1);
+    padding-left : 13.5px;
+    padding-right : 13.5px;
+    right : 0;
+    top : 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}
+.icon{
+    position: absolute;
+    width : 37px;
+    top : 69px;
+    right : 15px;
+}

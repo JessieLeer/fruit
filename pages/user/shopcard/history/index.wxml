@@ -1,0 +1,22 @@
+<view class="outer_container">
+    <view wx:if="{{true}}">
+        <view class="shopcard_container">
+            <view class="card">
+                <view class="wrap_info">
+                    <view class="title_card">坚果购物卡</view>
+                    <view class="price_card">
+                        <text>余额</text>
+                        <text>￥200</text>
+                    </view>
+                </view>
+                <view class="card_date">
+                    有效期：2019.08.01—2019.08.03
+                </view>
+                <view class="store_name">
+                    缘疆佳园齐河花甲店
+                </view>
+                <image src="../../../../static/image/used.png" class="icon" mode="widthFix"></image>
+            </view>
+        </view>
+    </view>
+</view>

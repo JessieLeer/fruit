@@ -1,0 +1,122 @@
+/* page/user/addressManage/newAddress/newAddress.wxss */
+page{
+  background: #f3f3f3;
+}
+.add-addressBtn{
+    font-family: SourceHanSansCN-Medium;
+    font-size: 36rpx;
+    font-weight: bold;
+    color:#fff;
+    width: 710rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    border-radius: 45rpx;
+    text-align: center;
+    margin: 0 auto;
+    background: #F6931F;
+    margin-top: 21rpx;
+}
+
+.box{
+  width: 712rpx;
+  margin: 0 auto;
+  height: 110rpx;
+  border-bottom:1px solid #f3f3f3;
+
+}
+.titleName{
+  width: 250rpx;
+  height: 110rpx;
+  line-height: 110rpx;
+  text-align: left;
+  text-indent: 18rpx;
+  font-size:32rpx;
+  font-family:Source Han Sans CN;
+  font-weight:400;
+  color:#686868;
+  float: left;
+}
+.inputStyle{
+  height: 110rpx;
+  width:500rpx; 
+  margin-left: 207rpx;
+  font-size:32rpx;
+  font-family:Source Han Sans CN;
+  font-weight:400;
+  color:#333;
+}
+
+.selSign{
+  height: 110rpx;
+  width:520rpx; 
+  margin-left: 207rpx;
+}
+.selSign>view{
+  float: right;
+  height:52rpx;
+  text-align:center;
+  line-height:52rpx;
+  background:#F8F8F8;
+  border:1rpx solid #e0e0e0;
+  border-radius:3px;
+  margin-right: 40rpx;
+  margin-top: 32rpx;
+  font-size:28rpx;
+  font-family:Source Han Sans CN;
+  font-weight:400;
+  color:#565656;
+}
+
+.sel{
+  background:#F6931F !important;
+  border:1rpx solid#F6931F  !important;
+  border-radius:3px  !important;
+  color:#fff  !important;
+}
+
+
+.sex{
+  width:32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  border: 1rpx solid #f3f3f3;
+  float: left;
+  margin-top: 5rpx;
+}
+
+.selSex{
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  float: left;
+  margin-top: 5rpx;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAFW0lEQVRYR8WYS2xUVRjH/9+dZx9AqZQOYB8C5bHQRAF5CQsTNz42IuCGhIWGl608JCx8MCS6kKCFaeWhLkjYSIs7NXGhRhSoTasSTUooVlCZPmhaoO1MZ+7c+zfnzoOZ6XSGqaPe7T33fL/z3f/3P985gvt42AJb4GbNbHFyAUysAeRxEnUimAOy2JpCJECiVwTdANvFYJubWjfm3RiQTTByhZFsAwjIqM8zS4NzlYi8CGINwekiooK7VPi07wkgRDIgkLsQXCT5iYlwW2lD36AA6n3GZ1IQ+uAKsmYZBDsheBLALACOXCtLe68DGATxNYjjReLolIZroUxzZAQZbqwtczv4gknuFsiiKQCkx9IJXgVxLGxorTP3XL+dPmACCJvnPTBO+04C2wHMzTMDuYb7BTiph/QT01/zDyYPTgEZbiwrc2ozdomGBgCzc806xfcDQjSNG3eaZ+65nchMAoS+ha5x6lsoPASRQmcilZn0C+WgWxxn4pqxQFR1BJtrVtHkxyKyNEM1THHxk35Gkl2iyUtFr9xoU9VkgYz4PBV2cb1PYHMBhJm+esCMgCBEcyi/ib/XBTgbYWjvtIa+W6LMKtRX/bQJOQVlUIV8aAIk4C6DaE4wNAyYxj0YolcDt7k8f3who4drPVoxj4DYVNBsKAhDh8yogn3lPkiJB+Gv9oEjfojNmZIVIyj75a6vap1d5DQg8wuWDAVh6pDSubCvqIdtyQaY/ZcR/rIeHOtPBlEK7YmQWyXQXH2AxAGBzCwISDrE4udh3myDfuEd8HYPAC1ZJ0o7wyJ4V4G0gvJcbO/4ZyyZIPw/QD9/CBy+BqhfIlp6DGX5n0nAV3MZgocnlKwSmRmJ0ostZRUZabNC/AbYVMVMgIi6B/GLBJpqBgBUpEyuINRHzlKABhAaiQFlnChaGZYm5kQ1oX5HIhNZIaywJAcl2FQ9QkhpCoihAyUVcKzaD+oBGD99CI7cBFJ9IPpJHKIkBrEkP4jYHGMS8FWPQqQkGYRGGFJSCedTR6F5HoXRdQ6RjmZwrC8VJgFRCfvyXbAt3ZRXJhIxyTEZ81XfEhHVa9x7VADlhOWL4HjidWiVj8HoakHkxxPgaAxGjbZ+hwf2ZTthW7oRZm8n9G/fAodz/47UcBzMIlZlSGFIeR0c673QPMthXPkUkc4PYI76LW1ryidUJhZvgNnXAf38QXBIVcekwsykcxL8VYn1HIBnM5av5Y4KZiEc6w9Bm7MCRlcr9PajFohj5Z6oWfnboX/njUFkLNFsthAr31yGFrfq8gVRmIpHELnSak1sV5ro/xn6eW82n8jqTZahAYcl6KtaB9FOE5jc4pNh1r4J7cE1lobMvy5C//7tvDWRTCZAD2hujW56RXwPwMasm14CRgn4DQvEghjqzlcTyRyquW41g7LPagMC/VXPCLWTOduA+LZeVB6dLDiU3ehybRhEL8XcXlz55+eJxsgGVyPkPloBpXFTLUSZb0qjkyts+nsdRIsRGt87bX//wL1W8VjNago/+q9aRQG6aOLloldvXEq0igr1d2+t21NubqHAC/zLzTNU8wxv35B25iHv9XEruykO11hbNm5nvQnUS/pGmG/iJxlP4JYGNLkj0iRJB60JB6y7R+bOcrgcO/7XA1Z8ETw1f0YgFFE97G4RqStAL6uT7AZwtNhlb5FtPXfSE5blEL7QFZTwclB2TPUQLoBOdQgHvgF4vIjOjrwO4YnMxK8lxLFaoG1W1xIAp8faBtWKZ7qWCIMcg8iIABdMmGdN6pemfC2RIuLkixpiLSgrQNRZBph0UQOiF9GLmg6heclt2K7e70XN39lZlPBATxgGAAAAAElFTkSuQmCC");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.woman,.man{
+  float: left;
+  width: 336rpx;
+  margin-top: 41rpx;
+}
+.woman{
+  width: 308rpx;
+}
+.man{
+  margin-left: 68rpx;
+}
+.woman>view{
+  float: right;
+}
+
+.toLeft{
+  width: 20rpx;
+  height: 20rpx;
+  border-top:1rpx solid #d3d3d3;
+  border-right: 1rpx solid #d3d3d3;
+  transform:rotate(45deg);
+  position: absolute;
+  top:45rpx;
+  right:5rpx;
+}

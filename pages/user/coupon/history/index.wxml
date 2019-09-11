@@ -1,0 +1,35 @@
+<view class="coupon_container">
+    <view>
+        <view class="content_coupon">
+            <view class="item_coupon" wx:for="{{dataList}}" wx:key="{{index}}">
+                <view class="cuopon_detail">
+                    <view class="flex">
+                        <view class="coupon_price">￥400</view>
+                        <view class="coupon_info">满99元使用</view>
+                    </view>
+                    <view class="coupon_text_area">
+                        <view class="top_text_area">
+                            <view>全品类优惠券</view>
+                            <view>2019.08.03-2019.08.03</view>
+                            <view class="overtime">
+                                <image mode="widthFix" src="../../../../static/image/overtime.png"></image>
+                            </view>
+                        </view>
+                        <view class="more_detail" bindtap="clickMore" data-index="{{index}}">
+                            <view>使用详情</view>
+                            <view class="op_icon {{selectedFlag[index]?'rotateani':''}}"><image src="../../../../static/image/options.png" mode="widthFix"></image></view>
+                        </view>
+                    </view>
+                </view>
+                <view class="more_detail_select" wx:if="{{selectedFlag[index]}}">
+                    自己的“亚洲万里通”会员卡；以及
+                    他们持有的本次奖励/促销里数优惠的邀请函；以及
+                    顾客在参加活动的购物村符合条件的购
+                    顾客在参加活动的购物村符合条件的购
+                    顾客在参加活动的购物村符合条件的购
+                    顾客在参加活动的购物村符合条件的购
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "积分明细",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "van-datetime-picker": "../../miniprogram_npm/vant-weapp/datetime-picker/index"
+  }
+}

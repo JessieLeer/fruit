@@ -1,0 +1,97 @@
+.avatar_area{
+    height : 121.5px;
+    border-bottom : 15px solid #F4F4F4;
+    padding : 0 9px;
+    display: flex;
+    align-items: center;
+    box-sizing : border-box;
+}
+.avatar{
+    width : 71px;
+    border-radius : 50%;
+}
+image{
+    height : auto;
+
+}
+.vip{
+    width : 77px;
+    vertical-align: -5px;
+}
+.name{
+    font-size:16px;
+    font-family:Source Han Sans CN;
+    font-weight:bold;
+    color:rgba(51,51,51,1);
+    margin : 0 15.5px 0 23px;
+}
+.item_input{
+    height : 54.5px;
+    line-height : 54.5px;
+    display: flex;
+    align-items: center;
+    font-size:16px;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(104,104,104,1);
+    border-bottom : 1px solid rgba(243,243,243,1);
+}
+.input{
+    margin-left : auto;
+    display: flex;
+    align-items: center;
+}
+.input input{
+    width: 106px;
+    text-align : right;
+}
+.warp_item{
+    padding : 0 9px;
+}
+.date_arrow{
+    width : 7px;
+    margin-left : 12.5px;
+}
+.popup{
+    position: fixed;
+    width : 100vw;
+    height :100vh;
+    background : rgba(0,0,0,.2);
+    top : 0;
+    left : 0;
+    z-index : 999999;
+}
+.autoheight{
+    position: absolute;
+    height : 100%;
+    width: 100%;
+}
+.fix{
+    position: absolute;
+    bottom : 0;
+    width  : 100%;
+    left : 0;
+}
+.van-picker__confirm{
+    color :#676767!important;
+}
+.van-picker__cancel{
+    color :#676767!important;
+}
+.btn_area{
+    padding-top : 195rpx;
+    display: flex;
+    justify-content: center;
+}
+.btn_area view{
+    width:359rpx;
+    height:90rpx;
+    background:rgba(246,147,31,1);
+    border-radius:45rpx;
+    line-height : 90rpx;
+    text-align: center;
+    font-size:36rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+}

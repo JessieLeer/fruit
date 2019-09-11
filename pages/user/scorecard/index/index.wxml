@@ -1,0 +1,33 @@
+<view class="score_container">
+    <view class="card_area">
+       <view class="card">
+            <view class="num_card">
+                <view>
+                    <view class="score_text">我的积分</view>
+                    <view class="score">{{myscore}}</view>
+                </view>
+                <view class="info_score">
+                    <view>积分说明</view>
+                    <view bindtap="gotoScoreDetail">积分明细</view>
+                </view>
+            </view>
+       </view>
+    </view>
+    <view class="cuopon_area">
+        <view class="item_coupon" wx:for="{{couponlist}}" wx:key="{{index}}">
+            <view class="coupon_img_area">
+                <view class="warp_img">
+                    <image src="{{item.iimg}}" mode="widthFix"></image>
+                </view>
+            </view>
+            <view class="coupon_desc">
+                <text space="ensp">{{item.iname}}</text>
+            </view>
+            <view class="wrap_btn">
+                <view class="btn_for" data-iid="{{item.iid}}" bindtap="convert">
+                    {{item.iconsume}}积分兑换
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,29 @@
+<!--page/user/addressManage/addressManage.wxml-->
+<view>
+  <block wx:for="{{content}}" wx:key="item">
+    <view  class="address-list" data-id="{{item.id}}">
+      <view class="address-content">
+        <view style="font-size:32rpx;color:#333;margin-bottom:20rpx;">
+        <wxs src="./addressLength.wxs" module="intercept" />
+          <view class="" style="float:left;">{{intercept.substr(item.address+item.addressMain)}}</view>
+          <view style="float:left;" class="{{item.icon==1?'homeSign':(item.icon==2?'eduInstitutionSign':(item.icon==3?'parentSign':(item.icon==4?'companySign':'')))}}"></view>
+        </view>
+        <view style="font-size:28rpx;color:#b4b4b4;float:left;">
+          <view><text>{{item.name}}</text>  {{item.tel}}</view>
+        </view>
+      </view>
+      <view class="edit" bindtap="toEdit">
+        <view class="editSign"></view>
+        <view>编辑</view>
+      </view>
+    </view>
+  </block>
+
+
+<view style="width:100%;height:132rpx;background:#fff;position:fixed;bottom:0;" bindtap="newAddress">
+   <view class="add-addressBtn">
+    新增收货地址
+  </view>
+</view>
+ 
+</view>

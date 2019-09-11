@@ -1,0 +1,35 @@
+<view class="outer_container">
+    <view class="avatar_area">
+        <view>
+            <image class="avatar" src="../../../../static/image/user.png" mode="widthFix"></image>
+        </view>
+        <view class="name">
+            小新
+        </view>
+        <view>
+            <image class="vip" src="../../../../static/image/vip.png" mode="widthFix"></image>
+        </view>
+    </view>
+    <view class="warp_item">
+        <view class="item_input">
+            <view>手机号</view>
+            <view class="input"><input maxlength="11" type="number" placeholder="请输入手机号" placeholder-style='text-align:right'
+                    value="{{tel}}" bindinput="inputChange" /></view>
+        </view>
+        <view class="item_input" bindtap="chooseDate">
+            <view>生日</view>
+            <view class="input">{{current}}</view>
+            <view>
+                <image src="../../../../static/image/arrow.png" mode="widthFix" class="date_arrow"></image>
+            </view>
+        </view>
+    </view>
+    <view class="btn_area">
+        <view>保存信息</view>
+    </view>
+    <view class="popup" wx:if="{{select}}">
+        <view class="autoheight" bindtap="close"></view>
+        <van-datetime-picker class="fix" type="date" min-date="{{ minDate }}" max-date="{{ maxDate }}"
+            item-height="54" value="{{ maxDate }}" bind:confirm="confirm" bind:cancel="close" value="{{ valuecurrent }}"/>
+    </view>
+</view>

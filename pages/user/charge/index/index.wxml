@@ -1,0 +1,44 @@
+<view class="user_container">
+    <view class="remain_info">
+        <view>
+            <view>卡内余额</view>
+            <view>
+                <text class="icon_money">￥</text>
+                <text class="money">20.8</text>
+            </view>
+        </view>
+        <view bindtap="gotoDetail">
+            <text>余额明细</text>
+            <image src="../../../../static/image/arrow.png" class="arrow" mode="widthFix"></image>
+        </view>
+    </view>
+    <view class="charge_detail">
+        <view class="info_content {{index==idx?'cur':''}}"  wx:for="{{chargeList}}" data-index='{{index}}' bindtap="onTap" wx:key="{{index}}">
+            <text>
+                <text class="rmb">￥{{item.num_price}}\n</text>
+                <text class="gift">赠送￥{{item.gift_num}}</text>
+            </text>
+        </view>
+    </view>
+    <view class="charge_info">
+        <view class="title">
+            <image src="../../../../static/image/desc.png" mode="widthFix"></image>
+            <text>充值说明</text>
+        </view>
+        <view class="content_info">
+            <text>1、余额不可提现；</text>
+        </view>
+        <view class="content_info">
+            <text>2、可到线下门店消费抵扣；</text>
+        </view>
+        <view class="content_info">
+            <text>3、如有疑问请致电400-880-9090；</text>
+        </view>
+        <view class="content_info">
+            <text>4、新用户充值前需设置会员卡支付密码；</text>
+        </view>
+    </view>
+    <view class="btn_charge">
+        <view>立即充值</view>
+    </view>
+</view> 

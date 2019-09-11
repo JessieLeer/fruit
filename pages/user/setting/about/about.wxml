@@ -1,0 +1,2 @@
+<!--page/user/setting/about/about.wxml-->
+<web-view src="http://baidu.com"></web-view>

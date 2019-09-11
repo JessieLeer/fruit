@@ -1,0 +1,107 @@
+.history_fix{
+    height : 67px;
+    position: fixed;
+    width : 100%;
+    bottom : 0;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+}
+.history_fix view{
+    height : 18px;
+    box-sizing: border-box;
+    width : 100%;
+    text-align : center;
+    font-size:14px;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+}
+.history_fix view:nth-child(1){
+   border-right : 1px solid rgba(217,217,217,1);
+}
+.hasno_area{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height : 100vh;
+}
+.hasno_area image{
+    width : 314.5px;
+}
+.info{
+    text-align : center;
+    font-size:16px;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(158,158,158,1);
+}
+.shopcard_container{
+    padding : 15px 17.5px;
+}
+.card{
+    position: relative;
+    height:141px;
+    border:1px solid rgba(246,147,31,1);
+    background:linear-gradient(149deg,rgba(252,248,245,1),#FCF8F5 100%);
+    border-radius:7.5px;
+    padding : 24px 17.5px 0 17.5px;
+    box-sizing : border-box;
+}
+.title_card{
+    font-size:16px;
+    font-family:Microsoft YaHei;
+    font-weight:bold;
+    color:rgba(51,51,51,1);
+}
+.price_card{
+    margin-top : 8px;
+}
+.price_card text:nth-child(1){
+    font-size:14px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    color:rgba(246,147,31,1);
+}
+.price_card text:nth-child(2){
+    font-size:23px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    color:rgba(246,147,31,1);
+    margin-left : 5px;
+}
+.wrap_info{
+    padding-bottom : 14px;
+    border-bottom : 1px solid rgba(0,0,0,.1);
+}
+.card_date{
+    height : 38px;
+    line-height : 38px;
+    font-size:14px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    color:rgba(186,159,137,1);
+}
+.store_name{
+    position: absolute;
+    min-width: 10px;
+    max-width: 200px;
+    height:30px;
+    border:1px solid rgba(239,220,204,1);
+    background:linear-gradient(-79deg,rgba(238,219,202,1) 0%,rgba(255,255,255,1) 100%);
+    border-top-left-radius:15px;
+    border-bottom-left-radius:15px;
+    line-height : 30px;
+    font-size:14px;
+    font-family:Microsoft YaHei;
+    font-weight:bold;
+    color:rgba(195,172,154,1);
+    padding-left : 13.5px;
+    padding-right : 13.5px;
+    right : 0;
+    top : 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}

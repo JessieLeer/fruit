@@ -1,0 +1,26 @@
+page{
+  background: #eee;
+  height:auto;
+}
+.container {
+  width: 710rpx;
+  height: 869rpx;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 10rpx;
+  box-shadow: 0rpx 2rpx 25rpx 10rpx #c3c3c3;
+  margin-top: 47rpx;
+}
+.container canvas {
+  margin: 0 auto;
+}
+.container .btns {
+  width: 307rpx;
+  height: 97rpx;
+  margin: 0 auto;
+  font-size: 32rpx;
+  color:#B1B0B0;
+  font-family: SourceHanSansCN-Regular;
+  font-weight: 400;
+  
+}

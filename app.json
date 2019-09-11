@@ -1,58 +1,80 @@
 {
   "pages": [
+    "pages/user/index/index",
+    "pages/user/charge/index/index",
+    "pages/user/charge/chargedetail/index",
+    "pages/user/scorecard/scoredetail/index",
+    "pages/user/scorecard/index/index",
+    "pages/user/coupon/index/index",
+    "pages/user/coupon/history/index",
+    "pages/user/shopcard/index/index",
+    "pages/user/shopcard/history/index",
+    "pages/user/seccard/index/index",
+    "pages/user/seccard/history/index",
+    "pages/user/mydetail/index/index",
+    "pages/user/addressManage/addressManage",
+    "pages/user/customerService/customerService",
+    "pages/user/payCode/payCode",
+    "pages/user/setting/setting",
     "pages/home/index/index",
-		"pages/home/search/index",
-		"pages/user/login/step0",
-		"pages/user/login/step1",
-		"pages/user/index/index"
+    "pages/home/search/index",
+    "pages/bindVIP/index",
+    "pages/user/login/step0",
+    "pages/user/login/step1"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#00837b",
     "navigationBarTitleText": "缘疆佳园",
     "navigationBarTextStyle": "white",
-		"enablePullDownRefresh": true
+    "enablePullDownRefresh": true
   },
-	"usingComponents": {
-		"van-button": "./miniprogram_npm/vant-weapp/button/index",
-		"van-dialog": "./miniprogram_npm/vant-weapp/dialog/index",
-		"van-icon": "./miniprogram_npm/vant-weapp/icon/index",
-		"van-row": "./miniprogram_npm/vant-weapp/row/index",
+  "usingComponents": {
+    "van-button": "./miniprogram_npm/vant-weapp/button/index",
+    "van-dialog": "./miniprogram_npm/vant-weapp/dialog/index",
+    "van-icon": "./miniprogram_npm/vant-weapp/icon/index",
+    "van-row": "./miniprogram_npm/vant-weapp/row/index",
     "van-col": "./miniprogram_npm/vant-weapp/col/index",
-		"van-search": "./miniprogram_npm/vant-weapp/search/index",
-		"van-tree-select": "./miniprogram_npm/vant-weapp/tree-select/index",
-		"van-card": "./miniprogram_npm/vant-weapp/card/index",
-		"van-stepper": "/miniprogram_npm/vant-weapp/stepper/index",
-		"van-action-sheet": "/miniprogram_npm/vant-weapp/action-sheet/index",
-		"van-popup": "/miniprogram_npm/vant-weapp/popup/index",
-		"van-field": "/miniprogram_npm/vant-weapp/field/index",
-		"van-toast": "/miniprogram_npm/vant-weapp/toast/index",
-		"van-cell": "/miniprogram_npm/vant-weapp/cell/index",
+    "van-search": "./miniprogram_npm/vant-weapp/search/index",
+    "van-tree-select": "./miniprogram_npm/vant-weapp/tree-select/index",
+    "van-card": "./miniprogram_npm/vant-weapp/card/index",
+    "van-stepper": "/miniprogram_npm/vant-weapp/stepper/index",
+    "van-action-sheet": "/miniprogram_npm/vant-weapp/action-sheet/index",
+    "van-popup": "/miniprogram_npm/vant-weapp/popup/index",
+    "van-field": "/miniprogram_npm/vant-weapp/field/index",
+    "van-toast": "/miniprogram_npm/vant-weapp/toast/index",
+    "van-cell": "/miniprogram_npm/vant-weapp/cell/index",
     "van-cell-group": "/miniprogram_npm/vant-weapp/cell-group/index",
-		"van-tag": "/miniprogram_npm/vant-weapp/tag/index"
-	},
-	"tabBar": {
-		"color":"#d5d5d5",
-		"selectedColor":"#00837B",
-		"borderStyle": "white",
-		"backgroundColor": "#F9F9F9",
-		"list": [
-			{
-				"pagePath": "pages/home/index/index",
+    "van-tag": "/miniprogram_npm/vant-weapp/tag/index"
+  },
+  "tabBar": {
+    "color": "#d5d5d5",
+    "selectedColor": "#00837B",
+    "borderStyle": "white",
+    "backgroundColor": "#F9F9F9",
+    "list": [
+      {
+        "pagePath": "pages/home/index/index",
         "text": "首页"
-			},
-			{
-				"pagePath": "pages/home/index/index",
+      },
+      {
+        "pagePath": "pages/home/index/index",
         "text": "拼团"
-			},
-			{
-				"pagePath": "pages/home/index/index",
+      },
+      {
+        "pagePath": "pages/home/index/index",
         "text": "订单"
-			},
-			{
-				"pagePath": "pages/home/index/index",
+      },
+      {
+        "pagePath": "pages/user/index/index",
         "text": "会员中心"
-			}
-		]
-	}
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
 }
