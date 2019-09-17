@@ -1,0 +1,20 @@
+.result{
+  color: #333;
+	padding-top: 100rpx;
+  text-align: center;
+	display: block;
+}
+
+.success{
+  width: 200rpx;
+	display: block;
+	margin: 0 auto 50rpx auto;
+}
+
+.submit.van-button--warning{
+  width: 50%;
+	border-radius: 40rpx;
+	background-color: #F6931F;
+	margin: 120rpx auto 0 auto;
+	display: block;
+}

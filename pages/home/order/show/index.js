@@ -65,8 +65,8 @@ Page({
 			data: {
 				carts: this.data.goods.map((item) => {
 					return {
-						commodityId: item.id,
-						number: item.count,
+						commodityId: item.id || item.commodityId,
+						number: item.count || item.number,
 						name: item.name,
 						sellingPrice: item.sellingPrice,
 					  originalPrice: item.originalPrice,
@@ -91,8 +91,8 @@ Page({
 			data: {
 				carts: JSON.stringify(this.data.goods.map((item) => {
 					return {
-						commodityId: item.id,
-						number: item.count,
+						commodityId: item.id || item.commodityId,
+						number: item.count || item.number,
 						name: item.name,
 						sellingPrice: item.sellingPrice,
 					  originalPrice: item.originalPrice,
@@ -100,7 +100,7 @@ Page({
 					}
 				})),
 			  postType: this.data.active,
-				addressId: this.data.active == '0' ? '' : this.data.orderInfo.fsId,
+				addressId: this.data.active == '1' ? '' : this.data.orderInfo.fsId,
 				storeId: this.data.shopId,
 				userId: this.data.cuser.userId
 			},
@@ -125,6 +125,9 @@ Page({
 		this.setData({
 			'pay.show': false
 		})
+		wx.redirectTo({
+			url: `/pages/home/order/detail/index?id=${this.data.orderId}`
+		})
 	},
 	onpayChange(e) {
 		this.setData({
@@ -142,6 +145,7 @@ Page({
 			'pay.password': e.detail
 		})
 		if(this.data.pay.password.length == 6 && this.data.pay.type == 'balance') {
+			let _this = this
 			wx.request({
 				url: 'http://192.168.1.103:8080/api/pay/balance',
 				data: {
@@ -151,15 +155,18 @@ Page({
 				},
 				success(res) {
 					if(res.data.code == 200) {
-						wx.redirectTo({
-							url: '/pages/home/order/success/index'
-						})
+						_this.paySuccess()
 					}else{
 						Toast(res.data.message)
 					}
 				}
 			})
 		}
+	},
+	paySuccess(e) {
+		wx.redirectTo({
+			url: `/pages/home/order/success/index?id=${this.data.orderId}`
+		})
 	},
 	passClose(e) {
 		this.setData({

@@ -22,11 +22,14 @@
     "pages/home/good/index",
 		"pages/home/order/index/index",
     "pages/home/order/show/index",
+		"pages/home/order/detail/index",
 		"pages/home/order/success/index",
+		"pages/home/order/evaluate/index",
+		"pages/home/order/evaluate/show",
+		"pages/home/order/evaluate/success",
     "pages/user/login/step0",
     "pages/user/login/step1",
     "pages/bindVIP/index"
-
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -57,8 +60,9 @@
 		"van-submit-bar": "/miniprogram_npm/vant-weapp/submit-bar/index",
 		"van-radio": "/miniprogram_npm/vant-weapp/radio/index",
     "van-radio-group": "/miniprogram_npm/vant-weapp/radio-group/index",
-		"van-panel": "/miniprogram_npm/vant-weapp/panel/index"
-
+		"van-panel": "/miniprogram_npm/vant-weapp/panel/index",
+		"van-notice-bar": "/miniprogram_npm/vant-weapp/notice-bar/index",
+		"van-rate": "/miniprogram_npm/vant-weapp/rate/index"
   },
   "tabBar": {
     "color": "#d5d5d5",
@@ -80,7 +84,6 @@
       },
       {
         "pagePath": "pages/user/index/index",
-
         "text": "会员中心"
       }
     ]

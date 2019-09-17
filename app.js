@@ -8,7 +8,7 @@ let qqmapsdk = new QQMapWX({
 App({
 	globalData: {
 		// 用户的微信信息
-    	userInfo: null,
+    userInfo: null,
 		// 用户的地理位置信息
 		position: {},
 		// openid

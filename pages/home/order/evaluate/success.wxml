@@ -1,0 +1,5 @@
+<view class='result'>
+  <image src='/static/image/success.png' mode='widthFix' class='success'/>
+  <text>评价提交成功！感谢您的评价</text>
+	<van-button type="warning" custom-class='submit' data-url='/pages/home/index/index' bind:click='go'>继续购物</van-button>
+</view>

@@ -76,7 +76,7 @@ page{
 .cancel.van-button--default,.pay.van-button--warning{
   border-radius:45px;
 	margin-left: 30rpx;
-}
+} 
 
 .more-text{
   text-align: center;
@@ -86,3 +86,19 @@ page{
 	padding-top: 20rpx;
 	padding-bottom: 20rpx;
 }
+
+.count-time{
+  margin-top: 14rpx;
+	border: #60BAB4 solid 1px;
+	margin-left: 20rpx;
+	margin-right: 20rpx;
+	border-radius: 6rpx;
+}
+
+.canvas-code{
+  background-color: #fff;
+	width: 200px;
+	height: 200px;
+	margin: 0 auto;
+}
+

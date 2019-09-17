@@ -1,50 +1,87 @@
 <van-tabs active="{{ active }}" bind:change="onChange" color='#F6931F' tab-active-class='active' sticky='{{true}}' class='h-100'>
-  <van-tab title="及时达" >
+  <van-tab title="商家配送" >
 	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper' style='height: {{windowH}}px' data-id='0'>
-			<van-panel wx:for='{{order0.data}}' wx:key='index' title="{{item.createTime}}" status="{{item.status}}" use-footer-slot custom-class='good' header-class='good-header' footer-class='good-footer'>
-			  <view class='good-content'>
-					<scroll-view  scroll-x class='image-wrapper'>
-				    <image wx:for='{{item.headImages}}' wx:key='i' wx:for-item="image" src='{{image}}' class='good-image' mode='widthFix'/>
-					</scroll-view>
-					<view class='good-count'>
-					  <text class='good-count-count'>共{{item.headImages.length}}件</text>
-						<text>实付¥{{item.payMoney}}</text>
+		  <view wx:for='{{order0.data}}' wx:key='index'>
+				<van-panel title="{{item.createTime}}" status="{{item.status}}" use-footer-slot custom-class='good' header-class='good-header' footer-class='good-footer'>
+					<view class='good-content' data-url='/pages/home/order/detail/index?id={{item.id}}' bindtap='go'>
+						<scroll-view  scroll-x class='image-wrapper'>
+							<image wx:for='{{item.headImages}}' wx:key='i' wx:for-item="image" src='{{image}}' class='good-image' mode='widthFix'/>
+						</scroll-view>
+						<view class='good-count'>
+							<text class='good-count-count'>共{{item.headImages.length}}件</text>
+							<text>实付¥{{item.payMoney}}</text>
+						</view>
 					</view>
-				</view>
-				<view slot="footer" wx:if='{{item.status == "待支付"}}'>
-					<van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='0'>取消订单</van-button>
-					<van-button type="warning" custom-class='pay'>去支付</van-button>
-				</view>
-				<view slot='footer' wx:if='{{item.status == "待配送"}}'>
-				  <van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='0'>取消订单</van-button>
-				</view>
-				<view slot='footer' wx:if='{{item.status == "待自提"}}'>
-				  <van-button custom-class='cancel'>退款</van-button>
-					<van-button type="warning" custom-class='pay'>查看取货码</van-button>
-				</view>
-				<view slot='footer' wx:if='{{item.status == "配送中"}}'>
-				  <van-button custom-class='cancel'>查看物流</van-button>
-					<van-button type="warning" custom-class='pay'>确认收货</van-button>
-				</view>
-				<view slot='footer' wx:if='{{item.status == "已取消"}}'>
-				  <van-button type="warning" custom-class='pay' data-id='{{item.id}}' bind:click='again'>再来一单</van-button>
-				</view>
-				<view slot='footer' wx:if='{{item.status == "已完成"}}'>
-				  <van-button type="warning" custom-class='pay' data-id='{{item.id}}' bind:click='again'>再来一单</van-button>
-				</view>
-				<view slot='footer' wx:if='{{item.status == "退款中"}}'>
-				  <van-button type="default" custom-class='cancel'>退款情况</van-button>
-				</view>
-				<view slot='footer' wx:if='{{item.status == "已退款"}}'>
-				  <van-button type="default" custom-class='cancel'>退款情况</van-button>
-				</view>
-			</van-panel>
+					<view slot="footer" wx:if='{{item.status == "待支付"}}'>
+						<van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='0'>取消订单</van-button>
+						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-type='0' data-cost='{{item.payMoney}}' bind:click='onPayshow'>去支付</van-button>
+					</view>
+					<view slot='footer' wx:if='{{item.status == "待配送"}}'>
+						<van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='0'>取消订单</van-button>
+					</view>
+					<view slot='footer' wx:if='{{item.status == "配送中"}}'>
+						<van-button custom-class='cancel' data-id='{{item.id}}' bind:click='logistics'>查看物流</van-button>
+						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-type='0' bind:click='receipt'>确认收货</van-button>
+					</view>
+					<view slot='footer' wx:if='{{item.status == "已取消"}}'>
+						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-shopid='{{item.storeId}}' bind:click='again'>再来一单</van-button>
+					</view>
+					<view slot='footer' wx:if='{{item.status == "已完成"}}'>
+					  <van-button custom-class='cancel' data-url='/pages/home/order/evaluate/index?id={{item.id}}&storeId={{item.storeId}}' bind:click='go' wx:if='{{item.evaluate == false}}'>评价</van-button>
+						<van-button custom-class='cancel' data-url='/pages/home/order/evaluate/show?id={{item.id}}' bind:click='go' wx:if='{{item.evaluate == true}}'>查看评价</van-button>
+						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-shopid='{{item.storeId}}' bind:click='again'>再来一单</van-button>
+					</view>
+				</van-panel>
+			</view>
 			<text wx:if='{{order0.isLoadAll}}' class='more-text w-100'>没有更多了</text>
 		</scroll-view>
 	</van-tab>
+	<van-tab title="门店自提">
+	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper' style='height: {{windowH}}px' data-id='1'>
+		  <view wx:for='{{order1.data}}' wx:key='index'>
+				<van-panel title="{{item.createTime}}" status="{{item.status}}" use-footer-slot custom-class='good' header-class='good-header' footer-class='good-footer'>
+					<view class='good-content' data-url='/pages/home/order/detail/index?id={{item.id}}' bindtap='go'>
+						<scroll-view  scroll-x class='image-wrapper'>
+							<image wx:for='{{item.headImages}}' wx:key='i' wx:for-item="image" src='{{image}}' class='good-image' mode='widthFix'/>
+						</scroll-view>
+						<view class='good-count'>
+							<text class='good-count-count'>共{{item.headImages.length}}件</text>
+							<text>实付¥{{item.payMoney}}</text>
+						</view>
+					</view>
+					<view slot="footer" wx:if='{{item.status == "待支付"}}'>
+						<van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='1'>取消订单</van-button>
+						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-type='1' data-cost='{{item.payMoney}}' bind:click='onPayshow'>去支付</van-button>
+					</view>
+					<view slot='footer' wx:if='{{item.status == "待配送"}}'>
+						<van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='1'>取消订单</van-button>
+					</view>
+					<view slot='footer' wx:if='{{item.status == "待自提"}}'>
+						<van-button custom-class='cancel'>取消订单</van-button>
+						<van-button type="warning" custom-class='pay' data-url='/pages/home/order/detail/index?id={{item.id}}' bind:click='go'>查看取货码</van-button>
+					</view>
+					<view slot='footer' wx:if='{{item.status == "已取消"}}'>
+						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-shopid='{{item.storeId}}' bind:click='again'>再来一单</van-button>
+					</view>
+					<view slot='footer' wx:if='{{item.status == "已完成"}}'>
+					  <van-button custom-class='cancel' data-url='/pages/home/order/evaluate/index?id={{item.id}}&storeId={{item.storeId}}' bind:click='go' wx:if='{{item.evaluate == false}}'>评价</van-button>
+						<van-button custom-class='cancel' data-url='/pages/home/order/evaluate/show?id={{item.id}}' bind:click='go' wx:if='{{item.evaluate == true}}'>查看评价</van-button>
+						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-shopid='{{item.storeId}}'  bind:click='again'>再来一单</van-button>
+					</view>
+				</van-panel>
+			</view>
+			<text wx:if='{{order1.isLoadAll}}' class='more-text w-100'>没有更多了</text>
+		</scroll-view>
+	</van-tab>
   <van-tab title="拼团">拼团</van-tab>
-  <van-tab title="到店订单">到店订单</van-tab>
 </van-tabs>
-
+<pay isShow="{{pay.show}}" paShow='{{pay.paShow}}' password='{{pay.password}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{pay.cost}}' orderId='{{pay.id}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
 <van-toast id="van-toast" />
 <van-dialog id="van-dialog" />
+<van-popup show="{{ logShow }}" bind:close="onLogclose" position='top'>
+  <van-field label='预计到货时间' value="今天{{ logistics.postTime }}前" border="{{ false }}" readonly/>
+	<van-field label='配送员' value="{{ logistics.name }}" border="{{ false }}" readonly/>
+	<van-field label='联系电话' value="{{ logistics.phone }}" border="{{ false }}" readonly/>
+	<van-field label='配送门店' value="{{ logistics.storeName }}" border="{{ false }}" readonly/>
+	<van-field label='门店电话' value="{{ logistics.storeMobile }}" border="{{ false }}" readonly/>
+</van-popup>

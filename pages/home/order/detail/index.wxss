@@ -1,0 +1,160 @@
+page{
+  background-color: #f7f7f7;
+}
+
+.status{
+  backgruond-color: #F1FBFA;
+	border: #00837B solid 1px;
+	margin-left: 30rpx;
+	margin-right: 30rpx;
+	margin-top: 30rpx;
+	margin-bottom: 30rpx;
+	border-radius: 4rpx;
+}
+
+.status .van-cell__label{
+  color: #333;
+}
+
+.f-tar{
+  text-align: right;
+}
+
+.f-tac{
+  text-align: center;
+}
+
+.w-100{
+  width: 100%;
+}
+
+.order-label{
+  padding-right: 30rpx;
+	color: #9f9f9f;
+	font-size: 24rpx;
+	padding-bottom: 20rpx;
+}
+
+.order-addinfo .van-cell,.field-label{
+  color: #676767;
+}
+
+.order-addinfo .van-cell:after,.status .van-cell:after{
+  border-bottom: none;
+}
+
+.order-addinfo .van-cell__value{
+  color: #424242;
+}
+
+.canvas-code{
+  background-color: #fff;
+	width: 200px;
+	height: 200px;
+	margin: 0 auto;
+}
+
+.mt-14{
+  margin-top: 14rpx;
+}
+
+.mb-14{
+  margin-bottom: 14rpx;
+}
+
+.oinfo-title.van-cell__title{
+  color: #676767;
+}
+
+.tip{
+  padding-left: 30rpx;
+	padding-right: 30rpx;
+	font-size: 24rpx;
+	color: #9EBBB8;
+	margin-bottom: 20rpx;
+	margin-top: -10rpx;
+	display: block;
+	position: relative;
+	z-index: 10;
+}
+
+.head-image{
+  width: 100rpx;
+}
+
+.good-area{
+  display: flex;
+}
+
+.good-price{
+  width: 200rpx;
+	text-align: right;
+	padding-top: 26rpx;
+}
+
+.good-name{
+  flex: 1;
+	padding-left: 20rpx;
+}
+
+.good-name text{
+  display: block;
+}
+
+.good-count{
+  color: #666;
+}
+
+.oldprice{
+  color: #BCBCBC;
+	font-size: 24rpx;
+	text-decoration: line-through;
+}
+
+.newprice{
+  font-weight: bold;
+	margin-left: 10rpx;
+}
+
+.goods{
+  margin-top: 10rpx;
+	margin-bottom: 10rpx;
+	display: block;
+}
+
+.f-pr{
+  position: relative;
+}
+
+.copy.van-button--default{
+  position: absolute;
+	top: 20rpx;
+	right: 20rpx;
+	border-radius: 4rpx;
+	background-color: #f7f7f7;
+	z-index: 10;
+}
+
+.footer{
+  background-color: white;
+	padding: 20rpx;
+	margin-top: 14rpx;
+	text-align: right;
+}
+
+.cancel.van-button--default {
+  background: rgba(255,255,255,1);
+  border: 1px solid #D7D7D7;
+	color: #6a6a6a;
+}
+
+.pay.van-button--warning{
+  background:rgba(246,147,31,1);
+	border: 1px solid #F6931F;
+	color: white;
+}
+
+.cancel.van-button--default,.pay.van-button--warning{
+  border-radius:45px;
+	margin-left: 30rpx;
+} 
