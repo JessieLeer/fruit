@@ -68,7 +68,7 @@
 .top_text_area{
     height:65.5px;
     position: relative;
-    border:1px solid rgba(235,235,235,0.8);
+    border-bottom:1px solid rgba(235,235,235,0.8);
     border-radius:4px;
     padding : 10px 11px;
     box-sizing : border-box;
@@ -173,4 +173,7 @@
     position: absolute;
     right : 10px;
     top : 4px;
+}
+image{
+    height: auto;
 }

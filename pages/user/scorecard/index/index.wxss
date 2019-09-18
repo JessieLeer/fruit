@@ -54,11 +54,11 @@
     padding : 25.5px 9px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 .item_coupon{
     width : 30%;
     margin-bottom : 33px;
+    margin-right : 3%;
 }
 .coupon_img_area{
     padding : 16.5px 14.5px;

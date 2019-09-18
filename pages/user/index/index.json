@@ -1,5 +1,9 @@
 {
     "disableScroll": true,
     "navigationBarTitleText": "会员中心",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "van-popup": "../miniprogram_npm/vant-weapp/popup/index"
+    }
 }

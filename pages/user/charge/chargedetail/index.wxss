@@ -1,3 +1,6 @@
+image{
+    height : auto;
+}
 .remain_info{
     width : 100%;
     overflow: hidden;
@@ -11,7 +14,7 @@
     font-size:38px;
     font-family:Source Han Sans CN;
     color:rgba(51,51,51,1);
-    font-weight: 200;
+    font-weight: 400;
 
 }
 .info_flex{
@@ -39,7 +42,7 @@
     width:130px;
     height:36px;
     background:rgba(255,255,255,1);
-    border-radius:13px;
+    border-radius:18px;
     line-height: 36px;
     padding-left : 8px;
     font-size:16px;
@@ -49,22 +52,22 @@
 .date_area>view:nth-child(2){
     margin-left: auto;
     padding-right:  10px;
-    font-size:16px;
+    font-size:14px;
     font-family:Source Han Sans CN;
     color:rgba(139,139,139,1);
 }
 .date_area image{
     width : 11px;
     margin-left : 40px;
-    transform:rotate(90deg) translateX(-2px);
+    transform:rotate(0deg) translateX(-2px);
 }
 .img_animation{
     animation: rotate 0.2s 1 forwards;
 }
 @keyframes rotate
 {
-	from {transform:rotate(90deg);}
-	to {transform:rotate(0deg) translateY(-2px);}
+	from {transform:rotate(0deg);}
+	to {transform:rotate(-180deg) translateY(2px);}
 }
 .relative{
     position: relative;
@@ -85,7 +88,7 @@
     padding-left : 18px;
     box-sizing: border-box;
     font-family:Source Han Sans CN;
-    font-weight:200;
+    font-weight:400;
     color:rgba(51,51,51,1)
 }
 .datepickerlist{
@@ -110,7 +113,7 @@
     margin-left : auto;
 }
 .item_detail>view:nth-child(1){
-    width : 102px;
+    width : 162px;
     display: flex;
     flex-wrap: wrap;
     flex-direction:column;
@@ -119,7 +122,7 @@
 .item_detail>view:nth-child(1) view:nth-child(1){
     font-size:16px;
     font-family:Source Han Sans CN;
-    font-weight:200;
+    font-weight:400;
     color:rgba(51,51,51,1);
 }
 .item_detail>view:nth-child(1) view:nth-child(2){

@@ -1,4 +1,5 @@
 {
     "navigationBarTitleText": "历史次卡",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false
 }

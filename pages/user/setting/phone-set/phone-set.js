@@ -1,4 +1,5 @@
 // page/user/setting/phone-set/phone-set.js
+var app = getApp()
 var interval = null //倒计时函数
 Page({
 
@@ -6,23 +7,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    tel : '',
     time: '获取验证码', //倒计时 
-    currentTime: 61
+    currentTime: 61,
+    code : 0,
+    disabled : false
   },
 
   bindKeyInput: function (e) {
-      this.setData({
-        inputVal:  e.detail.value
-      });
+    
   },
   codeKey:function(e){
-    var phone = e.detail.value;
-    wx.request();
+    this.setData({
+      code: e.detail.value
+    })
   },
   getCode: function (options) {
     var that = this;
-    var phone = this.data.inputVal;
+    var phone = this.data.tel;
     if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(phone))) {
       wx.showToast({
         title: "手机号码错误",
@@ -30,24 +32,39 @@ Page({
       })
     }
     else{
-  
-    var currentTime = that.data.currentTime
-      console.log(0);
-    interval = setInterval(function () {
-      console.log(1);
-      currentTime--;
-      that.setData({
-        time: currentTime + '秒重新获取'
+      this.setData({
+        disabled : true
       })
-      if (currentTime <= 0) {
-        clearInterval(interval)
+      var that = this;
+      wx.request({
+        url: `${app.globalData.url}/api/mini/sendUserSms`,
+        data: {
+          mobile: this.data.tel
+        },
+        success(res) {
+          wx.showToast({
+            title: res.data.message,
+            icon: 'none'
+          })
+        }
+      })
+      var currentTime = that.data.currentTime
+        console.log(0);
+      interval = setInterval(function () {
+        console.log(1);
+        currentTime--;
         that.setData({
-          time: '重新发送',
-          currentTime: 61,
-          disabled: false
+          time: currentTime + '秒重新获取'
         })
-      }
-    }, 1000)
+        if (currentTime <= 0) {
+          clearInterval(interval)
+          that.setData({
+            time: '重新发送',
+            currentTime: 61,
+            disabled: false
+          })
+        }
+      }, 1000)
     }
   },
   getVerificationCode() {
@@ -57,7 +74,31 @@ Page({
       disabled: true
     })
   },
-
+  next(){
+    wx.request({
+      url: `${app.globalData.url}/api/member/verifySms`,
+      data: {
+        oldMobile: this.data.tel,
+        loginUid: app.globalData.loginUid,
+        smsCode: this.data.code,
+        userId: app.globalData.userId,
+      },
+      success(res) {
+        console.log(res)
+        if(res.data.code == 200){
+          wx.navigateTo({
+            url: '../phone-set2/phone-set'
+          })
+        }else{
+          wx.showToast({
+            title: res.data.message,
+            icon: 'none',
+          })
+        }
+      }
+    })
+   
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -76,7 +117,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    wx.request({
+      url: `${app.globalData.url}/api/member/getUserInfo`, //仅为示例，并非真实的接口地址
+      data: {
+        loginUid: app.globalData.loginUid,
+        userId: app.globalData.userId
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        that.setData({
+          tel: res.data.data.mobile
+        })
+      }
+    })
   },
 
   /**

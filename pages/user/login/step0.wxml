@@ -1,6 +1,14 @@
 <view>
   <image src='/static/image/login_logo.png' class='logo' mode='widthFix'   />
-  <van-button type="primary" size='small' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" custom-class='login-wechat'>微信一键登录</van-button>
-  <van-button type="default" size='small' data-url='/pages/user/login/step1' bindtap='go' custom-class='login-phone'>手机验证登录</van-button>
+  <view class="wrap">
+    <button open-type="getUserInfo" class="info">
+      
+      <button class="phone" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" custom-class='login-wechat'>
+        微信一键登录
+      </button>
+    </button>
+   
+  </view>
+  <button data-url='/pages/user/login/step1' bindtap='go' class="tellogin">手机验证登录</button>
 	<van-toast id="van-toast" />
 </view>

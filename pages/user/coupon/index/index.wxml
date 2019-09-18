@@ -1,47 +1,54 @@
 <view class="coupon_container">
-    <view wx:if="{{true}}">
-        <view class="input_wrap">
-            <view>
-                <input class="for_code" placeholder="输入优惠券兑换码" bindinput="getValue"/>
-            </view>
-            <view bindtap="convertCoupon">
-                兑换
-            </view>
+    <view class="input_wrap">
+        <view>
+            <input class="for_code" placeholder="输入优惠券兑换码" bindinput="getValue" />
         </view>
+        <view bindtap="convertCoupon">
+            兑换
+        </view>
+    </view>
+    <view class="true_wrap">
         <view class="content_coupon">
-            <view class="item_coupon" wx:for="{{dataList}}" wx:key="{{index}}">
-                <view class="cuopon_detail">
-                    <view class="flex">
-                        <view class="coupon_price"><text wx:if="{{item.rtype == 1}}">¥</text>{{item.rtype == 1 ? item.money : item.fracture * 10}}<text wx:if="{{item.rtype == 2}}">折</text></view>
-                        <view class="coupon_info">满{{item.quota}}元使用</view>
-                    </view>
-                    <view class="coupon_text_area">
-                        <view class="top_text_area">
-                            <view>{{item.cname}}</view>
-                            <view>{{item.cstartTime}}至{{item.cendTime}}</view>
-                            <view class="btn_use">
-                                立即使用
+            <view class="auto_height" wx:if="{{dataList.length!=0}}" style="min-height: {{minHeight}}px">
+                <view class="item_coupon" wx:for="{{dataList}}" wx:key="{{index}}">
+                    <view class="cuopon_detail">
+                        <view class="flex">
+                            <view class="coupon_price"><text
+                                    wx:if="{{item.rtype == 1}}">¥</text>{{item.rtype == 1 ? item.money : item.fracture * 10}}<text
+                                    wx:if="{{item.rtype == 2}}">折</text></view>
+                            <view class="coupon_info">满{{item.quota}}元使用</view>
+                        </view>
+                        <view class="coupon_text_area">
+                            <view class="top_text_area">
+                                <view>{{item.cname}}</view>
+                                <view>{{item.cstartTime}}至{{item.cendTime}}</view>
+                                <view class="btn_use">
+                                    立即使用
+                                </view>
+                            </view>
+                            <view class="more_detail" bindtap="clickMore" data-index="{{index}}">
+                                <view>使用详情</view>
+                                <view class="op_icon {{selectedFlag[index]?'rotateani':''}}">
+                                    <image src="../../../../static/image/options.png" mode="widthFix"></image>
+                                </view>
                             </view>
                         </view>
-                        <view class="more_detail" bindtap="clickMore" data-index="{{index}}">
-                            <view>使用详情</view>
-                            <view class="op_icon {{selectedFlag[index]?'rotateani':''}}"><image src="../../../../static/image/options.png" mode="widthFix"></image></view>
-                        </view>
+                    </view>
+                    <view class="more_detail_select" wx:if="{{selectedFlag[index]}}">
+                        {{item.ctext}}
                     </view>
                 </view>
-                <view class="more_detail_select" wx:if="{{selectedFlag[index]}}">
-                   {{item.ctext}}
-                </view>
+                <view class="placeholder"></view>
+            </view>
+            <view wx:if="{{dataList.length==0}}" class="hasno_area" style="height: {{minHeight}}px">
+                <image src="../../../../static/image/hasno.png" mode="widthFix"></image>
+                <view class="info">暂无可用优惠券</view>
+            </view>
+            <view class="history_fix">
+                <view bindtap="gotoHistory">查看历史优惠券</view>
+                <view bindtap="gotoDoc">优惠券使用说明</view>
             </view>
         </view>
-        <view class="auto_height"></view>
-        <view class="history_fix">
-            <view bindtap="gotoHistory">查看历史优惠券</view>
-            <view>优惠券使用说明</view>
-        </view>
     </view>
-    <view wx:if="{{false}}" class="hasno_area">
-        <image src="../../../../static/image/hasno.png" mode="widthFix"></image>
-        <view class="info">暂无优惠券</view>
-    </view>
+    
 </view>

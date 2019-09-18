@@ -4,14 +4,14 @@
     <text>更换手机号</text>
     <view class="right-sign"></view>
   </view>
-  <view class="to-page" bindtap="resetPassword">
+  <!-- <view class="to-page" bindtap="resetPassword">
     <text>重置密码</text>
      <view class="right-sign"></view>
-  </view>
+  </view> -->
   <view class="to-page" bindtap="go">
     <text>关于我们</text>
      <view class="right-sign"></view>
   </view>
 
-  <view  class="btn-quit">退出</view>
+  <view  class="btn-quit" bindtap="loginOut">退出</view>
 </view>

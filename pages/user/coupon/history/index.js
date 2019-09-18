@@ -3,7 +3,7 @@ Page({
     data : {
         showkey : -1,
         selectedFlag : [],
-        dataList : [1,2,3,4,5]
+        dataList : []
     },
     clickMore(e){
         var index = e.currentTarget.dataset.index;

@@ -1,16 +1,18 @@
 {
   "pages": [
     "pages/home/index/index",
-    "pages/user/index/index",
-    "pages/user/charge/index/index",
-    "pages/user/charge/chargedetail/index",
-    "pages/user/scorecard/scoredetail/index",
-    "pages/user/scorecard/index/index",
-    "pages/user/coupon/index/index",
-    "pages/user/coupon/history/index",
-    "pages/user/shopcard/index/index",
-    "pages/user/shopcard/history/index",
     "pages/user/seccard/index/index",
+    "pages/user/shopcard/index/index",
+    "pages/user/charge/chargedetail/index",
+    "pages/user/coupon/index/index",
+    "pages/user/scorecard/scoredetail/index",
+    "pages/bindVIP/index",
+    "pages/user/setting/phone-set2/phone-set",
+    "pages/user/charge/index/index",
+    "pages/user/index/index",
+    "pages/user/scorecard/index/index",
+    "pages/user/coupon/history/index",
+    "pages/user/shopcard/history/index",
     "pages/user/seccard/history/index",
     "pages/user/mydetail/index/index",
     "pages/user/addressManage/addressManage",
@@ -24,8 +26,7 @@
     "pages/home/order/show/index",
 		"pages/home/order/success/index",
     "pages/user/login/step0",
-    "pages/user/login/step1",
-    "pages/bindVIP/index"
+    "pages/user/login/step1"
 
   ],
   "window": {

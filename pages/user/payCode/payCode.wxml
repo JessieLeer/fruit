@@ -21,7 +21,7 @@
 
 </view>
 
-<view>
+<!-- <view bindtap="gotopay">
   <image src="../../../static/image/1.png" style="width:48rpx;height:49rpx;display:block;margin:0 auto;margin-top:150rpx;margin-bottom:22rpx;"></image>
   <view style="width:130rpx;height:31rpx;margin:0 auto;text-align:center;font-size:32rpx;color:#333;font-family:SourceHanSansCN-Regular;font-weight:400;">微信支付</view>
-</view>
+</view> -->

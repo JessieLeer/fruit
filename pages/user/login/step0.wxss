@@ -21,3 +21,51 @@
 	height: 80rpx;
 	line-height: 80rpx;
 }
+.wrap{
+	position: relative;
+	width:  90%;
+	margin : 0 auto;
+	height:80rpx;
+	margin-bottom : 60rpx;
+}
+.info{
+	position: absolute;
+	width : 100%;
+	z-index : 999;
+	height: 80rpx;
+	border-radius: 45px;
+	line-height : 80rpx;
+	background : #F6931F;
+	margin : 0 auto;
+}
+.phone{
+	z-index : 998;
+	width : 100%;
+	border-radius: 45px;
+	height: 80rpx;
+	line-height : 80rpx;
+	background : #F6931F;
+	margin : 0 auto;
+	font-size:36rpx;
+	font-family:Source Han Sans CN;
+	font-weight:400;
+	color:rgba(255,255,255,1);
+}
+.tellogin{
+	width:  90%;
+	margin : 0 auto;
+	margin-bottom : 10px;
+	height:80rpx;
+	line-height : 80rpx;
+	font-size:36rpx;
+	font-family:Source Han Sans CN;
+	font-weight:400;
+	color:rgba(246,147,31,1);
+	box-sizing  : border-box;
+	background:rgba(255,255,255,1);
+	border:1px solid rgba(246,147,31,1);
+	border-radius:45px;
+}
+button::after{
+border:none;
+}

@@ -17,9 +17,7 @@
     box-sizing : border-box;
 }
 .title_card{
-    font-size:16px;
-    font-family:Microsoft YaHei;
-    font-weight:bold;
+    font-size:18px;
     color:rgba(51,51,51,1);
 }
 .price_card{
@@ -53,8 +51,6 @@
     border-bottom-left-radius:15px;
     line-height : 30px;
     font-size:14px;
-    font-family:Microsoft YaHei;
-    font-weight:bold;
     color:rgba(140,140,140,1);
     padding-left : 13.5px;
     padding-right : 13.5px;

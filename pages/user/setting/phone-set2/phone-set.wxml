@@ -1,0 +1,28 @@
+<!--page/user/setting/phone-set/phone-set.wxml-->
+
+<view>
+  <!-- <view>
+    <view class="safa-sign"></view>
+    <view style="width:409rpx;height:39rpx;margin:0 auto;font-size:40rpx;color:#333;text-align:center;font-weight:bold;">为了保障您的资金安全</view>
+    <view style="width:300rpx;height:30rpx;line-height:30rpx;font-size:32rpx;color:#818080;font-weight:400;text-align:center;margin:0 auto;margin-top:30rpx;margin-bottom:55rpx;">请先验证您的手机号</view>
+  </view> -->
+  <view class="header-area">
+    <view>①  验证身份</view>
+    <view>② 绑定新手机号</view>
+  </view>
+  <view>
+    <view style="margin-bottom:40rpx;">
+      <view class="title-style phone-number">新手机号</view>
+      <input  class="input-style" type="number" bindinput="bindKeyInput" maxlength="11" placeholder="请输入手机号码"/>
+    </view>
+     <view style="position:relative;margin-bottom:40rpx;">
+      <view class="title-style phone-code">验证码</view>
+      <input  class="input-style"  bindinput="codeKey" placeholder="请输入验证码"/>
+      <button class="btn-getCode" disabled="{{disabled}}" bindtap="getCode" style="z-index:100;">{{time}}</button>
+    </view>
+    
+  </view>
+  <view>
+    <view class="next-step" bindtap="confirm">确定</view>
+  </view>
+</view>

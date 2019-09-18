@@ -22,11 +22,11 @@
         </view>
         <view class="item_input" bindtap="showStore">
             <view>所属门店</view>
-            <view class="input">{{currentadress}}</view>
+            <view class="input">{{currentadress == null ? '' : currentadress}}</view>
         </view>
-        <view class="bind_btn" bindtap="bindcard">绑定会员卡</view>
+        <button class="bind_btn" bindtap="bindcard" disabled="{{!checked}}">绑定会员卡</button>
         <view class="checkbox_area">
-            <checkbox></checkbox>
+            <checkbox bindtap="checkboxChange" checked="{{checked}}"></checkbox>
             <text>
                 <text class="text_f">我已阅读并同意</text>
                 <text class="text_s">会员卡信息使用声明</text>
@@ -36,7 +36,7 @@
     <view class="popup" wx:if="{{showDate}}">
         <view class="autoheight" bindtap="close"></view>
         <van-datetime-picker class="fix" type="date" min-date="{{ minDate }}" max-date="{{ maxDate }}"
-            item-height="54" value="{{ maxDate }}" bind:confirm="confirm" bind:cancel="cancel" formatter="{{ formatter }}" />
+            item-height="54" value="{{ nowDate }}" bind:confirm="confirm" bind:cancel="cancel" formatter="{{ formatter }}" />
     </view>
     <view class="popup" wx:if="{{showStore}}">
         <view class="autoheight" bindtap="close"></view>

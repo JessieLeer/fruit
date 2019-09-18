@@ -3,7 +3,9 @@
 	display: block;
 	margin: 40rpx auto;
 }
-
+button::after{
+border:none;
+}
 .safe{
   font-weight:bold;
   color:rgba(51,51,51,1);
@@ -15,7 +17,11 @@
 	font-size: 28rpx;
 	margin-bottom: 40rpx;
 }
-
+.van-button--small{
+	border:1px solid #F6931F!important;
+	opacity: 1!important;
+	color :#F6931F!important;
+}
 .safe,.safe-grey{
   font-family:Source Han Sans CN;
   display: block;
@@ -32,4 +38,22 @@
 	border-radius:45px;
 	height: 80rpx;
 	line-height: 80rpx;
+}
+.info{
+	background: #F6931F;
+	height: 80rpx;
+	width:100%;
+	border-radius:45rpx;
+	line-height : 80rpx;
+	font-size:36rpx;
+	font-family:Source Han Sans CN;
+	font-weight:400;
+	color:rgba(255,255,255,1)
+}
+.wrap{
+	margin-top : 100rpx;
+	width:359rpx;
+	height:80rpx;
+	background:rgba(246,147,31,1);
+	border-radius:45rpx;
 }

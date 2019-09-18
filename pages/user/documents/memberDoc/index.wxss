@@ -1,0 +1,10 @@
+.doc_container{
+    padding : 38rpx 20rpx;
+    font-size:32rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(101,101,101,1);
+}
+.title_name{
+    margin-top : 22rpx;
+}

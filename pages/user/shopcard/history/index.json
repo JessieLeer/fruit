@@ -1,4 +1,5 @@
 {
     "navigationBarTitleText": "历史购物卡",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false
 }

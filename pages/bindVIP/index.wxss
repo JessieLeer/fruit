@@ -121,3 +121,6 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
     color:#00837B;
     margin-left : 4px;
 }
+button::after{
+border:none;
+}

@@ -1,0 +1,12 @@
+<view class="doc_container">
+    <view>优惠券使用说明</view>
+    <view class="title_name">1、优惠券不能兑换现金，不能开具发票</view>
+    <!-- <view>累计消费需达到 0 元，等级有效期：永久。</view> -->
+    <view class="title_name">2、单笔订单只能使用1张优惠券，不支持同时使用多张优惠券，用券后不找零，不退回；</view>
+    <!-- <view>累计消费需达到 200 元，等级有效期：永久。会员商品享受98折优惠。</view> -->
+    <view class="title_name">3、拼团商品不可使用优惠券，与其他优惠不同享；</view>
+    <!-- <view>累计消费需达到 3000 元，等级有效期：永久。会员商品享受97折优惠</view> -->
+    <view class="title_name">4、请在有效期内使用优惠券，未使用的优惠券过期后，将自动作废；</view>
+    <!-- <view>累计消费需达到 10000 元，等级有效期：1年。会员商品享受95折优惠</view> -->
+    <view class="title_name">5、每张优惠券的使用条件请查看对应优惠券的使用说明。</view>
+</view>

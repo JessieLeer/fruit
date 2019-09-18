@@ -5,7 +5,8 @@ Page({
     data : {
         showkey : -1,
         selectedFlag : [],
-        dataList : []
+        dataList : [],
+        minHeight : 0
     },
     clickMore(e){
         var index = e.currentTarget.dataset.index;
@@ -24,6 +25,26 @@ Page({
         this.data.dataList.map((item,index)=>{
             this.data.selectedFlag[index] = false;
         })
+        this.getMinHeight()
+    },
+    getMinHeight(){
+        let h ;
+        let minHeight ;
+        wx.getSystemInfo({
+            success: function (res) {
+                h = res.windowHeight
+               
+            }
+        })
+        minHeight = h - 152 - 41;
+        this.setData({
+            minHeight: minHeight
+        })
+    },
+    gotoDoc(){
+        wx.navigateTo({
+            url: "../../documents/couponDoc/index"
+        })
     },
     gotoHistory() {
         wx.navigateTo({
@@ -35,7 +56,7 @@ Page({
         wx.request({
             url: `${app.globalData.url}/api/coupon`, //仅为示例，并非真实的接口地址
             data: {
-                uid: 18679208206
+                uid: app.globalData.userId
             },
             header: {
                 'content-type': 'application/json' // 默认值
@@ -55,11 +76,19 @@ Page({
         })
     },
     convertCoupon(){
+        if (!this.data.value){
+            wx.showToast({
+                title: '请输入兑换码',
+                icon: 'none',
+                duration: 2000
+            })
+            return
+        }
         var that = this
         wx.request({
             url: `${app.globalData.url}/api/getCoupon`, //仅为示例，并非真实的接口地址
             data: {
-                uid: 18679208206,
+                uid: app.globalData.userId,
                 rid  : that.data.value
             },
             header: {
@@ -71,6 +100,7 @@ Page({
                     icon: 'none',
                     duration: 2000
                 })
+                that.getCouponList()
             }
         })
     },

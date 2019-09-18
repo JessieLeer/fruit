@@ -1,8 +1,9 @@
+const app = getApp()
 Page({
 	data: {
 		phone: {
 			value: '',
-			message: '请输入正确格式的手机号',
+			message: '',
 			verify: false
 		},
 		countdown: 0,
@@ -10,21 +11,26 @@ Page({
 			value: '',
 			verify: false
 		},
+		cardNo: null
 	},
 	
 	onLoad(option) {
+
+		
 	},
 	
 	/*-- 监听手机号发生改变时验证手机格式 --*/
 	phoneChange(event) {
-    const phone = event.detail || event
+	console.log(event)
+		const phone = event.detail
     let message = ''
 		let verify = false
     if (/^1[3|4|5|7|8][0-9]\d{8}$/.test(phone)) {
+		console.log(213131)
       message = ''
 			verify = true
     } else {
-      message = '请输入正确格式的手机号'
+      message = '请输入正确的手机号'
 			verify = false
     }
     this.setData({
@@ -36,37 +42,108 @@ Page({
 	
 	/*-- 发送手机验证码 --*/
 	sendSms(e) {
+		var that = this;
 		this.setData({
-			countdown: 60
+			countdown: 61,
+			key : false
 		})
 		wx.request({
-			url: '',
+			url: `${app.globalData.url}/api/mini/sendUserSms`,
 			data: {
-				phone: this.data.phone.value
+				mobile : this.data.phone.value
 			},
 			success(res) {
 				console.log(res)
-				if(res.data.retcode == '1'){
+				wx.showToast({
+					title: res.data.message,
+					icon: 'none'
+				})
+				if(res.data.code == 200){
 					let count = setInterval(() => {
-						if(this.countdown > 0){
-							this.countdown--
+						var num = that.data.countdown
+						num -=1 
+						if (num > 0){
+							that.setData({
+								countdown : num,
+								key : true
+							})
 						}else{
 							clearInterval(count)
+							that.setData({
+								key: false,
+								countdown: 0
+							})
 						}
 					},1000)
 				}else{
-					this.setData({
-						countdown: 60
+					that.setData({
+						countdown: 61		
 					})
 				}
 			}
 		})
 	},
-	
+	onGetUserinfo() {
+		wx.getUserInfo({
+			success: function (res) {
+				console.log(res)
+				app.globalData.avatarUrl = ""
+				app.globalData.Nickname = ""
+			}
+		})
+	},
 	/*-- 监听验证码改变 --*/
 	smsChange(e) {
 		this.setData({
-			'sms.verify': e.detail.length == 6
+			'sms.verify': e.detail.length == 6,
+			'sms.value' : e.detail
+		})
+	},
+	login(){
+		this.onGetUserinfo()
+		var that = this;
+		wx.request({
+			url: `${app.globalData.url}/api/mini/login`,
+			data: {
+				mobile: this.data.phone.value,
+				smsCode: this.data.sms.value,
+				loginType : 'sms'
+			},
+			success(res) {
+				if(res.data.code == 200){
+					console.log(res)
+					wx.showToast({
+						icon: 'none',
+						title: res.data.message,
+						dutation: 2000
+					})
+					app.globalData.loginUid = res.data.data.loginUid;
+					app.globalData.userId = res.data.data.userId;
+					that.setData({
+						cardNo: res.data.data.cardNo
+					})
+					if (!that.data.cardNo){
+						setTimeout(() => {
+							wx.navigateTo({
+								url: '../../bindVIP/index'
+							})
+						}, 2000);
+					}else{
+						setTimeout(() => {
+							wx.switchTab({
+								url: "../index/index"
+
+							})
+						}, 2000);
+					}
+				}else{
+					wx.showToast({
+						icon: 'none',
+						title: res.data.message,
+						dutation: 2000
+					})
+				}
+			}
 		})
 	}
 })

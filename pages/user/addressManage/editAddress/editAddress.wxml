@@ -3,7 +3,7 @@
   <view class="box">
     <view class="titleName">收货人</view>
     <view class="inputStyle">
-      <input style="height:110rpx;text-align:right;" placeholder="请输入收货人姓名"></input>
+      <input style="height:110rpx;text-align:right;" placeholder="请输入收货人姓名" bindinput="inputName"></input>
     </view>
   </view>
   <view class="box">
@@ -19,20 +19,20 @@
   <view class="box">
     <view class="titleName">手机号</view>
     <view class="inputStyle">
-      <input style="height:110rpx;text-align:right;" placeholder="请输入收货人手机号"></input>
+      <input style="height:110rpx;text-align:right;" placeholder="请输入收货人手机号" bindinput="inputTel"></input>
     </view>
   </view>
   <view class="box">
     <view class="titleName">地址</view>
     <view class="inputStyle" style="position:relative">
-      <input style="width:420rpx;;height:110rpx;text-align:right;" disabled="true" placeholder="点击选择所在地区"></input>
+      <input style="width:420rpx;;height:110rpx;text-align:right;" disabled="true" placeholder="点击选择所在地区" bindinput="inputAdd"></input>
       <view class="toLeft"></view>
     </view>
   </view>
   <view class="box">
     <view class="titleName">门牌号</view>
     <view class="inputStyle">
-      <input style="height:110rpx;text-align:right;" placeholder="详细地址，如：3号楼2单元105"></input>
+      <input style="height:110rpx;text-align:right;" placeholder="详细地址，如：3号楼2单元105" bindinput="inputBlo"></input>
     </view>
   </view>
     <view class="box">

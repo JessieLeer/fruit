@@ -1,4 +1,4 @@
-// page/user/setting/setting.js
+const app = getApp()
 Page({
 
   /**
@@ -7,7 +7,31 @@ Page({
   data: {
 
   },
-
+  loginOut : function () {
+    var that = this
+    wx.request({
+      url: `${app.globalData.url}/api/member/logout`, //仅为示例，并非真实的接口地址
+      data: {
+        loginUid: app.globalData.loginUid,
+        userId: app.globalData.userId
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        app.globalData.loginUid = '';
+        app.globalData.userId = '';
+        wx.showToast({
+          title: res.data.message,
+          icon: 'none',
+          duration: 2000
+        })
+        setTimeout(() => {
+          wx.navigateBack()
+        }, 2000);
+      }
+    })
+  },
   goPhone:function(){
     wx.navigateTo({
       url: 'phone-set/phone-set',

@@ -7,9 +7,25 @@ Page({
    */
   data: {
     isSel: true,
-    icon: 1
+    icon: 1,
+    dataSet : {
+      mobile : "",
+      name : "",
+      addr : ""
+    }
   },
-
+  inputTel(e){
+    this.data.dataSet.mobile = e.detail.value
+  },
+  inputName(e){
+    this.data.dataSet.name = e.detail.value
+  },
+  inputAdd(e){
+    this.data.dataSet.addr = e.detail.value
+  },
+  inputBlo(e){
+    this.data.dataSet.addr = e.detail.value
+  },
 
   selSex: function () {
     if (this.data.isSel) {

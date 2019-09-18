@@ -4,16 +4,33 @@ page{
 .remain_info{
     width : 100%;
     background:rgba(255,255,255,1);
-    border-bottom : 10px solid #F4F4F4;
-    padding : 27px 10px 27px 10px;
     box-sizing : border-box;
-    display: flex;
+    text-align : center;
+    padding : 54rpx 20rpx 0rpx 20rpx;
 }
 .remain_info view:nth-child(1){
-    font-size:16px;
+    font-size:32rpx;
     font-family:Source Han Sans CN;
-    font-weight:200;
-    color:rgba(165,165,165,1);
+    font-weight:400;
+    color:rgba(165,165,165,1)
+}
+.inner_wrap{
+    border-bottom : 1px solid #F6F6F6;
+    padding-bottom : 50rpx;
+}
+.info_charge{
+    display: flex;
+    justify-content: space-around;
+    background: #fff;
+    border-bottom : 10px solid #F4F4F4;
+    height: 75rpx;
+}
+.info_charge view{
+    line-height: 75rpx;
+    font-size:32rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(150,150,150,1)
 }
 .money{
     font-size:38px;
@@ -25,24 +42,12 @@ page{
     font-family:Source Han Sans CN;
     color:rgba(51,51,51,1);
 }
-.remain_info>view:last-child{
-    margin-left : auto;
-    line-height : 75px;
-    font-size:16px;
-    font-family:Source Han Sans CN;
-    font-weight:200;
-    color:rgba(187,187,187,1);
-}
-.remain_info>view:last-child text:nth-child(1){
-    margin-right : 9px;
-}
 .charge_detail{
     background:rgba(255,255,255,1);
     padding : 17px 10px;
     display: flex;
     flex-wrap : wrap;
-    justify-content : space-between;
-    
+    justify-content: space-between;
 }
 .charge_detail>view{
     margin-bottom : 5px;
@@ -56,7 +61,20 @@ page{
     flex-wrap:wrap;
     align-items:center;
     justify-content: center;
+    /* margin-right : 2%; */
+}
 
+.palceholder{
+    display: block;
+    width: 32%;
+    height: 0px;
+}
+
+.charge_detail:after {
+    display:block;
+    content:"";
+    width: 32%;
+    height:0px;
 }
 .rmb{
     font-size:21px;
@@ -66,7 +84,7 @@ page{
 .gift{
     font-size:13px;
     font-family:Source Han Sans CN;
-    font-weight:200;
+    font-weight:400;
     color:rgba(150,150,150,1);
 }
 .cur{
@@ -96,7 +114,7 @@ page{
 .content_info{
     font-size:15px;
     font-family:Source Han Sans CN;
-    font-weight:200;
+    font-weight:400;
     color:rgba(130,130,130,1);
 }
 .btn_charge{

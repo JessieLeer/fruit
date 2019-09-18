@@ -9,19 +9,26 @@
 .input_wrap>view:nth-child(2){
     height:  32px;
     line-height: 32px;
-    margin-left : 12px;
+    margin-left : auto;
     font-size:16px;
     font-family:Source Han Sans CN;
     font-weight:400;
     color:rgba(51,51,51,1);
 }
+.coupon_container{
+    height: 100%;
+}
 .for_code{
     height:  32px;
-    width : 310px;
+    width : 285px;
     border-bottom : 1px solid rgba(244,244,244,1);
 }
 .content_coupon{
     padding : 15px 10px; 
+    position: relative;
+}
+.true_wrap{
+
 }
 .cuopon_detail{
     display: flex;
@@ -68,7 +75,7 @@
 .top_text_area{
     height:65.5px;
     position: relative;
-    border:1px solid rgba(235,235,235,0.8);
+    border-bottom:1px solid rgba(235,235,235,0.8);
     border-radius:4px;
     padding : 10px 11px;
     box-sizing : border-box;
@@ -124,7 +131,8 @@
     margin-bottom : 14px;
 }
 .auto_height{
-    height : 67px;
+    min-height : 0;
+    position: relative;
 }
 .op_icon{
     margin-top : 2px;
@@ -147,13 +155,13 @@
     }
 }
 .history_fix{
-    height : 67px;
-    position: fixed;
     width : 100%;
-    bottom : 0;
+    padding-bottom : 10px;
     background: #fff;
     display: flex;
     justify-content: space-around;
+    bottom: 0px;
+    padding-top : 30px;
 }
 .history_fix view{
     height : 18px;
@@ -173,7 +181,7 @@
     justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
-    height : 100vh;
+    height : calc(100vh - 94px);
 }
 .hasno_area image{
     width : 314.5px;

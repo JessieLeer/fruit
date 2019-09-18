@@ -1,2 +1,9 @@
 <!--page/user/setting/about/about.wxml-->
-<web-view src="http://baidu.com"></web-view>
+<view>
+    <view>
+        <!-- <img src="./images/sdress.png" alt=""> -->
+    </view>
+    <view class="text_area">
+        援疆佳园主要建立特色优质农副产品供应链平台，协调联动克州和江西两地，以新疆特色农副产品深加工、产销地集配中心和供应链服务为核心内容，从根本上解决新疆“西果东送”一系列瓶颈与问题，促进和扩大克州特色优质农副产品全产业链升级。
+    </view>
+</view>

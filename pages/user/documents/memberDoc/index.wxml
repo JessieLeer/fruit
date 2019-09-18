@@ -1,0 +1,11 @@
+<view class="doc_container">
+    <view>会员等级权益说明</view>
+    <view class="title_name">1、普通会员（默认)</view>
+    <view>累计消费需达到 0 元，等级有效期：永久。</view>
+    <view class="title_name">2、银卡会员</view>
+    <view>累计消费需达到 200 元，等级有效期：永久。会员商品享受98折优惠。</view>
+    <view class="title_name">3、金卡会员</view>
+    <view>累计消费需达到 3000 元，等级有效期：永久。会员商品享受97折优惠</view>
+    <view class="title_name">4、钻石卡会员</view>
+    <view>累计消费需达到 10000 元，等级有效期：1年。会员商品享受95折优惠</view>
+</view>

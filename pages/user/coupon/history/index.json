@@ -1,4 +1,5 @@
 {
     "navigationBarTitleText": "历史优惠券",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false
 }

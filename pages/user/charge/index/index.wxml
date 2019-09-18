@@ -1,26 +1,27 @@
 <view class="user_container">
     <view class="remain_info">
-        <view>
+        <view class="inner_wrap">
             <view>卡内余额</view>
             <view>
                 <text class="icon_money">￥</text>
-                <text class="money">20.8</text>
+                <text class="money">{{balance}}</text>
             </view>
         </view>
-        <view bindtap="gotoDetail">
-            <text>余额明细</text>
-            <image src="../../../../static/image/arrow.png" class="arrow" mode="widthFix"></image>
-        </view>
+    </view>
+    <view class="info_charge">
+        <view>充值说明</view>
+        <view bindtap="gotoDetail">余额明细</view>
     </view>
     <view class="charge_detail">
         <view class="info_content {{index==idx?'cur':''}}"  wx:for="{{chargeList}}" data-index='{{index}}' bindtap="onTap" wx:key="{{index}}">
             <text>
-                <text class="rmb">￥{{item.num_price}}\n</text>
-                <text class="gift">赠送￥{{item.gift_num}}</text>
+                <text class="rmb">￥{{item.rcunrje}}\n</text>
+                <text class="gift">赠￥{{item.rzsje}}{{item.rzsgz == '储值卡'? '' : item.rzsgz}}</text>
             </text>
         </view>
+        <text class="palceholder"></text>
     </view>
-    <view class="charge_info">
+    <!-- <view class="charge_info">
         <view class="title">
             <image src="../../../../static/image/desc.png" mode="widthFix"></image>
             <text>充值说明</text>
@@ -37,8 +38,8 @@
         <view class="content_info">
             <text>4、新用户充值前需设置会员卡支付密码；</text>
         </view>
-    </view>
+    </view> -->
     <view class="btn_charge">
-        <view>立即充值</view>
+        <view bindtap="chargeBtn">立即充值</view>
     </view>
 </view> 

@@ -1,7 +1,7 @@
 <view class="outer_container">
     <view wx:if="{{true}}">
         <view class="shopcard_container">
-            <view class="card">
+            <view class="card"  wx:for="{{dataList}}">
                 <view class="wrap_info">
                     <view class="title_card">坚果购物卡</view>
                     <view class="price_card">

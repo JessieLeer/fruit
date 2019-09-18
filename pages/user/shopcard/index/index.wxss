@@ -1,11 +1,10 @@
 .history_fix{
-    height : 67px;
-    position: fixed;
     width : 100%;
-    bottom : 0;
+    padding-bottom : 10px;
     background: #fff;
     display: flex;
     justify-content: space-around;
+    padding-top : 30px;
 }
 .history_fix view{
     height : 18px;
@@ -25,7 +24,6 @@
     justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
-    height : 100vh;
 }
 .hasno_area image{
     width : 314.5px;
@@ -50,9 +48,7 @@
     box-sizing : border-box;
 }
 .title_card{
-    font-size:16px;
-    font-family:Microsoft YaHei;
-    font-weight:bold;
+    font-size:18px;
     color:rgba(51,51,51,1);
 }
 .price_card{
@@ -94,8 +90,6 @@
     border-bottom-left-radius:15px;
     line-height : 30px;
     font-size:14px;
-    font-family:Microsoft YaHei;
-    font-weight:bold;
     color:rgba(195,172,154,1);
     padding-left : 13.5px;
     padding-right : 13.5px;
@@ -104,4 +98,8 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
+}
+.auto_height{
+    min-height : 0;
+    position: relative;
 }

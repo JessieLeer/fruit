@@ -67,11 +67,11 @@ Page({
  
   tel: function () {
     wx.showActionSheet({
-      itemList: ['400123888', '呼叫'],
+      itemList: ['13387085587', '呼叫'],
       success: function (res) {
         if (res.tapIndex == 1 || res.tapIndex == 0){
             wx.makePhoneCall({
-              phoneNumber: '400123888',
+              phoneNumber: '13387085587',
             })
         }
       },

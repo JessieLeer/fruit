@@ -1,4 +1,5 @@
 {
     "navigationBarTitleText": "充值",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false
 }

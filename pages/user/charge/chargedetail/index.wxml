@@ -8,7 +8,7 @@
                     </view>
                     <view>
                         <text class="icon_money">￥</text>
-                        <text class="money">20.8</text>
+                        <text class="money">{{balance}}</text>
                     </view>
                 </view>
             </view>
@@ -18,21 +18,21 @@
                     <image src="../../../../static/image/select.png" mode="widthFix" class="{{select?'img_animation' : ''}}"></image>
                 </view>
                 <view>
-                    <text decode="{{true}}">充值：￥100&emsp;</text>
-                    <text>支出：20</text>
+                    <text decode="{{true}}">充值：￥{{plusTotal}}&emsp;</text>
+                    <text>支出：{{minusTotal}}</text>
                 </view>
         
             </view>
         </view>
     </view>
     <view class="content_detail" bindtap="close">
-        <view class="item_detail" wx:for="ceshi" wx:key="{{index}}">
+        <view class="item_detail" wx:for="{{datalist}}" wx:key="{{index}}">
             <view>
-                <view>账户充值</view>
-                <view>07-28 15：36</view>
+                <view>{{item.name}}</view>
+                <view>{{item.cratedTime}}</view>
             </view>
             <view>
-                <view class="info_charge">+￥100</view>
+                <view class="info_charge {{item.type == '1' ? 'minus' : ''}}">{{item.type == '0' ? "+" : "-"}}￥{{item.money}}</view>
             </view>
         </view>
     </view>

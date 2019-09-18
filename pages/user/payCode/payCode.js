@@ -1,6 +1,7 @@
 // page/user/payCode/payCode.js
 //const QR = require('../../../utils/wxqrcode.js');
-import QR from '../../../utils/qrCode.js'
+import QR from '../../../utils/qrCode.js';
+var app = getApp();
 Page({
 
   /**
@@ -71,18 +72,34 @@ Page({
     setInter: '',
     tip: 'null',
     st: null,  //记录每次自动刷新的开始时间
-    expireTime: 30,  //过期时间，这里设置为20秒
+    expireTime: 30,  //过期时间，这里设置为20秒,
+    url : ''
   },
   onLoad: function (options) {
     var size = this.setCanvasSize();//动态设置画布大小
     let ct = Date.parse(new Date())
-    let url = 'current_time=' + ct
-    this.setData({
-      st: ct
-    })
-    this.autoRefresh()
+    // let url = 'current_time=' + ct
+    this.getQRcode()
   },
-
+  getQRcode(){
+    var that = this
+    wx.request({
+      url: `${app.globalData.url}/api/member/refreshPayCode`, //仅为示例，并非真实的接口地址
+      data: {
+        loginUid: app.globalData.loginUid,
+        userId: app.globalData.userId
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        that.setData({
+          url : res.data.data.payCode
+        })
+        that.autoRefresh()
+      }
+    })
+  },
   //适配不同屏幕大小的canvas
   setCanvasSize: function () {
     var size = {};
@@ -109,7 +126,7 @@ Page({
       })
       clearInterval(that.data.setInter)
     } else {
-      let url = 'current_time=' + ct
+      let url = this.data.url;
       //console.log('当前生成时间是。。。。', ct)
       //调用插件中的draw方法，绘制二维码图片
       QR.api.draw(url, canvasId, cavW, cavH);
@@ -120,6 +137,7 @@ Page({
 
   // 自动刷新二维码，5秒刷新一次，先生成一次，再5秒后执行一次
   autoRefresh: function () {
+    console.log(23432342)
     let that = this;
     that.setData({
       st: Date.parse(new Date()),
@@ -127,10 +145,10 @@ Page({
     })
     let size = that.setCanvasSize();//动态设置画布大小
     that.createQrCode("mycanvas", size.w, size.h) //先生成一次
-    that.data.setInter = setInterval(function () {
-     // console.log('定时一次', Date.parse(new Date()))
-      that.createQrCode("mycanvas", size.w, size.h)
-    }, 10000);
+    // that.data.setInter = setInterval(function () {
+    //  // console.log('定时一次', Date.parse(new Date()))
+    //   that.createQrCode("mycanvas", size.w, size.h)
+    // }, 10000);
   },
   // 取消自动刷新
   stopRefresh: function () {
@@ -144,9 +162,9 @@ Page({
   // 手动刷新一次，先清除定时器，再重新开启一个定时器
   manuRefresh: function () {
     let that = this
+    this.getQRcode()
     //console.log('手动刷新')
     clearInterval(that.data.setInter)
-    that.autoRefresh()
   },
 
   //获取临时缓存照片路径，存入data中
@@ -225,5 +243,8 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  gotopay(){
+    wx.openOfflinePayView({})
   }
 })
