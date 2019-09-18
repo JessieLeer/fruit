@@ -1,0 +1,21 @@
+<view wx:for='{{coupons}}' wx:key='index'>
+  <view class='coupon'  bindtap='go'>
+		<view class='coupon-value'>
+			<text class='coupon-money f-db' wx:if='{{item.rtype == 1}}'>¥{{item.money}}</text>
+			<text class='coupon-money f-db' wx:else>{{item.fracture * 10}}折</text>
+			<text class='condition'>满{{item.quota}}元使用</text>
+		</view>
+		<view class='coupon-content'>
+			<text class='coupon-name f-db'>{{item.cname}}</text>
+			<text class='duration f-db'>{{item.cstartTime}} - {{item.cendTime}}</text>
+			<van-tag round plain custom-class='use' color='#F7A34A'>立即使用</van-tag>
+		</view>
+	</view>
+	<!--<van-collapse value="{{ activeNames }}" bind:change="onChange" class='explain'>
+		<van-collapse-item title="使用说明" name="{{index}}">
+			{{item.ctext}}
+		</van-collapse-item>
+	</van-collapse>-->
+</view>	
+
+<van-button type="default" custom-class='nouse'>不使用优惠券</van-button>

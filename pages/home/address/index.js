@@ -49,7 +49,7 @@ Page({
 	index(e) {
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.103:8080/api/near/store',
+			url: `${app.globalData.url}/api/near/store`,
 			data: {
 				latitude: this.data.position.location.lat,
 				longitude: this.data.position.location.lng

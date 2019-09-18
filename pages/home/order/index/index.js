@@ -87,7 +87,7 @@ Page({
 		let type = parseInt(e.type)
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.103:8080/api/order/list',
+			url: `${app.globalData.url}/api/order/list`,
 			data: {
 				userId: this.data.cuser.userId,
 				pageNum: this.data[`order${e.type}`].page,
@@ -216,7 +216,7 @@ Page({
 			e.currentTarget.dataset.shopid
 		]
 		wx.request({
-			url: 'http://192.168.1.103:8080/api/order/detail',
+			url: `${app.globalData.url}/api/order/detail`,
 			data: {
 				orderId: id
 			},
@@ -243,7 +243,7 @@ Page({
 				this
 			]
 			wx.request({
-				url: 'http://192.168.1.103:8080/api/order/cancel',
+				url: `${app.globalData.url}/api/order/cancel`,
 				data: {
 					orderId: id
 				},
@@ -270,7 +270,7 @@ Page({
 			e.currentTarget.dataset.type
 		]
  		wx.request({
-			url: 'http://192.168.1.103:8080/api/order/receipt',
+			url: `${app.globalData.url}/api/order/receipt`,
 			data: {
 				orderId: id
 			},
@@ -289,7 +289,7 @@ Page({
 	logistics(e) {
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.103:8080/api/order/logistics',
+			url: `${app.globalData.url}/api/order/logistics`,
 			data: {
 				orderId: e.currentTarget.dataset.id
 			},
@@ -342,7 +342,7 @@ Page({
 		if(this.data.pay.password.length == 6 && this.data.pay.type == 'balance') {
 			let _this = this
 			wx.request({
-				url: 'http://192.168.1.103:8080/api/pay/balance',
+				url: `${app.globalData.url}/api/pay/balance`,
 				data: {
 					orderId: this.data.pay.id,
 					payPwd: this.data.pay.password,

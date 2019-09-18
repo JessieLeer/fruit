@@ -6,6 +6,7 @@ Page({
 	data: {
 		shop: {},
 		goods: [],
+		goodIds: '',
 		cuser: {},
 		shopId: '',
 		orderInfo: {},
@@ -19,10 +20,20 @@ Page({
 		},
 		orderId: '',
 		localShopcarGoods: [],
+		coupon: {
+			show: false,
+			data: [],
+			useing: {},
+			text: '无可用'
+		},
+		emptyCoupon: {}
 	},
 	onLoad(option) {
 		this.setData({
 			goods: app.globalData.orderGoods,
+			goodIds: app.globalData.orderGoods.map((item) => {
+				return item.id || item.commodityId
+			}).toString(),
 			shopId: option.shopId
 		})
 		this.initCuser()
@@ -58,10 +69,11 @@ Page({
 			active: e.detail.index
 		})
 	},
+	/*-- 确认订单 --*/
 	confirm(e) {
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.103:8080/api/order/confirm',
+			url: `${app.globalData.url}/api/order/confirm`,
 			data: {
 				carts: this.data.goods.map((item) => {
 					return {
@@ -77,16 +89,78 @@ Page({
 				userId: this.data.cuser.userId
 			},
 			success(res) {
+				res.data.data.payMoney = res.data.data.totalMoney
 				_this.setData({
 					orderInfo: res.data.data
+				})
+				_this.couponIndex({quota: _this.data.orderInfo.totalMoney})
+			}
+		})
+	},
+	/*-- 获取当前订单可用优惠券 --*/
+	openCoupon(e) {
+		this.setData({
+			'coupon.show': true
+		})
+	},
+	couponIndex(e) {
+		let _this = this
+		wx.request({
+			url: 'http://192.168.1.70:8080/api/useList',
+			data: {
+				commodityId: this.data.goodIds,
+				quota: e.quota,
+				uid: this.data.cuser.userId
+			},
+			success(res) {
+				_this.setData({
+					'coupon.data': res.data.data,
+					'coupon.text': res.data.data.length == 0 ? '无可用' : `${res.data.data.length}张可用`
 				})
 			}
 		})
 	},
+	onCouponClose(e) {
+		this.setData({
+			'coupon.show': false
+		})
+	},
+	couponSelect(e) {
+		let coupon = e.currentTarget.dataset.coupon
+		if(coupon.rid == undefined) {
+			this.setData({
+				'coupon.show': false,
+			})
+		}else{
+			this.setData({
+				'coupon.useing': coupon,
+				'coupon.show': false,
+				'coupon.text': coupon.rtype == '1' ? `减${coupon.money}元` : `${coupon.fracture * 10}折`,
+			})
+			let _this = this
+			wx.request({
+				url: 'http://192.168.1.70:8080/api/orderUse',
+				data: {
+					commodityId: this.data.goodIds.toString(),
+					commodityQuota: this.data.goods.map((item) => {
+						return item.sellingPrice
+					}).toString(),
+					quota: this.data.orderInfo.totalMoney,
+					rid: coupon.rid
+				},
+				success(res) {
+					_this.setData({
+						'orderInfo.payMoney': parseFloat(res.data.total)
+					})
+				}
+			})
+		}
+	},
+	
 	onPayshow(e) {
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.103:8080/api/order/commit',
+			url: `${app.globalData.url}/api/order/commit`,
 			method: 'post',
 			data: {
 				carts: JSON.stringify(this.data.goods.map((item) => {
@@ -147,7 +221,7 @@ Page({
 		if(this.data.pay.password.length == 6 && this.data.pay.type == 'balance') {
 			let _this = this
 			wx.request({
-				url: 'http://192.168.1.103:8080/api/pay/balance',
+				url: `${app.globalData.url}/api/pay/balance`,
 				data: {
 					orderId: this.data.orderId,
 					payPwd: this.data.pay.password,

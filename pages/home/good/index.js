@@ -36,7 +36,7 @@ Page({
 	show(e) {
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.103:8080/api/commodity/detail',
+			url: `${app.globalData.url}/api/commodity/detail`,
 			data: {
 				storeId: this.data.shopId,
 				commodityId: this.data.goodId

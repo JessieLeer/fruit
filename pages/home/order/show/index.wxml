@@ -42,7 +42,7 @@
 		</van-cell>
 	</van-cell-group>
 	<van-cell-group class='goods'>
-	  <van-cell title="优惠券" value="无可用" is-link/>
+	  <van-cell title="优惠券" value="{{coupon.text}}" is-link bind:click='openCoupon'/>
 		<van-cell title="商品合计" value="¥{{orderInfo.totalMoney}}" value-class='value'/>
 		<van-cell title="配送费" value="¥{{active == 1 ? 0 : orderInfo.deliveryMoney}}" value-class='value' />
 		<van-cell title="积分" value="{{orderInfo.integral}}" value-class='value'/>
@@ -50,9 +50,32 @@
 	<van-submit-bar button-text="提交订单" bind:submit="onPayshow" custom-class='submit-bar' button-class='submit-button'>
 	  <view class='price'>
 		  <text class='price-text'>付款</text>
-		  <text class='price-price'>¥{{active == 1 ? orderInfo.totalMoney : orderInfo.totalMoney + orderInfo.deliveryMoney}}</text>
+		  <text class='price-price'>¥{{active == 1 ? orderInfo.payMoney : orderInfo.payMoney + orderInfo.deliveryMoney}}</text>
 		</view>
 	</van-submit-bar>
 	<pay isShow="{{pay.show}}" paShow='{{pay.paShow}}' password='{{pay.password}}' orderId='{{orderId}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{active == 1 ? orderInfo.totalMoney : orderInfo.totalMoney + orderInfo.deliveryMoney}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
 	<van-toast id="van-toast" />
+	<van-popup show="{{ coupon.show }}" bind:close="onCouponClose" position="right" custom-class='coupon-popup'>
+	  <view wx:for='{{coupon.data}}' wx:key='index'>
+			<view class='coupon' data-coupon='{{item}}' bindtap='couponSelect'>
+				<view class='coupon-value'>
+					<text class='coupon-money f-db' wx:if='{{item.rtype == 1}}'>¥{{item.money}}</text>
+					<text class='coupon-money f-db' wx:else>{{item.fracture * 10}}折</text>
+					<text class='condition'>满{{item.quota}}元使用</text>
+				</view>
+				<view class='coupon-content'>
+					<text class='coupon-name f-db'>{{item.cname}}</text>
+					<text class='duration f-db'>{{item.cstartTime}} - {{item.cendTime}}</text>
+					<van-tag round plain custom-class='use' color='#F7A34A'>立即使用</van-tag>
+				</view>
+			</view>
+			<!--<van-collapse value="{{ activeNames }}" bind:change="onChange" class='explain'>
+				<van-collapse-item title="使用说明" name="{{index}}">
+					{{item.ctext}}
+				</van-collapse-item>
+			</van-collapse>-->
+		</view>	
+
+		<van-button type="default" custom-class='nouse' data-coupon='{{emptyCoupon}}' bindtap='couponSelect'>不使用优惠券</van-button>
+	</van-popup>
 </view>

@@ -39,7 +39,7 @@ Page({
 	getPhoneNumber (e) {
 		//3. 解密
     wx.request({
-      url: 'http://192.168.1.103:8080/api/login/getPhoneNumber',
+      url: `${app.globalData.url}/api/login/getPhoneNumber`,
       data: {
         'decryptData': e.detail.encryptedData,
         'iv': e.detail.iv,
@@ -51,7 +51,7 @@ Page({
       },
       success(res) {
 				wx.request({
-					url: 'http://192.168.1.103:8080/api/login',
+					url: `${app.globalData.url}/api/login`,
 					data: {
 						mobile: JSON.parse(res.data.data).phoneNumber,
 						openid: app.globalData.openid

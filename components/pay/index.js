@@ -73,7 +73,7 @@ Component({
 		balanceShow(e) {
 			let _this = this
 			wx.request({
-				url: 'http://192.168.1.103:8080/api/user/balance',
+				url: `${app.globalData.url}/api/user/balance`,
 				data: {
 					userId: this.data.cuser.userId
 				},
@@ -97,7 +97,7 @@ Component({
 			let _this = this
 			if(this.properties.type == 'wechat') {
 				wx.request({
-					url: 'http://192.168.1.103:8080/api/wechat/pay',
+					url: `${app.globalData.url}/api/wechat/pay`,
 					data: {
 						openId: app.globalData.openid,
 						orderId: this.properties.orderId

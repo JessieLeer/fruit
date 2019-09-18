@@ -1,5 +1,7 @@
 import Toast from '../../../../miniprogram_npm/vant-weapp/toast/toast'
 
+const app = getApp()
+
 Page({
 	data: {
 		cuser: {},
@@ -62,7 +64,7 @@ Page({
 	uploadImage(e) {
 		let _this = this
 		wx.uploadFile({
-			url: 'http://192.168.1.103:8080/api/imgUpload',
+			url: '${app.globalData.url}/api/imgUpload',
 			filePath: e.filePath,
 			name: 'files',
 			header: {
@@ -93,7 +95,7 @@ Page({
 	submit(e) {
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.103:8080/api/evaluate/add',
+			url: `${app.globalData.url}/api/evaluate/add`,
 			data: {
 				content: this.data.evaluate.content,
 				images: this.data.evaluate.images.toString(),
@@ -104,7 +106,6 @@ Page({
 			},
 			method: 'post',
 			success(res) {
-				console.log(res)
 				if(res.data.code == 200) {
 					wx.redirectTo({
 						url: '/pages/home/order/evaluate/success'
