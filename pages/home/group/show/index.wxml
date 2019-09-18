@@ -1,0 +1,19 @@
+<swiper autoplay="true" interval="3000" duration="500" class='w-100 f-db'>
+	<block wx:for="{{banners}}" wx:key='index'>
+		<swiper-item class='swiper-item'>
+			<image src="{{item.showImg}}" class="slide-image w-100" mode="widthFix" bindtap='bannerGo' data-banner='{{item}}'/>
+		</swiper-item>
+	</block>
+</swiper>
+
+<view class='group-bread'>
+  <view class='group-bread-left'>
+	  <van-tag class='group-bread-people'>三人团</van-tag>
+		<text class='group-bread-price'></text>
+		<text class='group-bread-oldprice'></text>
+	</view>
+	<view class='group-bread-right'>
+	  <text class='group-bread-endtxt f-db'>距结束还有</text>
+		
+	</view>
+</view>

@@ -1,0 +1,22 @@
+<view class='rate-area f-tac'>
+  <text class='rate-question'>您对商家/商品满意吗</text>
+  <van-rate value="{{ evaluate.rate }}" bind:change="onChange" color='#F6931F' size='30'/>
+</view>
+
+<view class='rate-content'>
+  <van-field value="{{ evaluate.content }}" type="textarea" placeholder="您的评价会帮助我们做得更好" autosize border="{{ false }}" class='rate-message f-db' bind:change='handleContent'/>
+	<view class='rate-images'>
+	  <view wx:for='{{evaluate.images}}' wx:key='index' class='evaluate-image f-ib f-vat'>
+	    <image src='{{item}}' mode='widthFix' />
+			<van-icon name='close' data-index='{{index}}' class='del' bind:click='del' size='40rpx' />
+		</view>
+		<view class='image-pick f-tac f-ib f-vat' bindtap='chooseImage'>
+			<van-icon name="photograph" color='#bfbfbf' size='50rpx' class='photograph f-db'/>
+			<text class='f-db'>选择图片</text>
+		</view>
+	</view>
+</view>
+
+<van-button type="warning" custom-class='submit' bind:click='submit' disabled='{{evaluate.content == ""}}'>提交评价</van-button>
+
+<van-toast id="van-toast" />

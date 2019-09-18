@@ -1,0 +1,107 @@
+<!-- 订单状态判断 -->
+<van-panel title="{{order.status}}" desc="剩余支付时间 {{order.life}} 秒" custom-class='status' wx:if='{{order.status == "待支付"}}'>
+	<text class='tip'>15分钟内未支付，订单将自动取消</text>
+</van-panel>
+
+<van-panel title="{{order.status}}" desc="您的订单已经提交，正在为您安排配送小哥，请耐心等待" custom-class='status' wx:if='{{order.status == "待配送"}}'></van-panel>
+
+<view wx:if='{{order.status == "待自提"}}'>
+  <van-panel title="{{order.status}}" desc="您的订单已经提交，请及时到门店提货" custom-class='status'>
+  </van-panel>
+	<van-cell title="提货二维码" use-label-slot class='oinfo-title'>
+	  <canvas class="canvas-code" canvas-id="myQrcode" slot='label'/>
+	</van-cell>
+	<view class='mb-14'></view>
+</view>
+
+<van-panel title="{{order.status}}" desc="您的订单正在配送中，请耐心等待" custom-class='status' wx:if='{{order.status == "配送中"}}'></van-panel>
+
+<van-panel title="{{order.status}}" desc="您的订单已经取消" custom-class='status' wx:if='{{order.status == "已取消"}}'></van-panel>
+
+<van-panel title="交易成功" desc="感谢您对我们的信任，期待再次光临" custom-class='status' wx:if='{{order.status == "已完成"}}'></van-panel>
+
+<!-- 提货方式判断 -->
+<van-panel-group wx:if='{{order.type == "门店配送"}}'>
+  <van-cell title="提货方式" value="{{order.type}}" title-class='oinfo-title' custom-class='order-addinfo'/>
+	<van-panel title="收货人信息" status="{{order.fsAddress}}" custom-class='order-addinfo'>
+		<view class='order-label f-tar' >
+			{{order.fsName}} {{order.fsMobile}}
+		</view>
+	</van-panel>
+</van-panel-group>
+
+<van-cell-group class='mt-14' wx:if='{{order.type == "到店自提"}}'>
+  <van-cell title="提货方式" value="{{order.type}}" title-class='oinfo-title' custom-class='order-addinfo'/>
+  <van-cell title="提货地址" value="{{order.ztAddress}}" title-class='oinfo-title' custom-class='order-addinfo'/>
+	<van-cell title="门店电话" value="{{order.ztMobile}}" title-class='oinfo-title' custom-class='order-addinfo'/>
+	<van-cell title="营业时间" value="{{order.ztOpenTime}}" title-class='oinfo-title' custom-class='order-addinfo'/>
+	<van-cell title="可提货时间" value="{{order.zePickTime}}" title-class='oinfo-title' custom-class='order-addinfo'/>
+</van-cell-group>
+ 
+<!-- 共用信息 -->
+<van-cell-group class='goods'>
+  <van-cell wx:for='{{order.carts}}' wx:key='index'>
+		<view slot="title" class='good-area'>
+			<image src='{{item.headImage}}' mode='widthFix' class='head-image' />
+		  <view class='good-name'>
+				<text>{{item.name}}</text>
+			  <text class='good-count'>X{{item.count || item.number}}</text>
+			</view>
+		  <view class='good-price'>
+				<text class='oldprice'>¥{{item.originalPrice}}</text>
+				<text class='newprice'>¥{{item.sellingPrice}}</text>
+			</view>
+		</view>
+	</van-cell>
+</van-cell-group>
+<van-cell-group class='goods'>
+	<van-cell title="优惠券" value="无可用" is-link title-class='oinfo-title' custom-class='order-addinfo'/>
+	<van-cell title="商品合计" value="¥{{order.totalMoney}}" value-class='value' title-class='oinfo-title' custom-class='order-addinfo'/>
+	<van-cell title="配送费" value="¥{{order.deliveryMoney}}" value-class='value' title-class='oinfo-title' custom-class='order-addinfo'/>
+	<van-cell title="积分" value="{{order.integral}}" value-class='value' title-class='oinfo-title' custom-class='order-addinfo'/>
+</van-cell-group>
+<van-cell-group class='f-pr'>
+  <van-field value="{{order.id}}" border="{{ false }}" readonly>
+	  <text slot='label' class='field-label'>订单编号</text>
+	</van-field>
+	<van-field value="{{order.createTime}}" border="{{ false }}" readonly>
+	  <text slot='label' class='field-label'>下单时间</text>
+	</van-field>
+	<van-field value="{{order.payType}}" border="{{ false }}" readonly>
+	  <text slot='label' class='field-label'>支付方式</text>
+	</van-field>
+	<van-button type="default" custom-class='copy' size='small' bind:click='copy'>复制</van-button>
+</van-cell-group>
+
+<!-- 可进行的操作判断 -->
+<view class="footer" wx:if='{{order.status == "待支付"}}'>
+	<van-button custom-class='cancel' bind:click='cancel' data-id='{{order.id}}'>取消订单</van-button>
+	<van-button type="warning" custom-class='pay' data-id='{{order.id}}'  data-cost='{{order.payMoney}}' data-type='{{order.type}}' bind:click='onPayshow'>去支付</van-button>
+</view>
+<view class='footer' wx:if='{{order.status == "待配送"}}'>
+	<van-button custom-class='cancel' bind:click='cancel' data-id='{{order.id}}'>取消订单</van-button>
+</view>
+<view class='footer' wx:if='{{order.status == "待自提"}}'>
+	<van-button custom-class='cancel'>退款</van-button>
+</view>
+<view class='footer' wx:if='{{order.status == "配送中"}}'>
+	<van-button custom-class='cancel' data-id='{{order.id}}' bind:click='logistics'>查看物流</van-button>
+	<van-button type="warning" custom-class='pay' data-id='{{order.id}}' bind:click='receipt'>确认收货</van-button>
+</view>
+<view class='footer' wx:if='{{order.status == "已取消"}}'>
+	<van-button type="warning" custom-class='pay' data-id='{{order.id}}' data-shopid='{{order.storeId}}' bind:click='again'>再来一单</van-button>
+</view>
+<view class='footer' wx:if='{{order.status == "已完成"}}'>
+	<van-button type="warning" custom-class='pay' data-id='{{order.id}}' data-shopid='{{order.storeId}}' bind:click='again'>再来一单</van-button>
+</view>
+
+<pay isShow="{{pay.show}}" paShow='{{pay.paShow}}' password='{{pay.password}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{pay.cost}}' orderId='{{pay.id}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />
+<van-popup show="{{ logShow }}" bind:close="onLogclose" position='top'>
+  <van-field label='预计到货时间' value="今天{{ logistics.postTime }}前" border="{{ false }}" readonly/>
+	<van-field label='配送员' value="{{ logistics.name }}" border="{{ false }}" readonly/>
+	<van-field label='联系电话' value="{{ logistics.phone }}" border="{{ false }}" readonly/>
+	<van-field label='配送门店' value="{{ logistics.storeName }}" border="{{ false }}" readonly/>
+	<van-field label='门店电话' value="{{ logistics.storeMobile }}" border="{{ false }}" readonly/>
+</van-popup>

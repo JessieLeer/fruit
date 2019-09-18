@@ -1,0 +1,15 @@
+.w-100{
+  width: 100%;
+}
+
+.f-db{
+  display: block;
+}
+
+.group-bread{
+  display: flex;
+}
+
+.group-bread-left{
+  flex: 1;
+}

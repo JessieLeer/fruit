@@ -1,0 +1,47 @@
+<view class="h-100" wx:if='{{shop.id}}'>
+  <view class='position' bindtap='go' data-url='/pages/home/address/index'>
+	  <van-icon name="location-o" class='position-icon' />
+	  {{position.address}}
+		<van-icon name="arrow" class='position-icon' />
+	</view>
+	<view class='search-area'>
+	  <text class='arrive-time'>49分钟送达</text>
+		<view class='search' >
+		  <van-search placeholder="请输入商品名称" class='' bind:search='onSearch' bind:change='onSearChange' value='{{good.query}}'/>
+		</view>
+		<view class='qr'>
+		  <van-icon name="qr" size='46rpx'/>
+			<text class='qr-text'>会员码</text>
+		</view>
+	</view>
+	<view class='goods'>
+	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper'>
+		  <view wx:for='{{good.data}}' wx:key='index' class='good' bindtap='go' data-url='/pages/home/group/show/index?id={{item.gid}}'>
+			  <image src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1568800268235&di=1c02c258f1b94f0e8c819f9ab1039dc8&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201505%2F24%2F20150524195655_wiuT5.jpeg' mode='widthFix' class='good-image'/>
+				<view class='good-main'>
+					<view class='good-header f-cb'>
+						<text class='good-name f-tal f-fl'>{{item.shopName}}</text>
+						<text class='good-left f-tar f-fr'>还剩{{item.leftCount}}天结束</text>
+					</view>
+					<text class='good-pick f-db'>可提货日期：{{item.gstartTime}} 至 {{item.gendTime}}</text>
+					<view class='good-footer f-cb'>
+						<text class='good-price f-fl'>
+						  <text class='good-price-unit'>¥</text>{{item.gprice}}/{{item.dw}}
+						</text>
+						<van-button type="warning" custom-class='buy' size='small'>去拼团</van-button>
+					</view>
+				</view>
+			</view>
+		</scroll-view>
+		<text wx:if='{{good.isLoadAll}}' class='more-text w-100'>没有更多商品了</text>
+	</view>
+</view>	
+
+<view wx:else class='f-tac'>
+  <image src='../../../../static/image/noshop@2x.png' mode='widthFix' class='noshop'/>
+	<view class='caller'>已有<text class='caller-number'>{{caller}}人</text>召唤缘疆佳园在这里开店～</view>
+	<van-button type="default" custom-class='caller-me' bindtap='calling'>我也来召唤</van-button>
+	<van-button type="default" custom-class='caller-change' bindtap='go' data-url='/pages/home/address/index'>换个地址</van-button>
+</view>
+
+<van-toast id="van-toast" />

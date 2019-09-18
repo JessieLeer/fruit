@@ -119,7 +119,7 @@ Page({
 	bannerIndex(e) {
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.103:8080/api/banner/list',
+			url: `${app.globalData.url}/api/banner/list`,
 			data: {},
 			success(res) {
 				_this.setData({
@@ -153,7 +153,7 @@ Page({
 		}else{
 			let _this = this
 			wx.request({
-				url: 'http://192.168.1.103:8080/api/curr/store',
+				url: `${app.globalData.url}/api/curr/store`,
 				data: {
 					latitude: _this.data.position.location.lat,
 					longitude: _this.data.position.location.lng,
@@ -164,6 +164,7 @@ Page({
 							caller: res.data.data
 						})
 					}else{
+						app.globalData.shop = res.data.data
 						_this.setData({
 							shop: res.data.data
 						})
@@ -179,7 +180,7 @@ Page({
 	cateIndex(e) {
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.103:8080/api/category/list',
+			url: `${app.globalData.url}/api/category/list`,
 			data: {
 				storeId: _this.data.shop.id
 			},
@@ -214,7 +215,7 @@ Page({
 	index(e) {
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.103:8080/api/commodity/category',
+			url: `${app.globalData.url}/api/commodity/category`,
 			data: {
 				storeId: this.data.shop.id,
 				categoryId: this.data.active,
@@ -350,7 +351,7 @@ Page({
 	/*-- 召唤开店 --*/
 	calling(e) {
 		wx.request({
-			url: 'http://192.168.1.103:8080/api/call/store',
+			url: `${app.globalData.url}/api/call/store`,
 			method: 'post',
 			data: {
 				latitude: this.data.position.location.lat,

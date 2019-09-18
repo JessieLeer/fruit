@@ -80,7 +80,7 @@ Page({
 			if(this.data.cuser.userId) {
 			  let _this = this
 				wx.request({
-					url: 'http://192.168.1.103:8080/api/search/history',
+					url: `${app.globalData.url}/api/search/history`,
 					data: {
 						userId: this.data.cuser.userId
 					},
@@ -97,7 +97,7 @@ Page({
 	hotIndex(e) {
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.103:8080/api/search/hot',
+			url: `${app.globalData.url}/api/search/hot`,
 			success(res) {
 				_this.setData({
 					hots: res.data.data
@@ -113,7 +113,7 @@ Page({
 		}).then(() => {
 			let _this = this
 			wx.request({
-				url: 'http://192.168.1.103:8080/api/search/history/del',
+				url: `${app.globalData.url}/api/search/history/del`,
 				data: {
 					userId: this.data.cuser.userId
 				},
@@ -145,7 +145,7 @@ Page({
 	index(e) {
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.103:8080/api/commodity/search',
+			url: `${app.globalData.url}/api/commodity/search`,
 			data: {
 				pageNum: this.data.search.page,
 				pageSize: 10,

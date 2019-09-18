@@ -36,7 +36,7 @@ Page({
 	show(e) {
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.103:8080/api/commodity/detail',
+			url: `${app.globalData.url}/api/commodity/detail`,
 			data: {
 				storeId: this.data.shopId,
 				commodityId: this.data.goodId
@@ -208,7 +208,6 @@ Page({
       destHeight: _this.data.windowWidth * 4 * _this.data.scale,
       canvasId: 'myCanvas',
       success(res) {
-        console.log('朋友圈分享图生成成功:' + res.tempFilePath)
         wx.previewImage({
           current: res.tempFilePath, // 当前显示图片的http链接
           urls: [res.tempFilePath] // 需要预览的图片http链接列表

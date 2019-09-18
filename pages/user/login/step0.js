@@ -38,6 +38,7 @@ Page({
     var that = this;
 		//3. 解密
     wx.request({
+
       url: `${app.globalData.url}/api/mini/getPhoneNumber`,
       data: {
         'decryptData': e.detail.encryptedData,
@@ -49,6 +50,28 @@ Page({
         'content-type': 'application/json'
       },
       success(res) {
+        wx.request({
+					url: `${app.globalData.url}/api/login`,
+					data: {
+						mobile: JSON.parse(res.data.data).phoneNumber,
+						openid: app.globalData.openid
+					},
+					success(res) {
+						if(res.data.code == 200) {
+							wx.setStorage({
+								key: 'cuser',
+								data: res.data.data
+							})
+							Toast.success('登录成功')
+							setTimeout(() => {
+								wx.navigateBack()
+							},2000)
+						}
+					},
+					fail(err) {
+						console.log(err)
+					}
+				})
         console.log(res)
         that.loginGetCode()
         if (res.data.code == 500)return
@@ -58,6 +81,7 @@ Page({
           cardNo: res.data.data.cardNo
         })
         that.onGetUserinfo()
+			
       },
       fail(err) {
         console.log(err)

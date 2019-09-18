@@ -22,6 +22,9 @@ Component({
 		passFocus: {
 			type: Boolean,
 			default: true
+		},
+		orderId: {
+			type: String
 		}
   },
   data: {
@@ -70,7 +73,7 @@ Component({
 		balanceShow(e) {
 			let _this = this
 			wx.request({
-				url: 'http://192.168.1.103:8080/api/user/balance',
+				url: `${app.globalData.url}/api/user/balance`,
 				data: {
 					userId: this.data.cuser.userId
 				},
@@ -91,7 +94,40 @@ Component({
 			}
 		},
 		handlePass(e) {
-			this.triggerEvent('handlePass', {})
+			let _this = this
+			if(this.properties.type == 'wechat') {
+				wx.request({
+					url: `${app.globalData.url}/api/wechat/pay`,
+					data: {
+						openId: app.globalData.openid,
+						orderId: this.properties.orderId
+					},
+					success(res) {
+						if(res.data.code == 200) {
+							wx.requestPayment({
+								timeStamp: res.data.data.timeStamp,
+								nonceStr: res.data.data.nonceStr,
+								package: res.data.data.packageStr,
+								signType: res.data.data.signType,
+								paySign: res.data.data.paySign,
+								succcess(res) {
+									_this.triggerEvent('wepaySuccess', {})
+								},
+								fail(res) {
+									console.log(res)
+								},
+								complete(res) {
+									if(res.errMsg == 'requestPayment:ok'){
+										_this.triggerEvent('wepaySuccess', {})
+									}
+								}
+							})
+						}
+					}
+				})
+			}else{
+				this.triggerEvent('handlePass', {})
+			}
 		},
 		
 		/**

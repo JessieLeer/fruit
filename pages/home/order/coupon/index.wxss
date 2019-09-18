@@ -1,0 +1,69 @@
+page{
+  background-color: #f7f7f7;
+}
+
+.coupon{
+  display: flex;
+	background-color: white;
+	margin-top: 20rpx;
+	padding: 20rpx;
+}
+
+.coupon-value{
+  width: 200rpx;
+	background-color: #F6931F;
+	color: white;
+	padding: 20rpx 20rpx 20rpx 20rpx;
+	text-align: center;
+}
+
+.coupon-money{
+  font-weight: bold;
+	font-size: 40rpx;
+}
+
+.coupon-content{
+  flex: 1;
+	padding: 20rpx;
+	position: relative;
+}
+
+.condition{
+  font-size: 24rpx;
+	border: white solid 1px;
+	padding-left: 10rpx;
+	padding-right: 10rpx;
+	margin-top: 10rpx;
+}
+
+.f-db{
+  display: block;
+}
+
+.coupon-name{
+  color: #333;
+	font-size: 28rpx;
+}
+
+.duration{
+  color: #6D6D6D;
+	font-size: 24rpx;
+}
+
+.use.van-tag{
+  position: absolute;
+	right: 0rpx;
+	top: 40rpx;
+	padding: 10rpx;
+}
+
+.explain{
+	flex: 1;
+}
+
+.nouse.van-button--default{
+  margin: 100rpx auto 0 auto;
+	width: 80%;
+	border-radius: 45rpx;
+	display: block;
+}
