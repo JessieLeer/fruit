@@ -33,8 +33,7 @@
 		"pages/home/order/evaluate/show",
 		"pages/home/order/evaluate/success",
     "pages/user/login/step0", 
-    "pages/user/login/step1",
-    "pages/bindVIP/index"
+    "pages/user/login/step1" 
   ],
   "window": {
     "backgroundTextStyle": "light",

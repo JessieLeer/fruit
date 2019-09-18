@@ -50,10 +50,11 @@ Page({
         'content-type': 'application/json'
       },
       success(res) {
+        console.log(res.data.data)
         wx.request({
 					url: `${app.globalData.url}/api/login`,
 					data: {
-						mobile: JSON.parse(res.data.data).phoneNumber,
+						mobile: res.data.data.phoneNumber,
 						openid: app.globalData.openid
 					},
 					success(res) {
