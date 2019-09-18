@@ -179,19 +179,32 @@ Page({
 				userId: this.data.cuser.userId
 			},
 			success(res) {
-				_this.data.goods.forEach((item) => {
-					_this.data.localShopcarGoods.splice(_this.data.localShopcarGoods.findIndex(v => v.id == item.id), 1)
-				})
-				_this.setData({
-					orderId: res.data.data.id,
-					'pay.show': true,
-					localShopcarGoods: _this.data.localShopcarGoods
-				})
-				wx.setStorage({
-					key: 'shopcar',
-					data: _this.data.localShopcarGoods,
-					success(res) {}
-				})
+				if(res.data.code == 200) {
+					if(_this.data.coupon.useing.rid) {
+						wx.request({
+							url: 'http://192.168.1.70:8080/api/couponUpdate',
+							data: {
+								rid: _this.data.coupon.useing.rid
+							},
+							success(res) {
+								console.log(res)
+							}
+						})
+					}
+					_this.data.goods.forEach((item) => {
+						_this.data.localShopcarGoods.splice(_this.data.localShopcarGoods.findIndex(v => v.id == item.id), 1)
+					})
+					_this.setData({
+						orderId: res.data.data.id,
+						'pay.show': true,
+						localShopcarGoods: _this.data.localShopcarGoods
+					})
+					wx.setStorage({
+						key: 'shopcar',
+						data: _this.data.localShopcarGoods,
+						success(res) {}
+					})
+				}
 			}
 		})
 	},

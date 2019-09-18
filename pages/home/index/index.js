@@ -164,6 +164,7 @@ Page({
 							caller: res.data.data
 						})
 					}else{
+						app.globalData.shop = res.data.data
 						_this.setData({
 							shop: res.data.data
 						})

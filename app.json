@@ -20,6 +20,8 @@
     "pages/home/search/index",
     "pages/home/address/index",
     "pages/home/good/index",
+		"pages/home/group/index/index",
+		"pages/home/group/show/index",
 		"pages/home/order/index/index",
     "pages/home/order/show/index",
 		"pages/home/order/detail/index",
@@ -79,7 +81,7 @@
         "iconPath": "static/image/indexdefault.png"  
       },
       {
-        "pagePath": "pages/home/index/index",
+        "pagePath": "pages/home/group/index/index",
         "text": "拼团",
 				"selectedIconPath": "static/image/together.png",  
         "iconPath": "static/image/togetherdefault.png" 
