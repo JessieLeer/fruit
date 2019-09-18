@@ -64,6 +64,9 @@ Page({
         })
     },
     chargeBtn(){
+       this.isSetSecret()
+    },
+    pay(){
         var that = this
         wx.request({
             url: `${app.globalData.url}/api/member/charge`, //仅为示例，并非真实的接口地址
@@ -78,18 +81,59 @@ Page({
                 'content-type': 'application/json' // 默认值
             },
             success(res) {
-                console.log(res)
                 wx.requestPayment({
                     timeStamp: res.data.data.timeStamp,
                     nonceStr: res.data.data.nonceStr,
                     package: res.data.data.packageStr,
                     signType: res.data.data.signType,
                     paySign: res.data.data.paySign,
-                    success(res) { 
+                    success(res) {
+                        console.log(res)
+                        wx.request({
+                            url: `${app.globalData.url}/api/member/chargeCallback`, //仅为示例，并非真实的接口地址
+                            data: {
+                                loginUid: app.globalData.loginUid,
+                                userId: app.globalData.userId,
+                                czgzId: that.data.chargeList[that.data.idx].rid,
+                                // orderId : res.data.id
+                            },
+                            header: {
+                                'content-type': 'application/json' // 默认值
+                            },
+                            success(res) {
+                                wx.showToast({
+                                    title : '充值成功',
+                                    icon : 'success'
+                                })
+                                that.getData()
+                            }
+                        })
                         that.getData()
                     },
                     fail(res) { }
                 })
+            }
+        })
+    },
+    isSetSecret(){
+        var that = this;
+        wx.request({
+            url: `${app.globalData.url}/api/member/isSetPassword`, //仅为示例，并非真实的接口地址
+            data: {
+                loginUid: app.globalData.loginUid,
+                userId: app.globalData.userId,
+            },
+            header: {
+                'content-type': 'application/json' // 默认值
+            },
+            success(res) {
+                if (res.data.data){
+                    that.pay()
+                }else{
+                    wx.navigateTo({
+                        url: '../../../user/setting/paysetting/phone-set'
+                    })
+                }
             }
         })
     }

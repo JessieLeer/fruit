@@ -73,7 +73,8 @@ Page({
     tip: 'null',
     st: null,  //记录每次自动刷新的开始时间
     expireTime: 30,  //过期时间，这里设置为20秒,
-    url : ''
+    url : '',
+    isShow : false
   },
   onLoad: function (options) {
     var size = this.setCanvasSize();//动态设置画布大小
@@ -94,7 +95,8 @@ Page({
       },
       success(res) {
         that.setData({
-          url : res.data.data.payCode
+          url : res.data.data.payCode,
+          isShow : true
         })
         that.autoRefresh()
       }
@@ -161,6 +163,9 @@ Page({
   },
   // 手动刷新一次，先清除定时器，再重新开启一个定时器
   manuRefresh: function () {
+    this.setData({
+      isShow : false,
+    })
     let that = this
     this.getQRcode()
     //console.log('手动刷新')

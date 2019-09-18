@@ -24,3 +24,16 @@ page{
   font-weight: 400;
   
 }
+.img_loading{
+  width: 40px;
+  height : auto;
+}
+.loading{
+  width : 710rpx;
+  height : 710rpx;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+}

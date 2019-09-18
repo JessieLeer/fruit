@@ -19,7 +19,7 @@
                 </view>
                 <view>
                     <text decode="{{true}}">充值：￥{{plusTotal}}&emsp;</text>
-                    <text>支出：{{minusTotal}}</text>
+                    <text>支出：￥{{minusTotal}}</text>
                 </view>
         
             </view>

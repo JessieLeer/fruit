@@ -24,6 +24,7 @@
     justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
+    align-items: center;
 }
 .hasno_area image{
     width : 314.5px;

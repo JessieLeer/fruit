@@ -8,7 +8,6 @@
                         可用积分
                     </view>
                     <view>
-                        <text class="icon_money">￥</text>
                         <text class="money">{{number}}</text>
                     </view>
                 </view>
@@ -19,7 +18,7 @@
                     <image src="../../../../static/image/select.png" mode="widthFix" class="{{select?'img_animation' : ''}}"></image>
                 </view>
                 <view>
-                    <text decode="{{true}}">充值：￥{{income}}&emsp;</text>
+                    <text decode="{{true}}">收入：{{income}}&emsp;</text>
                     <text>支出：{{expenditure}}</text>
                 </view>
         
@@ -36,7 +35,7 @@
                 </view>  
             </view>
             <view>
-                <view class="info_charge {{item.itype == 1 ? 'minus' : ''}}">{{item.itype == 0 ? "+" : "-"}}￥{{item.inumber}}</view>
+                <view class="info_charge {{item.itype == 1 ? 'minus' : ''}}">{{item.itype == 0 ? "+" : "-"}}{{item.inumber}}</view>
             </view>
         </view>
     </view>

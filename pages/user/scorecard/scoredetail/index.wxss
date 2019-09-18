@@ -17,6 +17,9 @@ image{
     font-weight: 200;
 
 }
+.money{
+    margin-left : 4px;
+}
 .info_flex{
     display: flex;
 }
@@ -82,6 +85,7 @@ image{
 .top_zindex{
     position: relative;
     z-index : 1000;
+    overflow: hidden;
 }
 .datepickerlist{
     position: absolute;
@@ -109,7 +113,6 @@ image{
 }
 .content_detail{
     padding : 0 10px;
-    height : 100%;
 }
 .item_detail{
     min-height : 70px;

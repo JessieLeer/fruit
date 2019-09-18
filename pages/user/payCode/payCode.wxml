@@ -9,8 +9,13 @@
         <button formType="submit" class="mybtn" type="primary">生成二维码</button>
     </form> -->
     <view class="canvas-box">
-      <canvas class="canSty" style="width: 710rpx;height: 710rpx;margin-top:57rpx;background:#fff;" canvas-id="mycanvas"/>
+      <canvas class="canSty" style="width: 710rpx;height: 710rpx;margin-top:57rpx;background:#fff;" canvas-id="mycanvas">
+        <cover-view class="loading" hidden="{{isShow}}">
+          <cover-image class="img_loading" src="../../../static/image/loading.gif" mode="widthFix"></cover-image>
+        </cover-view>
+      </canvas>
     </view>
+   
     <view class="btns"   bindtap="manuRefresh">
         <image style="width:32rpx;height:32rpx;display:block;float:left;margin-top:8rpx" src="../../../static/image/2.png"></image>
         <view  style="width:270rpx;height:30rpx;margin-left:53rpx;">请点击二维码刷新</view>
