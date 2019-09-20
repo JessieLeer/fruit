@@ -87,8 +87,10 @@ Page({
 		wx.getUserInfo({
 			success: function (res) {
 				console.log(res)
-				app.globalData.avatarUrl = ""
-				app.globalData.Nickname = ""
+				wx.removeStorageSync('avatarUrl')
+				wx.removeStorageSync('Nickname')
+				// app.globalData.avatarUrl = ""
+				// app.globalData.Nickname = ""
 			}
 		})
 	},
@@ -117,8 +119,10 @@ Page({
 						title: res.data.message,
 						dutation: 2000
 					})
-					app.globalData.loginUid = res.data.data.loginUid;
-					app.globalData.userId = res.data.data.userId;
+					wx.setStorageSync('loginUid', res.data.data.loginUid)
+					wx.setStorageSync('userId', res.data.data.userId)
+					// app.globalData.loginUid = res.data.data.loginUid;
+					// app.globalData.userId = res.data.data.userId;
 					that.setData({
 						cardNo: res.data.data.cardNo
 					})

@@ -37,7 +37,11 @@ App({
     wx.login({
       success: res => {
 			console.log(res.code)
-			_this.globalData.code = res.code
+			wx.setStorage({
+				key: 'code',
+				data: res.code
+			})
+			// _this.globalData.code = res.code
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
 				wx.request({
 					url: 'https://api.weixin.qq.com/sns/jscode2session',
@@ -48,8 +52,10 @@ App({
 						grant_type: 'authorization_code'
 					},
 					success(res) {
-						_this.globalData.openid = res.data.openid 
-						_this.globalData.session_key = res.data.session_key
+						wx.setStorageSync('openid', res.data.openid )
+						wx.setStorageSync('session_key', res.data.session_key )
+						_this.globalData.openid = res.data.openid
+						_this.globalData.session_key = res.data.session_key				
 					}
 				})
       }

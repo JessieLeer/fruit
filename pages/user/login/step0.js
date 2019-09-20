@@ -6,7 +6,8 @@ const app = getApp()
 Page({
 	data: {
     userInfo: {},
-    cardNo : null
+    cardNo : null,
+
   },
   onShow(){
     this.loginGetCode()
@@ -31,8 +32,14 @@ Page({
     //   this.bindGetUserInfo();
     // }
 	},
-	
+  getWxStorage(){
+
+  },
 	getPhoneNumber (e) {
+    let code = wx.getStorageSync('code');
+    let openid = wx.getStorageSync('openid');
+    console.log(code)
+
     console.log(e.detail.encryptedData + "空格" + e.detail.iv + "空格" +app.globalData.code)
     // return
     var that = this;
@@ -43,19 +50,20 @@ Page({
       data: {
         'decryptData': e.detail.encryptedData,
         'iv': e.detail.iv,
-        'code': app.globalData.code,
+        'code': code,
       },
       method: 'GET', 
       header: {
         'content-type': 'application/json'
       },
       success(res) {
-        console.log(res.data.data)
+        console.log(res)
+        if(res.data.data == null)return
         wx.request({
 					url: `${app.globalData.url}/api/login`,
 					data: {
 						mobile: res.data.data.phoneNumber,
-						openid: app.globalData.openid
+            openid: openid
 					},
 					success(res) {
 						if(res.data.code == 200) {
@@ -74,10 +82,15 @@ Page({
 					}
 				})
         console.log(res)
+        console.log("-----------");
         that.loginGetCode()
         if (res.data.code == 500)return
-        app.globalData.loginUid = res.data.data.loginUid;
-        app.globalData.userId = res.data.data.userId;
+       
+        wx.setStorageSync('loginUid', res.data.data.loginUid)
+        wx.setStorageSync('userId', res.data.data.userId)
+
+        // app.globalData.loginUid = res.data.data.loginUid;
+        // app.globalData.userId = res.data.data.userId;
         that.setData({
           cardNo: res.data.data.cardNo
         })
@@ -93,8 +106,11 @@ Page({
     var that = this
     wx.getUserInfo({
       success: function (res) {
-        app.globalData.avatarUrl = res.userInfo.avatarUrl
-        app.globalData.Nickname = JSON.parse(res.rawData).nickName
+        console.log(res)
+        wx.setStorageSync('avatarUrl', res.userInfo.avatarUrl)
+        wx.setStorageSync('Nickname', JSON.parse(res.rawData).nickName)
+        // app.globalData.avatarUrl = res.userInfo.avatarUrl
+        // app.globalData.Nickname = JSON.parse(res.rawData).nickName
         if (!that.data.cardNo){
           wx.navigateTo({
             url: '../../bindVIP/index'
@@ -108,7 +124,8 @@ Page({
   loginGetCode(){
     wx.login({
       success: res => {
-        app.globalData.code = res.code
+        wx.setStorageSync('code', res.code)
+        // app.globalData.code = res.code
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         // wx.request({
         // 	url: 'https://api.weixin.qq.com/sns/jscode2session',

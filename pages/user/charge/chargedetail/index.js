@@ -20,12 +20,14 @@ Page({
 
   },
   getData(ParamsDate){
+    let loginUid = wx.getStorageSync('loginUid')
+    let userId = wx.getStorageSync('userId')
     var that = this;
     wx.request({
       url: `${app.globalData.url}/api/member/balanceMx`, //仅为示例，并非真实的接口地址
       data: {
-        userId: app.globalData.userId,
-        loginUid: app.globalData.loginUid
+        userId,
+        loginUid
       },
       header: {
         'content-type': 'application/json' // 默认值

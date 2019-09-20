@@ -51,12 +51,14 @@ Page({
         })
     },
     getUserInfo(){
+        let loginUid = wx.getStorageSync('loginUid');
+        let userId = wx.getStorageSync('userId');
         var that = this;
         wx.request({
             url: `${app.globalData.url}/api/member/getUserInfo`, //仅为示例，并非真实的接口地址
             data: {
-                loginUid: app.globalData.loginUid,
-                userId: app.globalData.userId
+                loginUid: loginUid,
+                userId: userId
             },
             header: {
                 'content-type': 'application/json' // 默认值
@@ -235,8 +237,10 @@ Page({
             },
             success(res) {
                 if(res.data.code == 200){
-                    app.globalData.loginUid = res.data.data.loginUid;
-                    app.globalData.userId = res.data.data.userId;
+                    wx.setStorageSync('loginUid', res.data.data.loginUid)
+                    wx.setStorageSync('userId', res.data.data.userId)
+                    // app.globalData.loginUid = res.data.data.loginUid;
+                    // app.globalData.userId = res.data.data.userId;
                     console.log(res)
                     wx.showToast({
                         title: res.data.message,

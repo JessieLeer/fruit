@@ -19,8 +19,9 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        app.globalData.loginUid = '';
-        app.globalData.userId = '';
+        wx.clearStorageSync()
+        // app.globalData.loginUid = '';
+        // app.globalData.userId = '';
         wx.showToast({
           title: res.data.message,
           icon: 'none',
