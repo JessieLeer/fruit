@@ -16,7 +16,7 @@
 	</view>
 	<view class='group-bread-right'>
 	  <text class='group-bread-endtxt f-db'>距结束还有</text>
-		<text wx:if='{{order.leftCount}}'>{{order.leftCount}}</text>
+		<text wx:if='{{order.leftCount}}'>{{order.leftCount}}天</text>
 		<view wx:else>
 		  <text class='time f-ib'>{{order.left.hour}}</text> : 
 			<text class='time f-ib'>{{order.left.minute}}</text> :
@@ -30,4 +30,59 @@
   <text class='good-text f-db'>{{order.text}}</text>
   <text class='good-spec'>单位：{{order.dw}}</text>
 	<text class='good-sold' wx:if='{{order.glimit}}'>每人限购 {{order.glimit}} 份</text>
+</view>
+<text class='pick-date f-db'>可提货日期：拼团结束后两小时之后</text>
+<view class='seg'></view>
+
+<view class='group-opera'>
+  <van-cell title="小伙伴们正在开团，可直接参团" is-link title-class='opera-title' custom-class='opera-group' url='/pages/home/group/list/index?id={{order.gid}}'/>
+	<view class='group' wx:for='{{order.groupList}}' wx:key='index' wx:if='{{index < 2}}'>
+	  <view class='group-info f-cb'>
+	    <image src='{{item.userImg || "http://192.168.1.70:8080/File/img/201909181554377043178QQ图片20190801151023.jpg"}}' class='group-avatar f-fl'/>
+		  <text class='user-name f-fl'>{{item.userName}}</text>
+			<view class='group-user f-fr'>
+			  <view class='group-user-count'>差<text>{{item.guserNumber - item.currentUser}}人</text>成团</view>
+				<text class='group-user-countdonw'>剩余{{order.left.hour}} : {{order.left.minute}} : {{order.left.second}}</text>
+			</view>
+		</view>
+		<van-button type="warning" size="large" custom-class='group-create'>去参团</van-button>
+	</view>
+</view>
+<view class='seg'></view>
+
+<view class='group-process'>
+  <view class='process-header'>
+	  <view class='process-header-line f-ib'></view>
+		<text class='process-header-title'>拼团流程</text>
+		<view class='process-header-line f-ib'></view>
+	</view>
+	<view class='process-body'>
+	  <view class='process-step f-ib f-vat'>
+		  <text class='process-index f-db'>1</text>
+			<text class='process-title f-db'>选择商品</text>
+			<text class='process-label f-db'>开团/参团</text>
+		</view>
+		<view class='process-step-line f-ib f-vat'></view>
+		<view class='process-step f-ib f-vat'>
+		  <text class='process-index f-db'>2</text>
+			<text class='process-title f-db'>邀请好友</text>
+			<text class='process-label f-db'>好友参团</text>
+		</view>
+		<view class='process-step-line f-ib f-vat'></view>
+		<view class='process-step f-ib f-vat'>
+		  <text class='process-index f-db'>3</text>
+			<text class='process-title f-db'>人满成团</text>
+			<text class='process-label f-db'>自提</text>
+		</view>
+	</view>
+</view>
+
+<view class='footer'>
+  <view class='footer-price'>
+	  <text class='group-price f-ib'>
+		  <text class='price-unit'>¥</text>{{order.gprice}}
+		</text>
+		<text class='single-price f-ib'>单买<text class='price-unit1'>¥</text>{{order.originalprice}}</text>
+	</view>
+	<van-button type="warning" size="large" custom-class='footer-submit'>一键开团</van-button>
 </view>

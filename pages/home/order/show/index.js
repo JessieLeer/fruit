@@ -143,7 +143,7 @@ Page({
 				data: {
 					commodityId: this.data.goodIds.toString(),
 					commodityQuota: this.data.goods.map((item) => {
-						return item.sellingPrice
+						return item.sellingPrice * item.number
 					}).toString(),
 					quota: this.data.orderInfo.totalMoney,
 					rid: coupon.rid
