@@ -1,5 +1,6 @@
 {
   "pages": [
+		"pages/home/tmp/index",
     "pages/home/index/index",
     "pages/user/index/index",
     "pages/user/charge/index/index",
@@ -75,19 +76,22 @@
     "backgroundColor": "#F9F9F9",
     "list": [
       {
-        "pagePath": "pages/home/index/index",
+  
+				"pagePath": "pages/home/tmp/index",
         "text": "首页",
 				"selectedIconPath": "static/image/index.png",  
         "iconPath": "static/image/indexdefault.png"  
       },
       {
-        "pagePath": "pages/home/group/index/index",
+       
+				"pagePath": "pages/home/tmp/index",
         "text": "拼团",
 				"selectedIconPath": "static/image/together.png",  
         "iconPath": "static/image/togetherdefault.png" 
       },
       {
-        "pagePath": "pages/home/order/index/index",
+
+				"pagePath": "pages/home/tmp/index",
         "text": "订单",
 				"selectedIconPath": "static/image/order.png",  
         "iconPath": "static/image/orderdefault.png"  

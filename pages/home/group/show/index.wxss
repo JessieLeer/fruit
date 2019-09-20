@@ -2,8 +2,31 @@
   width: 100%;
 }
 
+.f-fl{
+  float: left;
+}
+
+.f-fr{
+  float: right;
+}
+
+.f-ib{
+  display: inline-block;
+}
+
+.f-vat{
+  vertical-align: top;
+}
+
+.f-cb:after,.f-cbli li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+.f-cb,.f-cbli li{zoom:1;}
+
 .f-db{
   display: block;
+}
+
+.swiper{
+  height: 376rpx;
 }
 
 .group-bread{
@@ -12,4 +35,55 @@
 
 .group-bread-left{
   flex: 1;
+	background-color: #D81313;
+	padding: 20rpx;
+	color: white;
+	line-height: 58rpx;
+}
+
+.group-bread-right{
+  width: 200rpx;
+	background-color: #FDCC35;
+	padding-left: 30rpx;
+	padding-right: 30rpx;
+}
+
+.group-bread-price{
+  font-size: 46rpx;
+	font-weight: bold;
+	margin-left: 30rpx;
+	margin-right: 30rpx;
+}
+
+.price-unit,.group-bread-oldprice{
+  font-size: 24rpx;
+}
+
+.group-bread-oldprice{
+  text-decoration: line-through;
+	position: relative;
+	top: 6rpx;
+}
+
+.group-bread-endtxt{
+  color: #D81313;
+	font-size: 24rpx;
+	margin-top: 10rpx;
+	letter-spacing: 10rpx;
+	margin-bottom: 6rpx;
+}
+
+.time{
+  background-color: #333;
+	color: white;
+	font-size: 24rpx;
+	width: 44rpx;
+	height: 44rpx;
+	line-height: 44rpx;
+	text-align: center;
+	border-radius: 3rpx;
+}
+
+.good-info{
+
 }

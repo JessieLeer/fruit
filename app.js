@@ -18,7 +18,7 @@ App({
 		shop: {},
 		orderGoods: [],
 		session_key: '' ,
-		url: 'http://119.3.50.232:8082'
+		url: 'http://m.ysk360.com'
   },
   onLaunch() {
     // 展示本地存储能力
