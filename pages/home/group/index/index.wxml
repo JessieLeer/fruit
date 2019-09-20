@@ -21,7 +21,8 @@
 				<view class='good-main'>
 					<view class='good-header f-cb'>
 						<text class='good-name f-tal f-fl'>{{item.shopName}}</text>
-						<text class='good-left f-tar f-fr'>还剩{{item.leftCount}}天结束</text>
+						<text class='good-left f-tar f-fr' wx:if='{{item.leftCount > 0}}'>还剩{{item.leftCount}}天结束</text>
+						<text class='good-left f-tar f-fr' wx:else>不足一天结束</text>
 					</view>
 					<text class='good-pick f-db'>可提货日期：{{item.gstartTime}} 至 {{item.gendTime}}</text>
 					<view class='good-footer f-cb'>

@@ -1,19 +1,33 @@
-<swiper autoplay="true" interval="3000" duration="500" class='w-100 f-db'>
-	<block wx:for="{{banners}}" wx:key='index'>
+<swiper autoplay="true" interval="3000" duration="500" class='swiper w-100 f-db'>
+	<block wx:for="{{order.imgList}}" wx:key='index'>
 		<swiper-item class='swiper-item'>
-			<image src="{{item.showImg}}" class="slide-image w-100" mode="widthFix" bindtap='bannerGo' data-banner='{{item}}'/>
+			<image src="{{item.imageUrl}}" class="slide-image w-100" mode="widthFix" />
 		</swiper-item>
 	</block>
 </swiper>
 
 <view class='group-bread'>
-  <view class='group-bread-left'>
-	  <van-tag class='group-bread-people'>三人团</van-tag>
-		<text class='group-bread-price'></text>
-		<text class='group-bread-oldprice'></text>
+  <view class='group-bread-left f-cb'>
+	  <van-tag custom-class='group-bread-people' color='white' text-color='#D81313' size='large'>三人团</van-tag>
+		<text class='group-bread-price f-ib f-vat'>
+		  <text class='price-unit'>¥</text>{{order.gprice}}
+		</text>
+		<text class='group-bread-oldprice f-ib f-vat'>¥{{order.originalprice}}</text>
 	</view>
 	<view class='group-bread-right'>
 	  <text class='group-bread-endtxt f-db'>距结束还有</text>
-		
+		<text wx:if='{{order.leftCount}}'>{{order.leftCount}}</text>
+		<view wx:else>
+		  <text class='time f-ib'>{{order.left.hour}}</text> : 
+			<text class='time f-ib'>{{order.left.minute}}</text> :
+			<text class='time f-ib'>{{order.left.second}}</text>
+		</view>
 	</view>
+</view>
+
+<view class='good-info'>
+  <text class='good-name f-db'>{{order.shopName}}</text>
+  <text class='good-text f-db'>{{order.text}}</text>
+  <text class='good-spec'>单位：{{order.dw}}</text>
+	<text class='good-sold' wx:if='{{order.glimit}}'>每人限购 {{order.glimit}} 份</text>
 </view>
