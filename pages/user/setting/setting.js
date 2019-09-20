@@ -39,12 +39,12 @@ Page({
   },
   resetPassword:function(){
     wx.navigateTo({
-      url: 'reset-password/reset-password',
+      url: 'paysetting/phone-set?idx=setting',
     })
   },
   go:function(){
     wx.navigateTo({
-      url: 'about/about',
+      url: '../documents/Doc/index?id=aboutus',
     })
   },
 

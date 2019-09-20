@@ -29,11 +29,20 @@ page{
   height : auto;
 }
 .loading{
-  width : 710rpx;
-  height : 710rpx;
+  width : 400rpx;
+  height : 400rpx;
   background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
+}
+.url_wrap{
+  text-align : center;
+  margin-top : 10px;
+}
+.cover{
+  width : 285px;
+  height: 88px;
+  background: #fff;
 }

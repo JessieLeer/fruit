@@ -18,7 +18,7 @@ Page({
     },
     gotoDocMe(){
         wx.navigateTo({
-            url: "../documents/memberDoc/index"
+            url: "../documents/Doc/index?id=memberlevel"
 
         })
     },
@@ -87,7 +87,7 @@ Page({
     },
     gotoCus(){
         wx.navigateTo({
-            url: "../customerService/customerService"
+            url: "../customerService/customerService?id=customer"
 
         })
     },

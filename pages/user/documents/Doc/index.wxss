@@ -1,0 +1,8 @@
+@import "../../../../wxParse/wxParse.wxss";
+
+.doc_container{
+    padding : 38rpx 24rpx;
+}
+.title_name{
+    margin-top : 22rpx;
+}

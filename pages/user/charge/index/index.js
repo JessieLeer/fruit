@@ -10,7 +10,8 @@ Page({
             {'num_price' : '200','gift_num' : '50'},
             {'num_price' : '500','gift_num' : '60'}
         ],
-        idx : 0
+        idx : 0,
+        orderId : ''
     },
     onTap(e){
         this.setData({
@@ -66,6 +67,11 @@ Page({
     chargeBtn(){
        this.isSetSecret()
     },
+    gotoDoc(){
+        wx.navigateTo({
+            url: "../../documents/Doc/index?id=charge"
+        })
+    },
     pay(){
         var that = this
         wx.request({
@@ -74,13 +80,18 @@ Page({
                 // orderId: that.data.chargeList[that.data.idx].rid,
                 loginUid: app.globalData.loginUid,
                 userId: app.globalData.userId,
-                czgzId: that.data.chargeList[that.data.idx].rid
+                czgzId: that.data.chargeList[that.data.idx].rid,
+                openId: app.globalData.openid
 
             },
             header: {
                 'content-type': 'application/json' // 默认值
             },
             success(res) {
+                console.log(res)
+                that.setData({
+                    orderId: res.data.data.orderId
+                })
                 wx.requestPayment({
                     timeStamp: res.data.data.timeStamp,
                     nonceStr: res.data.data.nonceStr,
@@ -95,17 +106,26 @@ Page({
                                 loginUid: app.globalData.loginUid,
                                 userId: app.globalData.userId,
                                 czgzId: that.data.chargeList[that.data.idx].rid,
-                                // orderId : res.data.id
+                                orderId: that.data.orderId
                             },
                             header: {
                                 'content-type': 'application/json' // 默认值
                             },
                             success(res) {
-                                wx.showToast({
-                                    title : '充值成功',
-                                    icon : 'success'
-                                })
-                                that.getData()
+                                if(res.data.code == 200){
+                                    wx.showToast({
+                                        title: res.data.message,
+                                        icon: 'success'
+                                    })
+                                    that.getData()
+                                }else{
+                                    wx.showToast({
+                                        title: res.data.message,
+                                        icon: 'none'
+                                    })
+                                    that.getData()
+                                }
+                              
                             }
                         })
                         that.getData()

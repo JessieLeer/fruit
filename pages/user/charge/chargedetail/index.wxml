@@ -39,6 +39,6 @@
     <view class="popup" wx:if="{{select}}">
         <view class="autoheight" bindtap="close"></view>
         <van-datetime-picker class="fix" type="year-month" min-date="{{ minDate }}" max-date="{{ maxDate }}"
-            item-height="54" value="{{ maxDate }}" bind:confirm="confirm" bind:cancel="cancel" value="{{ valuecurrent }}"/>
+            item-height="54" value="{{ maxDate }}" bind:confirm="confirm" bind:cancel="close" value="{{ valuecurrent }}"/>
     </view>
 </view>

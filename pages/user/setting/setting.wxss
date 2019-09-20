@@ -1,4 +1,3 @@
-/* page/user/setting/setting.wxss */
 page{
   background: #ebebeb;
   font-weight: 400;

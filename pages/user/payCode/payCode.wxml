@@ -9,7 +9,14 @@
         <button formType="submit" class="mybtn" type="primary">生成二维码</button>
     </form> -->
     <view class="canvas-box">
-      <canvas class="canSty" style="width: 710rpx;height: 710rpx;margin-top:57rpx;background:#fff;" canvas-id="mycanvas">
+      <view>
+        <canvas style="width: 285px; height: 88px;margin-top:43px;" canvas-id="firstCanvas">
+          <cover-view class="cover" hidden="{{isShow}}">
+          </cover-view>
+        </canvas>
+      </view>
+      <view class="url_wrap" hidden="{{!isShow}}">{{url}}</view>
+      <canvas class="canSty" style="width: 400rpx;height: 400rpx;background:#fff;" canvas-id="mycanvas">
         <cover-view class="loading" hidden="{{isShow}}">
           <cover-image class="img_loading" src="../../../static/image/loading.gif" mode="widthFix"></cover-image>
         </cover-view>

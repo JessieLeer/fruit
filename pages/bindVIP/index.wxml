@@ -2,7 +2,7 @@
     <view>
         <view class="item_input">
             <view>手机号</view>
-            <view class="input"><input maxlength="11" type="number" placeholder="请输入手机号" placeholder-style='text-align:right' value="{{tel}}" bindinput="inputChange"/></view>
+            <view class="input"><input disabled maxlength="11" type="number" placeholder="请输入手机号" placeholder-style='text-align:right' value="{{tel}}" bindinput="inputChange"/></view>
         </view>
         <view class="item_input" wx:if="{{showCodeItem}}">
             <view>验证码</view>

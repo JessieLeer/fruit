@@ -1,6 +1,7 @@
 // page/user/payCode/payCode.js
 //const QR = require('../../../utils/wxqrcode.js');
 import QR from '../../../utils/qrCode.js';
+var barcode = require('../../../utils/index')
 var app = getApp();
 Page({
 
@@ -107,7 +108,7 @@ Page({
     var size = {};
     try {
       var res = wx.getSystemInfoSync();
-      var scale = 710/ 750; //不同屏幕下QRcode的适配比例；设计稿是750宽
+      var scale = 400/ 750; //不同屏幕下QRcode的适配比例；设计稿是750宽
       var width = res.windowWidth* scale;
       var height = width;//canvas画布为正方形
       size.w = width;
@@ -146,6 +147,7 @@ Page({
       tip: '正在刷新'
     })
     let size = that.setCanvasSize();//动态设置画布大小
+    barcode.barcode('firstCanvas', that.data.url, 285 * 2, 108 * 2)
     that.createQrCode("mycanvas", size.w, size.h) //先生成一次
     // that.data.setInter = setInterval(function () {
     //  // console.log('定时一次', Date.parse(new Date()))

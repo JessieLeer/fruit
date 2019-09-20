@@ -12,6 +12,7 @@ Page({
     Value: "",        //新密码
     nextValue:"",     //确认输入
     ispassword: true, //是否密文显示 true为密文， false为明文。
+    idx : ""
   },
   Focus(e) {
     var that = this;
@@ -63,7 +64,29 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        console.log(res)
+        console.log()
+        if (res.data.code == 200){
+          if(that.data.idx != 'setting'){
+            wx.reLaunch({
+              url: '../../charge/index/index'
+            })
+          }else{
+            wx.showToast({
+              title: res.data.message,
+              icon: 'success'
+            })
+            setTimeout(() => {
+              wx.reLaunch({
+                url: '../../index/index'
+              })
+            }, 2000);
+          } 
+        }else{
+          wx.showToast({
+            title : res.data.message,
+            icon : 'none'
+          })
+        }
       }
     })
     console.log(this.data.Value,this.data.nextValue);
@@ -74,7 +97,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      idx: options.idx
+    })
   },
 
   /**

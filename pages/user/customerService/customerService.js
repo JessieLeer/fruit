@@ -1,4 +1,6 @@
 // page/user/cus/cus.js
+var WxParse = require('../../../wxParse/wxParse');
+var app = getApp()
 Page({
 
   /**
@@ -81,12 +83,30 @@ Page({
     })
     
   },
+  getHtml(id){
+    var that = this;
+    //3. 解密
+    wx.request({
 
+      url: `${app.globalData.url}/api/mini/getContentById`,
+      data: {
+        contentId: id
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json'
+      },
+      success(res) {
+        console.log(res)
+        WxParse.wxParse('article', 'html', res.data.data.contentText, that, 5);
+      }
+    }) 
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getHtml(options.id)
   },
 
   /**
