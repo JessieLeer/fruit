@@ -75,3 +75,6 @@
     top : 80px;
     right : 15px;
 }
+image{
+    height : auto;
+}

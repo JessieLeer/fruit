@@ -43,7 +43,7 @@ Page({
     },
     gotoDoc(){
         wx.navigateTo({
-            url: "../../documents/couponDoc/index"
+            url: "../../documents/Doc/index?id=discount"
         })
     },
     gotoHistory() {
@@ -105,8 +105,9 @@ Page({
         })
     },
     getValue(e){
+        console.log(e)
         this.setData({
-            value : e.detail.value
+            value : e.detail
         })
     }
 })

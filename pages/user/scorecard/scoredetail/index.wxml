@@ -1,7 +1,7 @@
 <view class="wrap">
     <view class="relative">
         <view class="top_zindex">
-            <image class="score_desc" src="../../../../static/image/score_desc.png" mode="widthFix"></image>
+            <image class="score_desc" src="../../../../static/image/score_desc.png" bindtap="gotoDoc" mode="widthFix"></image>
             <view class="remain_info" bindtap="close">
                 <view class="info_flex">
                     <view>

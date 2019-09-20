@@ -10,6 +10,11 @@ Page({
 
         })
     },
+    gotoDoc(){
+        wx.navigateTo({
+            url: "../../documents/Doc/index?id=integral"
+        })
+    },
     onShow(){
         this.scoreDate()
         this.getCouponlist()

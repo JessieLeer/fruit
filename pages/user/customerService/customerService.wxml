@@ -1,12 +1,15 @@
 <!--page/user/customerService/customerService.wxml-->
  <view class='box'>
-      <block wx:for="{{content}}" wx:key="item">
+      <!-- <block wx:for="{{content}}" wx:key="item">
         <view class='text-item'>
           <view class='text-name' bindtap="showHide" data-changeid="{{item.id}}">{{item.title}}<view class="{{item.shows?'toUp':'toLeft'}}"></view></view>
           <view wx:if="{{item.shows}}" class="content">{{item.contents}}</view>
         </view>
-      </block>
-    </view>
+      </block> -->
+      <import src="../../../wxParse/wxParse.wxml" />
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+      <view class="auto_height"></view>
+  </view>
 
     <view class="customerTime">
   （客服服务时间：9：00-23：00）

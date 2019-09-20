@@ -9,7 +9,7 @@
         </view>
     </view>
     <view class="info_charge">
-        <view>充值说明</view>
+        <view bindtap="gotoDoc">充值说明</view>
         <view bindtap="gotoDetail">余额明细</view>
     </view>
     <view class="charge_detail">

@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "客服帮助"
+  "navigationBarTitleText": "客服帮助",
+  "enablePullDownRefresh": false
 }

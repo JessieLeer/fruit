@@ -11,7 +11,8 @@ Page({
     time: '获取验证码', //倒计时 
     currentTime: 61,
     code : 0,
-    disabled : false
+    disabled : false,
+    idx : ''
   },
 
   bindKeyInput: function (e) {
@@ -75,6 +76,7 @@ Page({
     })
   },
   next(){
+    var that = this;
     wx.request({
       url: `${app.globalData.url}/api/member/verifySms`,
       data: {
@@ -87,7 +89,7 @@ Page({
         console.log(res)
         if(res.data.code == 200){
           wx.navigateTo({
-            url: '../paysecretsetting/reset-password'
+            url: `../paysecretsetting/reset-password?idx=${that.data.idx}`
           })
         }else{
           wx.showToast({
@@ -103,7 +105,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.setData({
+      idx: 'setting'
+    })
   },
 
   /**

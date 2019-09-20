@@ -51,9 +51,22 @@ border:none;
 	color:rgba(255,255,255,1)
 }
 .wrap{
-	margin-top : 100rpx;
+	margin-top : 104rpx;
 	width:359rpx;
 	height:80rpx;
 	background:rgba(246,147,31,1);
 	border-radius:45rpx;
+}
+.auto_height{
+	height : 44rpx;
+}
+.auto_height_top{
+	height : 270rpx;
+}
+.van-field__input{
+	border-bottom : 1px solid #DFDFDF!important;
+	height: 34px!important;
+}
+.van-cell__title{
+	line-height: 34px!important;
 }

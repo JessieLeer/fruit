@@ -17,6 +17,7 @@
     "pages/user/shopcard/history/index",
     "pages/user/seccard/history/index",
     "pages/user/mydetail/index/index",
+    "pages/user/documents/Doc/index",
     "pages/user/addressManage/addressManage",
     "pages/user/customerService/customerService",
     "pages/user/payCode/payCode",

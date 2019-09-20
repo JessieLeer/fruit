@@ -1,9 +1,15 @@
 /* page/user/customerService/customerService.wxss */
+@import "../../../wxParse/wxParse.wxss";
+.auto_height{
+  height: 95px;
+}
 .box {
     display: flex;
     flex-direction: column;
     width: 750rpx;
     margin: auto;
+    padding: 38rpx 20rpx;
+    box-sizing: border-box;
   }
 .text-item {
     border-bottom: solid 1px #eee;

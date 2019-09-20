@@ -27,7 +27,7 @@
     align-items: center;
 }
 .hasno_area image{
-    width : 314.5px;
+   width : 314px;
 }
 .info{
     text-align : center;
@@ -103,4 +103,7 @@
 .auto_height{
     min-height : 0;
     position: relative;
+}
+.fix_height{
+    height : 231.5px;
 }

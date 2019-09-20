@@ -26,5 +26,10 @@ Page({
     },
     onShow(){
         this.getMinHeight()
+    },
+    gotoDoc(){
+        wx.navigateTo({
+            url: "../../documents/Doc/index?id=shopCard"
+        })
     }
 })

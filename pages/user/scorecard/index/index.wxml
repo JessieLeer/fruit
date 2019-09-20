@@ -7,7 +7,7 @@
                     <view class="score">{{myscore}}</view>
                 </view>
                 <view class="info_score">
-                    <view>积分说明</view>
+                    <view bindtap="gotoDoc">积分说明</view>
                     <view bindtap="gotoScoreDetail">积分明细</view>
                 </view>
             </view>

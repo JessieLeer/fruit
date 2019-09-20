@@ -19,12 +19,14 @@
         </view>
     </view>
     <view wx:if="{{true}}" class="hasno_area" style="min-height: {{minHeight}}px">
-        <image src="../../../../static/image/hasno.png" mode="widthFix"></image>
+        <view class="fix_height">
+            <image src="../../../../static/image/hasno.png" mode="widthFix"></image>
+        </view>
         <view class="info">暂无可用次卡</view>
     </view>
     <view class="history_fix">
         <view bindtap="gotoHistory">查看历史次卡</view>
-        <view>次卡使用说明</view>
+        <view bindtap="gotoDoc">次卡使用说明</view>
     </view>
     </view>
 </view>

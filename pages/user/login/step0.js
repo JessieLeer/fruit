@@ -9,7 +9,7 @@ Page({
     cardNo : null
   },
   onShow(){
-
+    this.loginGetCode()
   },
 	onLoad() {
 		// if (app.globalData.userInfo) {
@@ -36,7 +36,7 @@ Page({
     console.log(e.detail.encryptedData + "空格" + e.detail.iv + "空格" +app.globalData.code)
     // return
     var that = this;
-		//3. 解密
+    //3. 解密
     wx.request({
 
       url: `${app.globalData.url}/api/mini/getPhoneNumber`,

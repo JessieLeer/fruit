@@ -32,6 +32,11 @@ Page({
       select: false
     })
   },
+  gotoDoc(){
+    wx.navigateTo({
+      url: "../../documents/Doc/index?id=integral"
+    })
+  },
   confirm(e){
     this.setData({
       select: false,

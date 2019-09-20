@@ -39,19 +39,19 @@ App({
 			console.log(res.code)
 			_this.globalData.code = res.code
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-				// wx.request({
-				// 	url: 'https://api.weixin.qq.com/sns/jscode2session',
-				// 	data: {
-				// 		appId: 'wx2abde02acd11b274',
-				// 		secret: '2d8018b4f34d5f8815bfd627cd75907f',
-				// 		js_code: res.code,
-				// 		grant_type: 'authorization_code'
-				// 	},
-				// 	success(res) {
-				// 		_this.globalData.openid = res.data.openid 
-				// 		_this.globalData.session_key = res.data.session_key
-				// 	}
-				// })
+				wx.request({
+					url: 'https://api.weixin.qq.com/sns/jscode2session',
+					data: {
+						appId: 'wx2abde02acd11b274',
+						secret: '2d8018b4f34d5f8815bfd627cd75907f',
+						js_code: res.code,
+						grant_type: 'authorization_code'
+					},
+					success(res) {
+						_this.globalData.openid = res.data.openid 
+						_this.globalData.session_key = res.data.session_key
+					}
+				})
       }
     })
     // 获取用户信息
