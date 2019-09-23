@@ -52,11 +52,12 @@ Page({
         })
     },
     getCouponList(){
+        let userId = wx.getStorageSync('userId')
         var that = this
         wx.request({
             url: `${app.globalData.url}/api/coupon`, //仅为示例，并非真实的接口地址
             data: {
-                uid: app.globalData.userId
+                uid: userId
             },
             header: {
                 'content-type': 'application/json' // 默认值
@@ -76,6 +77,7 @@ Page({
         })
     },
     convertCoupon(){
+        let userId = wx.getStorageSync('userId')
         if (!this.data.value){
             wx.showToast({
                 title: '请输入兑换码',
@@ -88,7 +90,7 @@ Page({
         wx.request({
             url: `${app.globalData.url}/api/getCoupon`, //仅为示例，并非真实的接口地址
             data: {
-                uid: app.globalData.userId,
+                uid: userId,
                 rid  : that.data.value
             },
             header: {

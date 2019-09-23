@@ -92,7 +92,9 @@ Page({
         })
     },
     checkLogin(){
-        if (!app.globalData.loginUid) {
+        let loginUid = wx.getStorageSync('loginUid')
+
+        if (!loginUid) {
             wx.navigateTo({
                 url: "../../user/login/step0"
             })
@@ -115,7 +117,9 @@ Page({
         }
     },
     getUserData(){
-        if (!app.globalData.loginUid){
+        let loginUid = wx.getStorageSync('loginUid')
+        let userId = wx.getStorageSync('userId')
+        if (!loginUid){
             this.setData({
                 point: '- -',
                 coupon: '- -',
@@ -129,15 +133,18 @@ Page({
             wx.request({
                 url: `${app.globalData.url}/api/member/getUserInfo`, //仅为示例，并非真实的接口地址
                 data: {
-                    loginUid: app.globalData.loginUid,
-                    userId: app.globalData.userId
+                    loginUid: loginUid,
+                    userId: userId
                 },
                 header: {
                     'content-type': 'application/json' // 默认值
                 },
                 success(res) {
                     console.log(res)
-                    app.globalData.mobile = res.data.data.mobile;
+                    wx.setStorageSync('mobile', res.data.data.mobile)
+                    let avatarurl = wx.getStorageSync('avatarUrl')
+                    let Nickname = wx.getStorageSync('Nickname')
+                    console.log(avatarurl)
                     that.setData({
                         point: res.data.data.point,
                         userId: res.data.data.userId,
@@ -147,8 +154,8 @@ Page({
                         balance: res.data.data.balance,
                         onceCard: res.data.data.onceCard,
                         username: res.data.data.username,
-                        avatarurl: app.globalData.avatarUrl,
-                        Nickname: app.globalData.Nickname,
+                        avatarurl: avatarurl,
+                        Nickname: Nickname,
                         level : res.data.data.levelName,
                         loginKey: true
                     })

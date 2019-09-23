@@ -38,11 +38,12 @@ Page({
         })
     },
     scoreDate(){
+        let userId = wx.getStorageSync('userId')
         var that = this
         wx.request({
             url: `${app.globalData.url}/api/integral`, //仅为示例，并非真实的接口地址
             data: {
-                uid: app.globalData.userId
+                uid: userId
             },
             header: {
                 'content-type': 'application/json' // 默认值
@@ -56,12 +57,13 @@ Page({
     },
     convert(e){
         console.log(e.currentTarget.dataset.iid)
+        let userId = wx.getStorageSync('userId')
         var that = this
         wx.request({
             url: `${app.globalData.url}/api/insetCoupon`, //仅为示例，并非真实的接口地址
             data: {
                 iid: e.currentTarget.dataset.iid,
-                uid: app.globalData.userId
+                uid: userId
             },
             header: {
                 'content-type': 'application/json' // 默认值

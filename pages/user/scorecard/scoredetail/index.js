@@ -50,11 +50,12 @@ Page({
   },
   getData(ParamsDate) {
     console.log(new Date(this.data.date))
+    let userId = wx.getStorageSync('userId')
     var that = this
     wx.request({
       url: `${app.globalData.url}/api/integral`, //仅为示例，并非真实的接口地址
       data: {
-        uid: app.globalData.userId,
+        uid: userId,
         itime: ParamsDate ? ParamsDate : ''
       },
       header: {

@@ -29,12 +29,14 @@ Page({
         this.getChargeList()
     },
     getData(){
+        let loginUid = wx.getStorageSync('loginUid')
+        let userId = wx.getStorageSync('userId')
         var that = this
         wx.request({
             url: `${app.globalData.url}/api/member/getUserInfo`, //仅为示例，并非真实的接口地址
             data: {
-                loginUid: app.globalData.loginUid,
-                userId: app.globalData.userId
+                loginUid,
+                userId
             },
             header: {
                 'content-type': 'application/json' // 默认值
@@ -73,15 +75,18 @@ Page({
         })
     },
     pay(){
+        let loginUid = wx.getStorageSync('loginUid')
+        let userId = wx.getStorageSync('userId')
+        let openid = wx.getStorageSync('openid')
         var that = this
         wx.request({
             url: `${app.globalData.url}/api/member/charge`, //仅为示例，并非真实的接口地址
             data: {
                 // orderId: that.data.chargeList[that.data.idx].rid,
-                loginUid: app.globalData.loginUid,
-                userId: app.globalData.userId,
+                loginUid,
+                userId,
                 czgzId: that.data.chargeList[that.data.idx].rid,
-                openId: app.globalData.openid
+                openId: openid
 
             },
             header: {
@@ -89,6 +94,13 @@ Page({
             },
             success(res) {
                 console.log(res)
+                if(res.data.code == 500){
+                    wx.showToast({
+                        title : res.data.message ,
+                        icon : 'none'
+                    })
+                    return
+                }
                 that.setData({
                     orderId: res.data.data.orderId
                 })
@@ -103,8 +115,8 @@ Page({
                         wx.request({
                             url: `${app.globalData.url}/api/member/chargeCallback`, //仅为示例，并非真实的接口地址
                             data: {
-                                loginUid: app.globalData.loginUid,
-                                userId: app.globalData.userId,
+                                loginUid: loginUid,
+                                userId: userId,
                                 czgzId: that.data.chargeList[that.data.idx].rid,
                                 orderId: that.data.orderId
                             },
@@ -135,13 +147,15 @@ Page({
             }
         })
     },
-    isSetSecret(){
+    isSetSecret() {
+        let loginUid = wx.getStorageSync('loginUid')
+        let userId = wx.getStorageSync('userId')
         var that = this;
         wx.request({
             url: `${app.globalData.url}/api/member/isSetPassword`, //仅为示例，并非真实的接口地址
             data: {
-                loginUid: app.globalData.loginUid,
-                userId: app.globalData.userId,
+                loginUid,
+                userId,
             },
             header: {
                 'content-type': 'application/json' // 默认值
