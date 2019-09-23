@@ -1,3 +1,5 @@
+const app = getApp()
+
 Page({
 	data: {
 		gid: '',
@@ -10,6 +12,11 @@ Page({
 			gid: option.id
 		})
 		this.show()
+	},
+	go(e) {
+		wx.navigateTo({
+			url: e.currentTarget.dataset.url
+		})
 	},
 	show(e) {
 		let _this = this
@@ -28,6 +35,7 @@ Page({
 				_this.setData({
 					order: res.data.data
 				})
+				app.globalData.groupbuy = _this.data.order
 				console.log(_this.data.order)
 				if(leftCount == 0) {
 					setInterval(() => {

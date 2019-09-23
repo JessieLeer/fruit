@@ -11,6 +11,11 @@ Page({
 		})
 		this.show()
 	},
+	go(e) {
+		wx.navigateTo({
+			url: e.currentTarget.dataset.url
+		})
+	},
 	show(e) {
 		let _this = this
 		wx.request({

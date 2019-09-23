@@ -19,6 +19,7 @@ App({
 		code : '',
 		orderGoods: [],
 		session_key: '' ,
+		groupbuy: {},
 		url: 'http://m.ysk360.com',
 		loginUid: '',
 		avatarUrl : '',
@@ -26,11 +27,9 @@ App({
 		mobile : ''
   },
   onLaunch() {
-	  
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+	  wx.setStorageSync('cuser', {
+			userId: 1
+		})		
 
     // 登录
 		let _this = this

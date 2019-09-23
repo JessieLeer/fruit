@@ -27,6 +27,7 @@
 		"pages/home/group/index/index",
 		"pages/home/group/show/index",
 		"pages/home/group/list/index",
+		"pages/home/group/edit/index",
 		"pages/home/order/index/index",
     "pages/home/order/show/index",
 		"pages/home/order/detail/index",

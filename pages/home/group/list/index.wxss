@@ -47,3 +47,30 @@
 	font-size: 32rpx;
 	margin-top: 16rpx;
 }
+
+.w-100{
+  width: 100%;
+}
+
+.f-fl{
+  float: left;
+}
+
+.f-fr{
+  float: right;
+}
+
+.f-ib{
+  display: inline-block;
+}
+
+.f-vat{
+  vertical-align: top;
+}
+
+.f-cb:after,.f-cbli li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+.f-cb,.f-cbli li{zoom:1;}
+
+.f-db{
+  display: block;
+}

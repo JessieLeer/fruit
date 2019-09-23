@@ -4,8 +4,9 @@
 		<text class='user-name f-fl'>{{item.userName}}</text>
 	  <view class='group-user f-fr'>
 			<view class='group-user-count'>差<text>{{item.guserNumber - item.currentUser}}人</text>成团</view>
-		  <text class='group-user-countdonw'>剩余{{order.left.hour}} : {{order.left.minute}} : {{order.left.second}}</text>
+		  <text class='group-user-countdonw' wx:if='{{order.leftCount}}'>剩余：{{order.leftCount}}天</text>
+			<text class='group-user-countdonw' wx:else>剩余{{order.left.hour}} : {{order.left.minute}} : {{order.left.second}}</text>
 		</view>
 	</view>
-	<van-button type="warning" size="large" custom-class='group-create'>去参团</van-button>
+	<van-button type="warning" size="large" custom-class='group-create' data-url='/pages/home/group/edit/index?id={{item.gid}}' bind:click='go'>去参团</van-button>
 </view>
