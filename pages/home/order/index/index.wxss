@@ -102,3 +102,33 @@ page{
 	margin: 0 auto;
 }
 
+.group-header{
+  display: flex;
+	height: 44px;
+	line-height: 44px;
+	padding-left: 30rpx;
+	padding-right: 30rpx;
+}
+
+.group-header-left{
+  flex: 1;
+}
+
+.group-time{
+  color: #A5A5A5;
+	font-size: 14px;
+}
+
+.group-header-right{
+  width: 100rpx;
+	color: #F6931F;
+	font-size: 14px;
+	text-align: right;
+}
+
+.group-user.van-tag{
+  margin-left: 30rpx;
+	background:rgba(96,186,180,1);
+  border-radius:22px;
+	font-size: 20rpx;
+}

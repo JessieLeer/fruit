@@ -1,7 +1,7 @@
 <view class='main'>
 	<van-tabs type="card" tab-class='tab' custom-class='tabs' tab-active-class='tab-active' active='{{active}}' bind:change='tabChange'>
 	  <van-tab title="配送">
-		  <van-cell is-link title="{{orderInfo.fsAddress}}" link-type="navigateTo" url="/pages/dashboard/index" use-label-slot>
+		  <van-cell is-link title="{{orderInfo.fsAddress}}" use-label-slot bind:click='addressIndex'>
 			  <van-tag slot='icon' color='#e8fcfb' text-color='#00837B' custom-class='address-type'>{{orderInfo.addressType}}</van-tag>
 			  <view slot='label'>{{orderInfo.fsName}} {{orderInfo.fsMobile}}</view>
 			</van-cell>
@@ -53,7 +53,7 @@
 		  <text class='price-price'>¥{{active == 1 ? orderInfo.payMoney : orderInfo.payMoney + orderInfo.deliveryMoney}}</text>
 		</view>
 	</van-submit-bar>
-	<pay isShow="{{pay.show}}" paShow='{{pay.paShow}}' password='{{pay.password}}' orderId='{{orderId}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{active == 1 ? orderInfo.totalMoney : orderInfo.totalMoney + orderInfo.deliveryMoney}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
+	<pay isShow="{{pay.show}}" paShow='{{pay.paShow}}' balanceShow='{{pay.balanceShow}}' password='{{pay.password}}' orderId='{{orderId}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{active == 1 ? orderInfo.totalMoney : orderInfo.totalMoney + orderInfo.deliveryMoney}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
 	<van-toast id="van-toast" />
 	<van-popup show="{{ coupon.show }}" bind:close="onCouponClose" position="right" custom-class='coupon-popup'>
 	  <view wx:for='{{coupon.data}}' wx:key='index'>
@@ -77,5 +77,8 @@
 		</view>	
 
 		<van-button type="default" custom-class='nouse' data-coupon='{{emptyCoupon}}' bindtap='couponSelect'>不使用优惠券</van-button>
+	</van-popup>
+	<van-popup show='{{address.show}}' bind:close='onAddressClose' position='right' custom-class='address-popup'>
+	  
 	</van-popup>
 </view>

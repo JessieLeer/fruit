@@ -1,17 +1,31 @@
+import Toast from "../../../miniprogram_npm/vant-weapp/toast/toast"
+
 const app = getApp()
 
 Page({
 	data: {
 		gid: '',
-		order: {
-			
-		}
+		order: {},
+		cuser: {}
 	},
 	onLoad(option) {
 		this.setData({
 			gid: option.id
 		})
+		this.initCuser()
 		this.show()
+	},
+	/*-- 初始化用户 --*/
+	initCuser(e) {
+		let _this = this
+		wx.getStorage({
+			key: 'cuser',
+			success (res) {
+				_this.setData({
+					cuser: res.data
+				})
+			}
+		})
 	},
 	go(e) {
 		wx.navigateTo({
@@ -21,7 +35,7 @@ Page({
 	show(e) {
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.70:8080/api/groupUser',
+			url: `${app.globalData.url}/api/groupUser`,
 			data: {
 				gid: this.data.gid
 			},
@@ -36,7 +50,6 @@ Page({
 					order: res.data.data
 				})
 				app.globalData.groupbuy = _this.data.order
-				console.log(_this.data.order)
 				if(leftCount == 0) {
 					setInterval(() => {
 						_this.setData({
@@ -62,5 +75,39 @@ Page({
 			minute: minutes,
 			second: seconds
 		}			
+	},
+	/*-- 加入拼图 --*/
+	join(e) {
+		let item = e.currentTarget.dataset.item
+		wx.request({
+			url: `${app.globalData.url}/api/group/groupAdd`,
+			data: {
+				carts: JSON.stringify([
+					{
+						commodityId: item.sid,
+						number: 1,
+						name: item.shopName,
+						sellingPrice: item.gprice,
+					  originalPrice: item.originalPrice,
+						headImage: item.shopImg
+					}
+				]),
+			  postType: 1,
+				storeId: item.storeId,
+				userId: this.data.cuser.userId,
+				groupId: item.gid
+			},
+			method: 'post',
+			success(res) {
+				console.log(res)
+				if(res.data.code == 200) {
+					
+				}else{
+					Toast({
+						message: res.data.message
+					})
+				}
+			}
+		})
 	}
 })

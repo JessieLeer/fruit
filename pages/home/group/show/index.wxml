@@ -29,7 +29,7 @@
   <text class='good-name f-db'>{{order.shopName}}</text>
   <text class='good-text f-db'>{{order.text}}</text>
   <text class='good-spec'>单位：{{order.dw}}</text>
-	<text class='good-sold' wx:if='{{order.glimit}}'>每人限购 {{order.glimit}} 份</text>
+	<text class='good-sold' wx:if='{{order.glimit}}'>每人限购 1 份</text>
 </view>
 <text class='pick-date f-db'>可提货日期：拼团结束后两小时之后</text>
 <view class='seg'></view>
@@ -46,7 +46,7 @@
 				<text class='group-user-countdonw' wx:else>剩余{{order.left.hour}} : {{order.left.minute}} : {{order.left.second}}</text>
 			</view>
 		</view>
-		<van-button type="warning" size="large" custom-class='group-create' data-url='/pages/home/group/edit/index?id={{item.gid}}' bind:click='go'>去参团</van-button>
+		<van-button type="warning" size="large" custom-class='group-create' data-item='{{item}}' bind:click='join'>去参团</van-button>
 	</view>
 </view>
 <view class='seg'></view>
@@ -87,3 +87,5 @@
 	</view>
 	<van-button type="warning" size="large" custom-class='footer-submit' data-url='/pages/home/group/edit/index' bind:click='go'>一键开团</van-button>
 </view>
+
+<van-toast id="van-toast" />

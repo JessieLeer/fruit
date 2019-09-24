@@ -13,24 +13,6 @@ Page({
     this.loginGetCode()
   },
 	onLoad() {
-		// if (app.globalData.userInfo) {
-    //   this.setData({
-    //     userInfo: app.globalData.userInfo,
-    //     hasUserInfo: true
-    //   })
-    // } else if (this.data.canIUse){
-    //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-    //   // 所以此处加入 callback 以防止这种情况
-    //   app.userInfoReadyCallback = res => {
-    //     this.setData({
-    //       userInfo: res.userInfo,
-    //       hasUserInfo: true
-    //     })
-    //   }
-    // } else {
-    //   // 在没有 open-type=getUserInfo 版本的兼容处理
-    //   this.bindGetUserInfo();
-    // }
 	},
   getWxStorage(){
 
@@ -38,9 +20,6 @@ Page({
 	getPhoneNumber (e) {
     let code = wx.getStorageSync('code');
     let openid = wx.getStorageSync('openid');
-    console.log(code)
-
-    console.log(e.detail.encryptedData + "空格" + e.detail.iv + "空格" +app.globalData.code)
     // return
     var that = this;
     //3. 解密
@@ -57,10 +36,12 @@ Page({
         'content-type': 'application/json'
       },
       success(res) {
-        console.log(res)
         if(res.data.data == null)return
+				console.log('hello')
+				console.log(res)
+				console.log('world')
         wx.request({
-					url: `${app.globalData.url}/api/login`,
+					url: `${app.globalData.url}/api/mini/login`,
 					data: {
 						mobile: res.data.data.phoneNumber,
             openid: openid
@@ -81,16 +62,11 @@ Page({
 						console.log(err)
 					}
 				})
-        console.log(res)
-        console.log("-----------");
         that.loginGetCode()
         if (res.data.code == 500)return
        
         wx.setStorageSync('loginUid', res.data.data.loginUid)
         wx.setStorageSync('userId', res.data.data.userId)
-
-        // app.globalData.loginUid = res.data.data.loginUid;
-        // app.globalData.userId = res.data.data.userId;
         that.setData({
           cardNo: res.data.data.cardNo
         })
@@ -106,11 +82,8 @@ Page({
     var that = this
     wx.getUserInfo({
       success: function (res) {
-        console.log(res)
         wx.setStorageSync('avatarUrl', res.userInfo.avatarUrl)
         wx.setStorageSync('Nickname', JSON.parse(res.rawData).nickName)
-        // app.globalData.avatarUrl = res.userInfo.avatarUrl
-        // app.globalData.Nickname = JSON.parse(res.rawData).nickName
         if (!that.data.cardNo){
           wx.navigateTo({
             url: '../../bindVIP/index'
@@ -125,21 +98,6 @@ Page({
     wx.login({
       success: res => {
         wx.setStorageSync('code', res.code)
-        // app.globalData.code = res.code
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        // wx.request({
-        // 	url: 'https://api.weixin.qq.com/sns/jscode2session',
-        // 	data: {
-        // 		appId: 'wx2abde02acd11b274',
-        // 		secret: '2d8018b4f34d5f8815bfd627cd75907f',
-        // 		js_code: res.code,
-        // 		grant_type: 'authorization_code'
-        // 	},
-        // 	success(res) {
-        // 		_this.globalData.openid = res.data.openid 
-        // 		_this.globalData.session_key = res.data.session_key
-        // 	}
-        // })
       }
     })
   },

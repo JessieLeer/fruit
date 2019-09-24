@@ -14,6 +14,7 @@ Page({
 		pay: {
 			show: false,
 			paShow: false,
+			balanceShow: true,
 			type: '',
 			password: '',
 			passFocus: false
@@ -26,7 +27,11 @@ Page({
 			useing: {},
 			text: '无可用'
 		},
-		emptyCoupon: {}
+		emptyCoupon: {},
+		address: {
+			show: false,
+			data: []
+		}
 	},
 	onLoad(option) {
 		this.setData({
@@ -38,6 +43,7 @@ Page({
 		})
 		this.initCuser()
 		this.initShopcar()
+		this.addressIndex()
 	},
 	/*-- 初始化用户 --*/
 	initCuser(e) {
@@ -99,14 +105,20 @@ Page({
 	},
 	/*-- 获取当前订单可用优惠券 --*/
 	openCoupon(e) {
-		this.setData({
-			'coupon.show': true
-		})
+		if(this.data.coupon.text == '无可用') {
+			Toast({
+				message: '没有可用的优惠券'
+			})
+		}else{
+			this.setData({
+				'coupon.show': true
+			})
+		}
 	},
 	couponIndex(e) {
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.70:8080/api/useList',
+			url: `${app.globalData.url}/api/useList`,
 			data: {
 				commodityId: this.data.goodIds,
 				quota: e.quota,
@@ -139,7 +151,7 @@ Page({
 			})
 			let _this = this
 			wx.request({
-				url: 'http://192.168.1.70:8080/api/orderUse',
+				url: `${app.globalData.url}/api/orderUse`,
 				data: {
 					commodityId: this.data.goodIds.toString(),
 					commodityQuota: this.data.goods.map((item) => {
@@ -182,7 +194,7 @@ Page({
 				if(res.data.code == 200) {
 					if(_this.data.coupon.useing.rid) {
 						wx.request({
-							url: 'http://192.168.1.70:8080/api/couponUpdate',
+							url: `${app.globalData.url}/api/couponUpdate`,
 							data: {
 								rid: _this.data.coupon.useing.rid
 							},
@@ -259,6 +271,26 @@ Page({
 		this.setData({
 			'pay.paShow': false,
 			'pay.password': ''
+		})
+	},
+	/*-- 获取收获地址 --*/
+	addressIndex(e) {
+		let _this = this
+		wx.getStorage({
+			key: 'loginUid',
+			success (res) {
+				console.log(res.data)
+				wx.request({
+					url: `${app.globalData.url}/api/member/getUserAddress`,
+					data: {
+						loginUid: res.data,
+						userId: _this.data.cuser.userId
+					},
+					success(res) {
+						console.log(res)
+					}
+				})
+			}
 		})
 	}
 })

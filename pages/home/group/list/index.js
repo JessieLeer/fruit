@@ -19,7 +19,7 @@ Page({
 	show(e) {
 		let _this = this
 		wx.request({
-			url: 'http://192.168.1.70:8080/api/groupUser',
+			url: `${app.globalData.url}/api/groupUser`,
 			data: {
 				gid: this.data.gid
 			},
@@ -33,7 +33,6 @@ Page({
 				_this.setData({
 					order: res.data.data
 				})
-				console.log(_this.data.order)
 				if(leftCount == 0) {
 					setInterval(() => {
 						_this.setData({

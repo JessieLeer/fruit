@@ -16,6 +16,10 @@ Component({
 			type: Boolean,
 			default: false
 		},
+		balanceShow: {
+			type: Boolean,
+			default: true
+		},
 		password: {
 			type: String
 		},
@@ -97,9 +101,9 @@ Component({
 			let _this = this
 			if(this.properties.type == 'wechat') {
 				wx.request({
-					url: `${app.globalData.url}/api/wechat/pay`,
+					url: `${app.globalData.url}/api/pay/wechat`,
 					data: {
-						openId: app.globalData.openid,
+						userId: this.data.cuser.userId,
 						orderId: this.properties.orderId
 					},
 					success(res) {

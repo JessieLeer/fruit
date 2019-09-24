@@ -3,7 +3,7 @@
 	<view class='pay-money f-tac'>¥<text class='amount'>{{cost}}</text></view>
 	<van-radio-group value="{{ type }}">
 		<van-cell-group>
-			<van-cell title="会员卡余额支付" value-class="value-class" clickable data-name="balance" bind:click="onClick" label='可用余额：¥{{balance}}' border='{{false}}'>
+			<van-cell title="会员卡余额支付" value-class="value-class" clickable data-name="balance" bind:click="onClick" label='可用余额：¥{{balance}}' border='{{false}}' wx:if='{{balanceShow}}'>
 			  <image src='/static/image/card.png' mode='widthFix' slot='icon' class='pay-icon pay-icon-balance'/>
 				<van-radio name="balance" checked-color='#F6931F' class='pay-radio pay-radio-balance' disabled='{{cost > balance ? true : false}}'/>
 			</van-cell>

@@ -5,10 +5,12 @@ const app = getApp()
 Page({
 	data: {
 		cuser: {},
+		orderId: '',
 		orderInfo: {},
 		pay: {
 			show: false,
 			paShow: false,
+			balanceShow: false,
 			type: '',
 			password: '',
 			passFocus: false
@@ -39,7 +41,7 @@ Page({
 				carts: [
 					{
 						commodityId: app.globalData.groupbuy.sid,
-						number: app.globalData.groupbuy.snumber,
+						number: 1,
 						name: app.globalData.groupbuy.shopName,
 						sellingPrice: app.globalData.groupbuy.gprice,
 						originalPrice: app.globalData.groupbuy.originalPrice,
@@ -66,7 +68,7 @@ Page({
 				carts: JSON.stringify([
 					{
 						commodityId: app.globalData.groupbuy.sid,
-						number: app.globalData.groupbuy.snumber,
+						number: 1,
 						name: app.globalData.groupbuy.shopName,
 						sellingPrice: app.globalData.groupbuy.gprice,
 						originalPrice: app.globalData.groupbuy.originalPrice,
@@ -74,7 +76,6 @@ Page({
 					}
 				]),
 			  postType: 1,
-				addressId: '',
 				storeId: app.globalData.groupbuy.storeId,
 				userId: this.data.cuser.userId
 			},
@@ -145,5 +146,4 @@ Page({
 			'pay.password': ''
 		})
 	}
-	
 })
