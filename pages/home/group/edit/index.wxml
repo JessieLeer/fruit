@@ -1,0 +1,83 @@
+<view class='group-process'>
+  <view class='process-header'>
+	  <view class='process-header-line f-ib'></view>
+		<text class='process-header-title'>拼团流程</text>
+		<view class='process-header-line f-ib'></view>
+	</view>
+	<view class='process-body'>
+	  <view class='process-step f-ib f-vat'>
+		  <text class='process-index f-db'>1</text>
+			<text class='process-title f-db'>选择商品</text>
+			<text class='process-label f-db'>开团/参团</text>
+		</view>
+		<view class='process-step-line f-ib f-vat'></view>
+		<view class='process-step f-ib f-vat'>
+		  <text class='process-index f-db'>2</text>
+			<text class='process-title f-db'>邀请好友</text>
+			<text class='process-label f-db'>好友参团</text>
+		</view>
+		<view class='process-step-line f-ib f-vat'></view>
+		<view class='process-step f-ib f-vat'>
+		  <text class='process-index f-db'>3</text>
+			<text class='process-title f-db'>人满成团</text>
+			<text class='process-label f-db'>自提</text>
+		</view>
+	</view>
+</view>
+<view class='seg'></view>
+
+<view class='shop'>
+	<van-cell-group>
+		<van-field value="{{orderInfo.ztName}}" border="{{ false }}" readonly>
+			<text slot='label' class='label'>提货门店</text>
+		</van-field>
+		<van-field value="{{orderInfo.ztAddress}}" border="{{ false }}" readonly>  
+			<text slot='label' class='label'>提货地址</text> 
+		</van-field>
+		<van-field value="{{orderInfo.ztMobile}}" border="{{ false }}" readonly>
+			<text slot='label' class='label'>门店电话</text> 
+		</van-field>
+		<van-field value="{{orderInfo.ztOpenTime}}" border="{{ false }}" readonly>
+			<text slot='label' class='label'>营业时间</text> 
+		</van-field>
+		<van-field value="{{orderInfo.ztPickTime}}" border="{{ false }}" readonly>
+			<text slot='label' class='label'>提货时间</text> 
+		</van-field>
+	</van-cell-group>
+</view>
+<view class='seg'></view>
+
+<van-cell-group custom-class='goods'>
+	<van-cell wx:for='{{orderInfo.carts}}' wx:key='index'>
+		<view slot="title" class='good-area'>
+			<image src='{{item.headImage}}' mode='widthFix' class='head-image' />
+			<view class='good-name'>
+				<text>{{item.name}}</text>
+				<text class='good-count'>X{{item.count || item.number}}</text>
+			</view>
+			<view class='good-price'>
+				<text class='oldprice'>¥{{item.originalPrice}}</text>
+			  <text class='newprice'>¥{{item.sellingPrice}}</text>
+			</view>
+		</view>
+	</van-cell>
+</van-cell-group>
+<view class='seg'></view>
+<view class='seg'></view>
+
+<van-cell-group>
+	<van-cell title="商品合计" value="¥{{orderInfo.totalMoney}}" value-class='value'/>
+	<van-cell title="积分" value="{{orderInfo.integral}}" value-class='value'/>
+</van-cell-group>
+<view class='seg'></view>
+<view class='seg'></view>
+
+<view class='footer'>
+	<view class='footer-price'>
+		付款<text class='price-total'>¥{{orderInfo.totalMoney}}</text>
+	</view>
+	<van-button type="warning" size="large" custom-class='footer-submit' bind:click='onPayshow'>提交订单</van-button>
+</view>
+
+<pay isShow="{{pay.show}}" balanceShow='{{pay.balanceShow}}' paShow='{{pay.paShow}}' password='{{pay.password}}' orderId='{{orderId}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{orderInfo.totalMoney}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
+<van-toast id="van-toast" />

@@ -1,0 +1,76 @@
+.group{
+  padding: 30rpx 20rpx;
+	border-bottom: #f6f6f6 solid 1rpx;
+	display: flex;
+}
+
+.group-info{
+  flex: 1;
+}
+
+.group-avatar{
+  width: 100rpx;
+	height: 100rpx;
+	border-radius: 50%;
+	margin-right: 30rpx;
+}
+
+.user-name{
+  line-height: 100rpx;
+}
+
+.group-user{
+  margin-right: 30rpx;
+}
+
+.group-user-count{
+  color: #333;
+	font-size: 32rpx;
+	margin-top: 12rpx;
+}
+
+.group-user-countdonw{
+  color: #666;
+	font-size: 26rpx;
+}
+
+.group-user-count text{
+  color: #F6931F;
+}
+
+.group-create.van-button--warning{
+  width: 160rpx;
+  height: 80rpx;
+	line-height: 80rpx;
+  background: rgba(246,147,31,1);
+  border-radius: 12rpx;
+	font-size: 32rpx;
+	margin-top: 16rpx;
+}
+
+.w-100{
+  width: 100%;
+}
+
+.f-fl{
+  float: left;
+}
+
+.f-fr{
+  float: right;
+}
+
+.f-ib{
+  display: inline-block;
+}
+
+.f-vat{
+  vertical-align: top;
+}
+
+.f-cb:after,.f-cbli li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+.f-cb,.f-cbli li{zoom:1;}
+
+.f-db{
+  display: block;
+}

@@ -1,9 +1,0 @@
-.tmp{
-  text-align: center;
-	padding-top: 100rpx;
-}
-
-.txt{
-  color: #9E9E9E;
-	display: block;
-}

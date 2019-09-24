@@ -128,17 +128,13 @@ Page({
 	
 	/*-- 点击标签进行搜索或者跳转 --*/
 	handleTagClick(e) {
-		if(e.currentTarget.dataset.search.type == '1'){
-			this.setData({
-				isSearch: false,
-				'search.value': e.currentTarget.dataset.search.value,
-				'search.page': 1,
-				goods: []
-			})
-			this.index()
-		}else{
-			console.log('功能暂时没开放')
-		}
+		this.setData({
+			isSearch: false,
+			'search.value': e.currentTarget.dataset.search.value,
+			'search.page': 1,
+			goods: []
+		})
+		this.index()
 	},
 	
 	/*-- 获取商品列表 --*/

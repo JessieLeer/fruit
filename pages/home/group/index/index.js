@@ -58,7 +58,7 @@ Page({
 	index(e) {
 		let _this = this
 		wx.request({
-			url: `http://192.168.1.70:8080/api/groupNow`,
+			url: `${app.globalData.url}/api/groupNow`,
 			data: {
 				goodName: this.data.good.query,
 				page: this.data.good.page,

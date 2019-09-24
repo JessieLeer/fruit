@@ -114,12 +114,13 @@
 	float: left;
 }
 
-.good-item{
+.good-item.van-card{
   position: relative;
+	background-color: white;
 }
 
-.thumb{
-  max-width: 200rpx;
+image.thumb{
+	width: 150rpx;
 }
 
 .good-name{
@@ -159,6 +160,10 @@
   background:rgba(0,131,123,1);
   border-radius:50%;
 	color: white;
+}
+
+.plus.van-stepper__plus:after,.plus.van-stepper__plus:before{
+  background-color: white;
 }
 
 .step .good-input{

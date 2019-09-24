@@ -110,6 +110,10 @@
 	width: 40rpx;
 }
 
+.plus.van-stepper__plus:after,.plus.van-stepper__plus:before{
+  background-color: white;
+}
+
 .seg{
   background-color: #F4F4F4;
 	height: 20rpx;

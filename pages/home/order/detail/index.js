@@ -15,12 +15,20 @@ Page({
 			cost: 0,
 			show: false,
 			paShow: false,
+			balanceShow: true,
 			type: '',
 			password: '',
 			passFocus: false
 		},
 		logShow: false,
-		logistics: {}
+		logistics: {},
+		coupon: {
+			show: false,
+			data: [],
+			useing: {},
+			text: '无可用'
+		},
+		emptyCoupon: {}
 	},
 	onLoad(option) {
 		this.initUser()
@@ -299,5 +307,71 @@ Page({
 			'pay.paShow': false,
 			'pay.password': ''
 		})
-	}
+	},
+	
+	/*-- 获取当前订单可用优惠券 --*/
+	openCoupon(e) {
+		if(this.data.coupon.text == '无可用') {
+			Toast({
+				message: '没有可用的优惠券'
+			})
+		}else{
+			this.setData({
+				'coupon.show': true
+			})
+		}
+	},
+	couponIndex(e) {
+		let _this = this
+		wx.request({
+			url: `${app.globalData.url}/api/useList`,
+			data: {
+				commodityId: this.data.goodIds,
+				quota: e.quota,
+				uid: this.data.cuser.userId
+			},
+			success(res) {
+				_this.setData({
+					'coupon.data': res.data.data,
+					'coupon.text': res.data.data.length == 0 ? '无可用' : `${res.data.data.length}张可用`
+				})
+			}
+		})
+	},
+	onCouponClose(e) {
+		this.setData({
+			'coupon.show': false
+		})
+	},
+	couponSelect(e) {
+		let coupon = e.currentTarget.dataset.coupon
+		if(coupon.rid == undefined) {
+			this.setData({
+				'coupon.show': false,
+			})
+		}else{
+			this.setData({
+				'coupon.useing': coupon,
+				'coupon.show': false,
+				'coupon.text': coupon.rtype == '1' ? `减${coupon.money}元` : `${coupon.fracture * 10}折`,
+			})
+			let _this = this
+			wx.request({
+				url: `${app.globalData.url}/api/orderUse`,
+				data: {
+					commodityId: this.data.goodIds.toString(),
+					commodityQuota: this.data.goods.map((item) => {
+						return item.sellingPrice * item.number
+					}).toString(),
+					quota: this.data.orderInfo.totalMoney,
+					rid: coupon.rid
+				},
+				success(res) {
+					_this.setData({
+						'orderInfo.payMoney': parseFloat(res.data.total)
+					})
+				}
+			})
+		}
+	},
 })

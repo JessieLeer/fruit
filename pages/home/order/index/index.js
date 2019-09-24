@@ -29,6 +29,7 @@ Page({
 			cost: 0,
 			show: false,
 			paShow: false,
+			balanceShow: true,
 			type: '',
 			password: '',
 			passFocus: false
@@ -79,10 +80,11 @@ Page({
 				})
 				_this.index({type: 0})
 				_this.index({type: 1})
+				_this.index1()
 			}
 		})
 	},
-	/*-- 获取配送订单列表 --*/
+	/*-- 获取配送或者自提订单列表 --*/
 	index(e) {
 		let type = parseInt(e.type)
 		let _this = this
@@ -147,6 +149,52 @@ Page({
 			}
 		})
 	},
+	
+	/*-- 获取拼团订单列表 --*/
+	index1(e) {
+		let _this = this
+		wx.request({
+			url: `${app.globalData.url}/api/group/order/list`,
+			data: {
+				userId: this.data.cuser.userId,
+				pageNum: this.data.order2.page,
+				pageSize: 10,
+			},
+			success(res) {
+				if(res.data.data.length == 0) {
+					_this.setData({
+						'order2.isLoadAll': true
+					})
+				}else{
+					for(let item of res.data.data) {
+						switch(item.status) {
+							case '1':
+								item.status = '待支付'
+								break
+							case '2':
+								item.status = '待配送'
+								break
+							case '3':
+								item.status = '待自提'
+								break
+							case '4':
+								item.status = '配送中'
+								break
+							case '5':
+								item.status = '已取消'
+								break
+							case '6':
+								item.status = '已完成'
+								break
+						}
+					}
+					_this.setData({
+						'order2.data': _this.data.order2.data.concat(res.data.data)
+					})
+				}
+			}
+		})
+	},
 
 	/*-- 上拉刷新 --*/
 	refresh(e) {
@@ -157,21 +205,23 @@ Page({
 					'order0.data': [],
 					'order0.page': 1
 				})
+				this.index({type: id})
 				break
 			case '1':
 				this.setData({
 					'order1.data': [],
 					'order1.page': 1
 				})
+				this.index({type: id})
 				break
 			case '2':
 				this.setData({
 					'order2.data': [],
 					'order2.page': 1
 				})
+				this.index1({type: id})
 				break
 		}				 
-		this.index({type: id})
 	},
 	
 	/*-- 下拉加载更多商品 --*/
@@ -184,19 +234,21 @@ Page({
 					this.setData({
 					  'order0.page': this.data[`order${id}`].page + 1
 				  })
+					this.index({type: id})
 					break
 				case '1':
 					this.setData({
 					  'order1.page': this.data[`order${id}`].page + 1
 				  })
+					this.index({type: id})
 					break
 				case '2':
 					this.setData({
 					  'order2.page': this.data[`order${id}`].page + 1
 				  })
+					this.index1({type: id})
 					break	
 			}
-			this.index({type: id})
 		}
 	},
 	
