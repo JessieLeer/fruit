@@ -114,6 +114,7 @@ Page({
 			success(res) {
 				if(res.data.code == 200){
 					console.log(res)
+					console.log('__________________')
 					wx.showToast({
 						icon: 'none',
 						title: res.data.message,

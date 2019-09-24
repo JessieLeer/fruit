@@ -109,7 +109,9 @@ Page({
                 'content-type': 'application/json' // 默认值
             },
             success(res) {
-                console.log(res)
+                if (mobile == res.data.data.name){
+                    res.data.data.name = '';
+                }
                 that.setData({
                     currentadress : res.data.data.store,
                     name: res.data.data.name,
