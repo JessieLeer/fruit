@@ -21,7 +21,6 @@ Page({
 	
 	/*-- 监听手机号发生改变时验证手机格式 --*/
 	phoneChange(event) {
-	console.log(event)
 		const phone = event.detail
     let message = ''
 		let verify = false
