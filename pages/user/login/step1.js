@@ -11,11 +11,14 @@ Page({
 			value: '',
 			verify: false
 		},
-		cardNo: null
+		cardNo: null,
+		shopId : ''
 	},
 	
 	onLoad(option) {
-
+		this.setData({
+			shopId: option.shopId
+		})
 		
 	},
 	
@@ -128,7 +131,7 @@ Page({
 					if (!that.data.cardNo){
 						setTimeout(() => {
 							wx.navigateTo({
-								url: '../../bindVIP/index'
+								url: `../../bindVIP/index?shopId=${that.data.shopId}`
 							})
 						}, 2000);
 					}else{

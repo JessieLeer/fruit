@@ -7,12 +7,18 @@ Page({
 	data: {
     userInfo: {},
     cardNo : null,
-
+    shopId : ''
   },
   onShow(){
     this.loginGetCode()
   },
-	onLoad() {
+  onLoad(options) {
+    if (JSON.stringify(options) =='{}')return
+    console.log(options)
+    var scene = decodeURIComponent(options.scene)
+    this.setData({
+      shopId: scene.shopId
+    })
 	},
   getWxStorage(){
 
@@ -82,7 +88,7 @@ Page({
         wx.setStorageSync('Nickname', JSON.parse(res.rawData).nickName)
         if (!that.data.cardNo){
           wx.navigateTo({
-            url: '../../bindVIP/index'
+            url: `../../bindVIP/index?shopId=${that.data.shopId}`
           })
         }else{
           wx.navigateBack()
@@ -100,7 +106,7 @@ Page({
 	/*-- 页面跳转 --*/
 	go(e) {
 		wx.navigateTo({
-			url: e.currentTarget.dataset['url']
+      url: `./step1?shopId=${this.data.shopId}`
 		})
 	}
 })

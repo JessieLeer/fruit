@@ -38,11 +38,11 @@
         <van-datetime-picker class="fix" type="date" min-date="{{ minDate }}" max-date="{{ maxDate }}"
             item-height="54" value="{{ nowDate }}" bind:confirm="confirm" bind:cancel="cancel" formatter="{{ formatter }}" />
     </view>
-    <view class="popup" wx:if="{{showStore}}">
+    <!-- <view class="popup" wx:if="{{showStore}}">
         <view class="autoheight" bindtap="close"></view>
         <van-picker class="fix" show-toolbar="true" wx:if="{{showStore}}" columns="{{ columns }}" item-height="54"
             bind:confirm="confirm_select" bind:cancel="cancel_selcect"></van-picker>
-    </view>
+    </view> -->
    
    
 </view>

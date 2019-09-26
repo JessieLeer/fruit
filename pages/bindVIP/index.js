@@ -32,7 +32,8 @@ Page({
         wxcode : '',
         cardList : [],
         latitude : 0,
-        longitude : 0
+        longitude : 0,
+        shopId : ''
     },
     onShow(){
         this.getUserInfo()
@@ -103,7 +104,8 @@ Page({
         wx.request({
             url: `${app.globalData.url}/api/mini/getBasicInfo`, //仅为示例，并非真实的接口地址
             data: {
-                mobile
+                mobile,
+                shopId : that.data.shopId
             },
             header: {
                 'content-type': 'application/json' // 默认值
@@ -231,7 +233,7 @@ Page({
                 loginType : 'wx',
                 mobile: that.data.tel,
                 name: that.data.name,
-                store: that.data.currentadress
+                store: that.data.shopId
 
             },
             header: {
@@ -333,6 +335,12 @@ Page({
 
                 }
             }
+        })
+    },
+    onLoad(options){
+        console.log(options)
+        this.setData({
+            shopId: options.shopId
         })
     }
 })
