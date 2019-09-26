@@ -156,7 +156,7 @@ Page({
                         level : res.data.data.levelName,
                         loginKey: true
                     })
-                    barcode.barcode('firstCanvas', JSON.stringify(res.data.data.userId) , 285 * 2, 108 * 2)
+                    barcode.barcode('firstCanvas', JSON.stringify(res.data.data.cardNo) , 285 * 2, 108 * 2)
                 }
             })
         }
