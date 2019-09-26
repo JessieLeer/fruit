@@ -33,7 +33,8 @@ Page({
         cardList : [],
         latitude : 0,
         longitude : 0,
-        shopId : ''
+        shopId : '',
+        storeId : 0
     },
     onShow(){
         this.getUserInfo()
@@ -114,8 +115,10 @@ Page({
                 if (mobile == res.data.data.name){
                     res.data.data.name = '';
                 }
+                console.log(res)
                 that.setData({
-                    currentadress : res.data.data.store,
+                    currentadress : res.data.data.storeName,
+                    storeId : res.data.data.storeId,
                     name: res.data.data.name,
                     current: res.data.data.birthday,
                     nowDate: res.data.data.birthday ? new Date(res.data.data.birthday).getTime() : new Date(1980, 0, 1).getTime()
@@ -233,7 +236,7 @@ Page({
                 loginType : 'wx',
                 mobile: that.data.tel,
                 name: that.data.name,
-                store: that.data.shopId
+                store: that.data.storeId
 
             },
             header: {

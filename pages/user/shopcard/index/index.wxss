@@ -1,6 +1,6 @@
 .history_fix{
     width : 100%;
-    padding-bottom : 10px;
+    padding-bottom : 40px;
     background: #fff;
     display: flex;
     justify-content: space-around;
@@ -47,6 +47,7 @@
     border-radius:7.5px;
     padding : 24px 17.5px 0 17.5px;
     box-sizing : border-box;
+    margin-bottom : 20px;
 }
 .title_card{
     font-size:18px;

@@ -26,6 +26,28 @@ Page({
     },
     onShow(){
         this.getMinHeight()
+        this.getShopCard()
+    },
+    getShopCard(){
+        var that = this;
+        let loginUid = wx.getStorageSync('loginUid')
+        let userId = wx.getStorageSync('userId')
+        wx.request({
+            url: `${app.globalData.url}/api/member/shopCardMx`, //仅为示例，并非真实的接口地址
+            data: {
+                loginUid: loginUid,
+                userId: userId
+            },
+            header: {
+                'content-type': 'application/json' // 默认值
+            },
+            success(res) {
+                console.log(res)
+                that.setData({
+                    dataList: res.data.data.validList
+                })
+            }
+        })
     },
     gotoDoc(){
         wx.navigateTo({

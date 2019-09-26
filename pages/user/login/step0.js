@@ -40,8 +40,8 @@ Page({
         'content-type': 'application/json'
       },
       success(res) {
-				let _res = res.data.data.phoneNumber
         if(res.data.data == null)return
+				let _res = res.data.data.phoneNumber
 				 wx.login({
 					success: res => {
 						wx.request({

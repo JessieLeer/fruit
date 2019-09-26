@@ -147,7 +147,7 @@ Page({
                         userId: res.data.data.userId,
                         mobile: res.data.data.mobile,
                         coupon: res.data.data.coupon,
-                        card: res.data.data.card,
+                        card: res.data.data.shopCard,
                         balance: res.data.data.balance,
                         onceCard: res.data.data.onceCard,
                         username: res.data.data.username,
