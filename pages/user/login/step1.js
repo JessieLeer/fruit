@@ -25,7 +25,6 @@ Page({
     let message = ''
 		let verify = false
     if (/^1[3|4|5|7|8][0-9]\d{8}$/.test(phone)) {
-		console.log(213131)
       message = ''
 			verify = true
     } else {

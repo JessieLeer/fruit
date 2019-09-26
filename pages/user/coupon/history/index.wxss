@@ -177,3 +177,24 @@
 image{
     height: auto;
 }
+.hasno_area{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    height : calc(100vh - 94px);
+}
+.hasno_area image{
+    width : 314px;
+}
+.info{
+    text-align : center;
+    font-size:16px;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(158,158,158,1);
+}
+.fix_height{
+    height : 231.5px;
+}

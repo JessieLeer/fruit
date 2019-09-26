@@ -1,4 +1,5 @@
 import Toast from "../../../miniprogram_npm/vant-weapp/toast/toast"
+import qrcode from '../../../utils/weapp-qrcode.js'
 
 //index.js
 //获取应用实例
@@ -22,7 +23,8 @@ Page({
 		localShopcarGoods: [],
 		totalPrice: 0,
 		caller: 0,
-		noGoodShow: false
+		noGoodShow: false,
+		codeShow: false
 	},
 
   onLoad(option) {
@@ -76,6 +78,7 @@ Page({
 				cates: [],
 				goods: []
 			})
+			this.bannerIndex()
 			this.shopShow()
 			this.initCuser()
 		},1000)
@@ -139,6 +142,30 @@ Page({
 	go(e) {
 		wx.navigateTo({
 			url: e.currentTarget.dataset.url
+		})
+	},
+	
+	/*-- 查看会员码 --*/
+	viewCode(e) {
+		this.setData({
+			codeShow: true
+		})
+		new qrcode('myQrcode',{
+			text: '111',
+			width: 200,
+			height: 200,
+			padding: 12, 
+			// 二维码可辨识度
+			correctLevel: qrcode.CorrectLevel.L, 
+			callback: (res) => {
+				console.log(res)
+			}
+		})
+		console.log('world')
+	},
+	onCodeClose(e) {
+		this.setData({
+			codeShow: false
 		})
 	},
 	

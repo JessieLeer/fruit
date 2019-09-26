@@ -75,7 +75,6 @@ Page({
 		wx.getStorage({
 			key: 'cuser',
 			success (res) {
-				console.log(res)
 				_this.setData({
 					cuser: res.data
 				})

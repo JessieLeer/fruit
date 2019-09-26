@@ -72,21 +72,21 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        console.log()
         if (res.data.code == 200){
           if(that.data.idx != 'setting'){
-            wx.reLaunch({
-              url: '../../charge/index/index'
+						wx.navigateBack({
+              delta: 2  
             })
+
           }else{
             wx.showToast({
               title: res.data.message,
               icon: 'success'
             })
             setTimeout(() => {
-              wx.reLaunch({
-                url: '../../index/index'
-              })
+              wx.navigateBack({
+								delta: 3 
+							})
             }, 2000);
           } 
         }else{

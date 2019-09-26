@@ -1,10 +1,9 @@
 {
   "pages": [
-    "pages/home/tmp/index",
+		"pages/home/index/index",
     "pages/user/setting/reset-password/reset-password", 
     "pages/user/setting/paysetting/phone-set", 
     "pages/user/setting/paysecretsetting/reset-password",
-    "pages/home/index/index",
     "pages/user/seccard/index/index",
     "pages/user/shopcard/index/index",
     "pages/user/charge/chargedetail/index",

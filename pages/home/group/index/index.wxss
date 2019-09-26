@@ -193,3 +193,13 @@
 .f-cb:after,.f-cbli li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
 .f-cb,.f-cbli li{zoom:1;}
 
+.nogood{
+  text-align: center;
+	padding-top: 40rpx;
+}
+
+.nogood-text{
+  display: block;
+	color: #9e9e9e;
+	font-size:28rpx;
+}

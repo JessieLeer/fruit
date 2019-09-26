@@ -12,7 +12,8 @@ Page({
 			query: '',
 			data: [],
 			isLoadAll: false
-		}
+		},
+		noGroupShow: false
 	},
 	onLoad(option) {
 		wx.showLoading({
@@ -78,6 +79,9 @@ Page({
 						'good.data': _this.data.good.data.concat(res.data.data)
 					})
 				}
+				_this.setData({
+					noGroupShow: _this.data.good.data.length == 0
+				})
 			}
 		})
 	},

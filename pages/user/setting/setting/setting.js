@@ -19,7 +19,11 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        wx.clearStorageSync()
+				wx.removeStorageSync('loginUid')
+				wx.removeStorageSync('userId')
+				wx.removeStorageSync('cuser')
+				wx.removeStorageSync('avatarUrl')
+				wx.removeStorageSync('Nickname')
         wx.showToast({
           title: res.data.message,
           icon: 'none',

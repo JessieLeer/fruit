@@ -55,7 +55,7 @@ Page({
     },
     save(){
         wx.request({
-            url: `${app.globalData.url}/api/member/updateBirthday?loginUid=${app.globalData.loginUid}&userId=${JSON.stringify(wx.getStorageSync('userId'))}&birthday=${this.data.current}`,
+            url: `${app.globalData.url}/api/member/updateBirthday?loginUid=${wx.getStorageSync('loginUid')}&userId=${JSON.stringify(wx.getStorageSync('userId'))}&birthday=${this.data.current}`,
             method : 'POST',
             success(res) {
                 wx.showToast({

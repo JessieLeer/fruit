@@ -1,6 +1,12 @@
 <view class="coupon_container">
     <view>
-        <view class="content_coupon">
+			 <view wx:if="{{dataList.length==0}}" class="hasno_area" style="height: {{minHeight}}px">
+					<view class="fix_height">
+						 <image src="../../../../static/image/hasno.png" mode="widthFix"></image>
+						</view>
+					<view class="info">暂无历史优惠券</view>
+				</view>
+        <view class="content_coupon" wx:else>
             <view class="item_coupon" wx:for="{{dataList}}" wx:key="{{index}}">
                 <view class="cuopon_detail">
                     <view class="flex">

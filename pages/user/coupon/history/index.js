@@ -3,7 +3,8 @@ Page({
     data : {
         showkey : -1,
         selectedFlag : [],
-        dataList : []
+        dataList : [],
+			  minHeight : 0
     },
     clickMore(e){
         var index = e.currentTarget.dataset.index;
@@ -17,9 +18,24 @@ Page({
         })
         
     },
+	  getMinHeight(){
+        let h ;
+        let minHeight ;
+        wx.getSystemInfo({
+            success: function (res) {
+                h = res.windowHeight
+               
+            }
+        })
+        minHeight = h - 152 - 41;
+        this.setData({
+            minHeight: minHeight
+        })
+    },
     onShow (){
         this.data.dataList.map((item,index)=>{
             this.data.selectedFlag[index] = false;
         })
+			this.getMinHeight()
     }
 })
