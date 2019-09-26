@@ -69,7 +69,7 @@ Page({
  
   tel: function () {
     wx.showActionSheet({
-      itemList: ['13387085587', '呼叫'],
+      itemList: ['400-0566-360', '呼叫'],
       success: function (res) {
         if (res.tapIndex == 1 || res.tapIndex == 0){
             wx.makePhoneCall({
