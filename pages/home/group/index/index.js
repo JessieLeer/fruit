@@ -13,7 +13,8 @@ Page({
 			data: [],
 			isLoadAll: false
 		},
-		noGroupShow: false
+		noGroupShow: false,
+		caller: 0
 	},
 	onLoad(option) {
 		wx.showLoading({
@@ -25,7 +26,7 @@ Page({
 				shop: app.globalData.shop,
 		  })
 			this.initCuser()
-			this.index()
+			this.shopShow()
       wx.hideLoading()
     }, 1000)
 	},
@@ -54,6 +55,35 @@ Page({
 		wx.navigateTo({
 			url: url
 		})
+	},
+	
+	/*-- 获取最近店铺 --*/
+	shopShow(e) {
+		if(this.data.shop.id) {
+			this.index()
+		}else{
+			let _this = this
+			wx.request({
+				url: `${app.globalData.url}/api/curr/store`,
+				data: {
+					latitude: _this.data.position.location.lat,
+					longitude: _this.data.position.location.lng,
+				},
+				success(res) {
+					if(res.data.message == '附近没有门店'){
+						_this.setData({
+							caller: res.data.data
+						})
+					}else{
+						app.globalData.shop = res.data.data
+						_this.setData({
+							shop: res.data.data
+						})
+						_this.index()
+					}
+				}
+			})
+		}
 	},
 	
 	index(e) {
