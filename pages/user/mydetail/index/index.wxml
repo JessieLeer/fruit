@@ -4,7 +4,7 @@
             <image class="avatar" src="{{avatar == '' ? '../../../../static/image/user.png' : avatar}}" mode="widthFix"></image>
         </view>
         <view class="name">
-            {{Nickname}}
+            {{Nickname || username}}
         </view>
         <view>
             <image class="vip" src="../../../../static/image/vip.png" wx:if="{{level == '金卡'}}" mode="widthFix"></image>

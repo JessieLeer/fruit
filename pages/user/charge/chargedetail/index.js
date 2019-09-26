@@ -33,7 +33,6 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        console.log(res)
         that.setData({
           minusTotal: res.data.data.minusTotal,
           plusTotal: res.data.data.plusTotal,

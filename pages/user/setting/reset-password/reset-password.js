@@ -23,21 +23,25 @@ Page({
 
   nextFocus(e) {
     var that = this;
-    console.log(e.detail.value);
     var inputValue = e.detail.value;
     that.setData({
       nextValue: inputValue,
     });
-    console.log(this.data.Value)
-      if (that.data.Value != that.data.nextValue  ){
-        wx.showToast({
-          title: "密码不一致",
-          icon: 'none',
-        })
-      }else{
-       
-      }
-    
+		let reg = /^\d{6}$/
+		if(!reg.test(this.data.Value)){
+			 wx.showToast({
+        title : '密码必须为6位纯数字',
+        icon : 'none'
+      })
+      return
+		}
+		if (that.data.Value != that.data.nextValue  ){
+      wx.showToast({
+        title: "密码不一致",
+        icon: 'none',
+      })
+			return 
+    }
   },
   Tap() {
     var that = this;
@@ -62,7 +66,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
   },
 
   /**

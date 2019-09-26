@@ -28,10 +28,8 @@ Page({
 			text: '无可用'
 		},
 		emptyCoupon: {},
-		address: {
-			show: false,
-			data: []
-		}
+		aid: '',
+		caddress: {}
 	},
 	onLoad(option) {
 		this.setData({
@@ -43,7 +41,17 @@ Page({
 		})
 		this.initCuser()
 		this.initShopcar()
-		this.addressIndex()
+		
+		if(this.data.aid == '') {
+		}else{
+			this.addresShow()
+		}
+	},
+	onShow() {
+		if(this.data.aid == '') {
+		}else{
+			this.addresShow()
+		}
 	},
 	/*-- 初始化用户 --*/
 	initCuser(e) {
@@ -103,6 +111,29 @@ Page({
 			}
 		})
 	},
+	/*-- 获取某条收货地址 --*/
+	addresShow(e) {
+		let _this = this
+		wx.getStorage({
+			key: 'loginUid',
+			success (res) {
+				wx.request({
+					url: `${app.globalData.url}/api/member/getUserAddressById`,
+					data: {
+						loginUid: res.data,
+						userId: _this.data.cuser.userId,
+						addrId: _this.data.aid
+					},
+					success(res) {
+						_this.setData({
+							caddress: JSON.parse(res.data.data)
+						})
+						console.log(res)
+					}
+				})
+			}
+		})
+	},
 	/*-- 获取当前订单可用优惠券 --*/
 	openCoupon(e) {
 		if(this.data.coupon.text == '无可用') {
@@ -142,6 +173,8 @@ Page({
 		if(coupon.rid == undefined) {
 			this.setData({
 				'coupon.show': false,
+				'coupon.useing': {},
+				'coupon.text': `${this.data.coupon.data.length}张可用`
 			})
 		}else{
 			this.setData({
@@ -186,7 +219,7 @@ Page({
 					}
 				})),
 			  postType: this.data.active,
-				addressId: this.data.active == '1' ? '' : this.data.orderInfo.fsId,
+				addressId: this.data.active == '1' ? '' : this.data.caddress.id || this.data.orderInfo.fsId,
 				storeId: this.data.shopId,
 				userId: this.data.cuser.userId
 			},
@@ -271,26 +304,6 @@ Page({
 		this.setData({
 			'pay.paShow': false,
 			'pay.password': ''
-		})
-	},
-	/*-- 获取收获地址 --*/
-	addressIndex(e) {
-		let _this = this
-		wx.getStorage({
-			key: 'loginUid',
-			success (res) {
-				console.log(res.data)
-				wx.request({
-					url: `${app.globalData.url}/api/member/getUserAddress`,
-					data: {
-						loginUid: res.data,
-						userId: _this.data.cuser.userId
-					},
-					success(res) {
-						console.log(res)
-					}
-				})
-			}
 		})
 	}
 })

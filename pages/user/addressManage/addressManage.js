@@ -68,7 +68,6 @@ Page({
   },
 
   newAddress:function(){//新增地址
-    console.log(this.data.content.length);
     if (this.data.content.length <10){
       wx.navigateTo({
         url: 'newAddress/newAddress',

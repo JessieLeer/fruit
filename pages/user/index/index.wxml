@@ -124,7 +124,7 @@
                 </view>
                 <view class="code_wrap">
                     <canvas style="width: 285px; height: 108px;" canvas-id="firstCanvas"></canvas>
-                    <view style="margin-top: 15px;">{{userId}}</view>
+                    <view style="margin-top: 15px;">{{cardNo}}</view>
                 </view>
                 <view class="text_area">
                     到店结账时请向店员出示此会员卡

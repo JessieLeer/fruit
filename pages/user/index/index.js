@@ -19,14 +19,12 @@ Page({
     gotoDocMe(){
         wx.navigateTo({
             url: "../documents/Doc/index?id=memberlevel"
-
         })
     },
     onTap(){
         if(this.checkLogin())return;
         wx.navigateTo({
             url: "../charge/index/index"
-
         })
     },
     gotoScorePage(){
@@ -144,8 +142,8 @@ Page({
                     wx.setStorageSync('mobile', res.data.data.mobile)
                     let avatarurl = wx.getStorageSync('avatarUrl')
                     let Nickname = wx.getStorageSync('Nickname')
-                    console.log(avatarurl)
                     that.setData({
+											  cardNo: res.data.data.cardNo,
                         point: res.data.data.point,
                         userId: res.data.data.userId,
                         mobile: res.data.data.mobile,

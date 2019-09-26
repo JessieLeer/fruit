@@ -45,6 +45,14 @@ Page({
     })
   },
   formSubmit(e) {
+		let reg = /^\d{6}$/
+		if(!reg.test(this.data.Value)){
+			 wx.showToast({
+        title : '密码必须为6位纯数字',
+        icon : 'none'
+      })
+      return
+		}
     if (this.data.nextValue != this.data.Value){
       wx.showToast({
         title : '两次密码不一致',
@@ -56,8 +64,8 @@ Page({
     wx.request({
       url: `${app.globalData.url}/api/member/resetPayPassword`, //仅为示例，并非真实的接口地址
       data: {
-        loginUid: app.globalData.loginUid,
-        userId: app.globalData.userId,
+        loginUid: wx.getStorageSync('loginUid'),
+        userId: wx.getStorageSync('userId'),
         newPassword: that.data.nextValue
       },
       header: {

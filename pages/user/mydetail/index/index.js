@@ -48,20 +48,15 @@ Page({
     onShow(){
         this.getUserIndfo()
         this.setData({
-            avatar: app.globalData.avatarUrl,
-            Nickname: app.globalData.Nickname,
-            mobile: app.globalData.mobile
+            avatar: wx.getStorageSync('avatarUrl'),
+            Nickname: wx.getStorageSync('Nickname'),
+            mobile: wx.getStorageSync('mobile')
         })
     },
     save(){
         wx.request({
-            url: `${app.globalData.url}/api/member/updateBirthday?loginUid=${app.globalData.loginUid}&userId=${JSON.stringify(app.globalData.userId)}&birthday=${this.data.current}`,
+            url: `${app.globalData.url}/api/member/updateBirthday?loginUid=${app.globalData.loginUid}&userId=${JSON.stringify(wx.getStorageSync('userId'))}&birthday=${this.data.current}`,
             method : 'POST',
-            // data: {
-            //     loginUid: app.globalData.loginUid,
-            //     userId: JSON.stringify(app.globalData.userId),
-            //     birthday: this.data.current
-            // },
             success(res) {
                 wx.showToast({
                     title: res.data.message,
@@ -76,14 +71,17 @@ Page({
         wx.request({
             url: `${app.globalData.url}/api/member/getUserInfo`,
             data: {
-                loginUid: app.globalData.loginUid,
-                userId: app.globalData.userId
+                loginUid: wx.getStorageSync('loginUid'),
+                userId: wx.getStorageSync('userId')
             },
             success(res) {
+							console.log(res)
                 that.setData({
-                    level: res.data.data.levelName,
-                    current : res.data.data.birthday,
-                    valuecurrent: new Date(res.data.data.birthday).getTime()
+                  level: res.data.data.levelName,
+                  current : res.data.data.birthday,
+									username: res.data.data.username,
+                  valuecurrent: new Date(res.data.data.birthday).getTime(),
+									mobile: res.data.data.mobile
                 })
             }
         })

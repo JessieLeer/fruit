@@ -241,8 +241,8 @@ Page({
                 if(res.data.code == 200){
                     wx.setStorageSync('loginUid', res.data.data.loginUid)
                     wx.setStorageSync('userId', res.data.data.userId)
-                    // app.globalData.loginUid = res.data.data.loginUid;
-                    // app.globalData.userId = res.data.data.userId;
+                    // wx.getStorageSync('loginUid') = res.data.data.loginUid;
+                    // wx.getStorageSync('userId') = res.data.data.userId;
                     console.log(res)
                     wx.showToast({
                         title: res.data.message,
@@ -316,8 +316,6 @@ Page({
             },
             success(res) {
                 if (res.data.code == 200) {
-                    console.log(res.data)
-                    console.log('---------------卡券信息')
                     wx.addCard({
                         cardList: [
                             {

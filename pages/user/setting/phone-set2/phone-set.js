@@ -103,8 +103,8 @@ Page({
     wx.request({
       url: `${app.globalData.url}/api/member/getUserInfo`, //仅为示例，并非真实的接口地址
       data: {
-        loginUid: app.globalData.loginUid,
-        userId: app.globalData.userId
+        loginUid: wx.getStorageSync('loginUid'),
+        userId: wx.getStorageSync('userId')
       },
       header: {
         'content-type': 'application/json' // 默认值
@@ -121,10 +121,10 @@ Page({
       url: `${app.globalData.url}/api/member/updateMobile`,
       data: {
         newMobile: this.data.tel,
-        loginUid: app.globalData.loginUid,
+        loginUid: wx.getStorageSync('loginUid'),
         smsCodeId: this.data.smsId,
         smsCode: this.data.code,
-        userId: app.globalData.userId,
+        userId: wx.getStorageSync('userId'),
       },
       success(res) {
         console.log(res)

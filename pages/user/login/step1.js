@@ -121,8 +121,8 @@ Page({
 					})
 					wx.setStorageSync('loginUid', res.data.data.loginUid)
 					wx.setStorageSync('userId', res.data.data.userId)
-					// app.globalData.loginUid = res.data.data.loginUid;
-					// app.globalData.userId = res.data.data.userId;
+					// wx.getStorageSync('loginUid') = res.data.data.loginUid;
+					// wx.getStorageSync('userId') = res.data.data.userId;
 					that.setData({
 						cardNo: res.data.data.cardNo
 					})

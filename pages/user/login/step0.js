@@ -18,8 +18,8 @@ Page({
 
   },
 	getPhoneNumber(e) {
-    let code = wx.getStorageSync('code');
-    let openid = wx.getStorageSync('openid');
+    let code = wx.getStorageSync('code')
+    let openid = wx.getStorageSync('openid')
     // return
     var that = this
     //3. 解密

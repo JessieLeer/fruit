@@ -1,9 +1,9 @@
 <view class='main'>
 	<van-tabs type="card" tab-class='tab' custom-class='tabs' tab-active-class='tab-active' active='{{active}}' bind:change='tabChange'>
 	  <van-tab title="配送">
-		  <van-cell is-link title="{{orderInfo.fsAddress}}" use-label-slot bind:click='addressIndex'>
-			  <van-tag slot='icon' color='#e8fcfb' text-color='#00837B' custom-class='address-type'>{{orderInfo.addressType}}</van-tag>
-			  <view slot='label'>{{orderInfo.fsName}} {{orderInfo.fsMobile}}</view>
+		  <van-cell is-link title="{{caddress.addr || orderInfo.fsAddress}}" use-label-slot url='/pages/home/order/address/index?shopId={{shopId}}'>
+			  <van-tag slot='icon' color='#e8fcfb' text-color='#00837B' custom-class='address-type'>{{caddress.tag || orderInfo.addressType}}</van-tag>
+			  <view slot='label'>{{caddress.name || orderInfo.fsName}} {{caddress.mobile || orderInfo.fsMobile}}</view>
 			</van-cell>
 		</van-tab>
 		<van-tab title="门店自提">
@@ -77,8 +77,5 @@
 		</view>	
 
 		<van-button type="default" custom-class='nouse' data-coupon='{{emptyCoupon}}' bindtap='couponSelect'>不使用优惠券</van-button>
-	</van-popup>
-	<van-popup show='{{address.show}}' bind:close='onAddressClose' position='right' custom-class='address-popup'>
-	  
 	</van-popup>
 </view>

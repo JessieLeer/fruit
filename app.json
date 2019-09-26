@@ -1,5 +1,6 @@
 {
   "pages": [
+		"pages/home/tmp/index",
     "pages/home/index/index",
     "pages/user/seccard/index/index",
     "pages/user/shopcard/index/index",
@@ -35,13 +36,14 @@
 		"pages/home/order/evaluate/index",
 		"pages/home/order/evaluate/show",
 		"pages/home/order/evaluate/success",
+		"pages/home/order/address/index",
     "pages/user/login/step0", 
     "pages/user/login/step1" 
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#00837b",
-    "navigationBarTitleText": "缘疆佳园",
+    "navigationBarTitleText": "云时空",
     "navigationBarTextStyle": "white",
     "enablePullDownRefresh": true
   },
@@ -80,19 +82,19 @@
     "backgroundColor": "#F9F9F9",
     "list": [
       {
-				"pagePath": "pages/home/index/index",
+				"pagePath": "pages/home/tmp/index",
         "text": "首页",
 				"selectedIconPath": "static/image/index.png",  
         "iconPath": "static/image/indexdefault.png"  
       },
       {
-				"pagePath": "pages/home/group/index/index",
+				"pagePath": "pages/home/tmp/index",
         "text": "拼团",
 				"selectedIconPath": "static/image/together.png",  
         "iconPath": "static/image/togetherdefault.png" 
       },
       {
-				"pagePath": "pages/home/order/index/index",
+				"pagePath": "pages/home/tmp/index",
         "text": "订单",
 				"selectedIconPath": "static/image/order.png",  
         "iconPath": "static/image/orderdefault.png"  
