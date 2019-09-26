@@ -46,11 +46,11 @@
 	  </van-button>
 		<view class='share-text'>分享给好友</view>
 	</view>
-	<view class='share-part'>
+	<!--<view class='share-part'>
     <van-button type="default" custom-class='share-button'>
 	    <image src='../../../static/image/picture.png' mode='widthFix' class='share-image' />
 	  </van-button>
 		<view class='share-text'>生成图片</view>
-	</view>
+	</view>-->
 	<van-button type="default" custom-class='share-close' bindtap='onClose'>取消</van-button>
 </van-popup>

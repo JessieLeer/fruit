@@ -21,7 +21,8 @@ Page({
 		shopcarGoods: [],
 		localShopcarGoods: [],
 		totalPrice: 0,
-		caller: 0
+		caller: 0,
+		noGoodShow: false
 	},
 
   onLoad(option) {
@@ -110,7 +111,6 @@ Page({
 			url: `${app.globalData.url}/api/banner/list`,
 			data: {},
 			success(res) {
-				console.log(res.data.data)
 				_this.setData({
 					banners: res.data.data
 				})
@@ -237,9 +237,13 @@ Page({
 						item.shopId = _this.data.shop.id
 					}
 					_this.setData({
+						isLoadAll: res.data.data,
 						goods: _this.data.goods.concat(res.data.data)
 					})
 				}
+				_this.setData({
+					noGoodShow: _this.data.goods.length == 0
+				})
 			}
 		})
 	},

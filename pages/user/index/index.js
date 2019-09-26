@@ -138,7 +138,6 @@ Page({
                     'content-type': 'application/json' // 默认值
                 },
                 success(res) {
-                    console.log(res)
                     wx.setStorageSync('mobile', res.data.data.mobile)
                     let avatarurl = wx.getStorageSync('avatarUrl')
                     let Nickname = wx.getStorageSync('Nickname')
