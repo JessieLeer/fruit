@@ -99,6 +99,7 @@ Page({
 			suggestion: []
 		})
 		app.globalData.position = position
+		app.globalData.shop = {}
 		this.index()
 	},
 	
