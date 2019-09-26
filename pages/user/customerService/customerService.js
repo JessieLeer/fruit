@@ -73,7 +73,7 @@ Page({
       success: function (res) {
         if (res.tapIndex == 1 || res.tapIndex == 0){
             wx.makePhoneCall({
-              phoneNumber: '13387085587',
+              phoneNumber: '400-0566-360',
             })
         }
       },

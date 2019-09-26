@@ -13,11 +13,13 @@
   <view>
     <view style="margin-bottom:40rpx;">
       <view class="title-style phone-number">手机号</view>
-      <input  class="input-style" type="number" bindinput="bindKeyInput" maxlength="11" placeholder="请输入手机号码" disabled value="{{tel}}"/>
+      <input  class="input-style" type="number" bind:change="bindKeyInput" maxlength="11" placeholder="请输入手机号码" disabled value="{{tel}}"/>
     </view>
-     <view style="position:relative;margin-bottom:40rpx;">
+     <view style="position:relative;margin-bottom:40rpx;" class="wrap_code">
       <view class="title-style phone-code">验证码</view>
-      <input  class="input-style"  bindinput="codeKey" placeholder="请输入验证码"/>
+      <view class="input-style">
+        <input bindinput="codeKey" placeholder="请输入验证码" />
+      </view>
       <button class="btn-getCode" disabled="{{disabled}}"  bindtap="getCode" style="z-index:100;">{{time}}</button>
     </view>
     
