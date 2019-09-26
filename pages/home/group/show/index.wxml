@@ -34,7 +34,7 @@
 <text class='pick-date f-db'>可提货日期：拼团结束后两小时之后</text>
 <view class='seg'></view>
 
-<view class='group-opera'>
+<view class='group-opera' wx:if='{{order.groupList.length > 0}}'>
   <van-cell title="小伙伴们正在开团，可直接参团" is-link title-class='opera-title' custom-class='opera-group' url='/pages/home/group/list/index?id={{order.gid}}'/>
 	<view class='group' wx:for='{{order.groupList}}' wx:key='index' wx:if='{{index < 2}}'>
 	  <view class='group-info f-cb'>

@@ -16,7 +16,7 @@
                     <image src="../../../static/image/common.png" wx:if="{{level == '普卡' || level == '普通' }}" mode="widthFix" bindtap="gotoDocMe"></image>
                     <image src="../../../static/image/dimond.png" wx:if="{{level == '钻石卡'}}" mode="widthFix" bindtap="gotoDocMe"></image>
                 </view>
-                <view class="code">
+                <view class="code" wx:if='{{cardNo}}'>
                     <image src="../../../static/image/erweicode.png" bindtap="showCode"></image>
                 </view>
             </view>
