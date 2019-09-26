@@ -88,7 +88,7 @@ Page({
         wx.setStorageSync('Nickname', JSON.parse(res.rawData).nickName)
         if (!that.data.cardNo){
           wx.navigateTo({
-            url: `../../bindVIP/index?shopId=${that.data.shopId}`
+            url: `../../bindVIP/index?shopId=${that.data.shopId}&type=wx`
           })
         }else{
           wx.navigateBack()

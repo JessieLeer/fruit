@@ -34,7 +34,8 @@ Page({
         latitude : 0,
         longitude : 0,
         shopId : '',
-        storeId : 0
+        storeId : 0,
+        type : ''
     },
     onShow(){
         this.getUserInfo()
@@ -233,11 +234,11 @@ Page({
             data: {
                 birthday: that.data.current,
                 code: that.data.wxcode,
-                loginType : 'wx',
+                loginType : that.data.type,
                 mobile: that.data.tel,
                 name: that.data.name,
-                store: that.data.storeId
-
+                store: that.data.storeId,
+                smsCode: that.data.code
             },
             header: {
                 'content-type': 'application/json' // 默认值
@@ -343,7 +344,9 @@ Page({
     onLoad(options){
         console.log(options)
         this.setData({
-            shopId: options.shopId
+            shopId: options.shopId,
+            type: options.type,
+            code : options.code
         })
     }
 })

@@ -131,7 +131,7 @@ Page({
 					if (!that.data.cardNo){
 						setTimeout(() => {
 							wx.navigateTo({
-								url: `../../bindVIP/index?shopId=${that.data.shopId}`
+								url: `../../bindVIP/index?shopId=${that.data.shopId}&type=sms&code=${that.data.sms.value}`
 							})
 						}, 2000);
 					}else{
