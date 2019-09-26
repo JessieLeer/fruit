@@ -9,15 +9,21 @@
   <van-cell wx:for="{{suggestion}}" wx:key="index" title="{{item.title}}" label="{{item.address}}" border="{{ false }}" data-address='{{item}}' bind:click='handleAddress' />
 </van-cell-group>
 
-<van-cell-group title='附近门店' wx:else>
-  <van-cell wx:for='{{shops}}' title="{{item.name}}" wx:key='index' use-label-slot bind:click='handleShop' data-shop='{{item}}'>
-	  <view slot='label'>
-		  <text class='address'>{{item.address}}</text>
-			<text class='opentime'>营业时间：{{item.openTime}}</text>
-		</view>
-		<view slot="" class='distance'>
-		  <image src='/static/image/position.png' mode='widthFix' class='position'/>
-		  <view>{{item.distance}}米</view>
-		</view>
-  </van-cell>
-</van-cell-group>
+<view wx:else>
+  <view class='nogood' wx:if='{{shops.length == 0}}'>
+		<image src='/static/image/noshop.png'  mode='widthFix' />
+	  <text class='nogood-text'>该地址附近暂无门店～</text>
+	</view>
+	<van-cell-group title='附近门店' wx:else>
+		<van-cell wx:for='{{shops}}' title="{{item.name}}" wx:key='index' use-label-slot bind:click='handleShop' data-shop='{{item}}'>
+			<view slot='label'>
+				<text class='address'>{{item.address}}</text>
+				<text class='opentime'>营业时间：{{item.openTime}}</text>
+			</view>
+			<view slot="" class='distance'>
+				<image src='/static/image/position.png' mode='widthFix' class='position'/>
+				<view>{{item.distance}}米</view>
+			</view>
+		</van-cell>
+	</van-cell-group>
+</view>

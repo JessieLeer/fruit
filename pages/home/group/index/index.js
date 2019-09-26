@@ -29,18 +29,12 @@ Page({
     }, 1000)
 	},
 	onShow() {
-		
+		this.initCuser()
 	},
 	/*-- 初始化用户 --*/
 	initCuser(e) {
-		let _this = this
-		wx.getStorage({
-			key: 'cuser',
-			success (res) {
-				_this.setData({
-					cuser: res.data
-				})
-			}
+		this.setData({
+			cuser: wx.getStorageSync('cuser')
 		})
 	},
 	onSearChange(e) {
@@ -50,8 +44,14 @@ Page({
 	},
 	/*-- 页面跳转 --*/
 	go(e) {
+		let url
+		if(this.data.cuser.userId) {
+			url = e.currentTarget.dataset.url
+		}else{
+			url = '/pages/user/login/step0'
+		}
 		wx.navigateTo({
-			url: e.currentTarget.dataset.url
+			url: url
 		})
 	},
 	

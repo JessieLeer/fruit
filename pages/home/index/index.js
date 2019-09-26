@@ -82,20 +82,14 @@ Page({
 	
 	/*-- 初始化购物车数据 --*/
 	initShopcar(e) {
-		let _this = this
-		wx.getStorage({
-			key: 'shopcar',
-			success(res) {
-				_this.setData({
-					localShopcarGoods: res.data,
-				})
-				_this.setShopcar()
-				_this.calTotal()
-			}
+		this.setData({
+			localShopcarGoods: wx.getStorageSync('shopcar') || []
 		})
+		this.setShopcar()
+		this.calTotal()
 	},
 	setShopcar(e) {
-		this.setData({
+		this.setData({ 
 			shopcarGoods: this.data.localShopcarGoods.filter((item) => {
 				return item.shopId == this.data.shop.id
 			})
@@ -104,14 +98,8 @@ Page({
 	
 	/*-- 初始化用户 --*/
 	initCuser(e) {
-		let _this = this
-		wx.getStorage({
-			key: 'cuser',
-			success (res) {
-				_this.setData({
-					cuser: res.data
-				})
-			}
+		this.setData({
+			cuser: wx.getStorageSync('cuser')
 		})
 	},
 	
@@ -122,6 +110,7 @@ Page({
 			url: `${app.globalData.url}/api/banner/list`,
 			data: {},
 			success(res) {
+				console.log(res.data.data)
 				_this.setData({
 					banners: res.data.data
 				})
@@ -130,8 +119,16 @@ Page({
 	},
 	bannerGo(e) {
 		let url
-		if(e.currentTarget.dataset.banner.type == '1') {
-			url = `/pages/home/good/index?shopId=${this.data.shop.id}&id=${e.currentTarget.dataset.banner.value}`
+		switch(e.currentTarget.dataset.banner.type) {
+			case '0':
+				url = `/pages/home/good/index?shopId=${this.data.shop.id}&id=${e.currentTarget.dataset.banner.value}`
+				break
+			case '1':
+				url = `/pages/home/group/show/index?id=${e.currentTarget.dataset.banner.value}`
+				break
+			case '2':
+				url = `/pages/home/image/index?url=${e.currentTarget.dataset.banner.showImg}`
+				break
 		}
 		wx.navigateTo({
 			url: url

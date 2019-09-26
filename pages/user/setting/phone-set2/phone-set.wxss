@@ -28,19 +28,24 @@
   font-weight: 400;
 }
 .input-style{
-  width: 597rpx;
+  width: 547rpx;
   height: 80rpx;
   line-height: 80rpx;
   text-align: left;
   border: none;
   border-bottom:2rpx solid #dfdfdf;
   font-size: 32rpx;
+  display: flex;
+  align-items : center;
+}
+.input-style input{
+  width: 334rpx;
 }
 
 
 .btn-getCode{
   position: absolute;
-  right:20rpx;
+  right:68rpx;
   top:10rpx;
   width: 196rpx;
   height: 60rpx;
@@ -50,6 +55,7 @@
   border:1rpx solid #F6931F;
   font-size: 26rpx;
   color:#F6931F;
+  z-index : 99999;
 }
 button[disabled] {
     color: #333333 !important;

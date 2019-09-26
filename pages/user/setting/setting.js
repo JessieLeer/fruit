@@ -20,8 +20,6 @@ Page({
       },
       success(res) {
         wx.clearStorageSync()
-        // wx.getStorageSync('loginUid') = '';
-        // wx.getStorageSync('userId') = '';
         wx.showToast({
           title: res.data.message,
           icon: 'none',
@@ -29,7 +27,7 @@ Page({
         })
         setTimeout(() => {
           wx.navigateBack()
-        }, 2000);
+        }, 2000)
       }
     })
   },

@@ -23,6 +23,7 @@ Page({
     })
   },
   getCode: function (options) {
+    console.log(2131213)
     var that = this;
     var phone = this.data.tel;
     if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(phone))) {
