@@ -151,17 +151,15 @@ Page({
 			codeShow: true
 		})
 		new qrcode('myQrcode',{
-			text: '111',
+			text: this.data.cuser.cardNo,
 			width: 200,
 			height: 200,
 			padding: 12, 
 			// 二维码可辨识度
 			correctLevel: qrcode.CorrectLevel.L, 
 			callback: (res) => {
-				console.log(res)
 			}
 		})
-		console.log('world')
 	},
 	onCodeClose(e) {
 		this.setData({
