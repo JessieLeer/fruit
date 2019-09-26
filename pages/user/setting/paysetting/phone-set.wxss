@@ -25,15 +25,19 @@
   font-weight: 400;
 }
 .input-style{
-  width: 597rpx;
+  width: 547rpx;
   height: 80rpx;
   line-height: 80rpx;
   text-align: left;
   border: none;
   border-bottom:2rpx solid #dfdfdf;
   font-size: 32rpx;
+  display: flex;
+  align-items : center;
 }
-
+.wrap_code{
+  display: flex;
+}
 
 .btn-getCode{
   position: absolute;

@@ -79,7 +79,7 @@ Page({
     gotoSetting(){
         if (this.checkLogin()) return;
         wx.navigateTo({
-            url: "../setting/setting"
+            url: "../setting/setting/setting"
 
         })
     },
@@ -143,7 +143,7 @@ Page({
                     let avatarurl = wx.getStorageSync('avatarUrl')
                     let Nickname = wx.getStorageSync('Nickname')
                     that.setData({
-											  cardNo: res.data.data.cardNo,
+                        cardNo: res.data.data.cardNo,
                         point: res.data.data.point,
                         userId: res.data.data.userId,
                         mobile: res.data.data.mobile,

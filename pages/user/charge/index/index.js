@@ -165,7 +165,7 @@ Page({
                     that.pay()
                 }else{
                     wx.navigateTo({
-                        url: '../../../user/setting/paysetting/phone-set'
+                        url: '../../../user/setting/paysetting/phone-set?idx=charge'
                     })
                 }
             }

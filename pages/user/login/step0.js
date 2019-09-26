@@ -47,6 +47,7 @@ Page({
 							},
 							success(res) {
 								if(res.data.code == 200) {
+                  console.log(231321)
 									wx.setStorage({
 										key: 'cuser',
 										data: res.data.data

@@ -106,7 +106,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      idx: 'setting'
+      idx: options.idx
     })
   },
 

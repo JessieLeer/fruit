@@ -35,17 +35,17 @@ Page({
   },
   goPhone:function(){
     wx.navigateTo({
-      url: 'phone-set/phone-set',
+      url: '../phone-set/phone-set',
     })
   },
   resetPassword:function(){
     wx.navigateTo({
-      url: 'paysetting/phone-set?idx=setting',
+      url: '../paysetting/phone-set?idx=setting',
     })
   },
   go:function(){
     wx.navigateTo({
-      url: '../documents/Doc/index?id=aboutus',
+      url: '../../documents/Doc/index?id=aboutus',
     })
   },
 

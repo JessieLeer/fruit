@@ -6,7 +6,7 @@ Page({
         minDate: new Date('1900-01-01').getTime(),
         select: false,
         current: '',
-        valuecurrent: new Date().getTime(),
+        valuecurrent: new Date(1980,0,1).getTime(),
         avatar : '',
         Nickname : '',
         mobile : '' ,
@@ -80,7 +80,7 @@ Page({
                   level: res.data.data.levelName,
                   current : res.data.data.birthday,
 									username: res.data.data.username,
-                  valuecurrent: new Date(res.data.data.birthday).getTime(),
+                    valuecurrent: res.data.data.birthday ? new Date(res.data.data.birthday).getTime() : new Date(1980, 0, 1).getTime(),
 									mobile: res.data.data.mobile
                 })
             }

@@ -3,9 +3,9 @@ import utils from '../../utils/dealtime'
 const app = getApp()
 Page({
     data : {
-        minDate: new Date(1900, 1, 1).getTime(),
+        minDate: new Date(1960, 0, 1).getTime(),
         maxDate: new Date().getTime(),
-        nowDate: new Date().getTime(),
+        nowDate: new Date(1980,0,1).getTime(),
         showDate : false,
         showStore : false,
         formatter(type, value) {
@@ -116,7 +116,7 @@ Page({
                     currentadress : res.data.data.store,
                     name: res.data.data.name,
                     current: res.data.data.birthday,
-                    nowDate: new Date(res.data.data.birthday).getTime()
+                    nowDate: res.data.data.birthday ? new Date(res.data.data.birthday).getTime() : new Date(1980, 0, 1).getTime()
                 })
             }
         })
