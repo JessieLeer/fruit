@@ -1,6 +1,5 @@
 {
   "pages": [
-		"pages/home/tmp/index",
     "pages/home/index/index",
     "pages/user/seccard/index/index",
     "pages/user/shopcard/index/index",
@@ -82,19 +81,19 @@
     "backgroundColor": "#F9F9F9",
     "list": [
       {
-				"pagePath": "pages/home/tmp/index",
+				"pagePath": "pages/home/index/index",
         "text": "首页",
 				"selectedIconPath": "static/image/index.png",  
         "iconPath": "static/image/indexdefault.png"  
       },
       {
-				"pagePath": "pages/home/tmp/index",
+				"pagePath": "pages/home/group/index/index",
         "text": "拼团",
 				"selectedIconPath": "static/image/together.png",  
         "iconPath": "static/image/togetherdefault.png" 
       },
       {
-				"pagePath": "pages/home/tmp/index",
+				"pagePath": "pages/home/order/index/index",
         "text": "订单",
 				"selectedIconPath": "static/image/order.png",  
         "iconPath": "static/image/orderdefault.png"  
