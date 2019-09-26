@@ -152,8 +152,6 @@
 
 .share-part{
   text-align: center;
-	width: 50%;
-	float: left;
 }
 
 .share-image{
