@@ -1,4 +1,5 @@
 import Toast from "../../../../miniprogram_npm/vant-weapp/toast/toast"
+import qrcode from '../../../../utils/weapp-qrcode.js'
 
 const app = getApp()
 
@@ -54,6 +55,28 @@ Page({
 		}
 		wx.navigateTo({
 			url: url
+		})
+	},
+	
+	/*-- 查看会员码 --*/
+	viewCode(e) {
+		this.setData({
+			codeShow: true
+		})
+		new qrcode('myQrcode',{
+			text: this.data.cuser.cardNo,
+			width: 200,
+			height: 200,
+			padding: 12, 
+			// 二维码可辨识度
+			correctLevel: qrcode.CorrectLevel.L, 
+			callback: (res) => {
+			}
+		})
+	},
+	onCodeClose(e) {
+		this.setData({
+			codeShow: false
 		})
 	},
 	

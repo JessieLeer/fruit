@@ -1,3 +1,7 @@
+page{
+  padding-top: 160rpx;
+}
+
 /**index.wxss**/
 .userinfo {
   display: flex;
@@ -12,6 +16,10 @@
 	font-size: 30rpx;
 	padding-left: 20rpx;
 	padding-bottom: 10rpx;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
 }
 
 .position-icon{
@@ -29,10 +37,14 @@
 
 .search-area{
   padding-top: 10rpx;
-	padding-bottom: 10rpx;
 	display: flex;
 	overflow: auto;
 	width: 100%;
+	position: fixed;
+	top: 50rpx;
+	left: 0;
+	z-index: 1000;
+	background-color: white;
 }
 
 .arrive-time{
@@ -68,6 +80,7 @@
   display: flex;
 	width: 100%;
 	height: 100%;
+	position: fixed;
 }
 
 .good-cate{
@@ -76,6 +89,7 @@
 	background:rgba(246,246,246,1);
 	height: 100%;
 	overflow: auto;
+
 }
 
 .good-cate-item{

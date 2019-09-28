@@ -75,7 +75,9 @@
 		"van-notice-bar": "/miniprogram_npm/vant-weapp/notice-bar/index",
 		"van-rate": "/miniprogram_npm/vant-weapp/rate/index",
 		"van-collapse": "/miniprogram_npm/vant-weapp/collapse/index",
-		"van-collapse-item": "/miniprogram_npm/vant-weapp/collapse-item/index"
+		"van-collapse-item": "/miniprogram_npm/vant-weapp/collapse-item/index",
+		"van-sidebar": "/miniprogram_npm/vant-weapp/sidebar/index",
+    "van-sidebar-item": "/miniprogram_npm/vant-weapp/sidebar-item/index"
   },
   "tabBar": {
     "color": "#d5d5d5",
@@ -85,7 +87,7 @@
     "list": [
       {
 				"pagePath": "pages/home/index/index",
-        "text": "首页",
+        "text": "及时达",
 				"selectedIconPath": "static/image/index.png",  
         "iconPath": "static/image/indexdefault.png"  
       },

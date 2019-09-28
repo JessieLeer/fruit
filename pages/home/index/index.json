@@ -1,4 +1,5 @@
 {
+	"enablePullDownRefresh": false,
 	"usingComponents": {
 		"shopcar": "/components/shopcar/index"
 	}
