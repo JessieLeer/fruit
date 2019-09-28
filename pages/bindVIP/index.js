@@ -300,6 +300,7 @@ Page({
         })
     },
     getCodeAndCardInfo(){
+			console.log('hello')
         var that = this;
         wx.login({
             success: res => {
@@ -321,6 +322,7 @@ Page({
                 'content-type': 'application/json' // 默认值
             },
             success(res) {
+							console.log(res)
                 if (res.data.code == 200) {
                     wx.addCard({
                         cardList: [

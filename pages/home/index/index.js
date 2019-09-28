@@ -27,7 +27,7 @@ Page({
 		codeShow: false
 	},
 
-  onLoad(option) {
+  onLoad(option) {	
 		this.bannerIndex()
 		wx.showLoading({
       title: '加载中',

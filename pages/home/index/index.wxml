@@ -24,7 +24,7 @@
 			</view>
 		</view>
 		<scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper'>
-		  <swiper autoplay="true" interval="3000" duration="500" class='w-100' style='display: block'>
+		  <swiper autoplay="true" interval="3000" duration="500" class='w-100' style='display: block' indicator-dots='true' circular='true'>
 				<block wx:for="{{banners}}" wx:key='index'>
 					<swiper-item class='swiper-item'>
 						<image src="{{item.showImg}}" class="slide-image w-100" mode="widthFix" bindtap='bannerGo' data-banner='{{item}}'/>

@@ -9,7 +9,7 @@
 		<view class='search' >
 		  <van-search placeholder="请输入商品名称" class='' bind:search='onSearch' bind:change='onSearChange' value='{{good.query}}'/>
 		</view>
-		<view class='qr'>
+		<view class='qr' bindtap='viewCode' wx:if='{{cuser.cardNo}}'>
 		  <van-icon name="qr" size='46rpx'/>
 			<text class='qr-text'>会员码</text>
 		</view>
@@ -50,3 +50,7 @@
 </view>
 
 <van-toast id="van-toast" />
+
+<van-popup show="{{ codeShow }}" bind:close="onCodeClose">
+  <canvas class="canvas-code" canvas-id="myQrcode" />
+</van-popup>

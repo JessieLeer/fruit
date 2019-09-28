@@ -31,7 +31,7 @@ App({
 		let _this = this
     wx.login({
       success: res => {
-			wx.setStorageSync('code', res.code)
+			  wx.setStorageSync('code', res.code)
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
 				wx.request({
 					url: 'https://api.weixin.qq.com/sns/jscode2session',
