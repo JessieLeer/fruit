@@ -19,13 +19,13 @@
   <view class="box">
     <view class="titleName">手机号</view>
     <view class="inputStyle">
-      <input style="height:110rpx;text-align:right;" placeholder="请输入收货人手机号" bindinput="inputTel" value="{{dataSet.mobile}}"></input>
+      <input style="height:110rpx;text-align:right;" placeholder="请输入收货人手机号" bindinput="inputTel" value="{{dataSet.mobile}}" type="number"></input>
     </view>
   </view>
   <view class="box">
     <view class="titleName">地址</view>
     <view class="inputStyle" style="position:relative">
-      <input style="width:420rpx;;height:110rpx;text-align:right;" disabled="true" placeholder="点击选择所在地区" bindinput="inputAdd" bindtap="chooseAdd" value="{{dataSet.currentadress}}"></input>
+      <input style="width:420rpx;;height:110rpx;text-align:right;" disabled="true" placeholder="点击选择所在地区" bindinput="inputAdd" bindtap="chooseAdd" value="{{dataSet.addr}}"></input>
       <view class="toLeft"></view>
     </view>
   </view>
@@ -53,7 +53,7 @@
     </view>
   </view>
 </view>
-<view style="font-size:26rpx;font-family:Source Han Sans CN;font-weight:400;color:#9F9F9F;margin-top:29rpx;margin-left:20rpx;">每次购物时会优先定位至改地址，方便您轻松购物</view>
+<view style="font-size:26rpx;font-family:Source Han Sans CN;font-weight:400;color:#9F9F9F;margin-top:29rpx;margin-left:20rpx;">每次购物时会优先定位至该地址，方便您轻松购物</view>
 <view class="popup" wx:if="{{areakey}}">
     <view class="autoheight" bindtap="close"></view>
     <van-area class="fix" show-toolbar="true" wx:if="{{areakey}}"  area-list="{{ arealist }}" item-height="54"

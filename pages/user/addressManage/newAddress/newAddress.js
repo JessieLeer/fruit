@@ -42,7 +42,7 @@ Page({
     })
     this.setData({
       areakey: false,
-      'dataSet.currentadress': str
+      'dataSet.addr': str
     })
   },
   cancel_selcect() {
@@ -94,7 +94,7 @@ Page({
   },
   newAddress() {
     for (var key in this.data.dataSet) {
-      console.log(this.data.dataSet[key])
+      console.log(key)
       if (this.data.dataSet[key] == '') {
         wx.showToast({
           title: '请填写完整信息',
@@ -113,7 +113,7 @@ Page({
         // "loginUid": loginUid,
         // "userId": userId,
         "userAddr": {
-          "addr": that.data.dataSet.currentadress,
+          "addr": that.data.dataSet.addr,
           "defaultFlag": that.data.defaultFlag?1:0,
           "delFlag": 0,
           "detailAddr": that.data.dataSet.detailAddr,
