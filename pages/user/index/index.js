@@ -138,6 +138,14 @@ Page({
                     'content-type': 'application/json' // 默认值
                 },
                 success(res) {
+                    if(!res.data.data){
+                        wx.removeStorageSync('loginUid')
+                        wx.removeStorageSync('userId')
+                        wx.removeStorageSync('cuser')
+                        wx.removeStorageSync('avatarUrl')
+                        wx.removeStorageSync('Nickname')
+                        return
+                    }
                     wx.setStorageSync('mobile', res.data.data.mobile)
                     let avatarurl = wx.getStorageSync('avatarUrl')
                     let Nickname = wx.getStorageSync('Nickname')

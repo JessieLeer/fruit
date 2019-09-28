@@ -5,14 +5,14 @@
       <view class="address-content">
         <view style="font-size:32rpx;color:#333;margin-bottom:20rpx;">
         <wxs src="./addressLength.wxs" module="intercept" />
-          <view class="" style="float:left;">{{intercept.substr(item.address+item.addressMain)}}</view>
-          <view style="float:left;" class="{{item.icon==1?'homeSign':(item.icon==2?'eduInstitutionSign':(item.icon==3?'parentSign':(item.icon==4?'companySign':'')))}}"></view>
+          <view class="" style="float:left;">{{intercept.substr(item.addr+(item.detailAddr == null?'':item.detailAddr))}}</view>
+          <view style="float:left;" class="{{item.tag=='家'?'homeSign':(item.tag=='学校'?'eduInstitutionSign':(item.tag=='父母家'?'parentSign':(item.tag=='公司'?'companySign':'')))}}"></view>
         </view>
         <view style="font-size:28rpx;color:#b4b4b4;float:left;">
-          <view><text>{{item.name}}</text>  {{item.tel}}</view>
+          <view><text>{{item.name}}</text>  {{item.mobile}}</view>
         </view>
       </view>
-      <view class="edit" bindtap="toEdit">
+      <view class="edit" bindtap="toEdit" data-id="{{item.id}}">
         <view class="editSign"></view>
         <view>编辑</view>
       </view>

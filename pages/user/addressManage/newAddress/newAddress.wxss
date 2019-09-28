@@ -120,3 +120,30 @@ page{
   top:45rpx;
   right:5rpx;
 }
+.popup{
+    position: fixed;
+    width : 100vw;
+    height :100vh;
+    background : rgba(0,0,0,.2);
+    top : 0;
+    left : 0;
+    z-index : 9999999;
+}
+.autoheight{
+    position: absolute;
+    height : 100%;
+    width: 100%;
+}
+.fix{
+    position: absolute;
+    bottom : 0;
+    width  : 100%;
+    left : 0;
+    z-index : 9999999;
+}
+.van-picker__confirm{
+    color :#676767!important;
+}
+.van-picker__cancel{
+    color :#676767!important;
+}

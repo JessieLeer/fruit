@@ -1,5 +1,7 @@
 // page/user/addressManage/editAddress/editAddress.js
 // page/user/addressManage/newAddress/newAddress.js
+import arealist from '../area'
+var app = getApp()
 Page({
 
   /**
@@ -11,8 +13,15 @@ Page({
     dataSet : {
       mobile : "",
       name : "",
-      addr : ""
-    }
+      currentadress : "",
+      detailAddr : "",
+      tag : "家"
+    },
+    arealist : [],
+    areakey : false,
+    currentadress: "",
+    defaultFlag : 0,
+    id : ''
   },
   inputTel(e){
     this.data.dataSet.mobile = e.detail.value
@@ -21,12 +30,31 @@ Page({
     this.data.dataSet.name = e.detail.value
   },
   inputAdd(e){
-    this.data.dataSet.addr = e.detail.value
+
   },
   inputBlo(e){
-    this.data.dataSet.addr = e.detail.value
+    this.data.dataSet.detailAddr = e.detail.value
   },
-
+  confirm_select(e){
+    var str = '';
+    e.detail.values.map((item,index)=>{
+      str += ` ${item.name}`
+    })
+    this.setData({
+      areakey: false,
+      'dataSet.currentadress' : str
+    })
+  },
+  cancel_selcect(){
+    this.setData({
+      areakey : false
+    })
+  },
+  chooseAdd(){
+    this.setData({
+      areakey: true
+    })
+  },
   selSex: function () {
     if (this.data.isSel) {
       this.setData({
@@ -41,34 +69,50 @@ Page({
   sel: function (e) {
     var viewDataSet = e.target.dataset;
     var viewText = viewDataSet.text;
-    if (viewText == "公司") {
       this.setData({
-        icon: 4
+        'dataSet.tag': viewText
       })
-    }
-    else if (viewText == "父母家") {
-      this.setData({
-        icon: 3
-      })
-    }
-    else if (viewText == "学校") {
-      this.setData({
-        icon: 2
-      })
-    }
-    else if (viewText == "家") {
-      this.setData({
-        icon: 1
-      })
-    }
   },
   popConfirm: function () {
+    var that = this;
     wx.showModal({
       title: '',
       content: '确认删除此收货地址吗？',
       success: function (res) {
         if (res.confirm) {
-          console.log('点击确认回调')
+
+          let loginUid = wx.getStorageSync('loginUid')
+          let userId = wx.getStorageSync('userId')
+          wx.request({
+            url: `${app.globalData.url}/api/member/deleteUserAddress?loginUid=${loginUid}&userId=${userId}&addrId=${that.data.id}`, //仅为示例，并非真实的接口地址
+            method: "POST",
+            // data: {
+            //   // loginUid: loginUid,
+            //   // userId: userId,
+            //   // addrId: that.data.id
+            // },
+            header: {
+              'content-type': 'application/json' // 默认值
+            },
+            success(res) {
+              if (res.data.code == 200) {
+                wx.showToast({
+                  title: res.data.message,
+                  icon: 'none'
+                })
+                setTimeout(() => {
+                  wx.navigateBack({
+                    delta: 1, // 回退前 delta(默认为1) 页面
+                  })
+                }, 800)
+              }else {
+                wx.showToast({
+                  title: res.data.message,
+                  icon: 'none'
+                })
+              }
+            }
+          })
         } else {
           console.log('点击取消回调')
         }
@@ -79,9 +123,101 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options.id) 
+    this.setData({
+      id: options.id
+    })
+    this.getData(options.id)
   },
+  getData(id){
+    let loginUid = wx.getStorageSync('loginUid')
+    let userId = wx.getStorageSync('userId')
+    var that = this
+    wx.request({
+      url: `${app.globalData.url}/api/member/getUserAddressById`, //仅为示例，并非真实的接口地址
+      data: {
+        loginUid: loginUid,
+        userId: userId,
+        addrId : id
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        console.log(res)
+        that.setData({
+          content: res.data.data,
+          'dataSet.currentadress': res.data.data.addr,
+          'dataSet.name': res.data.data.name,
+          'dataSet.detailAddr': res.data.data.detailAddr,
+          'dataSet.mobile': res.data.data.mobile,
+          'dataSet.tag': res.data.data.tag,
+          'defaultFlag': res.data.data.defaultFlag
+        })
+      }
+    })
+  },
+  save(){
+    for (var key in this.data.dataSet) {
+      if (this.data.dataSet[key] == ''){
+        wx.showToast({
+          title : '请填写完整信息',
+          icon : 'none'
+        })
+        return;
+      }
+    }
+    let loginUid = wx.getStorageSync('loginUid')
+    let userId = wx.getStorageSync('userId')
+    var that = this
+    wx.request({
+      url: `${app.globalData.url}/api/member/updateUserAddress?loginUid=${loginUid}&userId=${userId}`, //仅为示例，并非真实的接口地址
+      method : "POST",
+      data: {
+        // "loginUid": loginUid,
+        // "userId": userId,
+        "userAddr" : {
+          "addr": that.data.dataSet.currentadress,
+          "defaultFlag": that.data.dataSet.defaultFlag?1:0,
+          "delFlag": 0,
+          "detailAddr": that.data.dataSet.detailAddr,
+          "id": that.data.id,
+          "mobile": that.data.dataSet.mobile,
+          "name": that.data.dataSet.name,
+          "tag": that.data.dataSet.tag
+        }
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        console.log(res)
+        if(res.data.code == 200 ){
+          wx.showToast({
+            title : res.data.message,
+            icon : 'none'
+          })
+          setTimeout(() => {
+            wx.navigateBack({
+              delta: 1, // 回退前 delta(默认为1) 页面
 
+            })
+          }, 800)
+        }else{
+          wx.showToast({
+            title: res.data.message,
+            icon: 'none'
+          })
+        }
+      }
+    })
+  },
+  switch1Change(e){
+    console.log(e)
+    this.setData({
+      'dataSet.defaultFlag': e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -93,7 +229,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log(arealist)
+    this.setData({
+      arealist 
+    })
   },
 
   /**

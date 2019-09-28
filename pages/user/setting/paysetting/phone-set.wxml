@@ -18,7 +18,7 @@
      <view style="position:relative;margin-bottom:40rpx;" class="wrap_code">
       <view class="title-style phone-code">验证码</view>
       <view class="input-style">
-        <input bindinput="codeKey" placeholder="请输入验证码" />
+        <input bindinput="codeKey" placeholder="请输入验证码" type="number"/>
       </view>
       <button class="btn-getCode" disabled="{{disabled}}"  bindtap="getCode" style="z-index:100;">{{time}}</button>
     </view>

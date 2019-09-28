@@ -20,7 +20,7 @@ App({
 		orderGoods: [],
 		session_key: '' ,
 		groupbuy: {},
-		url: 'https://yjjycs.ysk360.com',
+		url: 'http://m.ysk360.com',
 		loginUid: '',
 		avatarUrl : '',
 		Nickname : '',

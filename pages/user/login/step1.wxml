@@ -6,7 +6,7 @@
     <van-field value="{{ phone.value }}" label="手机号" type='number' placeholder="请输入手机号"
     error-message="{{phone.message}}" border="{{ false }}" bind:change='phoneChange' clearable/>
     <view class="auto_height"></view>
-		<van-field value="{{ sms.value }}" center clearable label="短信验证码" placeholder="请输入短信验证码" border="{{ false }}" bind:change='smsChange' use-button-slot>
+		<van-field value="{{ sms.value }}" center clearable type='number' label="短信验证码" placeholder="请输入短信验证码" border="{{ false }}" bind:change='smsChange' use-button-slot>
       <van-button slot="button" size="small" type="default" disabled='{{phone.verify && countdown == 0 ? false : true}}' bind:click='sendSms'>发送验证码<text wx:if="{{key}}">({{countdown}})</text></van-button>
     </van-field>
   

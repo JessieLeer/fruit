@@ -93,6 +93,8 @@ Page({
             },
             success(res) {
                 if(res.data.code == 500){
+                    isSubmitAble = true
+                    console.log(res)
                     wx.showToast({
                         title : res.data.message ,
                         icon : 'none'
@@ -122,7 +124,7 @@ Page({
                                 'content-type': 'application/json' // 默认值
                             },
                             success(res) {
-															isSubmitAble = true
+                                isSubmitAble = true
                                 if(res.data.code == 200){
                                     wx.showToast({
                                         title: res.data.message,
@@ -142,12 +144,12 @@ Page({
                         that.getData()
                     },
                     fail(res) { 
-										   isSubmitAble = true
-										}
+                        isSubmitAble = true
+                    }
                 })
             }
-					})
-				}
+        })
+    }
     },
     isSetSecret() {
         let loginUid = wx.getStorageSync('loginUid')

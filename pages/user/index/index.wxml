@@ -82,7 +82,7 @@
                 <view><image class="arrow" src="../../../static/image/arrow.png" mode="widthFix"></image></view>
             </view>
         </view>
-        <!-- <view class="item_list" bindtap="gotoLocationMan">
+        <view class="item_list" bindtap="gotoLocationMan">
             <view>
                 <image src="../../../static/image/local.png" mode="widthFix"></image>
             </view>
@@ -92,7 +92,7 @@
             <view>
                 <view><image class="arrow" src="../../../static/image/arrow.png" mode="widthFix"></image></view>
             </view>
-        </view> -->
+        </view>
         <view class="item_list" bindtap="gotoSetting">
             <view>
                 <image src="../../../static/image/set.png" mode="widthFix"></image>

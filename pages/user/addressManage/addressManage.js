@@ -1,4 +1,5 @@
 // page/user/addressManage/addressManage.js
+const app = getApp()
 Page({
 
   /**
@@ -6,54 +7,7 @@ Page({
    */
   data: {
     content: [
-      {
-        id: "01",
-        address:'绿地新城',
-        addressMain:"商务D2楼13层商务D2楼13层商务D2楼13层商务D2楼13层商务D2楼13层商务D2楼13层商务D2楼13层商务D2楼13层商务D2楼13层商务D2楼13层",//详细地址
-        name:"李先生",//姓名
-        tel:"18888888888",//联系电话
-        icon:"1",//地址标签
-      },
-      {
-        id: "01",
-        address: '绿地新城',
-        addressMain: "商务D2楼13层",//详细地址
-        name: "李先生",//姓名
-        tel: "18888888888",//联系电话
-        icon: "2",//地址标签
-      },
-      {
-        id: "01",
-        address: '绿地新城',
-        addressMain: "商务D2楼13层",//详细地址
-        name: "李先生",//姓名
-        tel: "18888888888",//联系电话
-        icon: "3",//地址标签
-      },
-      {
-        id: "01",
-        address: '绿地新城',
-        addressMain: "商务D2楼13层",//详细地址
-        name: "李先生",//姓名
-        tel: "18888888888",//联系电话
-        icon: "4",//地址标签
-      },
-      {
-        id: "01",
-        address: '绿地新城',
-        addressMain: "商务D2楼13层",//详细地址
-        name: "李先生",//姓名
-        tel: "18888888888",//联系电话
-        icon: "1",//地址标签
-      },
-      {
-        id: "01",
-        address: '绿地新城',
-        addressMain: "商务D2楼13层",//详细地址
-        name: "李先生",//姓名
-        tel: "18888888888",//联系电话
-        icon: "1",//地址标签
-      }
+      
       ]
   },
 
@@ -61,9 +15,9 @@ Page({
   
   },
 
-  toEdit:function(){
+  toEdit:function(e){
     wx.navigateTo({
-      url: 'editAddress/editAddress',
+      url: `editAddress/editAddress?id=${e.currentTarget.dataset.id}`,
     })
   },
 
@@ -79,6 +33,27 @@ Page({
         icon: 'none',
       })
     }
+  },
+  getData(){
+    let loginUid = wx.getStorageSync('loginUid')
+    let userId = wx.getStorageSync('userId')
+    var that = this
+    wx.request({
+      url: `${app.globalData.url}/api/member/getUserAddress`, //仅为示例，并非真实的接口地址
+      data: {
+        loginUid: loginUid,
+        userId: userId
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        console.log(res)
+        that.setData({
+          content : res.data.data
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -98,7 +73,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getData()
   },
 
   /**
