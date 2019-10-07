@@ -44,14 +44,12 @@ page{
 }
 .charge_detail{
     background:rgba(255,255,255,1);
-    padding : 17px 10px;
     display: flex;
     flex-wrap : wrap;
     justify-content: space-between;
 }
 .charge_detail>view{
-    margin-bottom : 5px;
-    width:32%;
+    width:48.8%;
     height:80px;
     background:rgba(255,255,255,1);
     border:1px solid rgba(221,221,221,1);
@@ -63,7 +61,13 @@ page{
     justify-content: center;
     /* margin-right : 2%; */
 }
-
+.info_content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom : 5px;
+    justify-content: space-between;
+}
 .palceholder{
     display: block;
     width: 32%;
@@ -86,6 +90,9 @@ page{
     font-family:Source Han Sans CN;
     font-weight:400;
     color:rgba(150,150,150,1);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .cur{
     border:1px solid  #F6931F!important;
@@ -126,6 +133,9 @@ page{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.auto_height {
+    height:61px;
 }
 .btn_charge view{
     width : 96%;

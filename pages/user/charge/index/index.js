@@ -7,11 +7,14 @@ Page({
        
         ],
         idx : 0,
-        orderId : ''
+        orderId : '',
+        price : 0,
+        key : false
     },
     onTap(e){
         this.setData({
-            idx: e.currentTarget.dataset.index
+            idx: e.currentTarget.dataset.index,
+            key : false
         })
     },
     gotoDetail(){
@@ -63,95 +66,104 @@ Page({
         })
     },
     chargeBtn(){
-       this.isSetSecret()
+        if(this.data.key){
+            this.isSetSecret('SETPRICE')
+        }else{
+            this.isSetSecret()
+        }
     },
     gotoDoc(){
         wx.navigateTo({
             url: "../../documents/Doc/index?id=charge"
         })
     },
-    pay(){
-			
-        let loginUid = wx.getStorageSync('loginUid')
-        let userId = wx.getStorageSync('userId')
-        let openid = wx.getStorageSync('openid')
-        var that = this
-				if(isSubmitAble){
-					isSubmitAble = false
-					wx.request({
-            url: `${app.globalData.url}/api/member/charge`, //仅为示例，并非真实的接口地址
-            data: {
-                // orderId: that.data.chargeList[that.data.idx].rid,
-                loginUid,
-                userId,
-                czgzId: that.data.chargeList[that.data.idx].rid,
-                openId: openid
+    pay(set){
+        if (set == "SETPRICE"){
+            console.log(31321321312)
+        }else{
+            console.log('guding')
+            let loginUid = wx.getStorageSync('loginUid')
+            let userId = wx.getStorageSync('userId')
+            let openid = wx.getStorageSync('openid')
+            var that = this
+            if (isSubmitAble) {
+                isSubmitAble = false
+                wx.request({
+                    url: `${app.globalData.url}/api/member/charge`, //仅为示例，并非真实的接口地址
+                    data: {
+                        // orderId: that.data.chargeList[that.data.idx].rid,
+                        loginUid,
+                        userId,
+                        czgzId: that.data.chargeList[that.data.idx].rid,
+                        openId: openid
 
-            },
-            header: {
-                'content-type': 'application/json' // 默认值
-            },
-            success(res) {
-                if(res.data.code == 500){
-                    isSubmitAble = true
-                    console.log(res)
-                    wx.showToast({
-                        title : res.data.message ,
-                        icon : 'none'
-                    })
-                    return
-                }
-                that.setData({
-                    orderId: res.data.data.orderId
-                })
-                wx.requestPayment({
-                    timeStamp: res.data.data.timeStamp,
-                    nonceStr: res.data.data.nonceStr,
-                    package: res.data.data.packageStr,
-                    signType: res.data.data.signType,
-                    paySign: res.data.data.paySign,
+                    },
+                    header: {
+                        'content-type': 'application/json' // 默认值
+                    },
                     success(res) {
-                        console.log(res)
-                        wx.request({
-                            url: `${app.globalData.url}/api/member/chargeCallback`, //仅为示例，并非真实的接口地址
-                            data: {
-                                loginUid: loginUid,
-                                userId: userId,
-                                czgzId: that.data.chargeList[that.data.idx].rid,
-                                orderId: that.data.orderId
-                            },
-                            header: {
-                                'content-type': 'application/json' // 默认值
-                            },
+                        if (res.data.code == 500) {
+                            isSubmitAble = true
+                            console.log(res)
+                            wx.showToast({
+                                title: res.data.message,
+                                icon: 'none'
+                            })
+                            return
+                        }
+                        that.setData({
+                            orderId: res.data.data.orderId
+                        })
+                        wx.requestPayment({
+                            timeStamp: res.data.data.timeStamp,
+                            nonceStr: res.data.data.nonceStr,
+                            package: res.data.data.packageStr,
+                            signType: res.data.data.signType,
+                            paySign: res.data.data.paySign,
                             success(res) {
+                                console.log(res)
+                                wx.request({
+                                    url: `${app.globalData.url}/api/member/chargeCallback`, //仅为示例，并非真实的接口地址
+                                    data: {
+                                        loginUid: loginUid,
+                                        userId: userId,
+                                        czgzId: that.data.chargeList[that.data.idx].rid,
+                                        orderId: that.data.orderId
+                                    },
+                                    header: {
+                                        'content-type': 'application/json' // 默认值
+                                    },
+                                    success(res) {
+                                        isSubmitAble = true
+                                        if (res.data.code == 200) {
+                                            wx.showToast({
+                                                title: res.data.message,
+                                                icon: 'success'
+                                            })
+                                            that.getData()
+                                        } else {
+                                            wx.showToast({
+                                                title: res.data.message,
+                                                icon: 'none'
+                                            })
+                                            that.getData()
+                                        }
+
+                                    }
+                                })
+                                that.getData()
+                            },
+                            fail(res) {
                                 isSubmitAble = true
-                                if(res.data.code == 200){
-                                    wx.showToast({
-                                        title: res.data.message,
-                                        icon: 'success'
-                                    })
-                                    that.getData()
-                                }else{
-                                    wx.showToast({
-                                        title: res.data.message,
-                                        icon: 'none'
-                                    })
-                                    that.getData()
-                                }
-                              
                             }
                         })
-                        that.getData()
-                    },
-                    fail(res) { 
-                        isSubmitAble = true
                     }
                 })
             }
-        })
-    }
-    },
-    isSetSecret() {
+        }
+
+},
+    isSetSecret(set) {
         let loginUid = wx.getStorageSync('loginUid')
         let userId = wx.getStorageSync('userId')
         var that = this;
@@ -166,13 +178,27 @@ Page({
             },
             success(res) {
                 if (res.data.data){
-                    that.pay()
+                    that.pay(set)
                 }else{
                     wx.navigateTo({
                         url: '../../../user/setting/paysetting/phone-set?idx=charge'
                     })
                 }
             }
+        })
+    },
+    change(e){
+        this.setData({
+            idx : -1,
+            price : e.detail.value,
+            key: true
+        })
+    },
+    getValue(e){
+        this.setData({
+            idx: -1,
+            price: e.currentTarget.dataset.value,
+            key : true
         })
     }
 })

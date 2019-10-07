@@ -16,8 +16,11 @@
         <view class="info_content {{index==idx?'cur':''}}"  wx:for="{{chargeList}}" data-index='{{index}}' bindtap="onTap" wx:key="{{index}}">
             <text>
                 <text class="rmb">￥{{item.rcunrje}}\n</text>
-                <text class="gift">赠￥{{item.rzsje}}{{item.rzsgz == '储值卡'? '' : item.rzsgz}}</text>
+                <text class="gift">赠￥{{item.rzsje}}{{item.flmc}}{{item.rzsgz == '储值卡'? '' : item.rzsgz}}</text>
             </text>
+        </view>
+        <view class="{{idx == -1?'cur':''}}" bindtap="getValue" data-value="{{price}}">
+            <input type="number" placeholder="请输入其他金额" bindblur="change" placeholder-style="color:#bbbbbb"></input>
         </view>
         <text class="palceholder"></text>
     </view>
@@ -39,6 +42,7 @@
             <text>4、新用户充值前需设置会员卡支付密码；</text>
         </view>
     </view> -->
+    <view class="auto_height"></view>
     <view class="btn_charge">
         <view bindtap="chargeBtn">立即充值</view>
     </view>
