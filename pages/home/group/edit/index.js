@@ -114,7 +114,7 @@ Page({
 	},
 	passInput(e) {
 		this.setData({
-			'pay.password': e.detail
+			'pay.password': e.detail.value
 		})
 		if(this.data.pay.password.length == 6 && this.data.pay.type == 'balance') {
 			let _this = this

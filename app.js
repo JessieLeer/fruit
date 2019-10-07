@@ -21,6 +21,7 @@ App({
 		session_key: '' ,
 		groupbuy: {},
 		url: 'http://m.ysk360.com',
+		//url: 'http://192.168.1.101:8080',
 		loginUid: '',
 		avatarUrl : '',
 		Nickname : '',

@@ -10,17 +10,20 @@ Page({
 		order0: {
 			data: [],
 			isLoadAll: false,
-			page: 1
+			page: 1,
+			noGood: false
 		},
 		order1: {
 			data: [],
 			isLoadAll: false,
-			page: 1
+			page: 1,
+			noGood: false
 		},
 		order2: {
 			data: [],
 			isLoadAll: false,
-			page: 1
+			page: 1,
+			noGood: false
 		},
 		windowH: 0,
 		pay: {
@@ -97,6 +100,7 @@ Page({
 				type: e.type
 			},
 			success(res) {
+				wx.hideLoading()
 				if(res.data.data.length == 0) {
 					switch(type) {
 						case 0:
@@ -138,13 +142,31 @@ Page({
 							_this.setData({
 								'order0.data': _this.data.order0.data.concat(res.data.data)
 							})
+							_this.setData({
+								'order0.noGood': _this.data.order0.data.length == 0
+							})
 							break
 						case 1:
 							_this.setData({
 								'order1.data': _this.data.order1.data.concat(res.data.data)
 							})
+							_this.setData({
+								'order1.noGood': _this.data.order1.data.length == 0
+							})
 							break	
 					}
+				}
+				switch(type) {
+					case 0:
+						_this.setData({
+							'order0.noGood': _this.data.order0.data.length == 0
+						})
+						break
+					case 1:
+						_this.setData({
+							'order1.noGood': _this.data.order1.data.length == 0
+						})
+						break	
 				}
 			}
 		})
@@ -161,6 +183,7 @@ Page({
 				pageSize: 10,
 			},
 			success(res) {
+				wx.hideLoading() 
 				if(res.data.data.length == 0) {
 					_this.setData({
 						'order2.isLoadAll': true
@@ -192,12 +215,18 @@ Page({
 						'order2.data': _this.data.order2.data.concat(res.data.data)
 					})
 				}
+				_this.setData({
+					'order2.noGood': _this.data.order2.data.length == 0
+				})
 			}
 		})
 	},
 
 	/*-- 上拉刷新 --*/
 	refresh(e) {
+		wx.showLoading({
+      title: '加载中',
+    })
 		let id = e.currentTarget.dataset.id
 		switch(id) {
 			case '0':
@@ -389,7 +418,7 @@ Page({
 	},
 	passInput(e) {
 		this.setData({
-			'pay.password': e.detail
+			'pay.password': e.detail.value
 		})
 		if(this.data.pay.password.length == 6 && this.data.pay.type == 'balance') {
 			let _this = this

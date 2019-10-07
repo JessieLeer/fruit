@@ -34,6 +34,7 @@ Component({
   data: {
 		cuser: {},
 		balance: 0,
+		isInputShow: false
   },
 	
   ready() { 
@@ -93,7 +94,17 @@ Component({
 		},
 		onClick(e) {
 			if(e.currentTarget.dataset.name == 'balance' && this.properties.cost > this.data.balance) {
+				
 			}else{
+				if(e.currentTarget.dataset.name == 'balance') {
+					this.setData({
+						isInputShow: true
+					})
+				}else{
+					this.setData({
+						isInputShow: false
+					})
+				}
 				this.triggerEvent('onChange', e.currentTarget.dataset.name)
 			}
 		},
@@ -122,6 +133,15 @@ Component({
 								},
 								complete(res) {
 									if(res.errMsg == 'requestPayment:ok'){
+										wx.request({
+											url: `${app.globalData.url}/api/pay/callBack`,
+											data: {
+												orderId: _this.properties.orderId
+											},
+											success(res) {
+												console.log(res)
+											}
+										})
 										_this.triggerEvent('wepaySuccess', {})
 									}
 								}
@@ -142,7 +162,13 @@ Component({
 		},
 		
 		onPassclose(e) {
+			this.setData({
+				isInputShow: false
+			})
 			this.triggerEvent('passClose', {})
+			this.setData({
+				isInputShow: true
+			})
 		}
   }
 })

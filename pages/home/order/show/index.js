@@ -126,9 +126,8 @@ Page({
 					},
 					success(res) {
 						_this.setData({
-							caddress: JSON.parse(res.data.data)
+							caddress: res.data.data
 						})
-						console.log(res)
 					}
 				})
 			}
@@ -174,7 +173,8 @@ Page({
 			this.setData({
 				'coupon.show': false,
 				'coupon.useing': {},
-				'coupon.text': `${this.data.coupon.data.length}张可用`
+				'coupon.text': `${this.data.coupon.data.length}张可用`,
+				'orderInfo.payMoney': this.data.orderInfo.totalMoney
 			})
 		}else{
 			this.setData({
@@ -249,6 +249,10 @@ Page({
 						data: _this.data.localShopcarGoods,
 						success(res) {}
 					})
+				}else{
+					Toast({
+						message: res.data.message
+					})
 				}
 			}
 		})
@@ -274,7 +278,7 @@ Page({
 	},
 	passInput(e) {
 		this.setData({
-			'pay.password': e.detail
+			'pay.password': e.detail.value
 		})
 		if(this.data.pay.password.length == 6 && this.data.pay.type == 'balance') {
 			let _this = this

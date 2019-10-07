@@ -27,7 +27,7 @@
 
 <view class='good-info'>
   <text class='good-name f-db'>{{order.shopName}}</text>
-  <text class='good-text f-db'>{{order.text}}</text>
+  <text class='good-text f-db' wx:if='{{order.text}}'>{{order.text}}</text>
   <text class='good-spec'>单位：{{order.dw}}</text>
 	<text class='good-sold' wx:if='{{order.glimit}}'>每人限购 1 份</text>
 </view>

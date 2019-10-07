@@ -14,17 +14,17 @@
 		</van-cell-group>
 	</van-radio-group>
 	<van-button type="warning" custom-class='pay-button' disabled='{{type == "" ? true : false}}' bind:click='handlePass'>支付</van-button>
+	<input type='number' bindinput='onPassChange' maxlength='6' value='{{password}}' class='pass-field' bindfocus='handlePass' wx:if='{{isInputShow}}' hold-keyboard='true'></input>
 </van-popup>
 
-<van-popup show="{{ paShow }}" bind:close="onPaclose" custom-class='pa-popup'>
+<van-popup show="{{ paShow }}" custom-class='pa-popup'>
 	<view class='pa-header'>
 	  <text>请输入支付密码</text>
 		<van-icon name="clear" custom-class='pa-close' size='50rpx' color='#c6c6c6' bind:click='onPassclose' />
 	</view>
 	<view class='pa-input-wrapper'>
-    <view class='pa-input' wx:for='{{6}}' wx:key='item' wx:for-index='i'>
+    <view bindtap='handleFocus' class='pa-input' wx:for='{{6}}' wx:key='item' wx:for-index='i'>
       <input type='password' value='{{password[i]}}' wx:if='{{password.length > i}}' class='pa-text'></input>
     </view>
   </view>
-	<van-field focus='{{passFocus}}' type='number' bindinput='onPassChange' maxlength='6' value='{{password}}'/>
 </van-popup>

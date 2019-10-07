@@ -1,6 +1,7 @@
 .pay{
   padding-top: 30rpx;
 	padding-bottom: 30rpx;
+	position: relative;
 }
 
 .f-tac{
@@ -109,8 +110,13 @@
   border-right: 0; 
 }
 
-
-/* 文本输入框位置: 设置到左边隐藏 */
-.input_control { 
-  width: 100rpx; height: 100rpx;
+input.pass-field{
+  position: absolute;
+	bottom: 0;
+	left: -100%;
+	z-index: 1000;
+	width: 200%;
+	height: 140rpx;
+	background-color: rgba(0,0,0,0);
+	font-size: 0;
 }

@@ -120,6 +120,7 @@ Page({
 				storeId: this.data.shop.id
 			},
 			success(res) {
+				wx.hideLoading()
 				if(res.data.data.length == 0) {
 					_this.setData({
 						'good.isLoadAll': true
@@ -153,6 +154,9 @@ Page({
 			'good.data': [],
 			'good.page': 1
 		})
+		wx.showLoading({
+      title: '加载中',
+    })
 		this.index()
 	},
 	

@@ -1,10 +1,11 @@
 <view class='main'>
 	<van-tabs type="card" tab-class='tab' custom-class='tabs' tab-active-class='tab-active' active='{{active}}' bind:change='tabChange'>
 	  <van-tab title="配送">
-		  <van-cell is-link title="{{caddress.addr || orderInfo.fsAddress}}" use-label-slot url='/pages/home/order/address/index?shopId={{shopId}}'>
+		  <van-cell is-link title="{{caddress.addr || orderInfo.fsAddress}}" use-label-slot url='/pages/home/order/address/index?shopId={{shopId}}' wx:if='{{caddress.tag || orderInfo.addressType}}'>
 			  <van-tag slot='icon' color='#e8fcfb' text-color='#00837B' custom-class='address-type'>{{caddress.tag || orderInfo.addressType}}</van-tag>
 			  <view slot='label'>{{caddress.name || orderInfo.fsName}} {{caddress.mobile || orderInfo.fsMobile}}</view>
 			</van-cell>
+			<van-cell wx:else is-link title='请选择收货地址' url='/pages/home/order/address/index?shopId={{shopId}}'></van-cell>
 		</van-tab>
 		<van-tab title="门店自提">
 			<van-cell-group>
@@ -53,7 +54,7 @@
 		  <text class='price-price'>¥{{active == 1 ? orderInfo.payMoney : orderInfo.payMoney + orderInfo.deliveryMoney}}</text>
 		</view>
 	</van-submit-bar>
-	<pay isShow="{{pay.show}}" paShow='{{pay.paShow}}' balanceShow='{{pay.balanceShow}}' password='{{pay.password}}' orderId='{{orderId}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{active == 1 ? orderInfo.totalMoney : orderInfo.totalMoney + orderInfo.deliveryMoney}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
+	<pay isShow="{{pay.show}}" paShow='{{pay.paShow}}' balanceShow='{{pay.balanceShow}}' password='{{pay.password}}' orderId='{{orderId}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{active == 1 ? orderInfo.payMoney : orderInfo.payMoney + orderInfo.deliveryMoney}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
 	<van-toast id="van-toast" />
 	<van-popup show="{{ coupon.show }}" bind:close="onCouponClose" position="right" custom-class='coupon-popup'>
 	  <view wx:for='{{coupon.data}}' wx:key='index'>

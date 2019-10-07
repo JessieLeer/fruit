@@ -1,6 +1,6 @@
 <van-tabs active="{{ active }}" bind:change="onChange" color='#F6931F' tab-active-class='active' sticky='{{true}}' class='h-100'>
   <van-tab title="商家配送" >
-	  <view class='nogood' wx:if='{{order0.data.length == 0}}'>
+	  <view class='nogood' wx:if='{{order0.noGood}}'>
 	    <image src='/static/image/nogood.png'  mode='widthFix' />
 			<text class='nogood-text'>未查询到您的订单</text>
 		</view>
@@ -41,7 +41,7 @@
 		</scroll-view>
 	</van-tab>
 	<van-tab title="门店自提">
-	  <view class='nogood' wx:if='{{order1.data.length == 0}}'>
+	  <view class='nogood' wx:if='{{order1.noGood}}'>
 	    <image src='/static/image/nogood.png'  mode='widthFix' />
 			<text class='nogood-text'>未查询到您的订单</text>
 		</view>
@@ -65,7 +65,7 @@
 						<van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='1'>取消订单</van-button>
 					</view>
 					<view slot='footer' wx:if='{{item.status == "待自提"}}'>
-						<van-button custom-class='cancel'>取消订单</van-button>
+						<van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='1'>取消订单</van-button>
 						<van-button type="warning" custom-class='pay' data-url='/pages/home/order/detail/index?id={{item.id}}' bind:click='go'>查看取货码</van-button>
 					</view>
 					<view slot='footer' wx:if='{{item.status == "已取消"}}'>
@@ -82,7 +82,7 @@
 		</scroll-view>
 	</van-tab>
   <van-tab title="拼团">
-	  <view class='nogood' wx:if='{{order2.data.length == 0}}'>
+	  <view class='nogood' wx:if='{{order2.noGood}}'>
 	    <image src='/static/image/nogood.png'  mode='widthFix' />
 			<text class='nogood-text'>未查询到您的订单</text>
 		</view>

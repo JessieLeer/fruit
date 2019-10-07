@@ -1,4 +1,6 @@
 {
+	"navigationBarTitleText": "搜索结果",
+	"enablePullDownRefresh": false,
 	"usingComponents": {
 		"shopcar": "/components/shopcar/index"
 	}

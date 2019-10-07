@@ -55,10 +55,10 @@
 	</van-cell>
 </van-cell-group>
 <van-cell-group class='goods'>
-	<van-cell title="优惠券" value="{{coupon.text}}" is-link title-class='oinfo-title' custom-class='order-addinfo' bind:click='openCoupon'/>
+	<van-cell title="商品优惠" value="{{order.discountMoney}}" title-class='oinfo-title' custom-class='order-addinfo'/>
 	<van-cell title="商品合计" value="¥{{order.totalMoney}}" value-class='value' title-class='oinfo-title' custom-class='order-addinfo'/>
 	<van-cell wx:if='{{order.deliveryMoney}}' title="配送费" value="¥{{order.deliveryMoney}}" value-class='value' title-class='oinfo-title' custom-class='order-addinfo'/>
-	<van-cell title="积分" value="{{order.integral}}" value-class='value' title-class='oinfo-title' custom-class='order-addinfo'/>
+	<van-cell title="积分" value="确认收货后可得{{order.integral ? order.integral : 0}}个积分" value-class='value' title-class='oinfo-title' custom-class='order-addinfo'/>
 </van-cell-group>
 <van-cell-group class='f-pr'>
   <van-field value="{{order.id}}" border="{{ false }}" readonly>

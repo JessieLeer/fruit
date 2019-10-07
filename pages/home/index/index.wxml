@@ -1,5 +1,5 @@
 <view class="container" wx:if='{{shop.id}}'>
-  <view class='position' bindtap='go' data-url='/pages/home/address/index'>
+  <view class='position' bindtap='go' data-url='/pages/home/address/index?from=/pages/home/index/index'>
 	  <van-icon name="location-o" class='position-icon' />
 	  {{position.address}}
 		<van-icon name="arrow" class='position-icon' />
@@ -16,8 +16,8 @@
 	</view>
 	<view class='good-area'>
 	  <view class='good-cate'>
-		  <view class='good-cate-list'>
-		    <view wx:for='{{cates}}' wx:key='index' wx:if='{{item.onShow == true}}' bindtap='cateChange' id='{{item.id}}' class="good-cate-item {{active == item.id ? 'active' : ''}}">
+		  <view class='good-cate-list' style='height: {{cateHeight}}'>
+		    <view wx:for='{{cates}}' wx:key='index' wx:if='{{item.onShow == "1"}}' bindtap='cateChange' id='{{item.id}}' class="good-cate-item {{active == item.id ? 'active' : ''}}">
 				  <text class='seg' hidden='{{active != item.id}}'>|</text>
 				  {{item.name}}
 				</view>
@@ -27,7 +27,7 @@
 		  <swiper autoplay="true" interval="3000" duration="500" class='w-100' style='display: block' indicator-dots='true' circular='true'>
 				<block wx:for="{{banners}}" wx:key='index'>
 					<swiper-item class='swiper-item'>
-						<image src="{{item.showImg}}" class="slide-image w-100" mode="widthFix" bindtap='bannerGo' data-banner='{{item}}'/>
+						<image src="{{item.showImg}}" class="slide-image" mode="widthFix" bindtap='bannerGo' data-banner='{{item}}' width='538' height='210'/>
 					</swiper-item>
 				</block>
 			</swiper>
@@ -54,7 +54,7 @@
   <image src='../../../static/image/noshop@2x.png' mode='widthFix' class='noshop'/>
 	<view class='caller'>已有<text class='caller-number'>{{caller}}人</text>召唤缘疆佳园在这里开店～</view>
 	<van-button type="default" custom-class='caller-me' bindtap='calling'>我也来召唤</van-button>
-	<van-button type="default" custom-class='caller-change' bindtap='go' data-url='/pages/home/address/index'>换个地址</van-button>
+	<van-button type="default" custom-class='caller-change' bindtap='go' data-url='/pages/home/address/index?from=/pages/home/index/index'>换个地址</van-button>
 </view>
 
 <van-toast id="van-toast" />
@@ -62,5 +62,3 @@
 <van-popup show="{{ codeShow }}" bind:close="onCodeClose">
   <canvas class="canvas-code" canvas-id="myQrcode" />
 </van-popup>
-
-

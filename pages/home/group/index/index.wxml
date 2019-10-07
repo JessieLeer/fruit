@@ -1,5 +1,5 @@
 <view class="h-100" wx:if='{{shop.id}}'>
-  <view class='position' bindtap='go' data-url='/pages/home/address/index'>
+  <view class='position' bindtap='go' data-url='/pages/home/address/index?from=/pages/home/group/index/index'>
 	  <van-icon name="location-o" class='position-icon' />
 	  {{position.address}}
 		<van-icon name="arrow" class='position-icon' />
@@ -21,7 +21,7 @@
 	<view class='goods' wx:else>
 	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper'>
 		  <view wx:for='{{good.data}}' wx:key='index' class='good' bindtap='go' data-url='/pages/home/group/show/index?id={{item.gid}}'>
-			  <image src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1568800268235&di=1c02c258f1b94f0e8c819f9ab1039dc8&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201505%2F24%2F20150524195655_wiuT5.jpeg' mode='widthFix' class='good-image'/>
+			  <image src='{{item.shopImg}}' mode='widthFix' class='good-image'/>
 				<view class='good-main'>
 					<view class='good-header f-cb'>
 						<text class='good-name f-tal f-fl'>{{item.shopName}}</text>

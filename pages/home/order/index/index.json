@@ -1,4 +1,6 @@
 {
+	"navigationBarTitleText": "订单",
+	"enablePullDownRefresh": false,
 	"usingComponents": {
 		"pay": "/components/pay/index"
 	}
