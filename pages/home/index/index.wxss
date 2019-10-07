@@ -1,5 +1,6 @@
 page{
   padding-top: 160rpx;
+	padding-bottom: 100rpx;
 }
 
 /**index.wxss**/
@@ -86,10 +87,9 @@ page{
 .good-cate{
   width: 210rpx;
 	text-align: center;
-	background:rgba(246,246,246,1);
+	background: rgba(246,246,246,1);
 	height: 100%;
 	overflow: auto;
-
 }
 
 .good-cate-item{
@@ -110,7 +110,7 @@ page{
 .good-wrapper{
   flex: 1;
 	padding-right: 10rpx;
-	height: 100%;
+	height: calc(100% - 160rpx);
 	overflow: auto;
 }
 
@@ -243,4 +243,12 @@ image.thumb{
 	width: 200px;
 	height: 200px;
 	margin: 0 auto;
+}
+
+swiper{
+  height: 130px;
+}
+
+.wx-swiper-dots{
+  margin-bottom: 10rpx;
 }

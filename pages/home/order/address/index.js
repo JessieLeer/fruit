@@ -53,7 +53,7 @@ Page({
 					},
 					success(res) {
 						_this.setData({
-							address: JSON.parse(res.data.data)
+							address: res.data.data
 						})
 					}
 				})

@@ -24,7 +24,9 @@ Page({
 		totalPrice: 0,
 		caller: 0,
 		noGoodShow: false,
-		codeShow: false
+		codeShow: false,
+		isCateChange: false,
+		cateHeight: 0
 	},
 
   onLoad(option) {	
@@ -215,8 +217,11 @@ Page({
 					})
 					_this.setData({
 						active: _this.data.cates.filter((item) => {
-							return item.onShow == true
-						})[0].id
+							return item.onShow == '1'
+						})[0].id,
+						cateHeight: 68 * (_this.data.cates.filter((item) => {
+							return item.onShow == '1'
+						}).length) + 'px'
 					})
 					_this.index()
 				}
@@ -228,8 +233,15 @@ Page({
 	cateChange(e) {
 		this.setData({
 			active: e.target.id,
-			goods: []
+			goods: [],
+			page: 1,
+			isCateChange: true,
+			isLoadAll: false,
+			noGoodShow: false
 		})
+		wx.showLoading({
+      title: '加载中',
+    })
 		this.index()
 	},
 	
@@ -262,10 +274,10 @@ Page({
 						item.shopId = _this.data.shop.id
 					}
 					_this.setData({
-						isLoadAll: res.data.data,
 						goods: _this.data.goods.concat(res.data.data)
 					})
 				}
+				wx.hideLoading()
 				_this.setData({
 					noGoodShow: _this.data.goods.length == 0
 				})
@@ -275,11 +287,17 @@ Page({
 	
 	/*-- 上拉刷新 --*/
 	refresh(e) {
-		this.setData({
-			goods: [],
-			page: 1
-		})
-		this.index()
+		if(this.data.isCateChange){
+			this.setData({
+				isCateChange: false
+			})
+		}else{
+			this.setData({
+				goods: [],
+				page: 1
+			})
+			this.index()
+		}
 	},
 	
 	/*-- 下拉加载更多商品 --*/

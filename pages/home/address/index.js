@@ -12,10 +12,12 @@ Page({
 		position: {},
 		suggestion: '',
 		searchValue: '',
-		shops: []
+		shops: [],
+		from: ''
 	},
-	onLoad() {
+	onLoad(option) {
 		this.setData({
+			from: option.from,
 			position: app.globalData.position,
 		})
 		this.index()
@@ -106,7 +108,7 @@ Page({
 	handleShop(e) {
 		app.globalData.shop = e.currentTarget.dataset.shop
 		wx.switchTab({
-			url: `/pages/home/index/index`
+			url: this.data.from
 		})
 	}
 })

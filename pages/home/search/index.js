@@ -16,6 +16,7 @@ Page({
 			value: '',
 			page: 1
 		},
+		noGoodShow: false,
 		localShopcarGoods: [],
 		shopcarGoods: [],
 		totalPrice: 0
@@ -139,6 +140,9 @@ Page({
 	
 	/*-- 获取商品列表 --*/
 	index(e) {
+		wx.showLoading({
+      title: '加载中',
+    })
 		let _this = this
 		wx.request({
 			url: `${app.globalData.url}/api/commodity/search`,
@@ -146,7 +150,7 @@ Page({
 				pageNum: this.data.search.page,
 				pageSize: 10,
 				storeId: this.data.shopId,
-				userId: this.data.cuser.userId,
+				userId: this.data.cuser.userId ? this.data.cuser.userId : '',
 				value: this.data.search.value
 			},
 			success(res) {				
@@ -161,8 +165,12 @@ Page({
 					}
 					item.shopId = _this.data.shopId
 				}
+				wx.hideLoading()
 				_this.setData({
 					goods: _this.data.goods.concat(res.data.data)
+				})
+				_this.setData({
+					noGoodShow: _this.data.goods.length == 0
 				})
 			}
 		})

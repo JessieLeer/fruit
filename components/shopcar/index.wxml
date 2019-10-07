@@ -1,6 +1,6 @@
 <van-submit-bar button-text="提交订单" bind:submit="onSubmit" button-class='submit' bar-class='submit-bar'>
   <view slot='' class='submit-shopcar' bindtap='toggleGood'>
-	  <van-icon name="shopping-cart" info='{{goods.length}}' size='40rpx' color='black'/>
+	  <van-icon name="shopping-cart" info='{{tools.counter(goods)}}' size='40rpx' color='black'/>
 		<view class='shopcar-price'>
 		  <text class='price'>¥{{totalPrice}}</text>
 			<text class='tip'>不含运费</text>
@@ -21,3 +21,19 @@
 	</view>
 </van-submit-bar>
 <van-popup show="{{!goodHidden}}" z-index='1' bind:close="onClose" position='bottom'></van-popup>
+
+<wxs module="tools">
+  function counter(arr){
+	  var count = 0
+		for(var i = 0; i<arr.length; i++) {
+		  count += arr[i].count
+		}
+		if(count > 99) {
+		  count = '99+'
+		}
+		return count
+	}
+	module.exports = {
+		counter: counter
+	}
+</wxs>
