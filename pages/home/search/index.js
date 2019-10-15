@@ -1,3 +1,4 @@
+import Toast from "../../../miniprogram_npm/vant-weapp/toast/toast"
 import Dialog from "../../../miniprogram_npm/vant-weapp/dialog/dialog"
 
 //获取应用实例
@@ -86,6 +87,11 @@ Page({
 						userId: this.data.cuser.userId
 					},
 					success(res) {
+						for(let item of res.data.data) {
+							if(item.value.length > 10) {
+								item.value = item.value.substr(0,10) + '...'
+							}
+						}
 						_this.setData({
 							histories: res.data.data
 						})
@@ -100,6 +106,11 @@ Page({
 		wx.request({
 			url: `${app.globalData.url}/api/search/hot`,
 			success(res) {
+				for(let item of res.data.data) {
+					if(item.name.length > 10) {
+						item.name = item.name.substr(0,10) + '...'
+					}
+				}
 				_this.setData({
 					hots: res.data.data
 				})
@@ -129,13 +140,19 @@ Page({
 	
 	/*-- 点击标签进行搜索或者跳转 --*/
 	handleTagClick(e) {
-		this.setData({
-			isSearch: false,
-			'search.value': e.currentTarget.dataset.search.value,
-			'search.page': 1,
-			goods: []
-		})
-		this.index()
+		if(e.currentTarget.dataset.search.type == '2') {
+			wx.redirectTo({
+				url: `/pages/home/good/index?shopId=${this.data.shopId}&id=${e.currentTarget.dataset.search.value}`
+			})
+		}else{
+			this.setData({
+				isSearch: false,
+				'search.value': e.currentTarget.dataset.search.value,
+				'search.page': 1,
+				goods: []
+			})
+			this.index({isHot: true})
+		}
 	},
 	
 	/*-- 获取商品列表 --*/
@@ -151,19 +168,27 @@ Page({
 				pageSize: 10,
 				storeId: this.data.shopId,
 				userId: this.data.cuser.userId ? this.data.cuser.userId : '',
-				value: this.data.search.value
+				value: this.data.search.value,
+				isHot: e.isHot ? e.isHot : false
 			},
 			success(res) {				
-				for(let item of res.data.data) {
-					let incart = _this.data.shopcarGoods.filter((itemer) => {
-						return itemer.id == item.id
-					})[0]
-					if(incart) {
-						item.count = incart.count
-					}else{
-						item.count = 0
+				if(_this.data.cuser.userId) {
+					for(let item of res.data.data) {
+						let incart = _this.data.shopcarGoods.filter((itemer) => {
+							return itemer.id == item.id
+						})[0]
+						if(incart) {
+							item.count = incart.count
+						}else{
+							item.count = 0
+						}
+						item.shopId = _this.data.shopId
 					}
-					item.shopId = _this.data.shopId
+				}else{
+					for(let item of res.data.data) {
+						item.count = 0
+					  item.shopId = _this.data.shopId
+					}
 				}
 				wx.hideLoading()
 				_this.setData({
@@ -187,12 +212,18 @@ Page({
 		})
 	},
  	onSearch(e) {
-		this.setData({
-			isSearch: false,
-			goods: [],
-			'search.page': 1
-		})
-		this.index()
+		if(this.data.search.value == '') {
+			Toast({
+				message: '请输入商品名称进行搜索'
+			})
+		}else{
+			this.setData({
+				isSearch: false,
+				goods: [],
+				'search.page': 1
+			})
+			this.index({isHot: false})
+		}
 	},
 	
 	/*-- 上拉刷新 --*/
@@ -201,7 +232,7 @@ Page({
 			goods: [],
 			'search.page': 1
 		})
-		this.index()
+		this.index({isHot: true})
 	},
 	
 	/*-- 下拉加载更多商品 --*/
@@ -211,7 +242,7 @@ Page({
 			this.setData({
 				'search.page': this.data.search.page + 1
 			})
-			this.index()
+			this.index({isHot: true})
 		}
 	},
 	/*-- 加入购物车 --*/
@@ -221,7 +252,7 @@ Page({
 			let good = this.data.goods.filter((item) => {
 				return item.id == id
 			})[0]
-	    good.count = 1
+			good.count = 1
 			this.setData({
 				goods: this.data.goods
 			})
@@ -270,11 +301,16 @@ Page({
 		this.handleShopcar()
 	},
 	
+	formatFloat(e) {
+		let m = Math.pow(10, e.digit)
+		return parseInt(e.f * m, 10) / m
+	},
+	
 	/*-- 计算购物车总价 --*/
 	calTotal(e) {
 		let total = 0
 		for(let item of this.data.shopcarGoods){
-			total += item.count * item.sellingPrice
+			total = this.formatFloat({f:item.count * item.sellingPrice + total, digit: 1})
 		}
 		this.setData({
 			totalPrice: total

@@ -224,3 +224,17 @@ page{
 	height: 200px;
 	margin: 0 auto;
 }
+
+.first-canvas{
+	width: 280px;
+	height: 100px;
+	margin-bottom: 20rpx;
+}
+
+.f-db{
+  display: block;
+}
+
+.mt-20{
+  margin-bottom: 20rpx;
+}

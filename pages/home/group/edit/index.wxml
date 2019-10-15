@@ -79,5 +79,5 @@
 	<van-button type="warning" size="large" custom-class='footer-submit' bind:click='onPayshow'>提交订单</van-button>
 </view>
 
-<pay isShow="{{pay.show}}" balanceShow='{{pay.balanceShow}}' paShow='{{pay.paShow}}' password='{{pay.password}}' orderId='{{orderId}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{orderInfo.totalMoney}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
+<pay class='pay' isShow="{{pay.show}}" balanceShow='{{pay.balanceShow}}' paShow='{{pay.paShow}}' password='{{pay.password}}' orderId='{{orderId}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{orderInfo.totalMoney}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
 <van-toast id="van-toast" />

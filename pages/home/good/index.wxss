@@ -179,3 +179,12 @@
 	border: white solid 1px;
 	margin-top: 30rpx;
 }
+
+.good-detail-content{
+  font-size: 28rpx;
+	display: block;
+	width: 90%;
+	margin: 0 auto 20rpx auto;
+	text-align: left;
+	color: b9b9b9;
+}

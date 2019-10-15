@@ -1,7 +1,11 @@
-<view class="h-100" wx:if='{{shop.id}}'>
+<view class='container' wx:if='{{isLoading}}'>
+  <van-loading type="spinner" color="#fff" />
+</view>
+
+<view class="h-100" wx:elif='{{shop.id}}'>
   <view class='position' bindtap='go' data-url='/pages/home/address/index?from=/pages/home/group/index/index'>
 	  <van-icon name="location-o" class='position-icon' />
-	  {{position.address}}
+	  {{shop.name}}
 		<van-icon name="arrow" class='position-icon' />
 	</view>
 	<view class='search-area'>
@@ -19,7 +23,7 @@
 		<text class='nogood-text'>当前搜索条件下无拼团</text>
 	</view>
 	<view class='goods' wx:else>
-	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper'>
+	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='-60' class='good-wrapper'>
 		  <view wx:for='{{good.data}}' wx:key='index' class='good' bindtap='go' data-url='/pages/home/group/show/index?id={{item.gid}}'>
 			  <image src='{{item.shopImg}}' mode='widthFix' class='good-image'/>
 				<view class='good-main'>
@@ -53,4 +57,7 @@
 
 <van-popup show="{{ codeShow }}" bind:close="onCodeClose">
   <canvas class="canvas-code" canvas-id="myQrcode" />
+	<canvas canvas-id="firstCanvas" class='first-canvas'></canvas>
+	<text class='f-db f-tac'>{{cuser.cardNo}}</text>
+  <text class="mt-20 f-db f-tac">到店结账时请向店员出示此会员卡</text>
 </van-popup>

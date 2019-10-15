@@ -120,7 +120,7 @@
         <view>
             <view class="img_wrap">
                 <view class="logo_wrap">
-                    <image src="../../../static/image/logo.png" mode="widthFix"></image>
+                    <canvas class="canvas-code" canvas-id="myQrcode" />
                 </view>
                 <view class="code_wrap">
                     <canvas style="width: 285px; height: 108px;" canvas-id="firstCanvas"></canvas>

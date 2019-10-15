@@ -113,3 +113,15 @@ page{
 .fix_height{
     height : 231.5px;
 }
+
+.default{
+  display: inline-block;
+	font-size: 28rpx;
+	color: #f2826a;
+	border: #f2826a solid 1px;
+	text-indent: 0;
+	padding-left: 10rpx;
+	padding-right: 10rpx;
+	height: 48rpx;
+	line-height: 48rpx;
+}

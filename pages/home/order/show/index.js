@@ -155,6 +155,7 @@ Page({
 				uid: this.data.cuser.userId
 			},
 			success(res) {
+				
 				_this.setData({
 					'coupon.data': res.data.data,
 					'coupon.text': res.data.data.length == 0 ? '无可用' : `${res.data.data.length}张可用`
@@ -188,7 +189,7 @@ Page({
 				data: {
 					commodityId: this.data.goodIds.toString(),
 					commodityQuota: this.data.goods.map((item) => {
-						return item.sellingPrice * item.number
+						return item.sellingPrice * (item.count || item.number)
 					}).toString(),
 					quota: this.data.orderInfo.totalMoney,
 					rid: coupon.rid
@@ -203,59 +204,55 @@ Page({
 	},
 	
 	onPayshow(e) {
-		let _this = this
-		wx.request({
-			url: `${app.globalData.url}/api/order/commit`,
-			method: 'post',
-			data: {
-				carts: JSON.stringify(this.data.goods.map((item) => {
-					return {
-						commodityId: item.id || item.commodityId,
-						number: item.count || item.number,
-						name: item.name,
-						sellingPrice: item.sellingPrice,
-					  originalPrice: item.originalPrice,
-						headImage: item.headImage
-					}
-				})),
-			  postType: this.data.active,
-				addressId: this.data.active == '1' ? '' : this.data.caddress.id || this.data.orderInfo.fsId,
-				storeId: this.data.shopId,
-				userId: this.data.cuser.userId
-			},
-			success(res) {
-				if(res.data.code == 200) {
-					if(_this.data.coupon.useing.rid) {
-						wx.request({
-							url: `${app.globalData.url}/api/couponUpdate`,
-							data: {
-								rid: _this.data.coupon.useing.rid
-							},
-							success(res) {
-								console.log(res)
-							}
+		let addressId = this.data.active == '1' ? '' : this.data.caddress.id || this.data.orderInfo.fsId
+		if(addressId == null) {
+			Toast({
+				message: '请先选择收货地址'
+			})
+		}else{
+			let _this = this
+			wx.request({
+				url: `${app.globalData.url}/api/order/commit`,
+				method: 'post',
+				data: {
+					carts: JSON.stringify(this.data.goods.map((item) => {
+						return {
+							commodityId: item.id || item.commodityId,
+							number: item.count || item.number,
+							name: item.name,
+							sellingPrice: item.sellingPrice,
+							originalPrice: item.originalPrice,
+							headImage: item.headImage
+						}
+					})),
+					postType: this.data.active,
+					addressId: addressId,
+					storeId: this.data.shopId,
+					userId: this.data.cuser.userId
+				},
+				success(res) {
+					if(res.data.code == 200) {
+						_this.data.goods.forEach((item) => {
+							_this.data.localShopcarGoods.splice(_this.data.localShopcarGoods.findIndex(v => v.id == item.id), 1)
+						})
+						_this.setData({
+							orderId: res.data.data.id,
+							'pay.show': true,
+							localShopcarGoods: _this.data.localShopcarGoods
+						})
+						wx.setStorage({
+							key: 'shopcar',
+							data: _this.data.localShopcarGoods,
+							success(res) {}
+						})
+					}else{
+						Toast({
+							message: res.data.message
 						})
 					}
-					_this.data.goods.forEach((item) => {
-						_this.data.localShopcarGoods.splice(_this.data.localShopcarGoods.findIndex(v => v.id == item.id), 1)
-					})
-					_this.setData({
-						orderId: res.data.data.id,
-						'pay.show': true,
-						localShopcarGoods: _this.data.localShopcarGoods
-					})
-					wx.setStorage({
-						key: 'shopcar',
-						data: _this.data.localShopcarGoods,
-						success(res) {}
-					})
-				}else{
-					Toast({
-						message: res.data.message
-					})
 				}
-			}
-		})
+			})
+		} 
 	},
 	onClose(e) {
 		this.setData({

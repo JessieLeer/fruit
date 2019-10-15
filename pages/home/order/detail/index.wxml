@@ -9,7 +9,8 @@
   <van-panel title="{{order.status}}" desc="您的订单已经提交，请及时到门店提货" custom-class='status'>
   </van-panel>
 	<van-cell title="提货二维码" use-label-slot class='oinfo-title'>
-	  <canvas class="canvas-code" canvas-id="myQrcode" slot='label'/>
+	  <text wx:if='{{order.qrCode == ""}}'>拼团结束后可查看</text>
+	  <canvas class="canvas-code" canvas-id="myQrcode" slot='label' wx:else/>
 	</van-cell>
 	<view class='mb-14'></view>
 </view>
@@ -88,14 +89,8 @@
 	<van-button custom-class='cancel' data-id='{{order.id}}' bind:click='logistics'>查看物流</van-button>
 	<van-button type="warning" custom-class='pay' data-id='{{order.id}}' bind:click='receipt'>确认收货</van-button>
 </view>
-<view class='footer' wx:if='{{order.status == "已取消"}}'>
-	<van-button type="warning" custom-class='pay' data-id='{{order.id}}' data-shopid='{{order.storeId}}' bind:click='again'>再来一单</van-button>
-</view>
-<view class='footer' wx:if='{{order.status == "已完成"}}'>
-	<van-button type="warning" custom-class='pay' data-id='{{order.id}}' data-shopid='{{order.storeId}}' bind:click='again'>再来一单</van-button>
-</view>
 
-<pay isShow="{{pay.show}}" paShow='{{pay.paShow}}' balanceShow='{{pay.balanceShow}}' password='{{pay.password}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{pay.cost}}' orderId='{{pay.id}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
+<pay class='pay-wrapper' isShow="{{pay.show}}" paShow='{{pay.paShow}}' balanceShow='{{pay.balanceShow}}' password='{{pay.password}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{pay.cost}}' orderId='{{pay.id}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
 <van-toast id="van-toast" />
 <van-dialog id="van-dialog" />
 <van-popup show="{{ logShow }}" bind:close="onLogclose" position='top'>

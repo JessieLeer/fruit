@@ -15,8 +15,12 @@ Page({
 			password: '',
 			passFocus: false
 		},
+		groupId: ''
 	},
 	onLoad(option) {
+		this.setData({
+			groupId: option.groupid
+		})
 		this.initCuser()
 	},
 	/*-- 初始化用户 --*/
@@ -51,6 +55,7 @@ Page({
 				storeId: app.globalData.groupbuy.storeId,
 				userId: this.data.cuser.userId
 			},
+			
 			success(res) {
 				_this.setData({
 				  orderInfo: res.data.data	
@@ -62,7 +67,7 @@ Page({
 	onPayshow(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/order/commit`,
+			url: `${app.globalData.url}/api/group/groupAdd`,
 			method: 'post',
 			data: {
 				carts: JSON.stringify([
@@ -77,7 +82,8 @@ Page({
 				]),
 			  postType: 1,
 				storeId: app.globalData.groupbuy.storeId,
-				userId: this.data.cuser.userId
+				userId: this.data.cuser.userId,
+				groupId: this.data.groupId
 			},
 			success(res) {
 				if(res.data.code == 200) {

@@ -14,6 +14,7 @@
             <wxs src="./addressLength.wxs" module="intercept" />
             <view class="" style="float:left;">{{intercept.substr(item.addr+(item.detailAddr == null?'':item.detailAddr))}}
             </view>
+						<view class='default' wx:if='{{item.defaultFlag == 1}}'>默认</view>
             <view style="float:left;"
               class="{{item.tag=='家'?'homeSign':(item.tag=='学校'?'eduInstitutionSign':(item.tag=='父母家'?'parentSign':(item.tag=='公司'?'companySign':'')))}}">
             </view>
@@ -29,8 +30,6 @@
       </view>
     </block>
   </view>
-  
-
 <view style="width:100%;height:132rpx;background:#fff;position:fixed;bottom:0;" bindtap="newAddress">
    <view class="add-addressBtn">
     新增收货地址

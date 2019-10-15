@@ -1,3 +1,5 @@
+import Toast from "../../../miniprogram_npm/vant-weapp/toast/toast"
+
 const app = getApp()
 
 Page({
@@ -19,6 +21,8 @@ Page({
 		this.initCuser()
 		this.initShopcar()
 		this.show()
+	},
+	onShow() {
 	},
 	/*-- 初始化用户 --*/
 	initCuser(e) {
@@ -42,11 +46,15 @@ Page({
 				commodityId: this.data.goodId
 			},
 			success(res) {
-				let incar = _this.data.shopcarGoods.filter((item) => {
-					return item.id == res.data.data.id
-				})
-				if(incar.length > 0){
-					res.data.data.count = incar[0].count
+				if(_this.data.cuser.userId) {
+					let incar = _this.data.shopcarGoods.filter((item) => {
+						return item.id == res.data.data.id
+					})
+					if(incar.length > 0){
+						res.data.data.count = incar[0].count
+					}else{
+						res.data.data.count = 0
+					}
 				}else{
 					res.data.data.count = 0
 				}
@@ -124,11 +132,16 @@ Page({
 		this.handleShopcar()
 	},
 	
+	formatFloat(e) {
+		let m = Math.pow(10, e.digit)
+		return parseInt(e.f * m, 10) / m
+	},
+	
 	/*-- 计算购物车总价 --*/
 	calTotal(e) {
 		let total = 0
 		for(let item of this.data.shopcarGoods){
-			total += item.count * item.sellingPrice
+			total = this.formatFloat({f:item.count * item.sellingPrice + total, digit: 1})
 		}
 		this.setData({
 			totalPrice: total
@@ -185,7 +198,7 @@ Page({
     const ctx = wx.createCanvasContext('myCanvas')
     let bgPath = _this.data.good.headImage
     let portraitPath = _this.data.portrait_temp
-    let hostNickname = app.globalData.userInfo.nickName
+    let hostNickname = '缘疆佳园'
     let qrPath = _this.data.qrcode_temp
     let windowWidth = _this.data.windowWidth
     _this.setData({

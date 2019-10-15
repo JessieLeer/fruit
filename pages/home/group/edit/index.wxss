@@ -1,5 +1,5 @@
 page{
-  padding-bottom: 50rpx;
+  padding-bottom: 80rpx;
 }
 
 .w-100{
@@ -170,4 +170,11 @@ page{
   color: #F6931F;
 	margin-left: 30rpx;
 	font-weight: bold;
+}
+
+.pay{
+  position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
 }

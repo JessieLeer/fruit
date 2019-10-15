@@ -1,5 +1,6 @@
 import Toast from "../../../../miniprogram_npm/vant-weapp/toast/toast"
 import qrcode from '../../../../utils/weapp-qrcode.js'
+import barcode from '../../../../utils/index'
 
 const app = getApp()
 
@@ -15,7 +16,8 @@ Page({
 			isLoadAll: false
 		},
 		noGroupShow: false,
-		caller: 0
+		caller: 0,
+		isLoading: true
 	},
 	onLoad(option) {
 		wx.showLoading({
@@ -32,7 +34,6 @@ Page({
     }, 1000)
 	},
 	onShow() {
-		this.initCuser()
 	},
 	/*-- 初始化用户 --*/
 	initCuser(e) {
@@ -73,6 +74,7 @@ Page({
 			callback: (res) => {
 			}
 		})
+		barcode.barcode('firstCanvas', JSON.stringify(this.data.cuser.cardNo) , 280 * 2, 100 * 2)
 	},
 	onCodeClose(e) {
 		this.setData({
@@ -83,6 +85,9 @@ Page({
 	/*-- 获取最近店铺 --*/
 	shopShow(e) {
 		if(this.data.shop.id) {
+			this.setData({
+				isLoading: false
+			})
 			this.index()
 		}else{
 			let _this = this
@@ -93,6 +98,9 @@ Page({
 					longitude: _this.data.position.location.lng,
 				},
 				success(res) {
+					_this.setData({
+						isLoading: false
+					})
 					if(res.data.message == '附近没有门店'){
 						_this.setData({
 							caller: res.data.data
@@ -121,6 +129,11 @@ Page({
 			},
 			success(res) {
 				wx.hideLoading()
+				if(_this.data.good.page == 1) {
+					_this.setData({
+						'good.data': []
+					})
+				}
 				if(res.data.data.length == 0) {
 					_this.setData({
 						'good.isLoadAll': true

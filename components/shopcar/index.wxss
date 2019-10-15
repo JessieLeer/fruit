@@ -77,14 +77,20 @@
 .f-cb:after,.f-cbli li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
 .f-cb,.f-cbli li{zoom:1;}
 
+.goods{
+  max-height: 600rpx;
+	overflow: auto;
+	background-color: white;
+	width: 100%;
+	padding-left: 10rpx;
+}
+
 .good{
   width: 100%;
-	background-color: white;
 	border-bottom: #f1f1f1 solid 1px;
 	display: flex;
 	padding-top: 30rpx;
 	padding-bottom: 20rpx;
-	padding-left: 10rpx;
 }
 
 .good-count{
@@ -132,5 +138,9 @@
 }
 
 .good-input{
+  background-color: white;
+}
+
+.plus.van-stepper__plus:after,.plus.van-stepper__plus:before{
   background-color: white;
 }

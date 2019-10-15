@@ -11,12 +11,14 @@
 		  <text class='selected f-fl'>已选商品</text>
 			<text class='clear f-fr' bindtap='onClear'>清空</text>
 		</view>
-		<view wx:for='{{goods}}' wx:key='index' class='good'>
-		  <view class='good-info'>
-		    <text class='good-name'>{{item.name}}</text>
-			  <text class='good-price'>¥{{item.sellingPrice}}</text>
+		<view class='goods'>
+			<view wx:for='{{goods}}' wx:key='index' class='good'>
+				<view class='good-info'>
+					<text class='good-name'>{{item.name}}</text>
+					<text class='good-price'>¥{{item.sellingPrice}}</text>
+				</view>
+				<van-stepper value="{{item.count}}" bind:change="onChange" class='good-count' input-class='good-input' custom-class='step' minus-class='minus' plus-class='plus' data-good='{{item}}' min='0'/>
 			</view>
-			<van-stepper value="{{item.count}}" bind:change="onChange" class='good-count' input-class='good-input' custom-class='step' minus-class='minus' plus-class='plus' data-good='{{item}}' min='0'/>
 		</view>
 	</view>
 </van-submit-bar>

@@ -22,13 +22,15 @@ Page({
 		},
 		logShow: false,
 		logistics: {},
-		emptyCoupon: {}
+		emptyCoupon: {},
+		waitime: 0
 	},
 	onLoad(option) {
 		this.initUser()
 		this.setData({
 			id: option.id
 		})
+		this.waitShow()
 		this.show()
 	},
 	initUser(e) {
@@ -55,6 +57,18 @@ Page({
 			}
 		},1000)
 	},
+	/*-- 获取待支付时间 --*/
+	waitShow(e) {
+		let _this = this
+		wx.request({
+			url: `${app.globalData.url}/api/order/waitPayTime`,
+			success(res) {
+				_this.setData({
+					waitime: res.data.data
+				})
+			}
+		})
+	},
 	show(e) {
 		let _this = this
 		wx.request({
@@ -68,7 +82,8 @@ Page({
 				res.data.data.discountMoney = res.data.data.discountMoney ? `-¥${res.data.data.discountMoney}` : 0
 				switch(parseInt(res.data.data.status)) {
 					case 1:
-					  let life = (900 - Math.floor((new Date().getTime() - new Date(res.data.data.createTime).getTime()) / 1000)) 
+						res.data.data.createTime = res.data.data.createTime.replace(/-/g, '/')
+					  let life = (_this.data.waitime - Math.floor((new Date().getTime() - new Date(res.data.data.createTime).getTime()) / 1000)) 
 						if(life < 0) {
 							res.data.data.status = '已取消'
 						}else{
@@ -103,10 +118,14 @@ Page({
 						res.data.data.status = '已完成'
 						break
 				}
+				if(res.data.data.groupId) {
+					_this.setData({
+						'pay.balanceShow': false
+					})
+				}
 				_this.setData({
 					order: res.data.data
 				})
-				console.log(res.data.data)
 			}
 		})
 	},

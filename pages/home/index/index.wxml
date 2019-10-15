@@ -1,7 +1,11 @@
-<view class="container" wx:if='{{shop.id}}'>
+<view class='container' wx:if='{{isLoading}}'>
+  <van-loading type="spinner" color="#fff" />
+</view>
+
+<view class="container" wx:elif='{{shop.id}}'>
   <view class='position' bindtap='go' data-url='/pages/home/address/index?from=/pages/home/index/index'>
 	  <van-icon name="location-o" class='position-icon' />
-	  {{position.address}}
+	  {{shop.name}}
 		<van-icon name="arrow" class='position-icon' />
 	</view>
 	<view class='search-area'>
@@ -23,7 +27,7 @@
 				</view>
 			</view>
 		</view>
-		<scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper'>
+		<scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='-60' scroll-with-animation='true' class='good-wrapper'>
 		  <swiper autoplay="true" interval="3000" duration="500" class='w-100' style='display: block' indicator-dots='true' circular='true'>
 				<block wx:for="{{banners}}" wx:key='index'>
 					<swiper-item class='swiper-item'>
@@ -40,8 +44,9 @@
 					<view class='thumb-area' slot='thumb'>
 						<image src="{{item.headImage ? item.headImage : 'https://img.yzcdn.cn/vant/t-thirt.jpg'}}" mode='widthFix' class='thumb' bindtap='go' data-url='/pages/home/good/index?shopId={{shop.id}}&id={{item.id}}'/>
 					</view>
-					<image src='../../../static/image/shopcar.png' slot='bottom' class='shopcar-icon' mode='widthFix' catchtap='addShopcar' data-good='{{item}}' wx:if='{{item.count == 0}}' />
-					<van-stepper slot='bottom' value="{{item.count}}" bind:change="onCartChange" class='shopcar' custom-class='step' input-class='good-input' minus-class='minus' plus-class='plus' min='0' max='{{item.inventory}}' wx:if='{{item.count != 0}}' data-good='{{item}}'/>
+					<van-tag wx:if='{{item.inventory == 0}}' slot='bottom' class='shopcar-noinven'>暂无库存</van-tag>
+					<image src='../../../static/image/shopcar.png' slot='bottom' class='shopcar-icon' mode='widthFix' catchtap='addShopcar' data-good='{{item}}' wx:elif='{{item.count == 0}}' />
+					<van-stepper slot='bottom' value="{{item.count}}" bind:change="onCartChange" class='shopcar' custom-class='step' input-class='good-input' minus-class='minus' plus-class='plus' min='0' max='{{item.inventory}}' wx:else data-good='{{item}}'/>
 				</van-card>
 				<text wx:if='{{isLoadAll}}' class='more-text w-100'>没有更多商品了</text>
 			</view>
@@ -61,4 +66,7 @@
 
 <van-popup show="{{ codeShow }}" bind:close="onCodeClose">
   <canvas class="canvas-code" canvas-id="myQrcode" />
+	<canvas canvas-id="firstCanvas" class='first-canvas'></canvas>
+	<text class='f-db f-tac'>{{cuser.cardNo}}</text>
+  <text class="mt-20 f-db f-tac">到店结账时请向店员出示此会员卡</text>
 </van-popup>

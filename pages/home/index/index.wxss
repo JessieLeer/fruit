@@ -145,7 +145,7 @@ image.thumb{
   color: #F6931F;
 }
 
-.shopcar,.shopcar-icon{
+.shopcar,.shopcar-icon,.shopcar-noinven{
   position: absolute;
 	right: 0;
 }
@@ -251,4 +251,18 @@ swiper{
 
 .wx-swiper-dots{
   margin-bottom: 10rpx;
+}
+
+.first-canvas{
+	width: 280px;
+	height: 100px;
+	margin-bottom: 20rpx;
+}
+
+.f-db{
+  display: block;
+}
+
+.mt-20{
+  margin-bottom: 20rpx;
 }

@@ -158,3 +158,12 @@ page{
   border-radius:45px;
 	margin-left: 30rpx;
 } 
+
+.pay-wrapper{
+  position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: white;
+	z-index: 10;
+}

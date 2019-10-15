@@ -164,13 +164,12 @@
     padding-top : 32.5px;
 }
 .logo_wrap{
-    text-align : center;
-    height : 303rpx;
+    text-align: center;
 }
-.logo_wrap image{
-    width : 151px;
-    height : 151px;
-
+canvas.canvas-code{
+  margin: 0 auto;
+	text-align: center;
+	width: 140px;
 }
 .arrow{
     width : 7px!important;

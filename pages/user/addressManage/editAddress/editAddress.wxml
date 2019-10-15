@@ -48,7 +48,7 @@
     <view class="titleName">设置为默认地址</view>
     <view class="inputStyle" style="text-align: right;padding-top: 25rpx;">
       <view class="body-view">
-        <switch style="zoom:.8" checked="{{defaultFlag}}" bindchange="switch1Change"/>
+        <switch style="zoom:.8" checked="{{dataSet.defaultFlag}}" bindchange="switch1Change"/>
       </view>
     </view>
   </view>

@@ -54,7 +54,7 @@
 		  <text class='price-price'>¥{{active == 1 ? orderInfo.payMoney : orderInfo.payMoney + orderInfo.deliveryMoney}}</text>
 		</view>
 	</van-submit-bar>
-	<pay isShow="{{pay.show}}" paShow='{{pay.paShow}}' balanceShow='{{pay.balanceShow}}' password='{{pay.password}}' orderId='{{orderId}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{active == 1 ? orderInfo.payMoney : orderInfo.payMoney + orderInfo.deliveryMoney}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
+	<pay class='pay' isShow="{{pay.show}}" paShow='{{pay.paShow}}' balanceShow='{{pay.balanceShow}}' password='{{pay.password}}' orderId='{{orderId}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{active == 1 ? orderInfo.payMoney : orderInfo.payMoney + orderInfo.deliveryMoney}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
 	<van-toast id="van-toast" />
 	<van-popup show="{{ coupon.show }}" bind:close="onCouponClose" position="right" custom-class='coupon-popup'>
 	  <view wx:for='{{coupon.data}}' wx:key='index'>

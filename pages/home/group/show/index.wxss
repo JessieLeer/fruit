@@ -1,5 +1,5 @@
 page{
-  padding-bottom: 420rpx;
+  padding-bottom: 620rpx;
 }
 
 .w-100{
@@ -275,4 +275,38 @@ page{
 
 .price-unit1{
   font-size: 20rpx;
+}
+
+.good-detail{
+  text-align: center;
+}
+
+.good-detail-header{
+  line-height: 60rpx;
+	padding-top: 20rpx;
+	padding-bottom: 20rpx;
+	color: #333;
+}
+
+.line{
+  display: inline-block;
+	background-color: #ddd;
+	height: 4rpx;
+	width: 100rpx;
+	position: relative;
+	top: -8rpx;
+}
+
+.good-detail-text{
+  margin-left: 20rpx;
+	margin-right: 20rpx;
+}
+
+.good-detail-content{
+  font-size: 28rpx;
+	display: block;
+	width: 90%;
+	margin: 0 auto 20rpx auto;
+	text-align: left;
+	color: b9b9b9;
 }

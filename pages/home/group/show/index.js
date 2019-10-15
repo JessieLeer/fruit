@@ -40,6 +40,7 @@ Page({
 				gid: this.data.gid
 			},
 			success(res) {
+				console.log(res)
 				let leftCount = Math.ceil((new Date(res.data.data.gendTime) - new Date()) / 86400000)
 				if(leftCount > 0) {
 					res.data.data.leftCount = leftCount
@@ -75,39 +76,5 @@ Page({
 			minute: minutes,
 			second: seconds
 		}			
-	},
-	/*-- 加入拼图 --*/
-	join(e) {
-		let item = e.currentTarget.dataset.item
-		wx.request({
-			url: `${app.globalData.url}/api/group/groupAdd`,
-			data: {
-				carts: JSON.stringify([
-					{
-						commodityId: item.sid,
-						number: 1,
-						name: item.shopName,
-						sellingPrice: item.gprice,
-					  originalPrice: item.originalPrice,
-						headImage: item.shopImg
-					}
-				]),
-			  postType: 1,
-				storeId: item.storeId,
-				userId: this.data.cuser.userId,
-				groupId: item.gid
-			},
-			method: 'post',
-			success(res) {
-				console.log(res)
-				if(res.data.code == 200) {
-					
-				}else{
-					Toast({
-						message: res.data.message
-					})
-				}
-			}
-		})
 	}
 })

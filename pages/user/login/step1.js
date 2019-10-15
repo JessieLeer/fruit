@@ -87,11 +87,8 @@ Page({
 	onGetUserinfo() {
 		wx.getUserInfo({
 			success: function (res) {
-				console.log(res)
 				wx.removeStorageSync('avatarUrl')
 				wx.removeStorageSync('Nickname')
-				// app.globalData.avatarUrl = ""
-				// app.globalData.Nickname = ""
 			}
 		})
 	},
@@ -114,17 +111,14 @@ Page({
 			},
 			success(res) {
 				if(res.data.code == 200){
-					console.log(res)
-					console.log('__________________')
 					wx.showToast({
 						icon: 'none',
 						title: res.data.message,
 						dutation: 2000
 					})
+					wx.setStorageSync('cuser', res.data.data)
 					wx.setStorageSync('loginUid', res.data.data.loginUid)
 					wx.setStorageSync('userId', res.data.data.userId)
-					// wx.getStorageSync('loginUid') = res.data.data.loginUid;
-					// wx.getStorageSync('userId') = res.data.data.userId;
 					that.setData({
 						cardNo: res.data.data.cardNo
 					})
@@ -138,7 +132,6 @@ Page({
 						setTimeout(() => {
 							wx.switchTab({
 								url: "../index/index"
-
 							})
 						}, 2000);
 					}

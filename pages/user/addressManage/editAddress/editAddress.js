@@ -1,5 +1,3 @@
-// page/user/addressManage/editAddress/editAddress.js
-// page/user/addressManage/newAddress/newAddress.js
 import arealist from '../area'
 var app = getApp()
 Page({
@@ -15,12 +13,13 @@ Page({
       name : "",
       currentadress : "",
       detailAddr : "",
-      tag : "家"
+      tag : "家",
+			defaultFlag: false
     },
     arealist : [],
     areakey : false,
     currentadress: "",
-    defaultFlag : 0,
+    defaultFlag: 0,
     id : ''
   },
   inputTel(e){
@@ -86,14 +85,6 @@ Page({
           wx.request({
             url: `${app.globalData.url}/api/member/deleteUserAddress?loginUid=${loginUid}&userId=${userId}&addrId=${that.data.id}`, //仅为示例，并非真实的接口地址
             method: "POST",
-            // data: {
-            //   // loginUid: loginUid,
-            //   // userId: userId,
-            //   // addrId: that.data.id
-            // },
-            header: {
-              'content-type': 'application/json' // 默认值
-            },
             success(res) {
               if (res.data.code == 200) {
                 wx.showToast({
@@ -123,7 +114,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.id) 
     this.setData({
       id: options.id
     })
@@ -144,7 +134,6 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        console.log(res)
         that.setData({
           content: res.data.data,
           'dataSet.currentadress': res.data.data.addr,
@@ -152,21 +141,22 @@ Page({
           'dataSet.detailAddr': res.data.data.detailAddr,
           'dataSet.mobile': res.data.data.mobile,
           'dataSet.tag': res.data.data.tag,
-          'defaultFlag': res.data.data.defaultFlag
+          'dataSet.defaultFlag': res.data.data.defaultFlag
         })
       }
     })
   },
   save(){
     for (var key in this.data.dataSet) {
-      if (this.data.dataSet[key] == ''){
+      if (this.data.dataSet[key] == '' && key != 'defaultFlag'){
         wx.showToast({
           title : '请填写完整信息',
           icon : 'none'
         })
-        return;
+        return
       }
     }
+		console.log(this.data.dataSet.defaultFlag)
     let loginUid = wx.getStorageSync('loginUid')
     let userId = wx.getStorageSync('userId')
     var that = this
@@ -174,11 +164,9 @@ Page({
       url: `${app.globalData.url}/api/member/updateUserAddress?loginUid=${loginUid}&userId=${userId}`, //仅为示例，并非真实的接口地址
       method : "POST",
       data: {
-        // "loginUid": loginUid,
-        // "userId": userId,
         "userAddr" : {
           "addr": that.data.dataSet.currentadress,
-          "defaultFlag": that.data.dataSet.defaultFlag?1:0,
+          "defaultFlag": that.data.dataSet.defaultFlag ? 1 : 0,
           "delFlag": 0,
           "detailAddr": that.data.dataSet.detailAddr,
           "id": that.data.id,
@@ -187,11 +175,7 @@ Page({
           "tag": that.data.dataSet.tag
         }
       },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
       success(res) {
-        console.log(res)
         if(res.data.code == 200 ){
           wx.showToast({
             title : res.data.message,
@@ -213,7 +197,6 @@ Page({
     })
   },
   switch1Change(e){
-    console.log(e)
     this.setData({
       'dataSet.defaultFlag': e.detail.value
     })
@@ -229,7 +212,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log(arealist)
     this.setData({
       arealist 
     })

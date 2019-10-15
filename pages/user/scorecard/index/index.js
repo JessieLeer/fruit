@@ -22,7 +22,7 @@ Page({
     getCouponlist(){
         var that = this
         wx.request({
-            url: `${app.globalData.url}/api/integralshop`, //仅为示例，并非真实的接口地址
+            url: `${app.globalData.url}/api/integralshop`,
             data: {
                 uid: 18679208206 
             },

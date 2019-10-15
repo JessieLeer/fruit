@@ -78,10 +78,12 @@ Page({
         })
     },
     pay(set){
-        if (set == "SETPRICE"){
-            console.log(31321321312)
-        }else{
-            console.log('guding')
+			let type
+      if (set == "SETPRICE"){
+        type = 1
+      }else{
+				type = 0
+      }
             let loginUid = wx.getStorageSync('loginUid')
             let userId = wx.getStorageSync('userId')
             let openid = wx.getStorageSync('openid')
@@ -91,12 +93,12 @@ Page({
                 wx.request({
                     url: `${app.globalData.url}/api/member/charge`, //仅为示例，并非真实的接口地址
                     data: {
-                        // orderId: that.data.chargeList[that.data.idx].rid,
                         loginUid,
                         userId,
-                        czgzId: that.data.chargeList[that.data.idx].rid,
-                        openId: openid
-
+                        czgzId: type == 0 ? that.data.chargeList[that.data.idx].rid : '',
+											  money: type == 1 ? that.data.price : '',
+                        openId: openid,
+										  	type
                     },
                     header: {
                         'content-type': 'application/json' // 默认值
@@ -127,8 +129,10 @@ Page({
                                     data: {
                                         loginUid: loginUid,
                                         userId: userId,
-                                        czgzId: that.data.chargeList[that.data.idx].rid,
-                                        orderId: that.data.orderId
+                                        czgzId: type == 0 ? that.data.chargeList[that.data.idx].rid : '',
+											  money: type == 1 ? that.data.price : '',
+                                        orderId: that.data.orderId,
+																			  type
                                     },
                                     header: {
                                         'content-type': 'application/json' // 默认值
@@ -160,9 +164,7 @@ Page({
                     }
                 })
             }
-        }
-
-},
+    },
     isSetSecret(set) {
         let loginUid = wx.getStorageSync('loginUid')
         let userId = wx.getStorageSync('userId')

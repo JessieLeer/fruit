@@ -14,7 +14,6 @@ Page({
   },
   onLoad(options) {
     if (JSON.stringify(options) =='{}')return
-    console.log(options)
     var scene = decodeURIComponent(options.scene)
     this.setData({
       shopId: scene.shopId
@@ -53,11 +52,8 @@ Page({
 							},
 							success(res) {
 								if(res.data.code == 200) {
-                  console.log(231321)
-									wx.setStorage({
-										key: 'cuser',
-										data: res.data.data
-									})
+									console.log(res.data)
+									wx.setStorageSync('cuser', res.data.data)
 									wx.setStorageSync('loginUid', res.data.data.loginUid)
 						      wx.setStorageSync('userId', res.data.data.userId)
 									Toast.success('登录成功')

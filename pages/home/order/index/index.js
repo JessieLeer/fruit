@@ -45,20 +45,11 @@ Page({
 		this.initCuser()
 	},
 	onShow() {
-		this.refreshOrder()
 	},
 	/*-- 页面跳转 --*/
 	go(e) {
 		wx.navigateTo({
 			url: e.currentTarget.dataset.url
-		})
-	},
-	/*-- 刷新订单数据 --*/
-	refreshOrder(e) {
-		this.setData({
-			'order0.data': this.data.order0.data,
-			'order1.data': this.data.order1.data,
-			'order2.data': this.data.order2.data,
 		})
 	},
 	/*-- 获取设备信息（屏幕高度等） --*/
@@ -77,13 +68,15 @@ Page({
 		let _this = this
 		wx.getStorage({
 			key: 'cuser',
-			success (res) {
+			success(res) {
 				_this.setData({
 					cuser: res.data
 				})
 				_this.index({type: 0})
 				_this.index({type: 1})
 				_this.index1()
+			},
+			fail() {
 			}
 		})
 	},
@@ -139,19 +132,23 @@ Page({
 					}
 					switch(type) {
 						case 0:
+							if(_this.data.order0.page == 1) {
+								_this.setData({
+									'order0.data': []
+								})
+							}
 							_this.setData({
 								'order0.data': _this.data.order0.data.concat(res.data.data)
 							})
-							_this.setData({
-								'order0.noGood': _this.data.order0.data.length == 0
-							})
 							break
 						case 1:
+						  if(_this.data.order1.page == 1) {
+								_this.setData({
+									'order1.data': []
+								})
+							}
 							_this.setData({
 								'order1.data': _this.data.order1.data.concat(res.data.data)
-							})
-							_this.setData({
-								'order1.noGood': _this.data.order1.data.length == 0
 							})
 							break	
 					}
@@ -210,6 +207,11 @@ Page({
 								item.status = '已完成'
 								break
 						}
+					}
+					if(_this.data.order2.page == 1) {
+						_this.setData({
+							'order2.data': []
+						})
 					}
 					_this.setData({
 						'order2.data': _this.data.order2.data.concat(res.data.data)
@@ -397,6 +399,7 @@ Page({
 			'pay.id': e.currentTarget.dataset.id,
 			'pay.orderType': e.currentTarget.dataset.type,
 			'pay.show': true,
+			'pay.balanceShow': !e.currentTarget.dataset.gid,
 			'pay.cost': e.currentTarget.dataset.cost
 		})
 	},

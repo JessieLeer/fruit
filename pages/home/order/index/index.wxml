@@ -1,10 +1,10 @@
 <van-tabs active="{{ active }}" bind:change="onChange" color='#F6931F' tab-active-class='active' sticky='{{true}}' class='h-100'>
   <van-tab title="商家配送" >
-	  <view class='nogood' wx:if='{{order0.noGood}}'>
+	  <view class='nogood' wx:if='{{order0.noGood || !cuser.userId}}'>
 	    <image src='/static/image/nogood.png'  mode='widthFix' />
 			<text class='nogood-text'>未查询到您的订单</text>
 		</view>
-	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper' style='height: {{windowH}}px' data-id='0' wx:else>
+	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='-60' class='good-wrapper' style='height: {{windowH}}px' data-id='0' wx:else>
 		  <view wx:for='{{order0.data}}' wx:key='index'>
 				<van-panel title="{{item.createTime}}" status="{{item.status}}" use-footer-slot custom-class='good' header-class='good-header' footer-class='good-footer'>
 					<view class='good-content' data-url='/pages/home/order/detail/index?id={{item.id}}' bindtap='go'>
@@ -41,11 +41,11 @@
 		</scroll-view>
 	</van-tab>
 	<van-tab title="门店自提">
-	  <view class='nogood' wx:if='{{order1.noGood}}'>
+	  <view class='nogood' wx:if='{{order1.noGood || !cuser.userId}}'>
 	    <image src='/static/image/nogood.png'  mode='widthFix' />
 			<text class='nogood-text'>未查询到您的订单</text>
 		</view>
-	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper' style='height: {{windowH}}px' data-id='1' wx:else>
+	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='-60' class='good-wrapper' style='height: {{windowH}}px' data-id='1' wx:else>
 		  <view wx:for='{{order1.data}}' wx:key='index'>
 				<van-panel title="{{item.createTime}}" status="{{item.status}}" use-footer-slot custom-class='good' header-class='good-header' footer-class='good-footer'>
 					<view class='good-content' data-url='/pages/home/order/detail/index?id={{item.id}}' bindtap='go'>
@@ -59,7 +59,7 @@
 					</view>
 					<view slot="footer" wx:if='{{item.status == "待支付"}}'>
 						<van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='1'>取消订单</van-button>
-						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-type='1' data-cost='{{item.payMoney}}' bind:click='onPayshow'>去支付</van-button>
+						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-type='1' data-cost='{{item.payMoney}}'  bind:click='onPayshow'>去支付</van-button>
 					</view>
 					<view slot='footer' wx:if='{{item.status == "待配送"}}'>
 						<van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='1'>取消订单</van-button>
@@ -82,11 +82,11 @@
 		</scroll-view>
 	</van-tab>
   <van-tab title="拼团">
-	  <view class='nogood' wx:if='{{order2.noGood}}'>
+	  <view class='nogood' wx:if='{{order2.noGood || !cuser.userId}}'>
 	    <image src='/static/image/nogood.png'  mode='widthFix' />
 			<text class='nogood-text'>未查询到您的订单</text>
 		</view>
-	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper' style='height: {{windowH}}px' data-id='2' wx:else>
+	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='-60' class='good-wrapper' style='height: {{windowH}}px' data-id='2' wx:else>
 		  <view wx:for='{{order2.data}}' wx:key='index'>
 				<van-panel use-footer-slot custom-class='good' header-class='good-header' footer-class='good-footer'>
 				  <view class='group-header' slot='header'>
@@ -106,23 +106,16 @@
 						</view>
 					</view>
 					<view slot="footer" wx:if='{{item.status == "待支付"}}'>
-						<van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='2'>取消订单</van-button>
-						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-type='2' data-cost='{{item.payMoney}}' bind:click='onPayshow'>去支付</van-button>
+						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-type='2' data-gid='{{item.groupId}}' data-cost='{{item.payMoney}}' bind:click='onPayshow'>去支付</van-button>
 					</view>
 					<view slot='footer' wx:if='{{item.status == "待配送"}}'>
-						<van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='2'>取消订单</van-button>
 					</view>
 					<view slot='footer' wx:if='{{item.status == "待自提"}}'>
-						<van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='2'>取消订单</van-button>
 						<van-button type="warning" custom-class='pay' data-url='/pages/home/order/detail/index?id={{item.id}}' bind:click='go'>查看取货码</van-button>
-					</view>
-					<view slot='footer' wx:if='{{item.status == "已取消"}}'>
-						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-shopid='{{item.storeId}}' bind:click='again'>再来一单</van-button>
 					</view>
 					<view slot='footer' wx:if='{{item.status == "已完成"}}'>
 					  <van-button custom-class='cancel' data-url='/pages/home/order/evaluate/index?id={{item.id}}&storeId={{item.storeId}}' bind:click='go' wx:if='{{item.evaluate == false}}'>评价</van-button>
 						<van-button custom-class='cancel' data-url='/pages/home/order/evaluate/show?id={{item.id}}' bind:click='go' wx:if='{{item.evaluate == true}}'>查看评价</van-button>
-						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-shopid='{{item.storeId}}'  bind:click='again'>再来一单</van-button>
 					</view>
 				</van-panel>
 			</view>
@@ -130,7 +123,7 @@
 		</scroll-view>
 	</van-tab>
 </van-tabs>
-<pay isShow="{{pay.show}}" paShow='{{pay.paShow}}' balanceShow='{{pay.balanceShow}}' password='{{pay.password}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{pay.cost}}' orderId='{{pay.id}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
+<pay class='payer' isShow="{{pay.show}}" paShow='{{pay.paShow}}' balanceShow='{{pay.balanceShow}}' password='{{pay.password}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{pay.cost}}' orderId='{{pay.id}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>
 <van-toast id="van-toast" />
 <van-dialog id="van-dialog" />
 <van-popup show="{{ logShow }}" bind:close="onLogclose" position='top'>

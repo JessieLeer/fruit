@@ -8,11 +8,11 @@
 
 <view class='group-bread'>
   <view class='group-bread-left f-cb'>
-	  <van-tag custom-class='group-bread-people' color='white' text-color='#D81313' size='large'>三人团</van-tag>
+	  <van-tag custom-class='group-bread-people' color='white' text-color='#D81313' size='large'>{{order.guserNumber}}人团</van-tag>
 		<text class='group-bread-price f-ib f-vat'>
 		  <text class='price-unit'>¥</text>{{order.gprice}}
 		</text>
-		<text class='group-bread-oldprice f-ib f-vat'>¥{{order.originalprice}}</text>
+		<text class='group-bread-oldprice f-ib f-vat'>¥{{order.originalPrice}}</text>
 	</view>
 	<view class='group-bread-right'>
 	  <text class='group-bread-endtxt f-db'>距结束还有</text>
@@ -46,7 +46,7 @@
 				<text class='group-user-countdonw' wx:else>剩余{{order.left.hour}} : {{order.left.minute}} : {{order.left.second}}</text>
 			</view>
 		</view>
-		<van-button type="warning" size="large" custom-class='group-create' data-item='{{item}}' bind:click='join'>去参团</van-button>
+		<van-button type="warning" size="large" custom-class='group-create' data-item='{{item}}' data-url='/pages/home/group/edit/index?groupid={{item.gid}}' bind:click='go'>去参团</van-button>
 	</view>
 </view>
 <view class='seg'></view>
@@ -78,14 +78,24 @@
 	</view>
 </view>
 
+<view class='good-detail'>
+  <view class='good-detail-header'>
+    <view class='line'></view>
+	  <text class='good-detail-text'>商品详情</text>
+	  <view class='line'></view>
+	</view>
+	<text class='good-detail-content'>{{order.voCommodityDetail.details}}</text>
+	<image wx:for='{{order.voCommodityDetail.images}}' src="{{item.imageUrl}}" class="slide-image w-100" mode="widthFix" wx:if='{{item.type == 2}}' wx:key='index'/>
+</view>
+
 <view class='footer'>
   <view class='footer-price'>
 	  <text class='group-price f-ib'>
 		  <text class='price-unit'>¥</text>{{order.gprice}}
 		</text>
-		<text class='single-price f-ib'>单买<text class='price-unit1'>¥</text>{{order.originalprice}}</text>
+		<text class='single-price f-ib'>单买<text class='price-unit1'>¥</text>{{order.originalPrice}}</text>
 	</view>
-	<van-button type="warning" size="large" custom-class='footer-submit' data-url='/pages/home/group/edit/index' bind:click='go'>一键开团</van-button>
+	<van-button type="warning" size="large" custom-class='footer-submit' data-url='/pages/home/group/edit/index?groupid={{order.gid}}' bind:click='go'>一键开团</van-button>
 </view>
 
 <van-toast id="van-toast" />

@@ -7,25 +7,14 @@ let qqmapsdk = new QQMapWX({
 //app.js
 App({
 	globalData: {
-		// 用户的微信信息
-    userInfo: null,
 		// 用户的地理位置信息
 		position: {},
-		// openid
-		openid: '',
-		// session_key
-		userId : '',
 		shop: {},
 		code : '',
 		orderGoods: [],
-		session_key: '' ,
 		groupbuy: {},
-		url: 'http://m.ysk360.com',
-		//url: 'http://192.168.1.101:8080',
-		loginUid: '',
-		avatarUrl : '',
-		Nickname : '',
-		mobile : ''
+		url: 'https://yjjycs.ysk360.com',
+		//url: 'http://192.168.1.70:8082',
   },
   onLaunch() {
     // 登录
@@ -44,74 +33,62 @@ App({
 					},
 					success(res) {
 						wx.setStorageSync('openid', res.data.openid )
-						wx.setStorageSync('session_key', res.data.session_key )
-						_this.globalData.openid = res.data.openid
-						_this.globalData.session_key = res.data.session_key				
+						wx.setStorageSync('session_key', res.data.session_key )			
 					}
 				})
       }
     })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-				// 用户是否进行了获取信息的授权
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-						withCredentials: true,
-            success: res => {
-							// 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
-        }
-				// 用户是否进行了获取位置信息的授权
-				if(res.authSetting['scope.userLocation']) {
-					/*-- 根据坐标点获取地理位置信息 --*/
-					let _this = this
-					qqmapsdk.reverseGeocoder({
-						//获取表单传入的位置坐标,不填默认当前位置,示例为string格式
-						location: '', 
-						//是否返回周边POI列表：1.返回；0不返回(默认),非必须参数
-						//get_poi: 1, 
-						success(res) {
-							_this.globalData.position = res.result
-						},
-						fail(error) {
-							console.error(error)
-						},
-						complete(res) {
-						}
-					})
-				}else{
-					wx.authorize({
-						scope: 'scope.userLocation',
-						success () {
-							/*-- 根据坐标点获取地理位置信息 --*/
-							let _this = this
-							qqmapsdk.reverseGeocoder({
-								//获取表单传入的位置坐标,不填默认当前位置,示例为string格式
-								location: '', 
-								//是否返回周边POI列表：1.返回；0不返回(默认),非必须参数
-								//get_poi: 1, 
-								success(res) {
-									_this.globalData.position = res.result
-								},
-								fail(error) {
-									console.error(error)
-								},
-								complete(res) {
-								}
-							})
-						}
-					})
+  },
+	positionShow() {
+		return new Promise((resolve, reject) => {
+			// 获取用户信息
+			wx.getSetting({
+				success: res => {
+					// 用户是否进行了获取位置信息的授权
+					if(res.authSetting['scope.userLocation']) {
+						/*-- 根据坐标点获取地理位置信息 --*/
+						let _this = this
+						qqmapsdk.reverseGeocoder({
+							//获取表单传入的位置坐标,不填默认当前位置,示例为string格式
+							location: '', 
+							//是否返回周边POI列表：1.返回；0不返回(默认),非必须参数
+							//get_poi: 1, 
+							success(res) {
+								_this.globalData.position = res.result
+								resolve(res.result)
+							},
+							fail(error) {
+								reject('error')
+							},
+							complete(res) {
+							}
+						})
+					}else{
+						let _this = this
+						wx.authorize({
+							scope: 'scope.userLocation',
+							success () {
+								/*-- 根据坐标点获取地理位置信息 --*/
+								qqmapsdk.reverseGeocoder({
+									//获取表单传入的位置坐标,不填默认当前位置,示例为string格式
+									location: '', 
+									//是否返回周边POI列表：1.返回；0不返回(默认),非必须参数
+									//get_poi: 1, 
+									success(res) {
+										_this.globalData.position = res.result
+										resolve(res.result)
+									},
+									fail(error) {
+										reject('error')
+									},
+									complete(res) {
+									}
+								})
+							}
+						})
+					}
 				}
-      }
-    })
-  }
+			})
+		})
+	}
 })

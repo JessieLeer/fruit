@@ -69,6 +69,7 @@
 }
 .coupon_img_area image{
     width : 100%;
+		max-height: 50px;
 }
 
 .warp_img{

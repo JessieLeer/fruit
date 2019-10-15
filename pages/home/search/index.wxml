@@ -24,12 +24,14 @@
 		<scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper' wx:else>
 			<van-card wx:for='{{goods}}' wx:key='index' price="{{item.sellingPrice}}" origin-price='{{item.originalPrice}}' desc="{{item.specification}}" title="{{item.name}}" desc-class='good-desc' title-class='good-name' price-class='good-price' custom-class='good-item' centered='false'>
 				<image slot='thumb' src="{{item.headImage ? item.headImage : 'https://img.yzcdn.cn/vant/t-thirt.jpg'}}" mode='widthFix' class='thumb' bindtap='go' data-url='/pages/home/good/index?shopId={{shopId}}&id={{item.id}}'/>
-				<image src='../../../static/image/shopcar.png' slot='bottom' class='shopcar-icon' mode='widthFix' catchtap='addShopcar' data-good='{{item}}' wx:if='{{item.count == 0}}' />
-				<van-stepper slot='bottom' value="{{item.count}}" bind:change="onCartChange" class='shopcar' custom-class='step' input-class='good-input' minus-class='minus' plus-class='plus' min='0' max='{{item.inventory}}' wx:if='{{item.count != 0}}' data-good='{{item}}'/>
+				<van-tag wx:if='{{item.inventory == 0}}' slot='bottom' class='shopcar-noinven'>暂无库存</van-tag>
+				<image src='../../../static/image/shopcar.png' slot='bottom' class='shopcar-icon' mode='widthFix' catchtap='addShopcar' data-good='{{item}}' wx:elif='{{item.count == 0}}' />
+				<van-stepper slot='bottom' value="{{item.count}}" bind:change="onCartChange" class='shopcar' custom-class='step' input-class='good-input' minus-class='minus' plus-class='plus' min='0' max='{{item.inventory}}' wx:else data-good='{{item}}'/>
 			</van-card>
 			<text wx:if='{{isLoadAll}}' class='more-text w-100'>没有更多商品了</text>
 		</scroll-view>
 	</view>	
+	<van-toast id="van-toast" />
 	<van-dialog id="van-dialog" />
 	<shopcar goods='{{shopcarGoods}}' shopId='{{shopId}}' totalPrice='{{totalPrice}}' wx:if='{{shopcarGoods.length > 0}}' bind:onCartChange='onCartChange' bind:onClear='onCartClear'></shopcar>
 </view>

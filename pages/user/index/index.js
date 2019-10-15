@@ -1,4 +1,5 @@
 var barcode = require('../../../utils/index')
+import qrcode from '../../../utils/weapp-qrcode.js'
 const app = getApp()
 
 Page({
@@ -165,6 +166,16 @@ Page({
                         loginKey: true
                     })
                     barcode.barcode('firstCanvas', JSON.stringify(res.data.data.cardNo) , 285 * 2, 108 * 2)
+									new qrcode('myQrcode',{
+										text: res.data.data.cardNo,
+										width: 140,
+										height: 140,
+										padding: 12, 
+										// 二维码可辨识度
+										correctLevel: qrcode.CorrectLevel.L, 
+										callback: (res) => {
+										}
+									})
                 }
             })
         }

@@ -24,6 +24,7 @@ Page({
 				wx.removeStorageSync('cuser')
 				wx.removeStorageSync('avatarUrl')
 				wx.removeStorageSync('Nickname')
+				wx.removeStorageSync('shopcar')
         wx.showToast({
           title: res.data.message,
           icon: 'none',

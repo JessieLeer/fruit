@@ -57,10 +57,8 @@ Page({
         wx.request({
             url: `${app.globalData.url}/api/coupon`, //仅为示例，并非真实的接口地址
             data: {
-                uid: userId
-            },
-            header: {
-                'content-type': 'application/json' // 默认值
+              uid: userId,
+							cuse: 0
             },
             success(res) {
                 res.data.data.forEach(element => {
@@ -72,7 +70,6 @@ Page({
                 that.setData({
                     dataList: res.data.data
                 })
-                console.log(res.data.data)
             }
         })
     },
@@ -93,9 +90,6 @@ Page({
                 uid: userId,
                 rid  : that.data.value
             },
-            header: {
-                'content-type': 'application/json' // 默认值
-            },
             success(res) {
                 wx.showToast({
                     title: res.data.tip,
@@ -107,7 +101,6 @@ Page({
         })
     },
     getValue(e){
-        console.log(e)
         this.setData({
             value : e.detail
         })
