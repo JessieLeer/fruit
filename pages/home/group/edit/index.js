@@ -6,12 +6,13 @@ Page({
 	data: {
 		cuser: {},
 		orderId: '',
+		groupId: '',
 		orderInfo: {},
 		pay: {
 			show: false,
 			paShow: false,
 			balanceShow: false,
-			type: '',
+			type: 'wechat',
 			password: '',
 			passFocus: false
 		},
@@ -88,6 +89,7 @@ Page({
 			success(res) {
 				if(res.data.code == 200) {
 					_this.setData({
+						groupId: res.data.data.groupId,
 						orderId: res.data.data.id,
 						'pay.show': true,
 					})
@@ -112,38 +114,10 @@ Page({
 			'pay.type': e.detail
 		})
 	},
-	handlePass(e) {
-		this.setData({
-			'pay.paShow': true,
-			'pay.passFocus': true
-		})
-	},
-	passInput(e) {
-		this.setData({
-			'pay.password': e.detail.value
-		})
-		if(this.data.pay.password.length == 6 && this.data.pay.type == 'balance') {
-			let _this = this
-			wx.request({
-				url: `${app.globalData.url}/api/pay/balance`,
-				data: {
-					orderId: this.data.orderId,
-					payPwd: this.data.pay.password,
-					userId: this.data.cuser.userId
-				},
-				success(res) {
-					if(res.data.code == 200) {
-						_this.paySuccess()
-					}else{
-						Toast(res.data.message)
-					}
-				}
-			})
-		}
-	},
+	
 	paySuccess(e) {
 		wx.redirectTo({
-			url: `/pages/home/order/success/index?id=${this.data.orderId}`
+			url: `/pages/home/group/success/index?id=${this.data.groupId}`
 		})
 	},
 	passClose(e) {

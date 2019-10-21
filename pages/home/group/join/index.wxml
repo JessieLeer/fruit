@@ -1,0 +1,26 @@
+<van-panel title="{{order.storeName}}" status="拼团进行中"></van-panel>
+<view class='good'>
+  <image src='{{order.shopImg}}' mode='widthFix' class='good-image'/>
+	<view class='good-info'>
+	  <text class='good-name'>{{order.shopName}}</text>
+		<view class='good-price'>
+		  <text class='good-price-now'>¥{{order.gprice}}</text>
+			<text class='good-price-old'>单买价:¥{{order.originalPrice}}</text>
+		</view>
+	</view>
+</view>
+<view class='user'>
+  <van-icon wx:for='{{order.userImgList}}' wx:key='index'  name="{{item.userImg}}" class='avatar' size='40px' color='#ccc' info='{{index == 0 ? "团长" : ""}}'/>
+</view>
+
+<view class='time'>
+  <text class='group-bread-endtxt f-db'>距结束还有</text>
+  <text wx:if='{{order.leftCount}}'>{{order.leftCount}}天</text>
+  <view class='f-ib' wx:else>
+    <text class='time f-ib'>{{order.left.hour}}</text> : 
+	  <text class='time f-ib'>{{order.left.minute}}</text> :
+	  <text class='time f-ib'>{{order.left.second}}</text>
+  </view>
+	<view class='people'>差<text class='need'>{{order.need}}</text>人成团</view>
+	<van-button type="warning" custom-class='join' data-url='/pages/home/group/edit/index?id={{order.gid}}' bind:click='go'>立即参团</van-button>
+</view>

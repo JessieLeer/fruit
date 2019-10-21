@@ -5,7 +5,7 @@
 		</swiper-item>
 	</block>
 </swiper>
-<van-icon name="share" class='share' size='40rpx' color='#F6931F' bindtap='showShare' />
+<image src='../../../static/image/share.png' class='share' bindtap='showShare' mode='widthFix'/>
 <view class='good-area'>
 	<view class='good-name'>
 		{{good.name}} {{good.flmc}} {{good.specification}}
@@ -36,11 +36,9 @@
 	  <text class='good-detail-text'>商品详情</text>
 	  <view class='line'></view>
 	</view>
-	<text class='good-detail-content'>{{good.details}}</text>
-	<image wx:for='{{good.images}}' src="{{item.imageUrl}}" class="slide-image w-100" mode="widthFix" wx:if='{{item.type == 2}}' wx:key='index'/>
+	<rich-text class='good-detail-content' nodes='{{good.details}}'></rich-text>
 </view>
 <shopcar goods='{{shopcarGoods}}' shopId='{{shopId}}' totalPrice='{{totalPrice}}' wx:if='{{shopcarGoods.length > 0}}' bind:onCartChange='onCartChange' bind:onClear='onCartClear'></shopcar>
-<!--<canvas canvas-id="myCanvas" style="width:600px;height:900px"></canvas>-->
 <van-toast id="van-toast" />
 <van-popup show="{{ shareShow }}" position="bottom" bind:close="onClose" class='f-cb' custom-class='share-area'>
   <view class='share-part'>
@@ -49,11 +47,5 @@
 	  </van-button>
 		<view class='share-text'>分享给好友</view>
 	</view>
-	<!--<view class='share-part'>
-    <van-button type="default" custom-class='share-button'>
-	    <image src='../../../static/image/picture.png' mode='widthFix' class='share-image' />
-	  </van-button>
-		<view class='share-text'>生成图片</view>
-	</view>-->
 	<van-button type="default" custom-class='share-close' bindtap='onClose'>取消</van-button>
 </van-popup>

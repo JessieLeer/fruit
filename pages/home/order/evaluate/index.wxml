@@ -4,7 +4,9 @@
 </view>
 
 <view class='rate-content'>
-  <van-field value="{{ evaluate.content }}" type="textarea" placeholder="您的评价会帮助我们做得更好" autosize border="{{ false }}" class='rate-message f-db' bind:change='handleContent'/>
+  <view class='rate-message'>  
+	  <van-field value="{{ evaluate.content }}" type="textarea" bind:focus='onFocus' bind:blur='onBlur' placeholder="{{placeholder}}"  border="{{ false }}" class='f-db' bind:change='handleContent' maxlength='140' autosize/>
+	</view>
 	<view class='rate-images'>
 	  <view wx:for='{{evaluate.images}}' wx:key='index' class='evaluate-image f-ib f-vat'>
 	    <image src='{{item}}' mode='widthFix' />

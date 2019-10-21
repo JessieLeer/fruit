@@ -23,12 +23,12 @@
 		<text class='nogood-text'>当前搜索条件下无拼团</text>
 	</view>
 	<view class='goods' wx:else>
-	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='-60' class='good-wrapper'>
+	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='-60' scroll-with-animation='true' class='good-wrapper'>
 		  <view wx:for='{{good.data}}' wx:key='index' class='good' bindtap='go' data-url='/pages/home/group/show/index?id={{item.gid}}'>
 			  <image src='{{item.shopImg}}' mode='widthFix' class='good-image'/>
 				<view class='good-main'>
 					<view class='good-header f-cb'>
-						<text class='good-name f-tal f-fl'>{{item.shopName}}</text>
+						<text class='good-name f-tal f-fl'>{{item.gname}}</text>
 						<text class='good-left f-tar f-fr' wx:if='{{item.leftCount > 0}}'>还剩{{item.leftCount}}天结束</text>
 						<text class='good-left f-tar f-fr' wx:else>不足一天结束</text>
 					</view>
@@ -50,7 +50,7 @@
   <image src='../../../../static/image/noshop@2x.png' mode='widthFix' class='noshop'/>
 	<view class='caller'>已有<text class='caller-number'>{{caller}}人</text>召唤缘疆佳园在这里开店～</view>
 	<van-button type="default" custom-class='caller-me' bindtap='calling'>我也来召唤</van-button>
-	<van-button type="default" custom-class='caller-change' bindtap='go' data-url='/pages/home/address/index'>换个地址</van-button>
+	<van-button type="default" custom-class='caller-change' bindtap='go' data-url='/pages/home/address/index?from=/pages/home/group/index/index'>换个地址</van-button>
 </view>
 
 <van-toast id="van-toast" />

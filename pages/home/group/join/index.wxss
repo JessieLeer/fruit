@@ -1,0 +1,66 @@
+.good{
+  display: flex;
+	padding: 20rpx;
+}
+
+.good-image{
+  width: 200rpx;
+}
+
+.good-info{
+  flex: 1;
+	padding-left: 20rpx;
+}
+
+.good-name{
+  font-size: 28rpx;
+}
+
+.good-price{
+  font-size: 24rpx;
+}
+
+.good-price-now{
+  color: rgba(246,147,31,1);
+}
+
+.good-price-old{
+  color: #ccc;
+	text-decoration: line-through;
+	margin-left: 20rpx;
+}
+
+.user{
+  text-align: center;
+	border-top: #eee solid 1rpx;
+	padding-top: 40rpx;
+}
+
+.avatar{
+  margin-left: 20rpx;
+	margin-right: 20rpx;
+}
+
+.time{
+  text-align: center;
+	color: #666;
+	font-size: 28rpx;
+}
+
+.f-ib{
+  display: inline-block;
+}
+
+.need{
+  color: rgba(246,147,31,1);
+	font-size: 28rpx;
+}
+
+.join.van-button--warning{
+  background-color: #F6931F;
+  border: #F6931F solid 1px;
+  color: white;
+	width: 80%;
+	margin: 40rpx auto;
+	border-radius: 45rpx;
+}

@@ -228,7 +228,8 @@ Page({
 					postType: this.data.active,
 					addressId: addressId,
 					storeId: this.data.shopId,
-					userId: this.data.cuser.userId
+					userId: this.data.cuser.userId,
+					couponId: this.data.coupon.useing.rid
 				},
 				success(res) {
 					if(res.data.code == 200) {
@@ -278,6 +279,9 @@ Page({
 			'pay.password': e.detail.value
 		})
 		if(this.data.pay.password.length == 6 && this.data.pay.type == 'balance') {
+			wx.showLoading({
+        title: '支付中',
+      })
 			let _this = this
 			wx.request({
 				url: `${app.globalData.url}/api/pay/balance`,
@@ -287,6 +291,7 @@ Page({
 					userId: this.data.cuser.userId
 				},
 				success(res) {
+					wx.hideLoading()
 					if(res.data.code == 200) {
 						_this.paySuccess()
 					}else{

@@ -24,7 +24,7 @@
                 <text space="ensp">{{item.iname}}</text>
             </view>
             <view class="wrap_btn">
-                <view class="btn_for" data-iid="{{item.iid}}" bindtap="convert">
+                <view class="btn_for" data-url='/pages/user/scorecard/show/index?iid={{item.iid}}' bindtap="go">
                     {{item.iconsume}}积分兑换
                 </view>
             </view>

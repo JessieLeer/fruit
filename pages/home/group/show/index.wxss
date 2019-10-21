@@ -33,6 +33,15 @@ page{
   height: 376rpx;
 }
 
+.share{
+  position: fixed;
+	right: 20rpx;
+	top: 30rpx;
+	border: none;
+	width: 50rpx;
+	z-index: 10;
+}
+
 .group-bread{
   display: flex;
 }
@@ -310,3 +319,48 @@ page{
 	text-align: left;
 	color: b9b9b9;
 }
+
+.share-area{
+  padding-top: 30rpx;
+	padding-bottom: 30rpx;
+	display: block;
+}
+
+.share-part{
+  text-align: center;
+}
+
+.share-image{
+  width: 80rpx;
+}
+
+.f-db{
+  display: block;
+}
+
+.f-cb:after,.f-cbli li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+.f-cb,.f-cbli li{zoom:1;}
+
+.share-button.van-button--default{
+  border: white solid 1px;
+}
+
+.share-text{
+  color: #898989;
+	font-size: 24rpx;
+}
+
+.share-close.van-button--default{
+  width: 100%;
+	border: white solid 1px;
+	margin-top: 30rpx;
+}
+
+.good-detail-content{
+	width: 100%;
+}
+
+.good-detail-content image{
+  max-width: 100%;
+}
+

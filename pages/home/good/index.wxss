@@ -15,6 +15,8 @@
 	right: 20rpx;
 	top: 30rpx;
 	border: none;
+	width: 50rpx;
+	z-index: 10;
 }
 
 .good-area{
@@ -180,11 +182,3 @@
 	margin-top: 30rpx;
 }
 
-.good-detail-content{
-  font-size: 28rpx;
-	display: block;
-	width: 90%;
-	margin: 0 auto 20rpx auto;
-	text-align: left;
-	color: b9b9b9;
-}

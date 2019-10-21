@@ -7,7 +7,6 @@ Page({
     gotoScoreDetail(){
         wx.navigateTo({
             url: "../scoredetail/index"
-
         })
     },
     gotoDoc(){
@@ -15,10 +14,30 @@ Page({
             url: "../../documents/Doc/index?id=integral"
         })
     },
+	  go(e) {
+			wx.navigateTo({
+				url: e.currentTarget.dataset.url
+			})
+		},
     onShow(){
         this.scoreDate()
         this.getCouponlist()
     },
+		scoreDate(){
+			let userId = wx.getStorageSync('userId')
+			var that = this
+			wx.request({
+				url: `${app.globalData.url}/api/integral`,
+				data: {
+					uid: userId
+				},
+				success(res) {
+					that.setData({
+						myscore: res.data.number
+					})
+				}
+			})
+		},
     getCouponlist(){
         var that = this
         wx.request({
@@ -26,55 +45,10 @@ Page({
             data: {
                 uid: 18679208206 
             },
-            header: {
-                'content-type': 'application/json' // 默认值
-            },
             success(res) {
-                console.log(res.data)
                 that.setData({
                     couponlist: res.data.data
                 })
-            }
-        })
-    },
-    scoreDate(){
-        let userId = wx.getStorageSync('userId')
-        var that = this
-        wx.request({
-            url: `${app.globalData.url}/api/integral`, //仅为示例，并非真实的接口地址
-            data: {
-                uid: userId
-            },
-            header: {
-                'content-type': 'application/json' // 默认值
-            },
-            success(res) {
-                that.setData({
-                    myscore: res.data.number
-                })
-            }
-        })
-    },
-    convert(e){
-        console.log(e.currentTarget.dataset.iid)
-        let userId = wx.getStorageSync('userId')
-        var that = this
-        wx.request({
-            url: `${app.globalData.url}/api/insetCoupon`, //仅为示例，并非真实的接口地址
-            data: {
-                iid: e.currentTarget.dataset.iid,
-                uid: userId
-            },
-            header: {
-                'content-type': 'application/json' // 默认值
-            },
-            success(res) {
-                wx.showToast({
-                    title: res.data.tips,
-                    icon: res.data.return == "false" ? 'none' : 'success',
-                    duration: 2000
-                })
-                that.scoreDate()
             }
         })
     }

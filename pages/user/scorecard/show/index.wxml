@@ -1,0 +1,15 @@
+<image src="{{good.ibanner}}" class="slide-image w-100" mode="widthFix"/>
+<view class='good-spec'>
+  <text class='good-cname f-db'>{{good.couponList.cname}}</text>
+	<text class='price f-db'>{{good.iconsume}}积分</text>
+</view>
+<view class='seg w-100'></view>
+<view class='good-detail'>
+  <view class='good-detail-header'>
+    <view class='line'></view>
+	  <text class='good-detail-text'>商品详情</text>
+	  <view class='line'></view>
+	</view>
+	<text class='good-detail-content'>{{good.couponList.ctext}}</text>
+</view>
+<van-button type="warning" color='#F6931F' class='sub' bind:click='convert'>立即兑换</van-button>

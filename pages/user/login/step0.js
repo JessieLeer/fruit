@@ -35,9 +35,6 @@ Page({
         'iv': e.detail.iv,
         'code': code,
       },
-      header: {
-        'content-type': 'application/json'
-      },
       success(res) {
         if(res.data.data == null)return
 				let _res = res.data.data.phoneNumber
@@ -52,7 +49,6 @@ Page({
 							},
 							success(res) {
 								if(res.data.code == 200) {
-									console.log(res.data)
 									wx.setStorageSync('cuser', res.data.data)
 									wx.setStorageSync('loginUid', res.data.data.loginUid)
 						      wx.setStorageSync('userId', res.data.data.userId)

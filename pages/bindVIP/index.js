@@ -1,4 +1,3 @@
-
 import utils from '../../utils/dealtime'
 const app = getApp()
 Page({
@@ -63,11 +62,7 @@ Page({
                 loginUid: loginUid,
                 userId: userId
             },
-            header: {
-                'content-type': 'application/json' // 默认值
-            },
             success(res) {
-                console.log(res)
                 that.setData({
                     tel: res.data.data.mobile
                 })
@@ -83,16 +78,11 @@ Page({
                 latitude: that.data.latitude,
                 longitude: that.data.longitude
             },
-            header: {
-                'content-type': 'application/json' // 默认值
-            },
             success(res) {
-                console.log(res)
                 var columns = []
                 res.data.data.map((item)=>{
                     columns.push(item.name)
                 })
-                console.log(columns)
                 // res.data.data
                 that.setData({
                     columns
@@ -109,14 +99,10 @@ Page({
                 mobile,
                 shopId : that.data.shopId
             },
-            header: {
-                'content-type': 'application/json' // 默认值
-            },
             success(res) {
                 if (mobile == res.data.data.name){
                     res.data.data.name = '';
                 }
-                console.log(res)
                 that.setData({
                     currentadress : res.data.data.storeName,
                     storeId : res.data.data.storeId,
@@ -300,8 +286,7 @@ Page({
         })
     },
     getCodeAndCardInfo(){
-			console.log('hello')
-        var that = this;
+        var that = this
         wx.login({
             success: res => {
                 that.setData({
@@ -322,7 +307,6 @@ Page({
                 'content-type': 'application/json' // 默认值
             },
             success(res) {
-							console.log(res)
                 if (res.data.code == 200) {
                     wx.addCard({
                         cardList: [
@@ -344,7 +328,6 @@ Page({
         })
     },
     onLoad(options){
-        console.log(options)
         this.setData({
             shopId: options.shopId,
             type: options.type,

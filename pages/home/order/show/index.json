@@ -1,5 +1,5 @@
 {
-	"navigationBarTitleText": "订单详情",
+	"navigationBarTitleText": "确认订单",
 	"enablePullDownRefresh": false,
 	"usingComponents": {
 		"pay": "/components/pay/index"

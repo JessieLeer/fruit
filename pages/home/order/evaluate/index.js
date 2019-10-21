@@ -5,6 +5,7 @@ const app = getApp()
 Page({
 	data: {
 		cuser: {},
+		placeholder: '您的评价会帮助我们做得更好',
 		evaluate: {
 			orderId: '',
 			storeId: '',
@@ -30,6 +31,16 @@ Page({
 					cuser: res.data
 				})
 			}
+		})
+	},
+	onFocus(e) {
+		this.setData({
+			placeholder: ''
+		})
+	},
+	onBlur(e) {
+		this.setData({
+			placeholder: this.data.evaluate.content == '' ? '您的评价会帮助我们做得更好' : ''
 		})
 	},
 	onChange(event) {
@@ -64,7 +75,7 @@ Page({
 	uploadImage(e) {
 		let _this = this
 		wx.uploadFile({
-			url: '${app.globalData.url}/api/imgUpload',
+			url: `${app.globalData.url}/api/imgUpload`,
 			filePath: e.filePath,
 			name: 'files',
 			header: {
@@ -77,7 +88,6 @@ Page({
 					_this.setData({
 						'evaluate.images': _this.data.evaluate.images
 				  })
-					console.log(_this.data.evaluate.images)
 				}else{
 					Toast('上传失败，请稍后再试')
 				}

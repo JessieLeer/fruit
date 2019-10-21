@@ -1,5 +1,7 @@
 page{
   padding-top: 160rpx;
+	height: 100%;
+	overflow: hidden;
 }
 
 .userinfo {
@@ -118,16 +120,18 @@ page{
 	background-color: #efeff4;
 	padding-left: 20rpx;
 	padding-right: 20rpx;
-	overflow: auto;
+	overflow: hidden;
 }
 
 .good-wrapper{
-  height: 100%;
+	height: calc(100% - 160rpx);
+	overflow: auto;
 }
 
 .good{
   background-color: white;
 	margin-top: 20rpx;
+	margin-bottom: 20rpx;
 }
 
 .good-image{

@@ -49,9 +49,9 @@ page{
 
 .canvas-code{
   background-color: #fff;
-	width: 200px;
-	height: 200px;
-	margin: 0 auto;
+	width: 280px;
+	height: 100px;
+	margin: 20rpx auto;
 }
 
 .mt-14{

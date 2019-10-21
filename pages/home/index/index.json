@@ -1,5 +1,5 @@
 {
-	"navigationBarTitleText": "缘疆佳园",
+	"navigationBarTitleText": "云时空",
 	"enablePullDownRefresh": false,
 	"usingComponents": {
 		"shopcar": "/components/shopcar/index"

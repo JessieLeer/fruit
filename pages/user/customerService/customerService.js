@@ -69,11 +69,11 @@ Page({
  
   tel: function () {
     wx.showActionSheet({
-      itemList: ['13387085587', '呼叫'],
+      itemList: ['400-056-6360', '呼叫'],
       success: function (res) {
         if (res.tapIndex == 1 || res.tapIndex == 0){
             wx.makePhoneCall({
-              phoneNumber: '13387085587',
+              phoneNumber: '400-056-6360',
             })
         }
       },

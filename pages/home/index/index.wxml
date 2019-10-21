@@ -10,7 +10,7 @@
 	</view>
 	<view class='search-area'>
 	  <text class='arrive-time'>49分钟送达</text>
-		<view class='search' >
+		<view class='search'>
 		  <van-search placeholder="请输入商品名称" class='' readonly bindtap='go' data-url='/pages/home/search/index?id={{shop.id}}'/>
 		</view>
 		<view class='qr' bindtap='viewCode' wx:if='{{cuser.cardNo}}'>
@@ -19,14 +19,14 @@
 		</view>
 	</view>
 	<view class='good-area'>
-	  <view class='good-cate'>
+		<scroll-view scroll-y="true" class='good-cate'> 
 		  <view class='good-cate-list' style='height: {{cateHeight}}'>
 		    <view wx:for='{{cates}}' wx:key='index' wx:if='{{item.onShow == "1"}}' bindtap='cateChange' id='{{item.id}}' class="good-cate-item {{active == item.id ? 'active' : ''}}">
 				  <text class='seg' hidden='{{active != item.id}}'>|</text>
 				  {{item.name}}
 				</view>
 			</view>
-		</view>
+		</scroll-view>
 		<scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='-60' scroll-with-animation='true' class='good-wrapper'>
 		  <swiper autoplay="true" interval="3000" duration="500" class='w-100' style='display: block' indicator-dots='true' circular='true'>
 				<block wx:for="{{banners}}" wx:key='index'>
@@ -40,7 +40,11 @@
 				<text class='nogood-text'>当前分类下无商品</text>
 			</view>
 			<view wx:else>
-				<van-card wx:for='{{goods}}' wx:key='index' price="{{item.sellingPrice}}" origin-price='{{item.originalPrice}}' desc="{{item.specification}}" title="{{item.name}}" desc-class='good-desc' title-class='good-name' price-class='good-price' custom-class='good-item' centered='false'>
+				<van-card wx:for='{{goods}}' wx:key='index' price="{{item.sellingPrice}}" origin-price='{{item.originalPrice}}' desc="{{item.specification}}"  desc-class='good-desc' title-class='good-name' price-class='good-price' custom-class='good-item' centered='false'>
+				  <view slot='title'>
+					  <van-tag type="primary" color='#00837b' wx:if='{{item.vipShow}}' class='vip'>vip</van-tag>
+						<text>{{item.name}}</text>
+					</view>
 					<view class='thumb-area' slot='thumb'>
 						<image src="{{item.headImage ? item.headImage : 'https://img.yzcdn.cn/vant/t-thirt.jpg'}}" mode='widthFix' class='thumb' bindtap='go' data-url='/pages/home/good/index?shopId={{shop.id}}&id={{item.id}}'/>
 					</view>
@@ -64,9 +68,9 @@
 
 <van-toast id="van-toast" />
 
-<van-popup show="{{ codeShow }}" bind:close="onCodeClose">
-  <canvas class="canvas-code" canvas-id="myQrcode" />
+<van-popup show="{{ codeShow }}" bind:close="onCodeClose" custom-class='code-popup'>
 	<canvas canvas-id="firstCanvas" class='first-canvas'></canvas>
 	<text class='f-db f-tac'>{{cuser.cardNo}}</text>
+	<canvas class="canvas-code" canvas-id="myQrcode" />
   <text class="mt-20 f-db f-tac">到店结账时请向店员出示此会员卡</text>
 </van-popup>

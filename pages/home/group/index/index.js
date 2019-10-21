@@ -34,6 +34,19 @@ Page({
     }, 1000)
 	},
 	onShow() {
+		this.initCuser()
+		if(this.data.shop.id == app.globalData.shop.id) {
+		}else{
+			wx.showLoading({
+				title: '加载中',
+			})
+			this.setData({
+				position: app.globalData.position,
+				shop: app.globalData.shop,
+		  })
+			this.shopShow()
+      wx.hideLoading()
+		}
 	},
 	/*-- 初始化用户 --*/
 	initCuser(e) {

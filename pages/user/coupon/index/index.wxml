@@ -29,9 +29,6 @@
                             <view class="top_text_area">
                                 <view>{{item.cname}}</view>
                                 <view>{{item.cstartTime}}至{{item.cendTime}}</view>
-                                <view class="btn_use">
-                                    立即使用
-                                </view>
                             </view>
                             <view class="more_detail" bindtap="clickMore" data-index="{{index}}">
                                 <view>使用详情</view>

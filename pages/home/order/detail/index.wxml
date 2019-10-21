@@ -8,9 +8,9 @@
 <view wx:if='{{order.status == "待自提"}}'>
   <van-panel title="{{order.status}}" desc="您的订单已经提交，请及时到门店提货" custom-class='status'>
   </van-panel>
-	<van-cell title="提货二维码" use-label-slot class='oinfo-title'>
+	<van-cell title="提货码" use-label-slot class='oinfo-title'>
 	  <text wx:if='{{order.qrCode == ""}}'>拼团结束后可查看</text>
-	  <canvas class="canvas-code" canvas-id="myQrcode" slot='label' wx:else/>
+		<canvas canvas-id="firstCanvas" class='canvas-code' slot='label' wx:else></canvas>
 	</van-cell>
 	<view class='mb-14'></view>
 </view>
@@ -34,6 +34,7 @@
 <van-cell-group class='mt-14' wx:if='{{order.type == "到店自提"}}'>
   <van-cell title="提货方式" value="{{order.type}}" title-class='oinfo-title' custom-class='order-addinfo'/>
   <van-cell title="提货地址" value="{{order.ztAddress}}" title-class='oinfo-title' custom-class='order-addinfo'/>
+	<van-cell title="提货门店" value="{{order.ztName}}" title-class='oinfo-title' custom-class='order-addinfo'/>
 	<van-cell title="门店电话" value="{{order.ztMobile}}" title-class='oinfo-title' custom-class='order-addinfo'/>
 	<van-cell title="营业时间" value="{{order.ztOpenTime}}" title-class='oinfo-title' custom-class='order-addinfo'/>
 	<van-cell title="可提货时间" value="{{order.ztPickTime}}" title-class='oinfo-title' custom-class='order-addinfo'/>
@@ -83,6 +84,7 @@
 	<van-button custom-class='cancel' bind:click='cancel' data-id='{{order.id}}'>取消订单</van-button>
 </view>
 <view class='footer' wx:if='{{order.status == "待自提"}}'>
+  <van-button wx:if='{{order.groupId}}' type="warning" custom-class='pay' open-type='share'>邀请好友</van-button>
 	<van-button custom-class='cancel' bind:click='cancel' data-id='{{order.id}}'>取消订单</van-button>
 </view>
 <view class='footer' wx:if='{{order.status == "配送中"}}'>

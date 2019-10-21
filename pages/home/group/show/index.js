@@ -24,6 +24,11 @@ Page({
 				_this.setData({
 					cuser: res.data
 				})
+			},
+			fail() {
+				wx.navigateTo({
+					url: 'pages/user/login/step0'
+				})
 			}
 		})
 	},
@@ -40,12 +45,14 @@ Page({
 				gid: this.data.gid
 			},
 			success(res) {
-				console.log(res)
+				res.data.data.voCommodityDetail.details = res.data.data.voCommodityDetail.details.replace(/style=""/gi, '')
+				res.data.data.voCommodityDetail.details = res.data.data.voCommodityDetail.details.replace(/\<img/gi, '<img style="max-width:100%;height:auto;display:block;"')
+				res.data.data.gendTime = res.data.data.gendTime.replace(/-/g, '/')
 				let leftCount = Math.ceil((new Date(res.data.data.gendTime) - new Date()) / 86400000)
 				if(leftCount > 0) {
 					res.data.data.leftCount = leftCount
 				}else{
-					res.data.data.left = _this.calTime({start: new Date().getTime(), end: new Date(res.data.data.gendTime + ' 24:00:00').getTime()})
+					res.data.data.left = _this.calTime({start: new Date().getTime(), end: new Date(_this.addDate(_this.data.order.gendTime,1)).getTime()})
 				}
 				_this.setData({
 					order: res.data.data
@@ -54,17 +61,22 @@ Page({
 				if(leftCount == 0) {
 					setInterval(() => {
 						_this.setData({
-							'order.left': _this.calTime({start: new Date().getTime(), end: new Date(_this.data.order.gendTime + ' 24:00:00').getTime()})
+							'order.left': _this.calTime({start: new Date().getTime(), end: new Date(_this.addDate(_this.data.order.gendTime,1)).getTime()})
 						})
 					}, 1000)
 				}
 			}
 		})
 	},
+	addDate(date,days){ 
+    let d = new Date(date) 
+    d.setDate(d.getDate()+days) 
+    let m = d.getMonth() + 1 
+    return d.getFullYear()+'/'+m+'/' + d.getDate() 
+  }, 
 	calTime(e) {
 		//时间差的毫秒数      
 		let leftDay = e.end - e.start
-		let days = Math.floor(leftDay/(24*3600*1000))
 		let leave1 = leftDay%(24*3600*1000)    
 		let hours = Math.floor(leave1/(3600*1000))
 		let leave2 = leave1%(3600*1000)        
@@ -76,5 +88,84 @@ Page({
 			minute: minutes,
 			second: seconds
 		}			
+	},
+	/*-- 打开分享弹窗 --*/
+	showShare(e) {
+		this.setData({
+			shareShow: true
+		})
+	},
+	/*-- 生成分享图片 --*/
+	generateImageCode(e) {
+		let _this = this
+		wx.downloadFile({
+      url: this.data.good.headImage,
+      success(res) {
+        //缓存头像图片
+        _this.setData({
+          portrait_temp: res.tempFilePath
+        })
+        //缓存canvas绘制小程序二维码
+        wx.downloadFile({
+          url: _this.data.good.headImage,
+          success(res0) {
+            //缓存二维码
+            _this.setData({
+              qrcode_temp: res0.tempFilePath
+            })
+            _this.drawImage()
+            wx.hideLoading()
+            setTimeout(function () {
+              _this.canvasToImage()
+            }, 1000)
+          }
+        })
+      }
+    })
+	},
+	drawImage() {
+    //绘制canvas图片
+    let _this = this
+    const ctx = wx.createCanvasContext('myCanvas')
+    let bgPath = _this.data.good.headImage
+    let portraitPath = _this.data.portrait_temp
+    let hostNickname = '缘疆佳园'
+    let qrPath = _this.data.qrcode_temp
+    let windowWidth = _this.data.windowWidth
+    _this.setData({
+      scale: 1.6
+    })
+    //绘制背景图片
+    ctx.drawImage(bgPath, 0, 0, windowWidth, _this.data.scale * windowWidth)
+    //绘制二维码
+    ctx.drawImage(qrPath, 0.64 * windowWidth / 2, 0.75 * windowWidth, 0.36 * windowWidth, 0.36 * windowWidth)
+    ctx.draw()
+  },
+	canvasToImage() {
+    let _this = this
+    wx.canvasToTempFilePath({
+      x: 0,
+      y: 0,
+      width: _this.data.windowWidth,
+      height: _this.data.windowWidth * _this.data.scale,
+      destWidth: _this.data.windowWidth * 4,
+      destHeight: _this.data.windowWidth * 4 * _this.data.scale,
+      canvasId: 'myCanvas',
+      success(res) {
+        wx.previewImage({
+          current: res.tempFilePath, // 当前显示图片的http链接
+          urls: [res.tempFilePath] // 需要预览的图片http链接列表
+        })
+      },
+      fail(err) {
+        console.log(err)
+      }
+    })
+  },
+	/*-- 关闭分享弹窗 --*/
+	onClose(e) {
+		this.setData({
+			shareShow: false
+		})
 	}
 })

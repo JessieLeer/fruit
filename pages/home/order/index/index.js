@@ -45,6 +45,15 @@ Page({
 		this.initCuser()
 	},
 	onShow() {
+		this.initSystem()
+		this.initCuser()
+	},
+	refreshOrder(e) {
+		this.setData({
+			'order0.data': this.data.order0.data,
+			'order1.data': this.data.order1.data,
+			'order2.data': this.data.order2.data
+		})
 	},
 	/*-- 页面跳转 --*/
 	go(e) {
@@ -69,14 +78,41 @@ Page({
 		wx.getStorage({
 			key: 'cuser',
 			success(res) {
-				_this.setData({
-					cuser: res.data
-				})
-				_this.index({type: 0})
-				_this.index({type: 1})
-				_this.index1()
+				if(_this.data.cuser.userId == res.data.userId) {
+					if(_this.data.order0.data.length == 0) {
+						_this.index({type: 0})
+					}
+					if(_this.data.order1.data.length == 0) {
+						_this.index({type: 1})
+					}
+					if(_this.data.order2.data.length == 0) {
+						_this.index1()
+					}
+				}else{
+					_this.setData({
+						'order0.page': 1,
+						'order1.page': 1,
+						'order2.page': 1,
+					}, () => {
+						_this.setData({
+							cuser: res.data
+						})
+						_this.index({type: 0})
+						_this.index({type: 1})
+						_this.index1()
+					})
+				}
 			},
 			fail() {
+				_this.setData({
+					cuser: {},
+					'order0.data': [],
+					'order0.noGood': true,
+					'order1.data': [],
+					'order1.noGood': true,
+					'order2.data': [],
+					'order2.noGood': true
+				})
 			}
 		})
 	},
@@ -94,6 +130,22 @@ Page({
 			},
 			success(res) {
 				wx.hideLoading()
+				switch(type) {
+				  case 0:
+						if(_this.data.order0.page == 1) {
+							_this.setData({
+								'order0.data': []
+							})
+						}
+					  break
+				  case 1:
+						if(_this.data.order1.page == 1) {
+							_this.setData({
+								'order1.data': []
+							})
+						}
+					  break	
+				}
 				if(res.data.data.length == 0) {
 					switch(type) {
 						case 0:
@@ -132,21 +184,11 @@ Page({
 					}
 					switch(type) {
 						case 0:
-							if(_this.data.order0.page == 1) {
-								_this.setData({
-									'order0.data': []
-								})
-							}
 							_this.setData({
 								'order0.data': _this.data.order0.data.concat(res.data.data)
 							})
 							break
 						case 1:
-						  if(_this.data.order1.page == 1) {
-								_this.setData({
-									'order1.data': []
-								})
-							}
 							_this.setData({
 								'order1.data': _this.data.order1.data.concat(res.data.data)
 							})
@@ -181,6 +223,11 @@ Page({
 			},
 			success(res) {
 				wx.hideLoading() 
+				if(_this.data.order2.page == 1) {
+					_this.setData({
+						'order2.data': []
+					})
+				}
 				if(res.data.data.length == 0) {
 					_this.setData({
 						'order2.isLoadAll': true
@@ -208,11 +255,7 @@ Page({
 								break
 						}
 					}
-					if(_this.data.order2.page == 1) {
-						_this.setData({
-							'order2.data': []
-						})
-					}
+					
 					_this.setData({
 						'order2.data': _this.data.order2.data.concat(res.data.data)
 					})
@@ -336,7 +379,7 @@ Page({
 						_this.data[`order${type}`].data.filter((item) => {
 							return item.id == id
 						})[0].status = '已取消'
-						_this.onShow()
+						_this.refreshOrder()
 					}
 				}
 			})
@@ -345,27 +388,31 @@ Page({
 	},
 	/*-- 确认收货 --*/
 	receipt(e) {
-		let [
-			id,
-			type
-		] = [
-			e.currentTarget.dataset.id,
-			e.currentTarget.dataset.type
-		]
- 		wx.request({
-			url: `${app.globalData.url}/api/order/receipt`,
-			data: {
-				orderId: id
-			},
-			success(res) {
-				if(res.data.code == 200) {
-					Toast('操作成功')
-					_this.data[`order${type}`].data.filter((item) => {
-						return item.id == id
-					})[0].status = '已完成'
-					_this.onShow()
+		Dialog.confirm({
+			message: '确认商品已收到？'
+		}).then(() => {
+			let [
+				id,
+				type
+			] = [
+				e.currentTarget.dataset.id,
+				e.currentTarget.dataset.type
+			]
+			wx.request({
+				url: `${app.globalData.url}/api/order/receipt`,
+				data: {
+					orderId: id
+				},
+				success(res) {
+					if(res.data.code == 200) {
+						Toast('操作成功')
+						_this.data[`order${type}`].data.filter((item) => {
+							return item.id == id
+						})[0].status = '已完成'
+						_this.refreshOrder()
+					}
 				}
-			}
+			})
 		})
 	},
 	/*-- 查看物流 --*/
@@ -400,6 +447,7 @@ Page({
 			'pay.orderType': e.currentTarget.dataset.type,
 			'pay.show': true,
 			'pay.balanceShow': !e.currentTarget.dataset.gid,
+			'pay.type': e.currentTarget.dataset.gid ? 'wechat' : '',
 			'pay.cost': e.currentTarget.dataset.cost
 		})
 	},
@@ -424,6 +472,9 @@ Page({
 			'pay.password': e.detail.value
 		})
 		if(this.data.pay.password.length == 6 && this.data.pay.type == 'balance') {
+			wx.showLoading({
+        title: '支付中',
+      })
 			let _this = this
 			wx.request({
 				url: `${app.globalData.url}/api/pay/balance`,
@@ -433,6 +484,7 @@ Page({
 					userId: this.data.cuser.userId
 				},
 				success(res) {
+					wx.hideLoading()
 					if(res.data.code == 200) {
 						_this.paySuccess()
 					}else{
@@ -462,7 +514,7 @@ Page({
 		this.data[`order${this.data.pay.orderType}`].data.filter((item) => {
 			return item.id == this.data.pay.id
 		})[0].status = status
-		this.onShow()
+		this.refreshOrder()
 	},
 	passClose(e) {
 		this.setData({

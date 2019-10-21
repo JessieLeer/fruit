@@ -1,0 +1,8 @@
+<view class='main'>
+  <image src='/static/image/success.png' mode='widthFix' class='success' />
+	<text class='success-text'>支付成功</text>
+	<view class='opera'>
+		<van-button type="default" custom-class='view' data-url='/pages/home/order/detail/index?id={{id}}' bind:click='go'>查看订单</van-button>
+	  <van-button type="warning" custom-class='shopping' open-type='share'>邀请好友</van-button>
+	</view>
+</view>

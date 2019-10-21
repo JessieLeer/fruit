@@ -8,7 +8,6 @@
 		<view class='coupon-content'>
 			<text class='coupon-name f-db'>{{item.cname}}</text>
 			<text class='duration f-db'>{{item.cstartTime}} - {{item.cendTime}}</text>
-			<van-tag round plain custom-class='use' color='#F7A34A'>立即使用</van-tag>
 		</view>
 	</view>
 	<!--<van-collapse value="{{ activeNames }}" bind:change="onChange" class='explain'>

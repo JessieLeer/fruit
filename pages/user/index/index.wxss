@@ -141,9 +141,6 @@
     height : 100%;
     position: fixed;
     background : rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .gradual {
     opacity: 1!important;
@@ -152,16 +149,18 @@
     height : 100vh;
 }
 .img_wrap{
-    width:335.5px;
-    height:376px;
-    background:rgba(255,255,255,1);
+    width: 90%;
+    background-color: white;
+		margin: 100rpx auto auto auto;
+		padding-top: 50rpx;
+		padding-bottom: 50rpx;
 } 
 .close_area{
-    width:335.5px;
-    height : 65.5px;
+    width: 100%;
+		display: block;
     text-align : center;
     box-sizing : border-box;
-    padding-top : 32.5px;
+		margin-top: 20rpx;
 }
 .logo_wrap{
     text-align: center;
@@ -187,8 +186,7 @@ canvas.canvas-code{
     height : auto;
 }
 .text_area{
-    padding : 29px 0;
-    text-align : center;
+    text-align: center;
     font-size:14px;
     font-family:Source Han Sans CN;
     font-weight:400;

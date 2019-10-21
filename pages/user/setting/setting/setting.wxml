@@ -5,7 +5,7 @@
     <view class="right-sign"></view>
   </view>
   <view class="to-page" bindtap="resetPassword">
-    <text>重置密码</text>
+    <text>重置支付密码</text>
      <view class="right-sign"></view>
   </view>
   <view class="to-page" bindtap="go">

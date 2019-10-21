@@ -1,6 +1,6 @@
 import Dialog from "../../../../miniprogram_npm/vant-weapp/dialog/dialog"
 import Toast from '../../../../miniprogram_npm/vant-weapp/toast/toast'
-import qrcode from '../../../../utils/weapp-qrcode.js'
+import barcode from '../../../../utils/index'
 
 const app = getApp()
 
@@ -9,6 +9,7 @@ Page({
 		id: '',
 		cuser: {},
 		order: {},
+		groupOrder: {},
 		pay: {
 			id: '',
 			orderType: '',
@@ -42,6 +43,11 @@ Page({
 					cuser: res.data
 				})
 			}
+		})
+	},
+	go(e) {
+		wx.redirectTo({
+			url: e.currentTarget.dataset.url
 		})
 	},
 	countdown(e) {
@@ -97,16 +103,7 @@ Page({
 						break
 					case 3:
 						res.data.data.status = '待自提'
-						new qrcode('myQrcode',{
-							text: res.data.data.qrCode,
-							width: 200,
-							height: 200,
-							padding: 12, 
-							// 二维码可辨识度
-							correctLevel: qrcode.CorrectLevel.L, 
-							callback: (res) => {
-							}
-						})
+						barcode.barcode('firstCanvas', res.data.data.qrCode+'' , 280 * 2, 100 * 2)
 						break
 					case 4:
 						res.data.data.status = '配送中'
@@ -120,11 +117,28 @@ Page({
 				}
 				if(res.data.data.groupId) {
 					_this.setData({
-						'pay.balanceShow': false
+						'pay.balanceShow': false,
+						'pay.type': 'wechat'
 					})
+					_this.groupShow({groupId: res.data.data.groupId})
 				}
 				_this.setData({
 					order: res.data.data
+				})
+			}
+		})
+	},
+	groupShow(e) {
+		let _this = this
+		wx.request({
+			url: `${app.globalData.url}/api/groupUserShare`,
+			data: {
+				gid: e.groupId
+			},
+			success(res) {
+				res.data.data.need = parseInt(res.data.data.guserNumber) - res.data.data.userImgList.length
+				_this.setData({
+					groupOrder: res.data.data
 				})
 			}
 		})
@@ -278,6 +292,9 @@ Page({
 			'pay.password': e.detail.value
 		})
 		if(this.data.pay.password.length == 6 && this.data.pay.type == 'balance') {
+			wx.showLoading({
+        title: '支付中',
+      })
 			let _this = this
 			wx.request({
 				url: `${app.globalData.url}/api/pay/balance`,
@@ -287,6 +304,7 @@ Page({
 					userId: this.data.cuser.userId
 				},
 				success(res) {
+					wx.hideLoading()
 					if(res.data.code == 200) {
 						_this.paySuccess()
 					}else{
@@ -322,5 +340,12 @@ Page({
 			'pay.paShow': false,
 			'pay.password': ''
 		})
-	}
+	},
+	onShareAppMessage() {
+    return {
+      title: `【仅剩${this.data.groupOrder.need}个名额】快来${this.data.groupOrder.gprice}元拼${this.data.groupOrder.shopName}`,
+			imageUrl: this.data.groupOrder.shopImg,
+      path: `/pages/home/group/join/index?id=${this.data.order.groupId}`
+    }
+  }
 })

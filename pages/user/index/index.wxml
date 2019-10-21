@@ -87,7 +87,7 @@
                 <image src="../../../static/image/local.png" mode="widthFix"></image>
             </view>
             <view>
-                收货管理
+                收货地址管理
             </view>
             <view>
                 <view><image class="arrow" src="../../../static/image/arrow.png" mode="widthFix"></image></view>
@@ -117,23 +117,18 @@
         </view>
     </scroll-view>
     <view  hidden="{{!popupkey}}" class="popup {{popupkey?'gradual': ''}}">
-        <view>
-            <view class="img_wrap">
-                <view class="logo_wrap">
-                    <canvas class="canvas-code" canvas-id="myQrcode" />
-                </view>
-                <view class="code_wrap">
-                    <canvas style="width: 285px; height: 108px;" canvas-id="firstCanvas"></canvas>
-                    <view style="margin-top: 15px;">{{cardNo}}</view>
-                </view>
-                <view class="text_area">
-                    到店结账时请向店员出示此会员卡
-                </view>
+        <view class="img_wrap">
+            <view class="code_wrap">
+                <canvas style="width: 285px; height: 108px;" canvas-id="firstCanvas"></canvas>
+                <view style="margin-top: 15px;">{{cardNo}}</view>
             </view>
-            <view class="close_area">
-                <image src="../../../static/image/close.png" mode="widthFix" bindtap="showCode"></image>
+					  <view class="logo_wrap">
+                <canvas class="canvas-code" canvas-id="myQrcode" />
             </view>
+            <view class="text_area">到店结账时请向店员出示此会员卡</view>
         </view>
-        
+        <view class="close_area">
+            <image src="../../../static/image/close.png" mode="widthFix" bindtap="showCode"></image>
+        </view>
     </view>
 </view> 

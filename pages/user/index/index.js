@@ -165,7 +165,7 @@ Page({
                         level : res.data.data.levelName,
                         loginKey: true
                     })
-                    barcode.barcode('firstCanvas', JSON.stringify(res.data.data.cardNo) , 285 * 2, 108 * 2)
+                    barcode.barcode('firstCanvas', res.data.data.cardNo , 285 * 2, 108 * 2)
 									new qrcode('myQrcode',{
 										text: res.data.data.cardNo,
 										width: 140,

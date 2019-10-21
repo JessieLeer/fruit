@@ -2,11 +2,12 @@
   <van-search placeholder="请输入商品名称" use-action-slot class='w-100' value='{{search.value}}' bind:focus='onFocus' bind:change='onChange' bind:search='onSearch'>
 	  <view slot="action" bindtap='onSearch'>搜索</view>
 	</van-search>	
-	<van-cell-group wx:if='{{isSearch}}'>
-		<van-cell title="历史搜索" class='w-100' use-label-slot wx:if='{{cuser && histories.length > 0}}' >
-			<van-icon name="delete" size='40rpx' bind:click='clearHistory'/>
+	<van-cell-group wx:if='{{isSearch}}' class='f-pr'>
+	  <van-icon name="delete" class='delete' size='40rpx' bind:click='clearHistory' wx:if='{{cuser && histories.length > 0}}'/>
+		<van-cell title="历史搜索" class='history-area w-100' use-label-slot wx:if='{{cuser && histories.length > 0}}' >
 			<view slot='label'>
 				<van-tag round color='#eee' text-color='#333' class='history' wx:for='{{histories}}' wx:key='index' bindtap='handleTagClick' data-search='{{item}}'>{{item.value}}</van-tag>
+				<view style='clear: both'></view>
 			</view>
 		</van-cell>
 		<van-cell title="热门搜索" class='w-100' use-label-slot>
@@ -22,7 +23,11 @@
 			<text class='nogood-text'>换个关键词吧</text>
 		</view>
 		<scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" class='good-wrapper' wx:else>
-			<van-card wx:for='{{goods}}' wx:key='index' price="{{item.sellingPrice}}" origin-price='{{item.originalPrice}}' desc="{{item.specification}}" title="{{item.name}}" desc-class='good-desc' title-class='good-name' price-class='good-price' custom-class='good-item' centered='false'>
+			<van-card wx:for='{{goods}}' wx:key='index' price="{{item.sellingPrice}}" origin-price='{{item.originalPrice}}' desc="{{item.specification}}" desc-class='good-desc' title-class='good-name' price-class='good-price' custom-class='good-item' centered='false'>
+			  <view slot='title'>
+					<van-tag type="primary" color='#00837b' wx:if='{{item.vipShow}}' class='vip'>vip</van-tag>
+				  <text>{{item.name}}</text>
+				</view>
 				<image slot='thumb' src="{{item.headImage ? item.headImage : 'https://img.yzcdn.cn/vant/t-thirt.jpg'}}" mode='widthFix' class='thumb' bindtap='go' data-url='/pages/home/good/index?shopId={{shopId}}&id={{item.id}}'/>
 				<van-tag wx:if='{{item.inventory == 0}}' slot='bottom' class='shopcar-noinven'>暂无库存</van-tag>
 				<image src='../../../static/image/shopcar.png' slot='bottom' class='shopcar-icon' mode='widthFix' catchtap='addShopcar' data-good='{{item}}' wx:elif='{{item.count == 0}}' />

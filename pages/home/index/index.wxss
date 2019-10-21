@@ -266,3 +266,15 @@ swiper{
 .mt-20{
   margin-bottom: 20rpx;
 }
+
+.code-popup{
+  padding: 50rpx;
+}
+
+.code-popup.van-popup{
+  top: 55%;
+}
+
+.vip{
+  margin-right: 10rpx;
+}

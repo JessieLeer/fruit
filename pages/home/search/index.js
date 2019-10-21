@@ -303,14 +303,14 @@ Page({
 	
 	formatFloat(e) {
 		let m = Math.pow(10, e.digit)
-		return parseInt(e.f * m, 10) / m
+		return parseFloat(e.f * m, 10) / m
 	},
 	
 	/*-- 计算购物车总价 --*/
 	calTotal(e) {
 		let total = 0
 		for(let item of this.data.shopcarGoods){
-			total = this.formatFloat({f:item.count * item.sellingPrice + total, digit: 1})
+			total = this.formatFloat({f:item.count * item.sellingPrice + total, digit: 2})
 		}
 		this.setData({
 			totalPrice: total

@@ -1,3 +1,5 @@
+import Dialog from "../../miniprogram_npm/vant-weapp/dialog/dialog"
+
 const app = getApp()
 
 Component({
@@ -34,7 +36,8 @@ Component({
   data: {
 		cuser: {},
 		balance: 0,
-		isInputShow: false
+		isInputShow: false,
+		isPaypass: false
   },
 	
   ready() { 
@@ -67,11 +70,12 @@ Component({
 			let _this = this
 			wx.getStorage({
 				key: 'cuser',
-				success (res) {
+				success(res) {
 					_this.setData({
 						cuser: res.data
 					})
 					_this.balanceShow()
+					_this.paypaShow()
 				}
 			})
 		},
@@ -89,6 +93,20 @@ Component({
 				}
 			})
 		},
+		paypaShow(e) {
+			let _this = this
+			wx.request({
+				url: `${app.globalData.url}/api/user/checkPayPwd`,
+				data: {
+					userId: this.data.cuser.userId
+				},
+				success(res) {
+					_this.setData({
+						isPaypass: res.data.code == 200
+					})
+				}
+			})
+		},
     onClose(e) {
 			this.triggerEvent('onClose', {})
 		},
@@ -97,23 +115,38 @@ Component({
 				
 			}else{
 				if(e.currentTarget.dataset.name == 'balance') {
-					this.setData({
-						isInputShow: true
-					})
+					if(this.data.isPaypass) {
+						this.setData({
+							isInputShow: true
+						})
+						this.triggerEvent('onChange', e.currentTarget.dataset.name)
+					}else{
+						Dialog.confirm({
+							message: '您还未设置支付密码，是否现在设置?'
+						}).then(() => {
+							wx.redirectTo({
+								url: '/pages/user/setting/paysetting/phone-set'
+							})
+						}).catch(() => {
+							// on cancel
+						})
+					}
 				}else{
 					this.setData({
 						isInputShow: false
 					})
+					this.triggerEvent('onChange', e.currentTarget.dataset.name)
 				}
-				this.triggerEvent('onChange', e.currentTarget.dataset.name)
 			}
 		},
+		handleFocus(e) {},
 		handlePass(e) {
 			let _this = this
 			if(this.properties.type == 'wechat') {
 				wx.request({
 					url: `${app.globalData.url}/api/pay/wechat`,
 					data: {
+						openId: wx.getStorageSync('openid'),
 						userId: this.data.cuser.userId,
 						orderId: this.properties.orderId
 					},
@@ -139,10 +172,9 @@ Component({
 												orderId: _this.properties.orderId
 											},
 											success(res) {
-												console.log(res)
+												_this.triggerEvent('wepaySuccess', {gid: res.data})
 											}
-										})
-										_this.triggerEvent('wepaySuccess', {})
+										})										
 									}
 								}
 							})
