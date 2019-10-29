@@ -146,7 +146,7 @@ Page({
 			total = this.formatFloat({f:item.count * item.sellingPrice + total, digit: 2})
 		}
 		this.setData({
-			totalPrice: total
+			totalPrice: total.toFixed(2)
 		})
 	},
 	

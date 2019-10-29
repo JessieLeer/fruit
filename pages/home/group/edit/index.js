@@ -117,7 +117,7 @@ Page({
 	
 	paySuccess(e) {
 		wx.redirectTo({
-			url: `/pages/home/group/success/index?id=${this.data.groupId}`
+			url: `/pages/home/group/success/index?id=${this.data.orderId}&gid=${this.data.groupId}`
 		})
 	},
 	passClose(e) {

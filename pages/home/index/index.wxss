@@ -107,6 +107,12 @@ page{
 	color: black;
 }
 
+.cate-logo{
+  width: 50rpx;
+	display: block;
+	margin: 0 auto 10rpx auto;
+}
+
 .good-wrapper{
   flex: 1;
 	padding-right: 10rpx;

@@ -1,10 +1,11 @@
 import utils from '../../utils/dealtime'
+import Toast from "../../miniprogram_npm/vant-weapp/toast/toast"
 const app = getApp()
 Page({
     data : {
         minDate: new Date(1960, 0, 1).getTime(),
         maxDate: new Date().getTime(),
-        nowDate: new Date(1980,0,1).getTime(),
+        nowDate: new Date(1990,0,1).getTime(),
         showDate : false,
         showStore : false,
         formatter(type, value) {
@@ -34,14 +35,21 @@ Page({
         longitude : 0,
         shopId : '',
         storeId : 0,
-        type : ''
+        type : '',
+			  nickName: ''
     },
     onShow(){
-        this.getUserInfo()
-        this.getJW()
+			app.userShow().then((res) => {
+				this.setData({
+					nickName: res.userInfo.nickName
+				})
+				this.getUserInfo()
+			})
+      
+      this.getJW()
     },
     getJW(){
-        var that = this;
+        var that = this
         wx.getLocation({
             type: 'wgs84',
             success: (res) => {
@@ -53,11 +61,11 @@ Page({
         })
     },
     getUserInfo(){
-        let loginUid = wx.getStorageSync('loginUid');
-        let userId = wx.getStorageSync('userId');
-        var that = this;
+        let loginUid = wx.getStorageSync('loginUid')
+        let userId = wx.getStorageSync('userId')
+        var that = this
         wx.request({
-            url: `${app.globalData.url}/api/member/getUserInfo`, //仅为示例，并非真实的接口地址
+            url: `${app.globalData.url}/api/member/getUserInfo`,
             data: {
                 loginUid: loginUid,
                 userId: userId
@@ -73,7 +81,7 @@ Page({
     getStoreName(){
         var that = this;
         wx.request({
-            url: `${app.globalData.url}/api/store/all`, //仅为示例，并非真实的接口地址
+            url: `${app.globalData.url}/api/store/all`,
             data: {
                 latitude: that.data.latitude,
                 longitude: that.data.longitude
@@ -87,14 +95,13 @@ Page({
                 that.setData({
                     columns
                 })
-                // that.getFormInfo(res.data.data.mobile)
             }
         })
     },
     getFormInfo(mobile){
         var that = this;
         wx.request({
-            url: `${app.globalData.url}/api/mini/getBasicInfo`, //仅为示例，并非真实的接口地址
+            url: `${app.globalData.url}/api/mini/getBasicInfo`, 
             data: {
                 mobile,
                 shopId : that.data.shopId
@@ -106,18 +113,24 @@ Page({
                 that.setData({
                     currentadress : res.data.data.storeName,
                     storeId : res.data.data.storeId,
-                    name: res.data.data.name,
+                    name: res.data.data.name == '' ? that.data.nickName : res.data.data.name,
                     current: res.data.data.birthday,
-                    nowDate: res.data.data.birthday ? new Date(res.data.data.birthday).getTime() : new Date(1980, 0, 1).getTime()
+                    nowDate: res.data.data.birthday ? new Date(res.data.data.birthday).getTime() : new Date(1990, 0, 1).getTime()
                 })
             }
         })
     },
     chooseDate(){
-        this.setData({
-            showDate : true,
-            showStore: false
+			if(this.data.current == '1990-01-01'){
+				this.setData({
+          showDate : true,
+          showStore: false
         })
+			}else{
+				Toast({
+					message: '生日只能修改一次'
+				})
+			}
     },
     confirm(e){
         this.setData({
@@ -186,7 +199,7 @@ Page({
         })
     },
     bindcard(){
-        var arr = ['tel', 'name', 'current','currentadress']
+        var arr = ['tel','name']
         for(var i in arr){
             if(!this.data[arr[i]]){
                 wx.showToast({
@@ -199,7 +212,6 @@ Page({
         }
         if (!this.data.showCodeItem){
             this.getWxCodeAndSaveCardInfo()
-            
         }else{
             if(!this.data.code){
                 wx.showToast({
@@ -209,14 +221,13 @@ Page({
                 })
             }else{
                 this.getWxCodeAndSaveCardInfo()
-                
             }
         }
     },
     ajaxBindCard(){
         var that = this
         wx.request({
-            url: `${app.globalData.url}/api/mini/saveMemberInfo`, //仅为示例，并非真实的接口地址
+            url: `${app.globalData.url}/api/mini/saveMemberInfo`,
             data: {
                 birthday: that.data.current,
                 code: that.data.wxcode,
@@ -226,16 +237,10 @@ Page({
                 store: that.data.storeId,
                 smsCode: that.data.code
             },
-            header: {
-                'content-type': 'application/json' // 默认值
-            },
             success(res) {
                 if(res.data.code == 200){
                     wx.setStorageSync('loginUid', res.data.data.loginUid)
                     wx.setStorageSync('userId', res.data.data.userId)
-                    // wx.getStorageSync('loginUid') = res.data.data.loginUid;
-                    // wx.getStorageSync('userId') = res.data.data.userId;
-                    console.log(res)
                     wx.showToast({
                         title: res.data.message,
                         icon: 'none',
@@ -299,12 +304,9 @@ Page({
     getCardInfo(){
         var that = this
         wx.request({
-            url: `${app.globalData.url}/api/mini/getAddWeCardInfo`, //仅为示例，并非真实的接口地址
+            url: `${app.globalData.url}/api/mini/getAddWeCardInfo`,
             data: {
                 code: that.data.wxcode
-            },
-            header: {
-                'content-type': 'application/json' // 默认值
             },
             success(res) {
                 if (res.data.code == 200) {

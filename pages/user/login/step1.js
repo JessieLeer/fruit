@@ -19,7 +19,6 @@ Page({
 		this.setData({
 			shopId: option.shopId
 		})
-		
 	},
 	
 	/*-- 监听手机号发生改变时验证手机格式 --*/
@@ -54,7 +53,6 @@ Page({
 				mobile : this.data.phone.value
 			},
 			success(res) {
-				console.log(res)
 				wx.showToast({
 					title: res.data.message,
 					icon: 'none'

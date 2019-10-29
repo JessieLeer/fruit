@@ -38,9 +38,19 @@ Page({
 			passFocus: false
 		},
 		logShow: false,
-		logistics: {}
+		logistics: {},
+		updistance: 0
 	},
 	onLoad(option) {
+		if(wx.getSystemInfoSync().system.indexOf('iOS') == -1){
+			this.setData({
+				updistance: 0
+			})
+		}else{
+			this.setData({
+				updistance: -60					 
+			})						 
+		}
 		this.initSystem()
 		this.initCuser()
 	},
@@ -48,6 +58,8 @@ Page({
 		this.initSystem()
 		this.initCuser()
 	},
+	onShareAppMessage() {
+  },
 	refreshOrder(e) {
 		this.setData({
 			'order0.data': this.data.order0.data,
@@ -521,5 +533,19 @@ Page({
 			'pay.paShow': false,
 			'pay.password': ''
 		})
+	},
+	call(e) {
+		wx.showActionSheet({
+      itemList: ['13387085587', '呼叫'],
+      success(res) {
+        if (res.tapIndex == 1 || res.tapIndex == 0){
+          wx.makePhoneCall({
+            phoneNumber: '13387085587',
+          })
+        }
+      },
+      fail(res) {
+      }
+    })
 	}
 })

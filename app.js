@@ -13,7 +13,7 @@ App({
 		code : '',
 		orderGoods: [],
 		groupbuy: {},
-		url: 'https://yjjycs.ysk360.com',
+		url: 'https://yjjy.ysk360.com',
 		//url: 'http://192.168.1.70:8082',
   },
   onLaunch() {
@@ -22,23 +22,51 @@ App({
     wx.login({
       success: res => {
 			  wx.setStorageSync('code', res.code)
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
 				wx.request({
-					url: 'https://api.weixin.qq.com/sns/jscode2session',
+					url: `${this.globalData.url}/api/mini/getMiniOpenId`,
 					data: {
-						appId: 'wx2abde02acd11b274',
-						secret: '2d8018b4f34d5f8815bfd627cd75907f',
-						js_code: res.code,
-						grant_type: 'authorization_code'
+						code: res.code
 					},
 					success(res) {
-						wx.setStorageSync('openid', res.data.openid )
-						wx.setStorageSync('session_key', res.data.session_key )			
+						wx.setStorageSync('openid', res.data.data.openid)
+						wx.setStorageSync('session_key', res.data.data.session_key)		
 					}
 				})
       }
     })
   },
+	userShow() {
+		return new Promise((resolve,reject) => {
+			wx.getSetting({
+				success: res=> {
+					if(res.authSetting['scope.userInfo']){
+						wx.getUserInfo({
+							success: res => {
+								resolve(res)
+							},
+							fail: error => {
+								reject(error)
+							}
+						})
+					}else{
+						wx.authorize({
+							scope: 'scope.userInfo',
+							success () {
+								wx.getUserInfo({
+									success: res => {
+										resolve(res)
+									},
+									fail: error => {
+										reject(error)
+									}
+								})
+							}
+						})
+					}
+				}
+			})
+		})
+	},
 	positionShow() {
 		return new Promise((resolve, reject) => {
 			// 获取用户信息

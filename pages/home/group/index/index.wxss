@@ -124,7 +124,7 @@ page{
 }
 
 .good-wrapper{
-	height: calc(100% - 160rpx);
+	height: 100%;
 	overflow: auto;
 }
 

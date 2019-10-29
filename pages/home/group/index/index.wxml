@@ -9,13 +9,8 @@
 		<van-icon name="arrow" class='position-icon' />
 	</view>
 	<view class='search-area'>
-	  <text class='arrive-time'>49分钟送达</text>
 		<view class='search' >
 		  <van-search placeholder="请输入商品名称" class='' bind:search='onSearch' bind:change='onSearChange' value='{{good.query}}'/>
-		</view>
-		<view class='qr' bindtap='viewCode' wx:if='{{cuser.cardNo}}'>
-		  <van-icon name="qr" size='46rpx'/>
-			<text class='qr-text'>会员码</text>
 		</view>
 	</view>
 	<view class='nogood' wx:if='{{noGroupShow}}'>
@@ -23,7 +18,7 @@
 		<text class='nogood-text'>当前搜索条件下无拼团</text>
 	</view>
 	<view class='goods' wx:else>
-	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='-60' scroll-with-animation='true' class='good-wrapper'>
+	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='{{updistance}}' scroll-with-animation='true' class='good-wrapper'>
 		  <view wx:for='{{good.data}}' wx:key='index' class='good' bindtap='go' data-url='/pages/home/group/show/index?id={{item.gid}}'>
 			  <image src='{{item.shopImg}}' mode='widthFix' class='good-image'/>
 				<view class='good-main'>
@@ -41,8 +36,8 @@
 					</view>
 				</view>
 			</view>
+			<text wx:if='{{good.isLoadAll}}' class='more-text w-100'>没有更多商品了</text>
 		</scroll-view>
-		<text wx:if='{{good.isLoadAll}}' class='more-text w-100'>没有更多商品了</text>
 	</view>
 </view>	
 

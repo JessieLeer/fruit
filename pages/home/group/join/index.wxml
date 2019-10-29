@@ -22,5 +22,5 @@
 	  <text class='time f-ib'>{{order.left.second}}</text>
   </view>
 	<view class='people'>差<text class='need'>{{order.need}}</text>人成团</view>
-	<van-button type="warning" custom-class='join' data-url='/pages/home/group/edit/index?id={{order.gid}}' bind:click='go'>立即参团</van-button>
+	<van-button type="warning" custom-class='join' data-url='/pages/home/group/edit/index?groupid={{order.gid}}' bind:click='go'>立即参团</van-button>
 </view>

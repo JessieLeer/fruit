@@ -1,3 +1,5 @@
+import Toast from "../../miniprogram_npm/vant-weapp/toast/toast"
+
 const app = getApp()
 
 Component({
@@ -74,10 +76,26 @@ Component({
 			this.triggerEvent('onClear', {})
 		},
 		onSubmit(e) {
-			app.globalData.orderGoods = this.properties.goods
-			wx.navigateTo({
-				url: `/pages/home/order/show/index?shopId=${this.properties.shopId}`
+			let _this = this
+			wx.request({
+				url: `${app.globalData.url}/api/select/store`,
+				data: {
+					sid: this.properties.shopId
+				},
+				success(res) {
+					if(res.data.data.dousiness == '0') {
+						app.globalData.orderGoods = _this.properties.goods
+						wx.navigateTo({
+							url: `/pages/home/order/show/index?shopId=${_this.properties.shopId}`
+						})
+					}else{
+						Toast({
+							message: '该门店休息中，请稍后下单'
+						})
+					}
+				}
 			})
+			
 		}
   }
 })

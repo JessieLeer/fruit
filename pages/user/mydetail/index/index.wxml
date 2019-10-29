@@ -35,4 +35,5 @@
         <van-datetime-picker class="fix" type="date" min-date="{{ minDate }}" max-date="{{ maxDate }}" formatter="{{ formatter }}"
             item-height="54" value="{{ maxDate }}" bind:confirm="confirm" bind:cancel="close" value="{{ valuecurrent }}"/>
     </view>
+		<van-toast id="van-toast" />
 </view>

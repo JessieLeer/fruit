@@ -2,7 +2,7 @@
   <van-loading type="spinner" color="#fff" />
 </view>
 
-<view class="container" wx:elif='{{shop.id}}'>
+<view class="container" wx:elif='{{shop.id && shop.dousiness == 0}}'>
   <view class='position' bindtap='go' data-url='/pages/home/address/index?from=/pages/home/index/index'>
 	  <van-icon name="location-o" class='position-icon' />
 	  {{shop.name}}
@@ -22,12 +22,13 @@
 		<scroll-view scroll-y="true" class='good-cate'> 
 		  <view class='good-cate-list' style='height: {{cateHeight}}'>
 		    <view wx:for='{{cates}}' wx:key='index' wx:if='{{item.onShow == "1"}}' bindtap='cateChange' id='{{item.id}}' class="good-cate-item {{active == item.id ? 'active' : ''}}">
-				  <text class='seg' hidden='{{active != item.id}}'>|</text>
+				  <image src='{{item.img}}' mode='widthFix' id='{{item.id}}' class='cate-logo'/>
+				  <!--<text class='seg' hidden='{{active != item.id}}'>|</text>-->
 				  {{item.name}}
 				</view>
 			</view>
 		</scroll-view>
-		<scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='-60' scroll-with-animation='true' class='good-wrapper'>
+		<scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='{{updistance}}' scroll-with-animation='true' class='good-wrapper'>
 		  <swiper autoplay="true" interval="3000" duration="500" class='w-100' style='display: block' indicator-dots='true' circular='true'>
 				<block wx:for="{{banners}}" wx:key='index'>
 					<swiper-item class='swiper-item'>
@@ -61,9 +62,15 @@
 
 <view wx:else class='f-tac'>
   <image src='../../../static/image/noshop@2x.png' mode='widthFix' class='noshop'/>
-	<view class='caller'>已有<text class='caller-number'>{{caller}}人</text>召唤缘疆佳园在这里开店～</view>
-	<van-button type="default" custom-class='caller-me' bindtap='calling'>我也来召唤</van-button>
-	<van-button type="default" custom-class='caller-change' bindtap='go' data-url='/pages/home/address/index?from=/pages/home/index/index'>换个地址</van-button>
+	<view wx:if='{{!shop.id}}'>
+		<view class='caller'>已有<text class='caller-number'>{{caller}}人</text>召唤缘疆佳园在这里开店～</view>
+		<van-button type="default" custom-class='caller-me' bindtap='calling'>我也来召唤</van-button>
+		<van-button type="default" custom-class='caller-change' bindtap='go' data-url='/pages/home/address/index?from=/pages/home/index/index'>换个地址</van-button>
+	</view>
+	<view wx:else class='caller'>
+	  该门店休息中，去看看拼团商品～
+		<van-button type="default" custom-class='caller-change' bindtap='go' data-url='/pages/home/address/index?from=/pages/home/index/index'>换个地址</van-button>
+	</view>
 </view>
 
 <van-toast id="van-toast" />

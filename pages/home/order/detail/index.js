@@ -7,6 +7,7 @@ const app = getApp()
 Page({
 	data: {
 		id: '',
+		gid: '',
 		cuser: {},
 		order: {},
 		groupOrder: {},
@@ -24,12 +25,14 @@ Page({
 		logShow: false,
 		logistics: {},
 		emptyCoupon: {},
-		waitime: 0
+		waitime: 0,
+		isShareAble: true
 	},
 	onLoad(option) {
 		this.initUser()
 		this.setData({
-			id: option.id
+			id: option.id,
+			gid: option.gid
 		})
 		this.waitShow()
 		this.show()
@@ -80,7 +83,8 @@ Page({
 		wx.request({
 			url: `${app.globalData.url}/api/order/detail`,
 			data: {
-				orderId: this.data.id
+				orderId: this.data.id,
+				groupId: this.data.gid
 			},
 			success(res) {
 				res.data.data.type = res.data.data.type == '0' ? '门店配送' : '到店自提'
@@ -122,6 +126,7 @@ Page({
 					})
 					_this.groupShow({groupId: res.data.data.groupId})
 				}
+				
 				_this.setData({
 					order: res.data.data
 				})
@@ -136,9 +141,14 @@ Page({
 				gid: e.groupId
 			},
 			success(res) {
-				res.data.data.need = parseInt(res.data.data.guserNumber) - res.data.data.userImgList.length
+				if(res.data.code == 200) {
+					res.data.data.need = parseInt(res.data.data.guserNumber) - res.data.data.userImgList.length
+					_this.setData({
+						groupOrder: res.data.data
+					})
+				}
 				_this.setData({
-					groupOrder: res.data.data
+					isShareAble: res.data.code == 200
 				})
 			}
 		})
@@ -347,5 +357,19 @@ Page({
 			imageUrl: this.data.groupOrder.shopImg,
       path: `/pages/home/group/join/index?id=${this.data.order.groupId}`
     }
-  }
+  },
+	call(e) {
+		wx.showActionSheet({
+      itemList: ['13387085587', '呼叫'],
+      success(res) {
+        if (res.tapIndex == 1 || res.tapIndex == 0){
+          wx.makePhoneCall({
+            phoneNumber: '13387085587',
+          })
+        }
+      },
+      fail(res) {
+      }
+    })
+	}
 })

@@ -19,10 +19,10 @@
             <view class="auto_height" wx:if="{{dataList.length!=0}}" style="min-height: {{minHeight}}px">
                 <view class="item_coupon" wx:for="{{dataList}}" wx:key="{{index}}">
                     <view class="cuopon_detail">
-                        <view class="flex">
-                            <view class="coupon_price"><text
-                                    wx:if="{{item.rtype == 1}}">¥</text>{{item.rtype == 1 ? item.money : item.fracture * 10}}<text
-                                    wx:if="{{item.rtype == 2}}">折</text></view>
+                        <view class="flex {{item.cline == 0 ? 'line-color' : 'offline-color'}}">
+                            <view class="coupon_price">
+														<text wx:if="{{item.rtype == 1}}">¥</text>{{item.rtype == 1 ? item.money : item.fracture * 10}}
+														<text wx:if="{{item.rtype == 2}}">折</text></view>
                             <view class="coupon_info">满{{item.quota}}元使用</view>
                         </view>
                         <view class="coupon_text_area">
@@ -37,6 +37,7 @@
                                 </view>
                             </view>
                         </view>
+												<image src='{{item.cline == 0 ? "../../../../static/image/online.png" : "../../../../static/image/offline.png"}}' mode='widthFix' class='isline'/>
                     </view>
                     <view class="more_detail_select" wx:if="{{selectedFlag[index]}}">
                         {{item.ctext}}

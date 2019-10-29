@@ -84,12 +84,21 @@
 	<van-button custom-class='cancel' bind:click='cancel' data-id='{{order.id}}'>取消订单</van-button>
 </view>
 <view class='footer' wx:if='{{order.status == "待自提"}}'>
-  <van-button wx:if='{{order.groupId}}' type="warning" custom-class='pay' open-type='share'>邀请好友</van-button>
+  <van-button wx:if='{{order.groupId && isShareAble}}' type="warning" custom-class='pay' open-type='share'>邀请好友</van-button>
 	<van-button custom-class='cancel' bind:click='cancel' data-id='{{order.id}}'>取消订单</van-button>
 </view>
 <view class='footer' wx:if='{{order.status == "配送中"}}'>
 	<van-button custom-class='cancel' data-id='{{order.id}}' bind:click='logistics'>查看物流</van-button>
 	<van-button type="warning" custom-class='pay' data-id='{{order.id}}' bind:click='receipt'>确认收货</van-button>
+</view>
+<view class='footer' wx:if='{{order.status == "已取消"}}'>
+  <van-button type="warning" custom-class='pay' data-id='{{order.id}}' data-shopid='{{order.storeId}}' bind:click='again' wx:if='{{order.groupId == null}}'>再来一单</van-button>
+</view>
+<view class='footer' wx:if='{{order.status == "已完成"}}'>
+  <van-button custom-class='cancel' data-url='/pages/home/order/evaluate/index?id={{order.id}}&storeId={{order.storeId}}' bind:click='go' wx:if='{{order.evaluate == false}}'>评价</van-button>
+	<van-button custom-class='cancel' data-url='/pages/home/order/evaluate/show?id={{order.id}}' bind:click='go' wx:if='{{order.evaluate == true}}'>查看评价</van-button>
+	<van-button type="warning" custom-class='pay' bind:click='call'>申请售后</van-button>
+	<van-button type="warning" custom-class='pay' data-id='{{order.id}}' data-shopid='{{order.storeId}}' wx:if='{{!order.groupId}}' bind:click='again'>再来一单</van-button>
 </view>
 
 <pay class='pay-wrapper' isShow="{{pay.show}}" paShow='{{pay.paShow}}' balanceShow='{{pay.balanceShow}}' password='{{pay.password}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{pay.cost}}' orderId='{{pay.id}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>

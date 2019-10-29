@@ -11,7 +11,7 @@
         </view>
         <view class="item_input">
             <view>姓名</view>
-            <view class="input"><input placeholder="请输入姓名" placeholder-style='text-align:right' value="{{name}}" bindinput="inputChange" bindinput="changeHandlerName"/></view>
+            <view class="input"><input placeholder="请输入姓名" placeholder-style='text-align:right' value="{{name}}"  bindinput="changeHandlerName"/></view>
         </view>
         <view class="item_input" bindtap="chooseDate">
             <view>生日</view>
@@ -43,6 +43,5 @@
         <van-picker class="fix" show-toolbar="true" wx:if="{{showStore}}" columns="{{ columns }}" item-height="54"
             bind:confirm="confirm_select" bind:cancel="cancel_selcect"></van-picker>
     </view> -->
-   
-   
+   <van-toast id="van-toast" />
 </view>

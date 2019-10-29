@@ -1,10 +1,12 @@
 Page({
 	data: {
-		id: ''
+		id: '',
+		gid: ''
 	},
 	onLoad(option) {
 		this.setData({
-			id: option.id
+			id: option.id,
+			gid: option.gid
 		})
 	},
 	goHome(e) {

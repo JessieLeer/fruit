@@ -51,7 +51,7 @@
 	<van-submit-bar button-text="提交订单" bind:submit="onPayshow" custom-class='submit-bar' button-class='submit-button'>
 	  <view class='price'>
 		  <text class='price-text'>付款</text>
-		  <text class='price-price'>¥{{active == 1 ? orderInfo.payMoney : orderInfo.payMoney + orderInfo.deliveryMoney}}</text>
+		  <text class='price-price'>¥{{showTotalPrice}}</text>
 		</view>
 	</van-submit-bar>
 	<pay class='pay' isShow="{{pay.show}}" paShow='{{pay.paShow}}' balanceShow='{{pay.balanceShow}}' password='{{pay.password}}' orderId='{{orderId}}' passFocus='{{pay.passFocus}}' type='{{pay.type}}' cost='{{active == 1 ? orderInfo.payMoney : orderInfo.payMoney + orderInfo.deliveryMoney}}' bind:onClose='onClose' bind:onChange='onpayChange' bind:handlePass='handlePass' bind:passInput='passInput' bind:passClose='passClose' bind:wepaySuccess='paySuccess'></pay>

@@ -17,9 +17,19 @@ Page({
 		},
 		noGroupShow: false,
 		caller: 0,
-		isLoading: true
+		isLoading: true,
+		updistance: 0
 	},
 	onLoad(option) {
+		if(wx.getSystemInfoSync().system.indexOf('iOS') == -1){
+			this.setData({
+				updistance: 0
+			})
+		}else{
+			this.setData({
+				updistance: -60					 
+			})						 
+		}
 		wx.showLoading({
       title: '加载中',
     })
@@ -36,6 +46,12 @@ Page({
 	onShow() {
 		this.initCuser()
 		if(this.data.shop.id == app.globalData.shop.id) {
+			if(this.data.noGroupShow) {
+				this.setData({
+					'good.page': 1
+				})
+				this.index()
+			}
 		}else{
 			wx.showLoading({
 				title: '加载中',
@@ -48,6 +64,8 @@ Page({
       wx.hideLoading()
 		}
 	},
+	onShareAppMessage() {
+  },
 	/*-- 初始化用户 --*/
 	initCuser(e) {
 		this.setData({
@@ -141,6 +159,7 @@ Page({
 				storeId: this.data.shop.id
 			},
 			success(res) {
+				console.log(res.data)
 				wx.hideLoading()
 				if(_this.data.good.page == 1) {
 					_this.setData({

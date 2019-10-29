@@ -1,4 +1,5 @@
 import { moment } from '../../../../utils/cndealtime'
+import Toast from "../../../../miniprogram_npm/vant-weapp/toast/toast"
 const app = getApp()
 Page({
     data : {
@@ -6,7 +7,7 @@ Page({
         minDate: new Date('1900-01-01').getTime(),
         select: false,
         current: '',
-        valuecurrent: new Date(1980,0,1).getTime(),
+        valuecurrent: new Date(1990,0,1).getTime(),
         avatar : '',
         Nickname : '',
         mobile : '' ,
@@ -29,9 +30,15 @@ Page({
         })
     },
     chooseDate(){
-        this.setData({
-            select : true
+			if(this.data.current == '1990-01-01'){
+				this.setData({
+          select : true
         })
+			}else{
+				Toast({
+					message: '生日只能修改一次'
+				})
+			}
     },
     close(){
         this.setData({
@@ -75,12 +82,11 @@ Page({
                 userId: wx.getStorageSync('userId')
             },
             success(res) {
-							console.log(res)
                 that.setData({
                   level: res.data.data.levelName,
                   current : res.data.data.birthday,
 									username: res.data.data.username,
-                    valuecurrent: res.data.data.birthday ? new Date(res.data.data.birthday).getTime() : new Date(1980, 0, 1).getTime(),
+                    valuecurrent: res.data.data.birthday ? new Date(res.data.data.birthday).getTime() : new Date(1990, 0, 1).getTime(),
 									mobile: res.data.data.mobile
                 })
             }

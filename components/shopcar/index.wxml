@@ -22,6 +22,7 @@
 		</view>
 	</view>
 </van-submit-bar>
+<van-toast id="van-toast" />
 <van-popup show="{{!goodHidden}}" z-index='1' bind:close="onClose" position='bottom'></van-popup>
 
 <wxs module="tools">

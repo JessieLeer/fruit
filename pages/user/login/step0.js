@@ -36,9 +36,9 @@ Page({
         'code': code,
       },
       success(res) {
-        if(res.data.data == null)return
+        if(res.data.data == null) return
 				let _res = res.data.data.phoneNumber
-				 wx.login({
+				wx.login({
 					success: res => {
 						wx.request({
 							url: `${app.globalData.url}/api/mini/login`,

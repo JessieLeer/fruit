@@ -4,7 +4,7 @@
 	    <image src='/static/image/nogood.png'  mode='widthFix' />
 			<text class='nogood-text'>未查询到您的订单</text>
 		</view>
-	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='-60' class='good-wrapper' style='height: {{windowH}}px' data-id='0' wx:else>
+	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='{{updistance}}' class='good-wrapper' style='height: {{windowH}}px' data-id='0' wx:else>
 		  <view wx:for='{{order0.data}}' wx:key='index'>
 				<van-panel title="{{item.createTime}}" status="{{item.status}}" use-footer-slot custom-class='good' header-class='good-header' footer-class='good-footer'>
 					<view class='good-content' data-url='/pages/home/order/detail/index?id={{item.id}}' bindtap='go'>
@@ -33,6 +33,7 @@
 					<view slot='footer' wx:if='{{item.status == "已完成"}}'>
 					  <van-button custom-class='cancel' data-url='/pages/home/order/evaluate/index?id={{item.id}}&storeId={{item.storeId}}' bind:click='go' wx:if='{{item.evaluate == false}}'>评价</van-button>
 						<van-button custom-class='cancel' data-url='/pages/home/order/evaluate/show?id={{item.id}}' bind:click='go' wx:if='{{item.evaluate == true}}'>查看评价</van-button>
+						<van-button type="warning" custom-class='pay' bind:click='call'>申请售后</van-button>
 						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-shopid='{{item.storeId}}' bind:click='again'>再来一单</van-button>
 					</view>
 				</van-panel>
@@ -45,7 +46,7 @@
 	    <image src='/static/image/nogood.png'  mode='widthFix' />
 			<text class='nogood-text'>未查询到您的订单</text>
 		</view>
-	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='-60' class='good-wrapper' style='height: {{windowH}}px' data-id='1' wx:else>
+	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='{{updistance}}' class='good-wrapper' style='height: {{windowH}}px' data-id='1' wx:else>
 		  <view wx:for='{{order1.data}}' wx:key='index'>
 				<van-panel title="{{item.createTime}}" status="{{item.status}}" use-footer-slot custom-class='good' header-class='good-header' footer-class='good-footer'>
 					<view class='good-content' data-url='/pages/home/order/detail/index?id={{item.id}}' bindtap='go'>
@@ -74,6 +75,7 @@
 					<view slot='footer' wx:if='{{item.status == "已完成"}}'>
 					  <van-button custom-class='cancel' data-url='/pages/home/order/evaluate/index?id={{item.id}}&storeId={{item.storeId}}' bind:click='go' wx:if='{{item.evaluate == false}}'>评价</van-button>
 						<van-button custom-class='cancel' data-url='/pages/home/order/evaluate/show?id={{item.id}}' bind:click='go' wx:if='{{item.evaluate == true}}'>查看评价</van-button>
+						<van-button type="warning" custom-class='pay' bind:click='call'>申请售后</van-button>
 						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-shopid='{{item.storeId}}'  bind:click='again'>再来一单</van-button>
 					</view>
 				</van-panel>
@@ -86,7 +88,7 @@
 	    <image src='/static/image/nogood.png'  mode='widthFix' />
 			<text class='nogood-text'>未查询到您的订单</text>
 		</view>
-	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='-60' class='good-wrapper' style='height: {{windowH}}px' data-id='2' wx:else>
+	  <scroll-view bindscrolltoupper='refresh' bindscrolltolower='loadMore' scroll-y="true" upper-threshold='{{updistance}}' class='good-wrapper' style='height: {{windowH}}px' data-id='2' wx:else>
 		  <view wx:for='{{order2.data}}' wx:key='index'>
 				<van-panel use-footer-slot custom-class='good' header-class='good-header' footer-class='good-footer'>
 				  <view class='group-header' slot='header'>
@@ -118,6 +120,7 @@
 					<view slot='footer' wx:if='{{item.status == "已完成"}}'>
 					  <van-button custom-class='cancel' data-url='/pages/home/order/evaluate/index?id={{item.id}}&storeId={{item.storeId}}' bind:click='go' wx:if='{{item.evaluate == false}}'>评价</van-button>
 						<van-button custom-class='cancel' data-url='/pages/home/order/evaluate/show?id={{item.id}}' bind:click='go' wx:if='{{item.evaluate == true}}'>查看评价</van-button>
+						<van-button type="warning" custom-class='pay' bind:click='call'>申请售后</van-button>
 					</view>
 				</van-panel>
 			</view>

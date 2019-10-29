@@ -33,15 +33,21 @@
 .cuopon_detail{
     display: flex;
     border : 1px solid rgba(221,221,221,1);
+		position: relative;
 }
 .cuopon_detail>view:nth-child(1){
     width:99px;
     height:101.5px;
-    background:rgba(246,147,31,1); 
 }
 .cuopon_detail>view:nth-child(2){
     flex : 1;
     height:101.5px;
+}
+.line-color{
+  background-color: rgba(246,147,31,1); 
+}
+.offline-color{
+  background-color: #5FBC7E;
 }
 .coupon_price{
     font-size:30px;
@@ -196,4 +202,11 @@
 }
 .fix_height{
     height : 231.5px;
+}
+
+.isline{
+  width: 80rpx;
+	position: absolute;
+	right: 0;
+	top: 0;
 }

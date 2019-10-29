@@ -45,25 +45,34 @@ Page({
 				gid: this.data.gid
 			},
 			success(res) {
-				res.data.data.voCommodityDetail.details = res.data.data.voCommodityDetail.details.replace(/style=""/gi, '')
-				res.data.data.voCommodityDetail.details = res.data.data.voCommodityDetail.details.replace(/\<img/gi, '<img style="max-width:100%;height:auto;display:block;"')
-				res.data.data.gendTime = res.data.data.gendTime.replace(/-/g, '/')
-				let leftCount = Math.ceil((new Date(res.data.data.gendTime) - new Date()) / 86400000)
-				if(leftCount > 0) {
-					res.data.data.leftCount = leftCount
+			  if(res.data.code == 200) {
+					res.data.data.voCommodityDetail.details = res.data.data.voCommodityDetail.details.replace(/style=""/gi, '')
+					res.data.data.voCommodityDetail.details = res.data.data.voCommodityDetail.details.replace(/\<img/gi, '<img style="max-width:100%;height:auto;display:block;"')
+					res.data.data.gendTime = res.data.data.gendTime.replace(/-/g, '/')
+					let leftCount = Math.ceil((new Date(res.data.data.gendTime) - new Date()) / 86400000)
+					if(leftCount > 0) {
+						res.data.data.leftCount = leftCount
+					}else{
+						res.data.data.left = _this.calTime({start: new Date().getTime(), end: new Date(_this.addDate(_this.data.order.gendTime,1)).getTime()})
+					}
+					_this.setData({
+						order: res.data.data
+					})
+					app.globalData.groupbuy = _this.data.order
+					if(leftCount == 0) {
+						setInterval(() => {
+							_this.setData({
+								'order.left': _this.calTime({start: new Date().getTime(), end: new Date(_this.addDate(_this.data.order.gendTime,1)).getTime()})
+							})
+						}, 1000)
+					}
 				}else{
-					res.data.data.left = _this.calTime({start: new Date().getTime(), end: new Date(_this.addDate(_this.data.order.gendTime,1)).getTime()})
-				}
-				_this.setData({
-					order: res.data.data
-				})
-				app.globalData.groupbuy = _this.data.order
-				if(leftCount == 0) {
-					setInterval(() => {
-						_this.setData({
-							'order.left': _this.calTime({start: new Date().getTime(), end: new Date(_this.addDate(_this.data.order.gendTime,1)).getTime()})
-						})
-					}, 1000)
+					Toast({
+						message: res.data.message
+					})
+					setTimeout(() => {
+						wx.navigateBack()
+					},2000)
 				}
 			}
 		})

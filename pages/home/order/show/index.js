@@ -29,7 +29,8 @@ Page({
 		},
 		emptyCoupon: {},
 		aid: '',
-		caddress: {}
+		caddress: {},
+		showTotalPrice: 0
 	},
 	onLoad(option) {
 		this.setData({
@@ -78,9 +79,18 @@ Page({
 			}
 		})
 	},
+	
+	formatFloat(e) {
+		let m = Math.pow(10, e.digit)
+		return parseFloat(e.f * m, 10) / m
+	},
+	
 	tabChange(e) {
 		this.setData({
 			active: e.detail.index
+		})
+		this.setData({
+			showTotalPrice: this.data.active == 0 ? this.formatFloat({f: this.data.orderInfo.payMoney + this.data.orderInfo.deliveryMoney ,digit: 2}).toFixed(2) : this.data.orderInfo.payMoney
 		})
 	},
 	/*-- 确认订单 --*/
@@ -105,7 +115,8 @@ Page({
 			success(res) {
 				res.data.data.payMoney = res.data.data.totalMoney
 				_this.setData({
-					orderInfo: res.data.data
+					orderInfo: res.data.data,
+					showTotalPrice: _this.formatFloat({f: res.data.data.payMoney + res.data.data.deliveryMoney ,digit: 2}).toFixed(2)
 				})
 				_this.couponIndex({quota: _this.data.orderInfo.totalMoney})
 			}
@@ -155,7 +166,6 @@ Page({
 				uid: this.data.cuser.userId
 			},
 			success(res) {
-				
 				_this.setData({
 					'coupon.data': res.data.data,
 					'coupon.text': res.data.data.length == 0 ? '无可用' : `${res.data.data.length}张可用`

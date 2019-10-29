@@ -1,5 +1,5 @@
 <view>
-  <image src='/static/image/login_logo1.png' class='logo' mode='widthFix'   />
+  <image src='/static/image/login_logo.png' class='logo' mode='widthFix'   />
   <view class="wrap">
     <button open-type="getUserInfo" class="info">
       

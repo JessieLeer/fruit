@@ -55,12 +55,13 @@ Page({
         let userId = wx.getStorageSync('userId')
         var that = this
         wx.request({
-            url: `${app.globalData.url}/api/coupon`, //仅为示例，并非真实的接口地址
+            url: `${app.globalData.url}/api/coupon`, 
             data: {
               uid: userId,
 							cuse: 0
             },
             success(res) {
+							console.log(res.data.data)
                 res.data.data.forEach(element => {
                     if (element.ctimeType == 1) {
                         element.cstartTime = element.ctime;

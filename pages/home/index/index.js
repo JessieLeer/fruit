@@ -26,10 +26,21 @@ Page({
 		codeShow: false,
 		isCateChange: false,
 		cateHeight: 0,
-		isLoading: true
+		isLoading: true,
+		openid: '',
+		updistance: 0
 	},
 
   onLoad(option) {	
+		if(wx.getSystemInfoSync().system.indexOf('iOS') == -1){
+			this.setData({
+				updistance: 0
+			})
+		}else{
+			this.setData({
+				updistance: -60					 
+			})						 
+		}
 		wx.showLoading({
       title: '加载中',
     })
@@ -41,7 +52,8 @@ Page({
 				shop: app.globalData.shop,
 				cates: [],
 				goods: [],
-				isFirstload: false
+				isFirstload: false,
+				openid: wx.getStorageSync('openid')
 			})
 			this.shopShow()
 			wx.hideLoading()
@@ -54,6 +66,7 @@ Page({
 		if(this.data.isFirstload) {
 		}else{
 			if(this.data.shop.id == app.globalData.shop.id) {
+				this.shopStatus({id: this.data.shop.id})
 				this.initShopcar()
 			}else{
 				wx.showLoading({
@@ -72,6 +85,9 @@ Page({
 			}
 		}
 	},
+	
+	onShareAppMessage() {
+  },
 	
 	/*-- 初始化购物车数据 --*/
 	initShopcar(e) {
@@ -184,6 +200,7 @@ Page({
 	/*-- 获取最近店铺 --*/
 	shopShow(e) {
 		if(this.data.shop.id) {
+			this.shopStatus({id: this.data.shop.id})
 			this.setData({
 				isLoading: false
 			})
@@ -218,6 +235,22 @@ Page({
 		}
 	},
 	
+	/*--获取店铺信息--*/
+	shopStatus(e) {
+		let _this = this
+		wx.request({
+			url: `${app.globalData.url}/api/select/store`,
+			data: {
+				sid: e.id
+			},
+			success(res) {
+				_this.setData({
+					'shop.dousiness': res.data.data.dousiness
+				})
+			}
+		})
+	},
+	
 	/*--获取分类列表--*/
 	cateIndex(e) {
 		let _this = this
@@ -237,7 +270,7 @@ Page({
 						active: _this.data.cates.filter((item) => {
 							return item.onShow == '1'
 						})[0].id,
-						cateHeight: 68 * (_this.data.cates.filter((item) => {
+						cateHeight: 86 * (_this.data.cates.filter((item) => {
 							return item.onShow == '1'
 						}).length) + 'px'
 					})
@@ -391,7 +424,7 @@ Page({
 			total = this.formatFloat({f:item.count * parseFloat(item.sellingPrice) + total, digit: 2})
 		}
 		this.setData({
-			totalPrice: total
+			totalPrice: total.toFixed(2)
 		})
 	},
 	
