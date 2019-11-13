@@ -46,7 +46,7 @@ Page({
 			key: 'loginUid',
 			success (res) {
 				wx.request({
-					url: `${app.globalData.url}/api/member/getUserAddress`,
+					url: `${app.globalData.custom.url}/api/member/getUserAddress`,
 					data: {
 						loginUid: res.data,
 						userId: _this.data.cuser.userId

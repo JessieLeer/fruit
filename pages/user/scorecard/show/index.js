@@ -18,7 +18,7 @@ Page({
 	
 	show(e) {
 		wx.request({
-			url: `${app.globalData.url}/api/integralshopMx`,
+			url: `${app.globalData.custom.url}/api/integralshopMx`,
 			data: {
 				iid: this.data.iid
 			},
@@ -34,7 +34,7 @@ Page({
     let userId = wx.getStorageSync('userId')
     var that = this
     wx.request({
-      url: `${app.globalData.url}/api/insetCoupon`,
+      url: `${app.globalData.custom.url}/api/insetCoupon`,
       data: {
         iid: this.data.iid,
         uid: userId

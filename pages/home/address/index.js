@@ -10,7 +10,7 @@ const app = getApp()
 Page({
 	data: {
 		position: {},
-		suggestion: '',
+		suggestion: [],
 		searchValue: '',
 		shops: [],
 		from: ''
@@ -47,11 +47,11 @@ Page({
 		
 	},
 	
-	/*-- 获取附近店铺 --*/
+	/*-- 获取店铺 --*/
 	index(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/near/store`,
+			url: `${app.globalData.custom.url}/api/store/all`,
 			data: {
 				latitude: this.data.position.location.lat,
 				longitude: this.data.position.location.lng

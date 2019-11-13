@@ -65,7 +65,7 @@ Page({
         let userId = wx.getStorageSync('userId')
         var that = this
         wx.request({
-            url: `${app.globalData.url}/api/member/getUserInfo`,
+            url: `${app.globalData.custom.url}/api/member/getUserInfo`,
             data: {
                 loginUid: loginUid,
                 userId: userId
@@ -81,7 +81,7 @@ Page({
     getStoreName(){
         var that = this;
         wx.request({
-            url: `${app.globalData.url}/api/store/all`,
+            url: `${app.globalData.custom.url}/api/store/all`,
             data: {
                 latitude: that.data.latitude,
                 longitude: that.data.longitude
@@ -101,7 +101,7 @@ Page({
     getFormInfo(mobile){
         var that = this;
         wx.request({
-            url: `${app.globalData.url}/api/mini/getBasicInfo`, 
+            url: `${app.globalData.custom.url}/api/mini/getBasicInfo`, 
             data: {
                 mobile,
                 shopId : that.data.shopId
@@ -114,7 +114,7 @@ Page({
                     currentadress : res.data.data.storeName,
                     storeId : res.data.data.storeId,
                     name: res.data.data.name == '' ? that.data.nickName : res.data.data.name,
-                    current: res.data.data.birthday,
+                    current: res.data.data.birthday == '' ? '1990-01-01' : res.data.data.birthday,
                     nowDate: res.data.data.birthday ? new Date(res.data.data.birthday).getTime() : new Date(1990, 0, 1).getTime()
                 })
             }
@@ -227,7 +227,7 @@ Page({
     ajaxBindCard(){
         var that = this
         wx.request({
-            url: `${app.globalData.url}/api/mini/saveMemberInfo`,
+            url: `${app.globalData.custom.url}/api/mini/saveMemberInfo`,
             data: {
                 birthday: that.data.current,
                 code: that.data.wxcode,
@@ -235,7 +235,8 @@ Page({
                 mobile: that.data.tel,
                 name: that.data.name,
                 store: that.data.storeId,
-                smsCode: that.data.code
+                smsCode: that.data.code,
+							avatar: wx.getStorageSync('avatarUrl')
             },
             success(res) {
                 if(res.data.code == 200){
@@ -304,7 +305,7 @@ Page({
     getCardInfo(){
         var that = this
         wx.request({
-            url: `${app.globalData.url}/api/mini/getAddWeCardInfo`,
+            url: `${app.globalData.custom.url}/api/mini/getAddWeCardInfo`,
             data: {
                 code: that.data.wxcode
             },

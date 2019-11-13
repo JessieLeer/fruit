@@ -75,7 +75,7 @@ Page({
 	uploadImage(e) {
 		let _this = this
 		wx.uploadFile({
-			url: `${app.globalData.url}/api/imgUpload`,
+			url: `${app.globalData.custom.url}/api/imgUpload`,
 			filePath: e.filePath,
 			name: 'files',
 			header: {
@@ -105,7 +105,7 @@ Page({
 	submit(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/evaluate/add`,
+			url: `${app.globalData.custom.url}/api/evaluate/add`,
 			data: {
 				content: this.data.evaluate.content,
 				images: this.data.evaluate.images.toString(),

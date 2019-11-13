@@ -2,21 +2,21 @@ const app = getApp()
 
 Page({
 	data: {
-		id: '',
+		gid: '',
 		order: {}
 	},
 	onLoad(option) {
 		this.setData({
-			id: option.id
+			gid: option.gid
 		})
 		this.show()
 	},
 	show(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/groupUserShare`,
+			url: `${app.globalData.custom.url}/api/groupUserShare`,
 			data: {
-				gid: this.data.id
+				gid: this.data.gid
 			},
 			success(res) {
 				for(let i = 0; i < parseFloat(res.data.data.guserNumber); i++) {

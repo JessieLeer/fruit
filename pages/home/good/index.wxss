@@ -154,6 +154,8 @@
 
 .share-part{
   text-align: center;
+	float: left;
+	width: 50%;
 }
 
 .share-image{
@@ -182,3 +184,18 @@
 	margin-top: 30rpx;
 }
 
+.save.van-button--warning{
+  margin-bottom: 30rpx;
+	width: 80%;
+	border-radius: 45rpx;
+}
+
+.f-tac{
+  text-align: center;
+}
+
+.save-text{
+  color: #aaa;
+	font-size: 24rpx;
+	margin-bottom: 30rpx;
+}

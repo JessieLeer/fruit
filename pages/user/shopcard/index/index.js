@@ -33,7 +33,7 @@ Page({
         let loginUid = wx.getStorageSync('loginUid')
         let userId = wx.getStorageSync('userId')
         wx.request({
-            url: `${app.globalData.url}/api/member/shopCardMx`, //仅为示例，并非真实的接口地址
+            url: `${app.globalData.custom.url}/api/member/shopCardMx`, //仅为示例，并非真实的接口地址
             data: {
                 loginUid: loginUid,
                 userId: userId

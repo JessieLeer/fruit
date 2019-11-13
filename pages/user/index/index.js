@@ -73,7 +73,7 @@ Page({
     gotoLocationMan(){
         if (this.checkLogin()) return;
         wx.navigateTo({
-            url: "../addressManage/addressManage"
+            url: "../address/index/index"
 
         })
     },
@@ -130,7 +130,7 @@ Page({
         }else{
             var that = this
             wx.request({
-                url: `${app.globalData.url}/api/member/getUserInfo`,
+                url: `${app.globalData.custom.url}/api/member/getUserInfo`,
                 data: {
                     loginUid: loginUid,
                     userId: userId

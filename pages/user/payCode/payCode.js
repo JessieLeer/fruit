@@ -88,7 +88,7 @@ Page({
     let userId = wx.getStorageSync('userId')
     var that = this
     wx.request({
-      url: `${app.globalData.url}/api/member/refreshPayCode`, //仅为示例，并非真实的接口地址
+      url: `${app.globalData.custom.url}/api/member/refreshPayCode`, //仅为示例，并非真实的接口地址
       data: {
         loginUid,
         userId
@@ -142,8 +142,7 @@ Page({
 
   // 自动刷新二维码，5秒刷新一次，先生成一次，再5秒后执行一次
   autoRefresh: function () {
-    console.log(23432342)
-    let that = this;
+    let that = this
     that.setData({
       st: Date.parse(new Date()),
       tip: '正在刷新'
@@ -151,10 +150,6 @@ Page({
     let size = that.setCanvasSize();//动态设置画布大小
     barcode.barcode('firstCanvas', that.data.url, 285 * 2, 108 * 2)
     that.createQrCode("mycanvas", size.w, size.h) //先生成一次
-    // that.data.setInter = setInterval(function () {
-    //  // console.log('定时一次', Date.parse(new Date()))
-    //   that.createQrCode("mycanvas", size.w, size.h)
-    // }, 10000);
   },
   // 取消自动刷新
   stopRefresh: function () {
@@ -183,7 +178,6 @@ Page({
       canvasId: 'mycanvas',
       success: function (res) {
         var tempFilePath = res.tempFilePath;
-        //console.log('生成临时图片路径。。。。', tempFilePath);
         that.setData({
           imagePath: tempFilePath,
         });
@@ -195,8 +189,7 @@ Page({
   },
   //点击图片进行预览，长按保存分享图片
   previewImg: function (e) {
-    var img = this.data.imagePath;
-    //console.log(img);
+    var img = this.data.imagePath
     wx.previewImage({
       current: img, // 当前显示图片的http链接
       urls: [img] // 需要预览的图片http链接列表

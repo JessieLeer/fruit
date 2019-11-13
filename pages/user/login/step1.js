@@ -48,7 +48,7 @@ Page({
 			key : false
 		})
 		wx.request({
-			url: `${app.globalData.url}/api/mini/sendUserSms`,
+			url: `${app.globalData.custom.url}/api/mini/sendUserSms`,
 			data: {
 				mobile : this.data.phone.value
 			},
@@ -101,7 +101,7 @@ Page({
 		this.onGetUserinfo()
 		var that = this;
 		wx.request({
-			url: `${app.globalData.url}/api/mini/login`,
+			url: `${app.globalData.custom.url}/api/mini/login`,
 			data: {
 				mobile: this.data.phone.value,
 				smsCode: this.data.sms.value,

@@ -21,7 +21,7 @@ Page({
 	show(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/groupUser`,
+			url: `${app.globalData.custom.url}/api/groupUser`,
 			data: {
 				gid: this.data.gid
 			},

@@ -39,9 +39,13 @@ Page({
 		},
 		logShow: false,
 		logistics: {},
-		updistance: 0
+		updistance: 0,
+		phone: app.globalData.custom.phone
 	},
 	onLoad(option) {
+		this.setData({
+			active: app.globalData.orderActive
+		})
 		if(wx.getSystemInfoSync().system.indexOf('iOS') == -1){
 			this.setData({
 				updistance: 0
@@ -55,6 +59,9 @@ Page({
 		this.initCuser()
 	},
 	onShow() {
+		this.setData({
+			active: app.globalData.orderActive
+		})
 		this.initSystem()
 		this.initCuser()
 	},
@@ -133,7 +140,7 @@ Page({
 		let type = parseInt(e.type)
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/order/list`,
+			url: `${app.globalData.custom.url}/api/order/list`,
 			data: {
 				userId: this.data.cuser.userId,
 				pageNum: this.data[`order${e.type}`].page,
@@ -227,7 +234,7 @@ Page({
 	index1(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/group/order/list`,
+			url: `${app.globalData.custom.url}/api/group/order/list`,
 			data: {
 				userId: this.data.cuser.userId,
 				pageNum: this.data.order2.page,
@@ -251,13 +258,10 @@ Page({
 								item.status = '待支付'
 								break
 							case '2':
-								item.status = '待配送'
+								item.status = '拼团中'
 								break
 							case '3':
 								item.status = '待自提'
-								break
-							case '4':
-								item.status = '配送中'
 								break
 							case '5':
 								item.status = '已取消'
@@ -267,7 +271,6 @@ Page({
 								break
 						}
 					}
-					
 					_this.setData({
 						'order2.data': _this.data.order2.data.concat(res.data.data)
 					})
@@ -342,6 +345,7 @@ Page({
 		this.setData({
 			active: e.detail.index
 		})
+		app.globalData.orderActive = e.detail.index
   },
 	/*-- 再来一单 --*/
 	again(e) {
@@ -354,7 +358,7 @@ Page({
 			e.currentTarget.dataset.shopid
 		]
 		wx.request({
-			url: `${app.globalData.url}/api/order/detail`,
+			url: `${app.globalData.custom.url}/api/order/detail`,
 			data: {
 				orderId: id
 			},
@@ -381,7 +385,7 @@ Page({
 				this
 			]
 			wx.request({
-				url: `${app.globalData.url}/api/order/cancel`,
+				url: `${app.globalData.custom.url}/api/order/cancel`,
 				data: {
 					orderId: id
 				},
@@ -411,7 +415,7 @@ Page({
 				e.currentTarget.dataset.type
 			]
 			wx.request({
-				url: `${app.globalData.url}/api/order/receipt`,
+				url: `${app.globalData.custom.url}/api/order/receipt`,
 				data: {
 					orderId: id
 				},
@@ -431,7 +435,7 @@ Page({
 	logistics(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/order/logistics`,
+			url: `${app.globalData.custom.url}/api/order/logistics`,
 			data: {
 				orderId: e.currentTarget.dataset.id
 			},
@@ -489,7 +493,7 @@ Page({
       })
 			let _this = this
 			wx.request({
-				url: `${app.globalData.url}/api/pay/balance`,
+				url: `${app.globalData.custom.url}/api/pay/balance`,
 				data: {
 					orderId: this.data.pay.id,
 					payPwd: this.data.pay.password,
@@ -536,11 +540,11 @@ Page({
 	},
 	call(e) {
 		wx.showActionSheet({
-      itemList: ['13387085587', '呼叫'],
+      itemList: [this.data.phone, '呼叫'],
       success(res) {
         if (res.tapIndex == 1 || res.tapIndex == 0){
           wx.makePhoneCall({
-            phoneNumber: '13387085587',
+            phoneNumber: this.data.phone,
           })
         }
       },

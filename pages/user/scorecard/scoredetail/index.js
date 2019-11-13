@@ -20,7 +20,6 @@ Page({
     this.setData({
       select: true
     })
-
   },
   close(){
     this.setData({
@@ -49,20 +48,15 @@ Page({
     this.getData()
   },
   getData(ParamsDate) {
-    console.log(new Date(this.data.date))
     let userId = wx.getStorageSync('userId')
     var that = this
     wx.request({
-      url: `${app.globalData.url}/api/integral`, //仅为示例，并非真实的接口地址
+      url: `${app.globalData.custom.url}/api/integral`,
       data: {
         uid: userId,
         itime: ParamsDate ? ParamsDate : ''
       },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
       success(res) {
-        console.log(res)
         that.setData({
           income: res.data.income,
           expenditure: res.data.expenditure,

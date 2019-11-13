@@ -7,21 +7,19 @@ Page({
 	data: {
     userInfo: {},
     cardNo : null,
-    shopId : ''
+    shopId : '',
+		logo: app.globalData.custom.logo
   },
   onShow(){
     this.loginGetCode()
   },
   onLoad(options) {
-    if (JSON.stringify(options) =='{}')return
+    if (JSON.stringify(options) =='{}') return
     var scene = decodeURIComponent(options.scene)
     this.setData({
       shopId: scene.shopId
     })
 	},
-  getWxStorage(){
-
-  },
 	getPhoneNumber(e) {
     let code = wx.getStorageSync('code')
     let openid = wx.getStorageSync('openid')
@@ -29,7 +27,7 @@ Page({
     var that = this
     //3. 解密
     wx.request({
-      url: `${app.globalData.url}/api/mini/getPhoneNumber`,
+      url: `${app.globalData.custom.url}/api/mini/getPhoneNumber`,
       data: {
         'decryptData': e.detail.encryptedData,
         'iv': e.detail.iv,
@@ -41,7 +39,7 @@ Page({
 				wx.login({
 					success: res => {
 						wx.request({
-							url: `${app.globalData.url}/api/mini/login`,
+							url: `${app.globalData.custom.url}/api/mini/login`,
 							data: {
 								mobile: _res,
 								loginType: 'wx',

@@ -13,8 +13,29 @@ App({
 		code : '',
 		orderGoods: [],
 		groupbuy: {},
-		url: 'https://yjjy.ysk360.com',
-		//url: 'http://192.168.1.70:8082',
+		orderActive: 0,
+		custom: {
+			appId: 'wx6326bb7bd9f2a207',
+			name: '缘疆佳园',
+			//url: 'https://yjjy.ysk360.com',
+			url: 'http://192.168.1.65:8082',
+			logo: '/static/image/login_logo.png',
+			phone: '13387085587'
+		},
+		/*custom: {
+			appId: 'wx2abde02acd11b274',
+			name: '云时空',
+			url: 'https://yjjycs.ysk360.com',
+			logo: '/static/image/login_logo1.png',
+			phone: '400-056-6360'
+		},*/
+		/*custom: {
+			appId: 'wx00ad98daf153da07',
+			name: '鲁药',
+			url: 'https://ly.ysk360.com',
+			logo: '/static/image/login_logo2.jpg',
+			phone: '0531-80660150'
+		},*/
   },
   onLaunch() {
     // 登录
@@ -23,7 +44,7 @@ App({
       success: res => {
 			  wx.setStorageSync('code', res.code)
 				wx.request({
-					url: `${this.globalData.url}/api/mini/getMiniOpenId`,
+					url: `${this.globalData.custom.url}/api/mini/getMiniOpenId`,
 					data: {
 						code: res.code
 					},

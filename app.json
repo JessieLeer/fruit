@@ -10,10 +10,10 @@
     "pages/user/coupon/index/index",
     "pages/user/scorecard/scoredetail/index",
 		"pages/user/scorecard/show/index",
-    "pages/user/addressManage/newAddress/newAddress",
-    "pages/user/addressManage/editAddress/editAddress",
-    "pages/user/addressManage/newAddress",
-    "pages/user/addressManage/addressManage",
+		"pages/user/address/address/index",
+		"pages/user/address/create/index",
+		"pages/user/address/edit/index",
+		"pages/user/address/index/index",
     "pages/bindVIP/index",
     "pages/user/setting/phone-set2/phone-set",
     "pages/user/setting/phone-set/phone-set",
@@ -51,11 +51,13 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#00837b",
-    "navigationBarTitleText": "缘疆佳园",
+    "navigationBarTitleText": "",
     "navigationBarTextStyle": "white",
     "enablePullDownRefresh": true
   },
   "usingComponents": {
+		"van-area": "./miniprogram_npm/vant-weapp/area/index",
+		"van-switch": "./miniprogram_npm/vant-weapp/switch/index",
     "van-button": "./miniprogram_npm/vant-weapp/button/index",
     "van-dialog": "./miniprogram_npm/vant-weapp/dialog/index",
     "van-icon": "./miniprogram_npm/vant-weapp/icon/index",
@@ -84,7 +86,8 @@
 		"van-collapse-item": "/miniprogram_npm/vant-weapp/collapse-item/index",
 		"van-sidebar": "/miniprogram_npm/vant-weapp/sidebar/index",
     "van-sidebar-item": "/miniprogram_npm/vant-weapp/sidebar-item/index",
-		"van-loading": "/miniprogram_npm/vant-weapp/loading/index"
+		"van-loading": "/miniprogram_npm/vant-weapp/loading/index",
+		"van-swipe-cell": "/miniprogram_npm/vant-weapp/swipe-cell/index"
   },
   "tabBar": {
     "color": "#d5d5d5",

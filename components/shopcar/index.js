@@ -78,7 +78,7 @@ Component({
 		onSubmit(e) {
 			let _this = this
 			wx.request({
-				url: `${app.globalData.url}/api/select/store`,
+				url: `${app.globalData.custom.url}/api/select/store`,
 				data: {
 					sid: this.properties.shopId
 				},

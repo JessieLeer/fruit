@@ -40,7 +40,7 @@ Page({
 	show(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/groupUser`,
+			url: `${app.globalData.custom.url}/api/groupUser`,
 			data: {
 				gid: this.data.gid
 			},
@@ -138,7 +138,7 @@ Page({
     const ctx = wx.createCanvasContext('myCanvas')
     let bgPath = _this.data.good.headImage
     let portraitPath = _this.data.portrait_temp
-    let hostNickname = '缘疆佳园'
+    let hostNickname = app.globalData.custom.name
     let qrPath = _this.data.qrcode_temp
     let windowWidth = _this.data.windowWidth
     _this.setData({

@@ -54,7 +54,7 @@ Page({
         //3. 解密
         wx.request({
 
-            url: `${app.globalData.url}/api/mini/getContentById`,
+            url: `${app.globalData.custom.url}/api/mini/getContentById`,
             data: {
                 contentId: id
             },

@@ -38,7 +38,7 @@ Page({
       })
       var that = this;
       wx.request({
-        url: `${app.globalData.url}/api/mini/sendUserSms`,
+        url: `${app.globalData.custom.url}/api/mini/sendUserSms`,
         data: {
           mobile: this.data.tel
         },
@@ -77,7 +77,7 @@ Page({
   },
   next(){
     wx.request({
-      url: `${app.globalData.url}/api/member/verifySms`,
+      url: `${app.globalData.custom.url}/api/member/verifySms`,
       data: {
         oldMobile: this.data.tel,
         loginUid: wx.getStorageSync('loginUid'),
@@ -120,7 +120,7 @@ Page({
   onShow: function () {
     var that = this;
     wx.request({
-      url: `${app.globalData.url}/api/member/getUserInfo`, //仅为示例，并非真实的接口地址
+      url: `${app.globalData.custom.url}/api/member/getUserInfo`, //仅为示例，并非真实的接口地址
       data: {
         loginUid: wx.getStorageSync('loginUid'),
         userId: wx.getStorageSync('userId')

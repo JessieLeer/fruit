@@ -26,7 +26,8 @@ Page({
 		logistics: {},
 		emptyCoupon: {},
 		waitime: 0,
-		isShareAble: true
+		isShareAble: true,
+		phone: app.globalData.custom.phone
 	},
 	onLoad(option) {
 		this.initUser()
@@ -70,7 +71,7 @@ Page({
 	waitShow(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/order/waitPayTime`,
+			url: `${app.globalData.custom.url}/api/order/waitPayTime`,
 			success(res) {
 				_this.setData({
 					waitime: res.data.data
@@ -81,12 +82,13 @@ Page({
 	show(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/order/detail`,
+			url: `${app.globalData.custom.url}/api/order/detail`,
 			data: {
 				orderId: this.data.id,
 				groupId: this.data.gid
 			},
 			success(res) {
+				console.log(res.data.data)
 				res.data.data.type = res.data.data.type == '0' ? '门店配送' : '到店自提'
 				res.data.data.payType = res.data.data.payType == '0' ? '余额支付' : '微信支付'
 				res.data.data.discountMoney = res.data.data.discountMoney ? `-¥${res.data.data.discountMoney}` : 0
@@ -136,11 +138,12 @@ Page({
 	groupShow(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/groupUserShare`,
+			url: `${app.globalData.custom.url}/api/groupUserShare`,
 			data: {
 				gid: e.groupId
 			},
 			success(res) {
+				console.log(res.data.data)
 				if(res.data.code == 200) {
 					res.data.data.need = parseInt(res.data.data.guserNumber) - res.data.data.userImgList.length
 					_this.setData({
@@ -179,7 +182,7 @@ Page({
 			e.currentTarget.dataset.shopid
 		]
 		wx.request({
-			url: `${app.globalData.url}/api/order/detail`,
+			url: `${app.globalData.custom.url}/api/order/detail`,
 			data: {
 				orderId: id
 			},
@@ -206,7 +209,7 @@ Page({
 				this
 			]
 			wx.request({
-				url: `${app.globalData.url}/api/order/cancel`,
+				url: `${app.globalData.custom.url}/api/order/cancel`,
 				data: {
 					orderId: id
 				},
@@ -233,7 +236,7 @@ Page({
 		]
 		let _this = this
  		wx.request({
-			url: `${app.globalData.url}/api/order/receipt`,
+			url: `${app.globalData.custom.url}/api/order/receipt`,
 			data: {
 				orderId: id
 			},
@@ -251,7 +254,7 @@ Page({
 	logistics(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/order/logistics`,
+			url: `${app.globalData.custom.url}/api/order/logistics`,
 			data: {
 				orderId: e.currentTarget.dataset.id
 			},
@@ -307,7 +310,7 @@ Page({
       })
 			let _this = this
 			wx.request({
-				url: `${app.globalData.url}/api/pay/balance`,
+				url: `${app.globalData.custom.url}/api/pay/balance`,
 				data: {
 					orderId: this.data.pay.id,
 					payPwd: this.data.pay.password,
@@ -353,18 +356,18 @@ Page({
 	},
 	onShareAppMessage() {
     return {
-      title: `【仅剩${this.data.groupOrder.need}个名额】快来${this.data.groupOrder.gprice}元拼${this.data.groupOrder.shopName}`,
+      title: this.data.groupOrder.shareText == '' ? `【仅剩${this.data.groupOrder.need}个名额】快来${this.data.groupOrder.gprice}元拼${this.data.groupOrder.shopName}` : this.data.groupOrder.shareText,
 			imageUrl: this.data.groupOrder.shopImg,
       path: `/pages/home/group/join/index?id=${this.data.order.groupId}`
     }
   },
 	call(e) {
 		wx.showActionSheet({
-      itemList: ['13387085587', '呼叫'],
+      itemList: [this.data.phone, '呼叫'],
       success(res) {
         if (res.tapIndex == 1 || res.tapIndex == 0){
           wx.makePhoneCall({
-            phoneNumber: '13387085587',
+            phoneNumber: this.data.phone,
           })
         }
       },

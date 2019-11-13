@@ -242,3 +242,9 @@ page{
 .mt-20{
   margin-bottom: 20rpx;
 }
+
+.mine{
+  position: fixed;
+	right: 20rpx;
+	bottom: 60rpx;
+}

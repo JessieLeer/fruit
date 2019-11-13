@@ -1,10 +1,10 @@
 <van-cell-group>
-	<van-cell wx:for='{{address}}' wx:key='index' title="{{item.addr}}" use-label-slot data-id='{{item.id}}' bind:click='back'>
+	<van-cell wx:for='{{address}}' wx:key='index' title="{{item.address}}" use-label-slot data-id='{{item.id}}' bind:click='back'>
 		<van-tag slot='icon' color='#e8fcfb' text-color='#00837B' custom-class='address-type'>{{item.tag}}</van-tag>
-		<view slot='label'>{{item.name}} {{item.mobile}}</view>
+		<view slot='label'>{{item.contact}} {{item.phone}}</view>
 	</van-cell>
 </van-cell-group>
 
 <view class='footer'>
-  <van-button type="warning" data-url='/pages/user/addressManage/addressManage' bind:click='go' custom-class='manager'>管理收货地址</van-button>
+  <van-button type="warning" data-url='/pages/user/address/index/index' bind:click='go' custom-class='manager'>管理收货地址</van-button>
 </view>

@@ -10,7 +10,7 @@ Page({
   loginOut : function () {
     var that = this
     wx.request({
-      url: `${app.globalData.url}/api/member/logout`, //仅为示例，并非真实的接口地址
+      url: `${app.globalData.custom.url}/api/member/logout`, //仅为示例，并非真实的接口地址
       data: {
         loginUid: wx.getStorageSync('loginUid'),
         userId: wx.getStorageSync('userId')

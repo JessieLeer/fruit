@@ -41,7 +41,7 @@ Page({
 	confirm(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/order/confirm`,
+			url: `${app.globalData.custom.url}/api/order/confirm`,
 			data: {
 				carts: [
 					{
@@ -56,7 +56,6 @@ Page({
 				storeId: app.globalData.groupbuy.storeId,
 				userId: this.data.cuser.userId
 			},
-			
 			success(res) {
 				_this.setData({
 				  orderInfo: res.data.data	
@@ -68,7 +67,7 @@ Page({
 	onPayshow(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/group/groupAdd`,
+			url: `${app.globalData.custom.url}/api/group/groupAdd`,
 			method: 'post',
 			data: {
 				carts: JSON.stringify([

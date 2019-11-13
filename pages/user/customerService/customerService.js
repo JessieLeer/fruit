@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+		phone: app.globalData.custom.phone,
     content: [
       {
         id: "01",
@@ -69,11 +70,11 @@ Page({
  
   tel: function () {
     wx.showActionSheet({
-      itemList: ['13387085587', '呼叫'],
+      itemList: [this.data.phone, '呼叫'],
       success: function (res) {
         if (res.tapIndex == 1 || res.tapIndex == 0){
             wx.makePhoneCall({
-              phoneNumber: '13387085587',
+              phoneNumber: this.data.phone,
             })
         }
       },
@@ -84,21 +85,15 @@ Page({
     
   },
   getHtml(id){
-    var that = this;
+    var that = this
     //3. 解密
     wx.request({
-
-      url: `${app.globalData.url}/api/mini/getContentById`,
+      url: `${app.globalData.custom.url}/api/mini/getContentById`,
       data: {
         contentId: id
       },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json'
-      },
       success(res) {
-        console.log(res)
-        WxParse.wxParse('article', 'html', res.data.data.contentText, that, 5);
+        WxParse.wxParse('article', 'html', res.data.data.contentText, that, 5)
       }
     }) 
   },

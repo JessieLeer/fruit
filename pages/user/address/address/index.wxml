@@ -1,0 +1,11 @@
+<view class='search'>
+  <van-button bind:click='openArea' type="default" size='small' custom-class='city' >{{cuscity || position.address_component.city}}<van-icon name="arrow-down" custom-class='dropcity'/></van-button>
+  <van-search placeholder="请输入收货地址" class='search-input' bind:change='getsuggest' value='{{searchValue}}'/>
+</view>
+<van-cell-group wx:if='{{suggestion.length > 0}}'>
+  <van-cell wx:for="{{suggestion}}" wx:key="index" title="{{item.title}}" label="{{item.address}}" border="{{ false }}" data-address='{{item}}' bind:click='handleAddress' />
+</van-cell-group>
+
+<van-popup show="{{ area.show }}" position='bottom'>
+  <van-area area-list="{{ area.data }}" bind:confirm='cityConfirm' bind:cancel='cityCancel' columns-num="{{ 2 }}"/>
+</van-popup>

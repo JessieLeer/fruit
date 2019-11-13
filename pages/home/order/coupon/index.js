@@ -29,7 +29,7 @@ Page({
 	index(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/useList`,
+			url: `${app.globalData.custom.url}/api/useList`,
 			data: {
 				commodityId: e.goods,
 				quota: e.quota,

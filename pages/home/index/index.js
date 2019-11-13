@@ -28,10 +28,14 @@ Page({
 		cateHeight: 0,
 		isLoading: true,
 		openid: '',
-		updistance: 0
+		updistance: 0,
+		custom: app.globalData.custom
 	},
 
   onLoad(option) {	
+		wx.setNavigationBarTitle({
+      title: this.data.custom.name 
+    })
 		if(wx.getSystemInfoSync().system.indexOf('iOS') == -1){
 			this.setData({
 				updistance: 0
@@ -66,7 +70,10 @@ Page({
 		if(this.data.isFirstload) {
 		}else{
 			if(this.data.shop.id == app.globalData.shop.id) {
-				this.shopStatus({id: this.data.shop.id})
+				if(this.data.shop.id == undefined){
+				}else{
+					this.shopStatus({id: this.data.shop.id})
+				}
 				this.initShopcar()
 			}else{
 				wx.showLoading({
@@ -140,7 +147,7 @@ Page({
 	bannerIndex(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/banner/list`,
+			url: `${app.globalData.custom.url}/api/banner/list`,
 			data: {},
 			success(res) {
 				_this.setData({
@@ -209,7 +216,7 @@ Page({
 		}else{
 			let _this = this
 			wx.request({
-				url: `${app.globalData.url}/api/curr/store`,
+				url: `${app.globalData.custom.url}/api/curr/store`,
 				data: {
 					latitude: _this.data.position.location.lat,
 					longitude: _this.data.position.location.lng,
@@ -239,7 +246,7 @@ Page({
 	shopStatus(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/select/store`,
+			url: `${app.globalData.custom.url}/api/select/store`,
 			data: {
 				sid: e.id
 			},
@@ -255,7 +262,7 @@ Page({
 	cateIndex(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/category/list`,
+			url: `${app.globalData.custom.url}/api/category/list`,
 			data: {
 				storeId: _this.data.shop.id
 			},
@@ -300,7 +307,7 @@ Page({
 	index(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/commodity/category`,
+			url: `${app.globalData.custom.url}/api/commodity/category`,
 			data: {
 				userId: this.data.cuser.userId || '',
 				storeId: this.data.shop.id,
@@ -445,7 +452,7 @@ Page({
 	/*-- 召唤开店 --*/
 	calling(e) {
 		wx.request({
-			url: `${app.globalData.url}/api/call/store`,
+			url: `${app.globalData.custom.url}/api/call/store`,
 			method: 'post',
 			data: {
 				latitude: this.data.position.location.lat,

@@ -43,10 +43,12 @@
 
 <view wx:else class='f-tac'>
   <image src='../../../../static/image/noshop@2x.png' mode='widthFix' class='noshop'/>
-	<view class='caller'>已有<text class='caller-number'>{{caller}}人</text>召唤缘疆佳园在这里开店～</view>
+	<view class='caller'>已有<text class='caller-number'>{{caller}}人</text>召唤{{custom.name}}在这里开店～</view>
 	<van-button type="default" custom-class='caller-me' bindtap='calling'>我也来召唤</van-button>
 	<van-button type="default" custom-class='caller-change' bindtap='go' data-url='/pages/home/address/index?from=/pages/home/group/index/index'>换个地址</van-button>
 </view>
+
+<van-tag type='primary' custom-class='mine' size='medium' data-url='/pages/home/order/index/index' bindtap='goTab'>我的拼团</van-tag>
 
 <van-toast id="van-toast" />
 

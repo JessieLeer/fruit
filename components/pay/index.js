@@ -82,7 +82,7 @@ Component({
 		balanceShow(e) {
 			let _this = this
 			wx.request({
-				url: `${app.globalData.url}/api/user/balance`,
+				url: `${app.globalData.custom.url}/api/user/balance`,
 				data: {
 					userId: this.data.cuser.userId
 				},
@@ -96,7 +96,7 @@ Component({
 		paypaShow(e) {
 			let _this = this
 			wx.request({
-				url: `${app.globalData.url}/api/user/checkPayPwd`,
+				url: `${app.globalData.custom.url}/api/user/checkPayPwd`,
 				data: {
 					userId: this.data.cuser.userId
 				},
@@ -144,7 +144,7 @@ Component({
 			let _this = this
 			if(this.properties.type == 'wechat') {
 				wx.request({
-					url: `${app.globalData.url}/api/pay/wechat`,
+					url: `${app.globalData.custom.url}/api/pay/wechat`,
 					data: {
 						openId: wx.getStorageSync('openid'),
 						userId: this.data.cuser.userId,
@@ -167,7 +167,7 @@ Component({
 								complete(res) {
 									if(res.errMsg == 'requestPayment:ok'){
 										wx.request({
-											url: `${app.globalData.url}/api/pay/callBack`,
+											url: `${app.globalData.custom.url}/api/pay/callBack`,
 											data: {
 												orderId: _this.properties.orderId
 											},

@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "新增地址",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "van-area": "../../../../miniprogram_npm/vant-weapp/area/index"
-  }
-}

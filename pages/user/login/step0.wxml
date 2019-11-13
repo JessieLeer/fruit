@@ -1,14 +1,12 @@
 <view>
-  <image src='/static/image/login_logo.png' class='logo' mode='widthFix'   />
+  <image src='{{logo}}' class='logo' mode='widthFix' />
   <view class="wrap">
     <button open-type="getUserInfo" class="info">
-      
       <button class="phone" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" custom-class='login-wechat'>
         微信一键登录
       </button>
     </button>
-   
   </view>
-  <button data-url='/pages/user/login/step1' bindtap='go' class="tellogin">手机验证登录</button>
+  <!--<button data-url='/pages/user/login/step1' bindtap='go' class="tellogin">手机验证登录</button>-->
 	<van-toast id="van-toast" />
 </view>

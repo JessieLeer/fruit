@@ -55,7 +55,7 @@ Page({
         let userId = wx.getStorageSync('userId')
         var that = this
         wx.request({
-            url: `${app.globalData.url}/api/coupon`, 
+            url: `${app.globalData.custom.url}/api/coupon`, 
             data: {
               uid: userId,
 							cuse: 0
@@ -86,7 +86,7 @@ Page({
         }
         var that = this
         wx.request({
-            url: `${app.globalData.url}/api/getCoupon`, //仅为示例，并非真实的接口地址
+            url: `${app.globalData.custom.url}/api/getCoupon`, //仅为示例，并非真实的接口地址
             data: {
                 uid: userId,
                 rid  : that.data.value

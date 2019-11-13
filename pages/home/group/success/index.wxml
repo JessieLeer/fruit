@@ -3,6 +3,31 @@
 	<text class='success-text'>支付成功</text>
 	<view class='opera'>
 		<van-button type="default" custom-class='view' data-url='/pages/home/order/detail/index?id={{id}}' bind:click='go'>查看订单</van-button>
-	  <van-button type="warning" custom-class='shopping' open-type='share'>邀请好友</van-button>
+	  <van-button type="warning" custom-class='shopping' bind:click='showShare'>邀请好友</van-button>
 	</view>
+	
+	<van-popup show="{{ picShow }}" position="bottom" bind:close="onClose1">
+		<canvas canvas-id="sharePic" class='w-100' style='height: {{canvasHeight}}px;'></canvas>
+		<view class='f-tac'>
+			<van-button type='warning' bind:click='saveCanvas' custom-class='save' color='#F6931F'>保存图片</van-button>
+			<text class='save-text f-db'>保存图片到手机相册后，将图片分享到朋友圈</text>
+		</view>
+	</van-popup>
+	
+	<van-popup show="{{ shareShow }}" position="bottom" bind:close="onClose" class='f-cb' custom-class='share-area' overlay='{{false}}'>
+		<view class='share-part'>
+			<van-button type="default" open-type='share' custom-class='share-button'>
+				<image src='../../../../static/image/wechat.png' mode='widthFix' class='share-image' />
+			</van-button>
+			<view class='share-text'>分享给好友</view>
+		</view>
+		<view class='share-part'>
+			<van-button type="default" bind:click='generateImageCode' custom-class='share-button'>
+				<image src='../../../../static/image/picture.png' mode='widthFix' class='share-image' />
+			</van-button>
+			<view class='share-text'>生成分享图</view>
+		</view>
+		<van-button type="default" custom-class='share-close' bindtap='onClose'>取消</van-button>
+	</van-popup>
+
 </view>

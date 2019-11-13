@@ -82,7 +82,7 @@ Page({
 			if(this.data.cuser.userId) {
 			  let _this = this
 				wx.request({
-					url: `${app.globalData.url}/api/search/history`,
+					url: `${app.globalData.custom.url}/api/search/history`,
 					data: {
 						userId: this.data.cuser.userId
 					},
@@ -104,7 +104,7 @@ Page({
 	hotIndex(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/search/hot`,
+			url: `${app.globalData.custom.url}/api/search/hot`,
 			success(res) {
 				for(let item of res.data.data) {
 					if(item.name.length > 10) {
@@ -125,7 +125,7 @@ Page({
 		}).then(() => {
 			let _this = this
 			wx.request({
-				url: `${app.globalData.url}/api/search/history/del`,
+				url: `${app.globalData.custom.url}/api/search/history/del`,
 				data: {
 					userId: this.data.cuser.userId
 				},
@@ -162,7 +162,7 @@ Page({
     })
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/commodity/search`,
+			url: `${app.globalData.custom.url}/api/commodity/search`,
 			data: {
 				pageNum: this.data.search.page,
 				pageSize: 10,

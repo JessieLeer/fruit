@@ -111,11 +111,11 @@
 					  <van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='2'>取消订单</van-button>
 						<van-button type="warning" custom-class='pay' data-id='{{item.id}}' data-type='2' data-gid='{{item.groupId}}' data-cost='{{item.payMoney}}' bind:click='onPayshow'>去支付</van-button>
 					</view>
-					<view slot='footer' wx:if='{{item.status == "待配送"}}'>
-					</view>
 					<view slot='footer' wx:if='{{item.status == "待自提"}}'>
-					  <van-button custom-class='cancel' bind:click='cancel' data-id='{{item.id}}' data-type='2'>取消订单</van-button>
 						<van-button type="warning" custom-class='pay' data-url='/pages/home/order/detail/index?id={{item.id}}' bind:click='go'>查看取货码</van-button>
+					</view>
+					<view slot='footer' wx:if='{{item.status == "拼团中"}}'>
+						<van-button type="warning" custom-class='pay'>邀请好友拼团</van-button>
 					</view>
 					<view slot='footer' wx:if='{{item.status == "已完成"}}'>
 					  <van-button custom-class='cancel' data-url='/pages/home/order/evaluate/index?id={{item.id}}&storeId={{item.storeId}}' bind:click='go' wx:if='{{item.evaluate == false}}'>评价</van-button>

@@ -16,7 +16,7 @@ Page({
 		let userId = wx.getStorageSync('userId')
     let _this = this
     wx.request({
-      url: `${app.globalData.url}/api/coupon`, 
+      url: `${app.globalData.custom.url}/api/coupon`, 
       data: {
         uid: userId,
 			  cuse: 0

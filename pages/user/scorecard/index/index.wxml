@@ -14,17 +14,17 @@
        </view>
     </view>
     <view class="cuopon_area">
-        <view class="item_coupon" wx:for="{{couponlist}}" wx:key="{{index}}">
+        <view class="item_coupon" wx:for="{{couponlist}}" wx:key="{{index}}" data-url='/pages/user/scorecard/show/index?iid={{item.iid}}' bindtap="go">
             <view class="coupon_img_area">
-                <view class="warp_img">
-                    <image src="{{item.iimg}}" mode="widthFix"></image>
+                <view class="warp_img" >
+                    <image src="{{item.iimg}}" mode="widthFix" ></image>
                 </view>
             </view>
             <view class="coupon_desc">
                 <text space="ensp">{{item.iname}}</text>
             </view>
             <view class="wrap_btn">
-                <view class="btn_for" data-url='/pages/user/scorecard/show/index?iid={{item.iid}}' bindtap="go">
+                <view class="btn_for">
                     {{item.iconsume}}积分兑换
                 </view>
             </view>

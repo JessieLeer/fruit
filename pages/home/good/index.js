@@ -11,7 +11,9 @@ Page({
 		shopcarGoods: [],
 		totalPrice: 0,
 		shareShow: false,
-		portrait_temp: ''
+		portrait_temp: '',
+		canvasHeight: 0,
+		qrcode: ''
 	},
 	onLoad(option) {
 		this.setData({
@@ -21,6 +23,7 @@ Page({
 		this.initCuser()
 		this.initShopcar()
 		this.show()
+		this.initCode()
 	},
 	onShow() {
 	},
@@ -40,12 +43,13 @@ Page({
 	show(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/commodity/detail`,
+			url: `${app.globalData.custom.url}/api/commodity/detail`,
 			data: {
 				storeId: this.data.shopId,
 				commodityId: this.data.goodId
 			},
 			success(res) {
+				console.log(res.data.data)
 				if(_this.data.cuser.userId) {
 					let incar = _this.data.shopcarGoods.filter((item) => {
 						return item.id == res.data.data.id
@@ -59,8 +63,11 @@ Page({
 					res.data.data.count = 0
 				}
 				res.data.data.shopId = _this.data.shopId
-				res.data.data.details = res.data.data.details.replace(/style=""/gi, '')
-				res.data.data.details = res.data.data.details.replace(/\<img/gi, '<img style="max-width:100%;height:auto;display:block;"')
+				if(res.data.data.details.indexOf('style=') == -1) {
+					res.data.data.details = res.data.data.details.replace(/>/gi, 'style="max-width:100%;height:auto;display:block;">')
+				}else{
+					res.data.data.details = res.data.data.details.replace(/style="/gi, 'style="max-width:100%;height:auto;display:block;')
+				}
 				_this.setData({
 					good: res.data.data
 				})
@@ -160,83 +167,132 @@ Page({
 		this.handleShopcar()
 	},
 	
+	/*-- 生成二维码 --*/
+	initCode(e) {
+		let _this = this
+		wx.request({
+			url: `${app.globalData.custom.url}/api/getShareQrImg`,
+			data: {
+				path: `/pages/home/good/index`,
+		  	id: this.data.goodId,
+				gid: '',
+				shopId: this.data.shopId
+			},
+			success(res) {
+				_this.setData({
+					qrcode: res.data.data
+				})
+		  }
+		})
+	},
+	
 	/*-- 打开分享弹窗 --*/
 	showShare(e) {
 		this.setData({
 			shareShow: true
 		})
 	},
-	/*-- 生成分享图片 --*/
+	
+	/*
+	 * 自定义的canvas输入文字方法
+	 * 可以实现文字超过一定长度自动换行
+	 */
+	fillTextWrap(ctx, text, x, y, maxWidth, lineHeight) {
+    // 设定默认最大宽度
+    const systemInfo = wx.getSystemInfoSync()
+    const deciveWidth = systemInfo.screenWidth
+    // 默认参数
+    maxWidth = maxWidth || deciveWidth
+    lineHeight = lineHeight || 20
+    // 校验参数
+    if (
+      typeof text !== 'string' ||
+      typeof x !== 'number' ||
+      typeof y !== 'number'
+    ) {
+      return
+    }
+    // 字符串分割为数组
+    const arrText = text.split('')
+    // 当前字符串及宽度
+    let currentText = ''
+    let currentWidth
+    for (let letter of arrText) {
+      currentText += letter
+      currentWidth = ctx.measureText(currentText).width
+      if (currentWidth > maxWidth) {
+        ctx.fillText(currentText, x, y)
+        currentText = ''
+        y += lineHeight
+      }
+    }
+    if (currentText) {
+      ctx.fillText(currentText, x, y)
+    }
+  },
+	
 	generateImageCode(e) {
+		this.setData({
+			picShow: true,
+			shareShow: false
+		})
 		let _this = this
-		wx.downloadFile({
-      url: this.data.good.headImage,
-      success(res) {
-        //缓存头像图片
-        _this.setData({
-          portrait_temp: res.tempFilePath
-        })
-        //缓存canvas绘制小程序二维码
-        wx.downloadFile({
-          url: _this.data.good.headImage,
-          success(res0) {
-            //缓存二维码
-            _this.setData({
-              qrcode_temp: res0.tempFilePath
-            })
-            _this.drawImage()
-            wx.hideLoading()
-            setTimeout(function () {
-              _this.canvasToImage()
-            }, 1000)
-          }
-        })
-      }
-    })
+		wx.getImageInfo({
+			src: this.data.good.headImage,
+			success(res) {
+				let systemInfo = wx.getSystemInfoSync()
+				_this.setData({
+					canvasHeight: systemInfo.screenWidth + 100
+				})
+				const ctx = wx.createCanvasContext('sharePic')
+				ctx.drawImage(res.path, 0, 0, systemInfo.screenWidth, systemInfo.screenWidth)
+				ctx.fillStyle="#fff"
+        ctx.fillRect(0,systemInfo.screenWidth,systemInfo.screenWidth,100)
+				ctx.setFillStyle('#333')
+				ctx.setFontSize(14)
+				_this.fillTextWrap(ctx,_this.data.good.name, 10, systemInfo.screenWidth + 30, 200, 20)
+				ctx.setFillStyle('#F6931F')
+				ctx.setFontSize(16)
+				ctx.fillText(`${_this.data.good.sellingPrice}元`, 10, systemInfo.screenWidth + 80)
+				ctx.setFillStyle('#ccc')
+				ctx.setFontSize(14)
+				ctx.fillText("单买价", 80, systemInfo.screenWidth + 80)
+				ctx.fillText(`${_this.data.good.originalPrice}`, 126, systemInfo.screenWidth + 80)
+				ctx.stroke()
+				ctx.drawImage(_this.data.qrcode, 280, systemInfo.screenWidth + 10, 80, 80)
+				ctx.draw()
+			}
+		})
 	},
-	drawImage() {
-    //绘制canvas图片
-    let _this = this
-    const ctx = wx.createCanvasContext('myCanvas')
-    let bgPath = _this.data.good.headImage
-    let portraitPath = _this.data.portrait_temp
-    let hostNickname = '缘疆佳园'
-    let qrPath = _this.data.qrcode_temp
-    let windowWidth = _this.data.windowWidth
-    _this.setData({
-      scale: 1.6
-    })
-    //绘制背景图片
-    ctx.drawImage(bgPath, 0, 0, windowWidth, _this.data.scale * windowWidth)
-    //绘制二维码
-    ctx.drawImage(qrPath, 0.64 * windowWidth / 2, 0.75 * windowWidth, 0.36 * windowWidth, 0.36 * windowWidth)
-    ctx.draw()
-  },
-	canvasToImage() {
-    let _this = this
-    wx.canvasToTempFilePath({
-      x: 0,
-      y: 0,
-      width: _this.data.windowWidth,
-      height: _this.data.windowWidth * _this.data.scale,
-      destWidth: _this.data.windowWidth * 4,
-      destHeight: _this.data.windowWidth * 4 * _this.data.scale,
-      canvasId: 'myCanvas',
-      success(res) {
-        wx.previewImage({
-          current: res.tempFilePath, // 当前显示图片的http链接
-          urls: [res.tempFilePath] // 需要预览的图片http链接列表
-        })
-      },
-      fail(err) {
-        console.log(err)
-      }
-    })
-  },
+	
+	/*-- 保存分享图 --*/
+	saveCanvas(e) {
+		let _this = this
+		wx.canvasToTempFilePath({
+			canvasId: 'sharePic',
+			success(res) {
+				wx.saveImageToPhotosAlbum({
+					filePath: res.tempFilePath,
+					success(res0) {
+						wx.showToast({
+							title: '已保存到相册'
+						})
+						_this.onClose1()
+					}
+				})
+			}
+		})
+	},
+	
 	/*-- 关闭分享弹窗 --*/
 	onClose(e) {
 		this.setData({
 			shareShow: false
+		})
+	},
+	onClose1(e) {
+		this.setData({
+			picShow: false
 		})
 	}
 })

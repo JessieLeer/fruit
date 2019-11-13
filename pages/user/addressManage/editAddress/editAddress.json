@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "编辑收货地址",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "van-area": "../../../../miniprogram_npm/vant-weapp/area/index"
-  }
-}

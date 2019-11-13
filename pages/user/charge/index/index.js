@@ -32,7 +32,7 @@ Page({
         let userId = wx.getStorageSync('userId')
         var that = this
         wx.request({
-            url: `${app.globalData.url}/api/member/getUserInfo`, //仅为示例，并非真实的接口地址
+            url: `${app.globalData.custom.url}/api/member/getUserInfo`, //仅为示例，并非真实的接口地址
             data: {
                 loginUid,
                 userId
@@ -50,7 +50,7 @@ Page({
     getChargeList(){
         var that = this
         wx.request({
-            url: `${app.globalData.url}/api/czgzList`, //仅为示例，并非真实的接口地址
+            url: `${app.globalData.custom.url}/api/czgzList`, //仅为示例，并非真实的接口地址
             data: {
 
             },
@@ -91,7 +91,7 @@ Page({
             if (isSubmitAble) {
                 isSubmitAble = false
                 wx.request({
-                    url: `${app.globalData.url}/api/member/charge`, //仅为示例，并非真实的接口地址
+                    url: `${app.globalData.custom.url}/api/member/charge`, //仅为示例，并非真实的接口地址
                     data: {
                         loginUid,
                         userId,
@@ -125,7 +125,7 @@ Page({
                             success(res) {
                                 console.log(res)
                                 wx.request({
-                                    url: `${app.globalData.url}/api/member/chargeCallback`, //仅为示例，并非真实的接口地址
+                                    url: `${app.globalData.custom.url}/api/member/chargeCallback`, //仅为示例，并非真实的接口地址
                                     data: {
                                         loginUid: loginUid,
                                         userId: userId,
@@ -170,7 +170,7 @@ Page({
         let userId = wx.getStorageSync('userId')
         var that = this;
         wx.request({
-            url: `${app.globalData.url}/api/member/isSetPassword`, //仅为示例，并非真实的接口地址
+            url: `${app.globalData.custom.url}/api/member/isSetPassword`, //仅为示例，并非真实的接口地址
             data: {
                 loginUid,
                 userId,

@@ -1,11 +1,4 @@
-<!--page/user/customerService/customerService.wxml-->
  <view class='box'>
-      <!-- <block wx:for="{{content}}" wx:key="item">
-        <view class='text-item'>
-          <view class='text-name' bindtap="showHide" data-changeid="{{item.id}}">{{item.title}}<view class="{{item.shows?'toUp':'toLeft'}}"></view></view>
-          <view wx:if="{{item.shows}}" class="content">{{item.contents}}</view>
-        </view>
-      </block> -->
       <import src="../../../wxParse/wxParse.wxml" />
       <template is="wxParse" data="{{wxParseData:article.nodes}}" />
       <view class="auto_height"></view>

@@ -1,0 +1,38 @@
+<van-cell-group >
+  <van-field value="{{ form.address.value }}" label="收货地址" placeholder='点击选择' border="{{ false }}" icon="location-o" bind:change='onChange' data-field='address' data-url='/pages/user/address/address/index?from=/pages/user/address/edit/index?id={{form.id.value}}' readonly bindtap='go'/>
+	<van-field value="{{ form.house.value }}" label="门牌号" placeholder='详细地址，如：16号楼5层505室' border="{{ false }}" data-field='house' bind:change='onChange'/>
+	<van-field value="{{ form.contact.value }}" label="联系人" placeholder='请填写收货人姓名' border="{{ false }}" data-field='contact' bind:change='onChange'/>
+	
+	<van-field readonly center label="性别" border="{{ false }}" use-button-slot input-class='gender'>
+		<van-radio-group slot="button" value="{{ form.gender.value }}" data-field='gender' bind:change='onChange' class='radio-group'>
+		  <van-radio name="先生" class='gender-item f-ib'>先生</van-radio>
+		  <van-radio name="女士" class='gender-item f-ib'>女士</van-radio>
+	  </van-radio-group>
+  </van-field>
+	
+	<van-field value="{{ form.phone.value }}" label="手机号" placeholder='请填写收货人手机号' border="{{ false }}" data-field='phone' bind:change='onChange'/>
+	
+	<van-field readonly center label="标签" border="{{ false }}" use-button-slot input-class='gender'>
+		<van-radio-group slot='button' value="{{ form.tag.value }}" data-field='tag' bind:change='onChange' class='radio-group'>
+			<van-radio name="公司" class='gender-item tag-item f-ib'>
+				<van-tag plain='{{!(form.tag.value == "公司")}}' size='medium' custom-class='tag' color='{{form.tag.value == "公司" ? "#F6931F" : "#999"}}' text-color='{{form.tag.value == "公司" ? "#fff" : "#999"}}'>公司</van-tag>
+			</van-radio>
+			<van-radio name="学校" class='gender-item tag-item f-ib'>
+				<van-tag plain='{{!(form.tag.value == "学校")}}' size='medium' custom-class='tag' color='{{form.tag.value == "学校" ? "#F6931F" : "#999"}}' text-color='{{form.tag.value == "学校" ? "#fff" : "#999"}}'>学校</van-tag>
+			</van-radio>
+			<van-radio name="家" class='gender-item tag-item f-ib'>
+				<van-tag plain='{{!(form.tag.value == "家")}}' size='medium' custom-class='tag' color='{{form.tag.value == "家" ? "#F6931F" : "#999"}}' text-color='{{form.tag.value == "家" ? "#fff" : "#999"}}'>家</van-tag>
+			</van-radio>
+		</van-radio-group>
+	</van-field>
+	
+	<van-field readonly center label="设为默认" border="{{ false }}" use-button-slot input-class='gender'>
+	  <van-switch custom-class='default' size='40rpx' active-color='#F6931F' inactive-color='#fff' slot='button' class='radio-group' checked="{{ form.defaultFlag.value }}" data-field='defaultFlag' bind:change="onChange" />
+	</van-field>
+</van-cell-group>
+
+<view class='f-tac'>
+  <van-button type="default" color='#F6931F' custom-class='submit' bind:click='submit'>保存</van-button>
+</view>
+
+<van-toast id="van-toast" />

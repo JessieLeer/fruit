@@ -1,0 +1,19 @@
+.search{
+  display: flex;
+}
+
+.city.van-button--default{
+  border: white solid 1px;
+	width: 140rpx;
+	height: 54px;
+	line-height: 54px;
+}
+
+.search-input{
+  flex: 1;
+}
+
+.dropcity{
+  position: relative;
+  top: 5rpx;
+}

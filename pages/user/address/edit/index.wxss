@@ -1,0 +1,43 @@
+.radio-group{
+	font-size: 28rpx;
+}
+
+.gender.van-field__input{
+  width: 0%;
+}
+
+.gender-item{
+  margin-right: 30rpx;
+}
+
+.f-ib{
+  display: inline-block;
+}
+
+.tag-item .van-radio__icon{
+  display: none;
+}
+
+.tag{
+	position: relative;
+	top: 10rpx;
+	z-index: 20;
+}
+
+.gender-item .van-radio{
+  overflow: visible;
+}
+
+.f-tac{
+  text-align: center;
+}
+
+.submit.van-button{
+  margin-top: 100rpx;
+	width: 80%;
+	border-radius: 45rpx;
+}
+
+.default{
+  margin-top: 20rpx;
+}

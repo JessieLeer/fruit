@@ -30,6 +30,7 @@ Page({
 		emptyCoupon: {},
 		aid: '',
 		caddress: {},
+		originalPaymoney: 0,
 		showTotalPrice: 0
 	},
 	onLoad(option) {
@@ -97,7 +98,7 @@ Page({
 	confirm(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/order/confirm`,
+			url: `${app.globalData.custom.url}/api/order/confirm`,
 			data: {
 				carts: this.data.goods.map((item) => {
 					return {
@@ -116,6 +117,7 @@ Page({
 				res.data.data.payMoney = res.data.data.totalMoney
 				_this.setData({
 					orderInfo: res.data.data,
+					originalPaymoney: res.data.data.payMoney,
 					showTotalPrice: _this.formatFloat({f: res.data.data.payMoney + res.data.data.deliveryMoney ,digit: 2}).toFixed(2)
 				})
 				_this.couponIndex({quota: _this.data.orderInfo.totalMoney})
@@ -129,7 +131,7 @@ Page({
 			key: 'loginUid',
 			success (res) {
 				wx.request({
-					url: `${app.globalData.url}/api/member/getUserAddressById`,
+					url: `${app.globalData.custom.url}/api/member/getUserAddressById`,
 					data: {
 						loginUid: res.data,
 						userId: _this.data.cuser.userId,
@@ -159,16 +161,19 @@ Page({
 	couponIndex(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/useList`,
+			url: `${app.globalData.custom.url}/api/useList`,
 			data: {
 				commodityId: this.data.goodIds,
 				quota: e.quota,
 				uid: this.data.cuser.userId
 			},
 			success(res) {
+				let lines = res.data.data.filter((item) => {
+					return item.cline == '0'
+				})
 				_this.setData({
-					'coupon.data': res.data.data,
-					'coupon.text': res.data.data.length == 0 ? '无可用' : `${res.data.data.length}张可用`
+					'coupon.data': lines,
+					'coupon.text': lines == 0 ? '无可用' : `${lines.length}张可用`
 				})
 			}
 		})
@@ -185,7 +190,8 @@ Page({
 				'coupon.show': false,
 				'coupon.useing': {},
 				'coupon.text': `${this.data.coupon.data.length}张可用`,
-				'orderInfo.payMoney': this.data.orderInfo.totalMoney
+				'orderInfo.payMoney': this.data.orderInfo.totalMoney,
+				showTotalPrice: this.data.active == 0 ? this.formatFloat({f: parseFloat(this.data.originalPaymoney) + this.data.orderInfo.deliveryMoney, digit: 2}).toFixed(2) : this.data.originalPaymoney
 			})
 		}else{
 			this.setData({
@@ -195,7 +201,7 @@ Page({
 			})
 			let _this = this
 			wx.request({
-				url: `${app.globalData.url}/api/orderUse`,
+				url: `${app.globalData.custom.url}/api/orderUse`,
 				data: {
 					commodityId: this.data.goodIds.toString(),
 					commodityQuota: this.data.goods.map((item) => {
@@ -206,7 +212,8 @@ Page({
 				},
 				success(res) {
 					_this.setData({
-						'orderInfo.payMoney': parseFloat(res.data.total)
+						'orderInfo.payMoney': parseFloat(res.data.total),
+						showTotalPrice: _this.data.active == 0 ? _this.formatFloat({f: parseFloat(res.data.total) + _this.data.orderInfo.deliveryMoney, digit: 2}).toFixed(2) : res.data.total
 					})
 				}
 			})
@@ -222,7 +229,7 @@ Page({
 		}else{
 			let _this = this
 			wx.request({
-				url: `${app.globalData.url}/api/order/commit`,
+				url: `${app.globalData.custom.url}/api/order/commit`,
 				method: 'post',
 				data: {
 					carts: JSON.stringify(this.data.goods.map((item) => {
@@ -294,7 +301,7 @@ Page({
       })
 			let _this = this
 			wx.request({
-				url: `${app.globalData.url}/api/pay/balance`,
+				url: `${app.globalData.custom.url}/api/pay/balance`,
 				data: {
 					orderId: this.data.orderId,
 					payPwd: this.data.pay.password,

@@ -15,6 +15,7 @@ Page({
         })
     },
 	  go(e) {
+			console.log(e)
 			wx.navigateTo({
 				url: e.currentTarget.dataset.url
 			})
@@ -27,7 +28,7 @@ Page({
 			let userId = wx.getStorageSync('userId')
 			var that = this
 			wx.request({
-				url: `${app.globalData.url}/api/integral`,
+				url: `${app.globalData.custom.url}/api/integral`,
 				data: {
 					uid: userId
 				},
@@ -41,7 +42,7 @@ Page({
     getCouponlist(){
         var that = this
         wx.request({
-            url: `${app.globalData.url}/api/integralshop`,
+            url: `${app.globalData.custom.url}/api/integralshop`,
             data: {
                 uid: 18679208206 
             },

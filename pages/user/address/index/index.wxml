@@ -1,0 +1,16 @@
+<van-swipe-cell right-width="{{ 65 }}" wx:for='{{address}}' wx:key='index'>
+  <van-cell use-label-slot data-id='{{item.id}}' is-link url='/pages/user/address/edit/index?id={{item.id}}'>
+		<van-tag slot='icon' color='#e8fcfb' text-color='#00837B' custom-class='address-type'>{{item.tag}}</van-tag>
+		<view slot='title'>
+		  <van-tag wx:if="{{item.defaultFlag == 1}}" color='#e8fcfb' text-color='#00837B' custom-class='address-type'>默认</van-tag>{{item.address}}
+		</view>
+		<view slot='label'>{{item.contact}} {{item.phone}}</view>
+	</van-cell>
+	<van-button type='danger' slot='right' data-id='{{item.id}}' bind:click='del'>删除</van-button>
+</van-swipe-cell>
+
+<view class='footer'>
+  <van-button type="warning" data-url='/pages/user/address/create/index' bind:click='go' custom-class='manager'>添加收货地址</van-button>
+</view>
+
+<van-toast id="van-toast" />

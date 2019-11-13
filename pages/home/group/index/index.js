@@ -18,7 +18,8 @@ Page({
 		noGroupShow: false,
 		caller: 0,
 		isLoading: true,
-		updistance: 0
+		updistance: 0,
+		custom: app.globalData.custom
 	},
 	onLoad(option) {
 		if(wx.getSystemInfoSync().system.indexOf('iOS') == -1){
@@ -89,6 +90,17 @@ Page({
 			url: url
 		})
 	},
+	goTab(e) {
+		if(this.data.cuser.userId) {
+			app.globalData.orderActive = 2
+			console.log(app.globalData.orderActive)
+			wx.switchTab({
+				url: e.currentTarget.dataset.url
+			})
+		}else{
+			this.go('/pages/user/login/step0')
+		}
+	},
 	
 	/*-- 查看会员码 --*/
 	viewCode(e) {
@@ -123,7 +135,7 @@ Page({
 		}else{
 			let _this = this
 			wx.request({
-				url: `${app.globalData.url}/api/curr/store`,
+				url: `${app.globalData.custom.url}/api/curr/store`,
 				data: {
 					latitude: _this.data.position.location.lat,
 					longitude: _this.data.position.location.lng,
@@ -151,7 +163,7 @@ Page({
 	index(e) {
 		let _this = this
 		wx.request({
-			url: `${app.globalData.url}/api/groupNow`,
+			url: `${app.globalData.custom.url}/api/groupNow`,
 			data: {
 				goodName: this.data.good.query,
 				page: this.data.good.page,
@@ -159,7 +171,6 @@ Page({
 				storeId: this.data.shop.id
 			},
 			success(res) {
-				console.log(res.data)
 				wx.hideLoading()
 				if(_this.data.good.page == 1) {
 					_this.setData({

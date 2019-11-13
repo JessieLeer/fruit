@@ -83,9 +83,12 @@
 <view class='footer' wx:if='{{order.status == "待配送"}}'>
 	<van-button custom-class='cancel' bind:click='cancel' data-id='{{order.id}}'>取消订单</van-button>
 </view>
-<view class='footer' wx:if='{{order.status == "待自提"}}'>
+<view class='footer' wx:if='{{order.status == "拼团中"}}'>
   <van-button wx:if='{{order.groupId && isShareAble}}' type="warning" custom-class='pay' open-type='share'>邀请好友</van-button>
-	<van-button custom-class='cancel' bind:click='cancel' data-id='{{order.id}}'>取消订单</van-button>
+</view>
+<view class='footer' wx:if='{{order.status == "待自提"}}'>
+	<van-button wx:if='{{order.groupId}}' type="warning" custom-class='pay'>查看取货码</van-button>
+	<van-button wx:else custom-class='cancel' bind:click='cancel' data-id='{{order.id}}'>取消订单</van-button>
 </view>
 <view class='footer' wx:if='{{order.status == "配送中"}}'>
 	<van-button custom-class='cancel' data-id='{{order.id}}' bind:click='logistics'>查看物流</van-button>
