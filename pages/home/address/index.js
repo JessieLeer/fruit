@@ -57,6 +57,13 @@ Page({
 				longitude: this.data.position.location.lng
 			},
 			success(res) {
+				for(let item of res.data.data) {
+					if(item.distance < 1000) {
+						item.distance = item.distance + 'm'
+					}else{
+						item.distance = Math.round(item.distance/1000) + 'km'
+					}
+				}
 				_this.setData({
 					shops: res.data.data
 				})

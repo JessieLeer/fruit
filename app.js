@@ -17,8 +17,8 @@ App({
 		custom: {
 			appId: 'wx6326bb7bd9f2a207',
 			name: '缘疆佳园',
-			//url: 'https://yjjy.ysk360.com',
-			url: 'http://192.168.1.65:8082',
+			url: 'https://yjjy.ysk360.com',
+			//url: 'http://192.168.1.65:8082',
 			logo: '/static/image/login_logo.png',
 			phone: '13387085587'
 		},

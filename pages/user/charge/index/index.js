@@ -14,13 +14,12 @@ Page({
     onTap(e){
         this.setData({
             idx: e.currentTarget.dataset.index,
-            key : false
+            key: false
         })
     },
     gotoDetail(){
         wx.navigateTo({
             url: "../chargedetail/index"
-
         })
     },
     onShow(){
@@ -32,13 +31,10 @@ Page({
         let userId = wx.getStorageSync('userId')
         var that = this
         wx.request({
-            url: `${app.globalData.custom.url}/api/member/getUserInfo`, //仅为示例，并非真实的接口地址
+            url: `${app.globalData.custom.url}/api/member/getUserInfo`, 
             data: {
                 loginUid,
                 userId
-            },
-            header: {
-                'content-type': 'application/json' // 默认值
             },
             success(res) {
                 that.setData({
@@ -50,15 +46,10 @@ Page({
     getChargeList(){
         var that = this
         wx.request({
-            url: `${app.globalData.custom.url}/api/czgzList`, //仅为示例，并非真实的接口地址
-            data: {
-
-            },
-            header: {
-                'content-type': 'application/json' // 默认值
-            },
+            url: `${app.globalData.custom.url}/api/czgzList`,
+            data: {},
             success(res) {
-                console.log(res)
+							console.log(res.data)
                 that.setData({
                     chargeList: res.data.data,
                 })
@@ -91,7 +82,7 @@ Page({
             if (isSubmitAble) {
                 isSubmitAble = false
                 wx.request({
-                    url: `${app.globalData.custom.url}/api/member/charge`, //仅为示例，并非真实的接口地址
+                    url: `${app.globalData.custom.url}/api/member/charge`,
                     data: {
                         loginUid,
                         userId,
@@ -100,13 +91,9 @@ Page({
                         openId: openid,
 										  	type
                     },
-                    header: {
-                        'content-type': 'application/json' // 默认值
-                    },
                     success(res) {
                         if (res.data.code == 500) {
                             isSubmitAble = true
-                            console.log(res)
                             wx.showToast({
                                 title: res.data.message,
                                 icon: 'none'
@@ -123,19 +110,16 @@ Page({
                             signType: res.data.data.signType,
                             paySign: res.data.data.paySign,
                             success(res) {
-                                console.log(res)
                                 wx.request({
-                                    url: `${app.globalData.custom.url}/api/member/chargeCallback`, //仅为示例，并非真实的接口地址
+                                    url: `${app.globalData.custom.url}/api/member/chargeCallback`,
                                     data: {
                                         loginUid: loginUid,
                                         userId: userId,
                                         czgzId: type == 0 ? that.data.chargeList[that.data.idx].rid : '',
 											  money: type == 1 ? that.data.price : '',
                                         orderId: that.data.orderId,
-																			  type
-                                    },
-                                    header: {
-                                        'content-type': 'application/json' // 默认值
+																			  type,
+																			flmc: type == 0 ? that.data.chargeList[that.data.idx].flmc : ''
                                     },
                                     success(res) {
                                         isSubmitAble = true
@@ -168,16 +152,14 @@ Page({
     isSetSecret(set) {
         let loginUid = wx.getStorageSync('loginUid')
         let userId = wx.getStorageSync('userId')
-        var that = this;
+        var that = this
         wx.request({
-            url: `${app.globalData.custom.url}/api/member/isSetPassword`, //仅为示例，并非真实的接口地址
+            url: `${app.globalData.custom.url}/api/member/isSetPassword`, 
             data: {
                 loginUid,
                 userId,
             },
-            header: {
-                'content-type': 'application/json' // 默认值
-            },
+
             success(res) {
                 if (res.data.data){
                     that.pay(set)

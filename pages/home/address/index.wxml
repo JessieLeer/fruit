@@ -22,7 +22,7 @@
 			</view>
 			<view slot="" class='distance'>
 				<image src='/static/image/position.png' mode='widthFix' class='position'/>
-				<view>{{item.distance}}米</view>
+				<view>{{item.distance}}</view>
 			</view>
 		</van-cell>
 	</van-cell-group>

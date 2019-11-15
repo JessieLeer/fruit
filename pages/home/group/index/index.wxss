@@ -247,4 +247,5 @@ page{
   position: fixed;
 	right: 20rpx;
 	bottom: 60rpx;
+	box-shadow: 2rpx 2rpx 5rpx rgb(26,137,250);
 }
