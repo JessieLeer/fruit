@@ -43,7 +43,7 @@
 <van-toast id="van-toast" />
 
 <van-popup show="{{ picShow }}" position="bottom" bind:close="onClose1">
-  <canvas canvas-id="sharePic" class='w-100' style='height: {{canvasHeight}}px;'></canvas>
+  <canvas canvas-id="sharePic" class='w-100 canvasbg' style='height: {{canvasHeight}}px;'></canvas>
 	<view class='f-tac'>
 	  <van-button type='warning' bind:click='saveCanvas' custom-class='save' color='#F6931F'>保存图片</van-button>
 		<text class='save-text f-db'>保存图片到手机相册后，将图片分享到朋友圈</text>

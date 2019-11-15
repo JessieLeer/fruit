@@ -21,3 +21,27 @@
 	margin: 0 auto;
 	display: block;
 }
+
+
+.van-swipe-cell__right {
+  display: inline-block;
+  width: 65px;
+  height: 44px;
+  font-size: 15px;
+  line-height: 44px;
+  color: #fff;
+  text-align: center;
+  background-color: #f44;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.van-cell{
+	position: relative;
+}
+.van-icon-arrow{
+	position: absolute!important;
+	top : calc(50% - 8px);
+	right : 10px;
+
+}

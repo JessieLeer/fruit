@@ -162,6 +162,7 @@ Page({
                         level : res.data.data.levelName,
                         loginKey: true
                     })
+                    if (!res.data.data.cardNo)return;
                     barcode.barcode('firstCanvas', res.data.data.cardNo , 285 * 2, 108 * 2)
 									new qrcode('myQrcode',{
 										text: res.data.data.cardNo,

@@ -199,3 +199,6 @@
 	font-size: 24rpx;
 	margin-bottom: 30rpx;
 }
+.canvasbg{
+	background: #fff;
+}

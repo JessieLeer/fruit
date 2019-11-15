@@ -65,9 +65,12 @@ Page({
 				res.data.data.shopId = _this.data.shopId
 				if(res.data.data.details.indexOf('style=') == -1) {
 					res.data.data.details = res.data.data.details.replace(/>/gi, 'style="max-width:100%;height:auto;display:block;">')
+					res.data.data.details = res.data.data.details.replace(/\<img/gi, '<img style="max-width:100%;height:auto"')
 				}else{
 					res.data.data.details = res.data.data.details.replace(/style="/gi, 'style="max-width:100%;height:auto;display:block;')
+					res.data.data.details = res.data.data.details.replace(/\<img/gi, '<img style="max-width:100%;height:auto"')
 				}
+				console.log(res.data.data)
 				_this.setData({
 					good: res.data.data
 				})
@@ -245,9 +248,11 @@ Page({
 					canvasHeight: systemInfo.screenWidth + 100
 				})
 				const ctx = wx.createCanvasContext('sharePic')
-				ctx.drawImage(res.path, 0, 0, systemInfo.screenWidth, systemInfo.screenWidth)
-				ctx.fillStyle="#fff"
-        ctx.fillRect(0,systemInfo.screenWidth,systemInfo.screenWidth,100)
+				ctx.fillStyle = "#fff"
+				ctx.fillRect(0, 0, systemInfo.screenWidth, systemInfo.screenWidth + 100)
+				ctx.drawImage(res.path, 10, 10, systemInfo.screenWidth - 20 , systemInfo.screenWidth - 20)
+				// 		ctx.fillStyle = "#00c"
+				// ctx.fillRect(0,systemInfo.screenWidth,systemInfo.screenWidth,100)
 				ctx.setFillStyle('#333')
 				ctx.setFontSize(14)
 				_this.fillTextWrap(ctx,_this.data.good.name, 10, systemInfo.screenWidth + 30, 200, 20)

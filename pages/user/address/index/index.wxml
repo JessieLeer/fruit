@@ -1,10 +1,10 @@
 <van-swipe-cell right-width="{{ 65 }}" wx:for='{{address}}' wx:key='index'>
-  <van-cell use-label-slot data-id='{{item.id}}' is-link url='/pages/user/address/edit/index?id={{item.id}}'>
-		<van-tag slot='icon' color='#e8fcfb' text-color='#00837B' custom-class='address-type'>{{item.tag}}</van-tag>
+  	<van-cell use-label-slot data-id='{{item.id}}' is-link url='/pages/user/address/edit/index?id={{item.id}}'>
+		<van-tag slot='icon' color='{{item.tag == "家" ? "#EAFCFB" : item.tag == "公司" ? "#F4F7FC" : item.tag == "学校"? "#F9F4EE" : "#fff"}}' text-color='{{item.tag == "家" ? "#00837B" : item.tag == "公司" ? "#1C83E4" : item.tag == "学校"? "#F6931F" : "#fff"}}' custom-class='address-type'>{{item.tag}}</van-tag>
 		<view slot='title'>
 		  <van-tag wx:if="{{item.defaultFlag == 1}}" color='#e8fcfb' text-color='#00837B' custom-class='address-type'>默认</van-tag>{{item.address}}
+		  <view>{{item.contact}} {{item.phone}}</view>
 		</view>
-		<view slot='label'>{{item.contact}} {{item.phone}}</view>
 	</van-cell>
 	<van-button type='danger' slot='right' data-id='{{item.id}}' bind:click='del'>删除</van-button>
 </van-swipe-cell>

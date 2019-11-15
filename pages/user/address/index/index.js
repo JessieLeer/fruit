@@ -8,6 +8,9 @@ Page({
 		address: []
 	},
 	onLoad(option) {
+		// this.initCuser()
+	},
+	onShow(){
 		this.initCuser()
 	},
 	/*-- 初始化用户 --*/
