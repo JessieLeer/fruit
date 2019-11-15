@@ -330,6 +330,11 @@ Page({
             }
         })
     },
+    gotodoc(){
+        wx.navigateTo({
+            url: "../documents/Doc/index?id=memberlevel"
+        })
+    },
     onLoad(options){
         this.setData({
             shopId: options.shopId,

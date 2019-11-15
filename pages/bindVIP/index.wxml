@@ -29,7 +29,7 @@
             <checkbox bindtap="checkboxChange" checked="{{checked}}"></checkbox>
             <text>
                 <text class="text_f">我已阅读并同意</text>
-                <text class="text_s">会员卡信息使用声明</text>
+                <text class="text_s" bindtap="gotodoc">会员卡信息使用声明</text>
             </text>
         </view>
     </view>

@@ -2,7 +2,7 @@
 	<van-tabs type="card" tab-class='tab' custom-class='tabs' tab-active-class='tab-active' active='{{active}}' bind:change='tabChange'>
 	  <van-tab title="配送">
 		  <van-cell is-link title="{{caddress.addr || orderInfo.fsAddress}}" use-label-slot url='/pages/home/order/address/index?shopId={{shopId}}' wx:if='{{caddress.tag || orderInfo.addressType}}'>
-			  <van-tag slot='icon' color='#e8fcfb' text-color='#00837B' custom-class='address-type'>{{caddress.tag || orderInfo.addressType}}</van-tag>
+			  <van-tag slot='icon' color='{{caddress.tag == "家" ? "#EAFCFB" : caddress.tag == "公司" ? "#F4F7FC" : caddress.tag == "学校"? "#F9F4EE" : "#fff"}}' text-color='{{caddress.tag == "家" ? "#00837B" : caddress.tag == "公司" ? "#1C83E4" : caddress.tag == "学校"? "#F6931F" : "#fff"}}'  custom-class='address-type'>{{caddress.tag || orderInfo.addressType}}</van-tag>
 			  <view slot='label'>{{caddress.name || orderInfo.fsName}} {{caddress.mobile || orderInfo.fsMobile}}</view>
 			</van-cell>
 			<van-cell wx:else is-link title='请选择收货地址' url='/pages/home/order/address/index?shopId={{shopId}}'></van-cell>
