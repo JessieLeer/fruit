@@ -311,6 +311,7 @@ Page({
             },
             success(res) {
                 if (res.data.code == 200) {
+                    console.log(res)
                     wx.addCard({
                         cardList: [
                             {
@@ -319,11 +320,15 @@ Page({
                             }
                         ],
                         success(res) {
-                            wx.switchTab({
-                                url: '../user/index/index'
-                            })
+                            console.log(122131212123)
+                            
                         }
                     })
+                    setTimeout(() => {
+                        wx.navigateBack({
+                            delta: 2
+                        })
+                    }, 800);
                 } else {
 
                 }

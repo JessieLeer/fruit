@@ -75,8 +75,16 @@ Page({
 		}			
 	},
 	go(e) {
-		wx.navigateTo({
-			url: e.currentTarget.dataset.url
-		})
+		let cuser = wx.getStorageSync('cuser');
+		if(cuser.userId){
+			wx.navigateTo({
+				url: e.currentTarget.dataset.url
+			})	
+		}else{
+			wx.navigateTo({
+				url: '../../../user/login/step0'
+			})	
+		}
+		
 	}
 })

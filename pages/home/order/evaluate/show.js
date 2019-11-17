@@ -20,6 +20,7 @@ Page({
 				_this.setData({
 					evaluate: res.data.data
 				})
+				console.log(_this.data.evaluate)
 			}
 		})
 	}

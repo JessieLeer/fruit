@@ -18,6 +18,7 @@ Page({
 		noGroupShow: false,
 		caller: 0,
 		isLoading: true,
+		key : true,
 		updistance: 0,
 		custom: app.globalData.custom
 	},
@@ -52,7 +53,10 @@ Page({
 					'good.page': 1
 				})
 				this.index()
+			}else{
+				this.refresh()
 			}
+			// this.refresh()
 		}else{
 			wx.showLoading({
 				title: '加载中',
@@ -62,8 +66,11 @@ Page({
 				shop: app.globalData.shop,
 		  })
 			this.shopShow()
+		  	console.log(111222)
+			
       wx.hideLoading()
 		}
+
 	},
 	onShareAppMessage() {
   },
@@ -171,6 +178,7 @@ Page({
 				storeId: this.data.shop.id
 			},
 			success(res) {
+				wx.stopPullDownRefresh();
 				wx.hideLoading()
 				if(_this.data.good.page == 1) {
 					_this.setData({
@@ -215,15 +223,22 @@ Page({
     })
 		this.index()
 	},
-	
-	/*-- 下拉加载更多商品 --*/
-	loadMore(e) {
-		if(this.data.isLoadAll) {
-		}else{
+	onReachBottom(){
+		if (this.data.isLoadAll) {
+
+		} else {
 			this.setData({
 				'good.page': this.data.good.page + 1
 			})
 			this.index()
 		}
+	},
+
+	onPullDownRefresh(){
+		this.refresh()
+	},
+	/*-- 下拉加载更多商品 --*/
+	loadMore(e) {
+		
 	},
 })

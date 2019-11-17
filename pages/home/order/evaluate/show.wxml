@@ -6,7 +6,7 @@
 <view class='rate-content'>
   <text class='time f-db'>{{evaluate.createTime || '2019-09-09 12:34:56'}}</text>
   <van-field value="{{ evaluate.content }}" type="textarea" placeholder="您的评价会帮助我们做得更好" autosize border="{{ false }}" class='rate-message f-db' bind:change='handleContent'/>
-	<view class='rate-images'>
+	<view class='rate-images' wx:if='{{evaluate.images[0] != ""}}'>
 	  <view wx:for='{{evaluate.images}}' wx:key='index' class='evaluate-image {{evaluate.images.length == 1 ? "evaluate-image0" : evaluate.images.length == 2 ? "evaluate-image1" : "evaluate-image2"}} f-ib f-vat'>
 	    <image src='{{item}}' mode='widthFix' />
 		</view>

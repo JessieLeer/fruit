@@ -345,6 +345,7 @@ Page({
 		this.setData({
 			active: e.detail.index
 		})
+		console.log(111)
 		app.globalData.orderActive = e.detail.index
   },
 	/*-- 再来一单 --*/

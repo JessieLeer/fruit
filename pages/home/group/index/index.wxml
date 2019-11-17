@@ -2,7 +2,7 @@
   <van-loading type="spinner" color="#fff" />
 </view>
 
-<view class="h-100" wx:elif='{{shop.id}}'>
+<view class="h-100 outer-wrap-area" wx:elif='{{shop.id}}'>
   <view class='position' bindtap='go' data-url='/pages/home/address/index?from=/pages/home/group/index/index'>
 	  <van-icon name="location-o" class='position-icon' />
 	  {{shop.name}}
